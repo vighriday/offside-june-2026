@@ -20,11 +20,20 @@ from __future__ import annotations
 
 from dataclasses import asdict, dataclass
 
+from offside_engine.analyze.split_schema import Citation
+
 # Confirmed by the StatsBomb spike (see _local/SPIKE_RESULTS.md).
 HAND_OF_GOD_MATCH_ID = 3750191
 COMPETITION_ID = 43  # FIFA World Cup
 SEASON_ID = 54  # 1986
 ATTRIBUTION = "Data provided by StatsBomb Open Data (StatsBomb User Agreement)."
+
+# The stable id the Tactical lens cites for the Hand of God body-part anomaly.
+HAND_OF_GOD_TACTICAL_CITATION_ID = "sb-hand-of-god-body-part"
+
+# The feed's catch-all body-part label — a string, never a number. The Tactical lens
+# reports that a goal fell back to this label, not any stat value.
+_CATCH_ALL_LABEL = "Other"
 
 
 @dataclass(frozen=True)
@@ -77,6 +86,41 @@ def aggregate_from_events(events) -> HandOfGodAggregate:
         second_goal_body_part=None if g2_bp is None else str(g2_bp),
         anomaly_present=bool((goals["shot_body_part"] == "Other").any()),
         three_sixty_available=False,  # confirmed 404 for 1986 in the spike
+    )
+
+
+def to_tactical_citation(agg: HandOfGodAggregate) -> Citation:
+    """Render the aggregate as the single license-safe Citation the Tactical lens cites.
+
+    The text is a statement about the *data model only*: the hand-scored goal fell back
+    to the feed's catch-all body-part label while a comparable goal carries a real
+    body-part class. It contains **no number and no raw event row** — only the catch-all
+    label name and the comparison — so it honours both the StatsBomb no-redistribution
+    rule and the lens's no-numbers rule. Built only when the anomaly is actually present.
+    """
+    if not agg.anomaly_present:
+        raise ValueError(
+            "no body-part anomaly in the aggregate — refusing to fabricate a Tactical citation"
+        )
+    comparison = (
+        f"a comparable goal by the same player is recorded with a specific body-part class "
+        f"('{agg.second_goal_body_part}')"
+        if agg.second_goal_body_part and agg.second_goal_body_part != _CATCH_ALL_LABEL
+        else "a comparable goal by the same player is recorded with a specific body-part class"
+    )
+    text = (
+        f"In the event data this goal's body part is recorded as the catch-all label "
+        f"'{_CATCH_ALL_LABEL}', while {comparison}. The shot ontology has no category "
+        f"for a hand-scored goal, so the event falls back to '{_CATCH_ALL_LABEL}'. This "
+        f"describes the data model only — not officiating, intent, or knowability."
+    )
+    return Citation(
+        id=HAND_OF_GOD_TACTICAL_CITATION_ID,
+        source_doc="statsbomb-open-data",
+        doc_kind="STATSBOMB_EVENT",
+        page=None,
+        extracted_text=text,
+        attribution=agg.attribution,
     )
 
 

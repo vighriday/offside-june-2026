@@ -6,9 +6,17 @@ The synthetic frame mirrors the real spike output: Maradona's 50' goal is body_p
 
 from __future__ import annotations
 
-import pandas as pd
+import re
 
-from offside_engine.statsbomb.pull_aggregates import ATTRIBUTION, aggregate_from_events
+import pandas as pd
+import pytest
+
+from offside_engine.statsbomb.pull_aggregates import (
+    ATTRIBUTION,
+    HAND_OF_GOD_TACTICAL_CITATION_ID,
+    aggregate_from_events,
+    to_tactical_citation,
+)
 
 
 def _events():
@@ -60,3 +68,31 @@ def test_match_metadata_is_pinned():
     agg = aggregate_from_events(_events())
     assert agg.match_id == 3750191
     assert agg.scoreline == "Argentina 2 - 1 England"
+
+
+# ── tactical citation bridge ─────────────────────────────────────────────────
+
+def test_tactical_citation_has_stable_id_and_attribution():
+    cit = to_tactical_citation(aggregate_from_events(_events()))
+    assert cit.id == HAND_OF_GOD_TACTICAL_CITATION_ID
+    assert cit.doc_kind == "STATSBOMB_EVENT"
+    assert cit.attribution == ATTRIBUTION
+
+
+def test_tactical_citation_text_carries_the_catch_all_label_and_no_number():
+    cit = to_tactical_citation(aggregate_from_events(_events()))
+    assert "'Other'" in cit.extracted_text          # the catch-all label, named
+    assert "Left Foot" in cit.extracted_text        # the comparison class
+    assert "data model only" in cit.extracted_text  # the bounded claim
+    # the Tactical lens forbids numbers — the citation text must carry no digit
+    assert not re.search(r"\d", cit.extracted_text)
+
+
+def test_tactical_citation_refuses_when_no_anomaly():
+    # a frame with no body_part 'Other' goal -> no anomaly -> no fabricated citation
+    df = pd.DataFrame([
+        {"type": "Shot", "player": "Diego Armando Maradona", "minute": 54,
+         "shot_outcome": "Goal", "shot_body_part": "Left Foot"},
+    ])
+    with pytest.raises(ValueError, match="no body-part anomaly"):
+        to_tactical_citation(aggregate_from_events(df))
