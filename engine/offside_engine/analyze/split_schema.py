@@ -161,6 +161,41 @@ GRANITE_FACING_MODELS: tuple[type[BaseModel], ...] = (LensOutput, SplitCell, Spl
 # GRANITE_FACING_MODELS and therefore from the no-numbers guarantee.
 # ─────────────────────────────────────────────────────────────────────────────
 
+class Bbox(BaseModel):
+    """A bounding box on a source page, in Docling's top-left-origin coordinates.
+
+    Carries numbers freely — it is code-owned, built from Docling provenance, and
+    never emitted by Granite. Used by the web viewer to highlight the cited passage.
+    """
+
+    model_config = ConfigDict(extra="forbid")
+
+    left: float
+    top: float
+    right: float
+    bottom: float
+
+
+class Citation(BaseModel):
+    """One evidence atom — a specific passage of a specific source page.
+
+    Built from Docling provenance (page number + bounding box + extracted text) by our
+    own code, and joined to a cell via its ``citation_ids`` *after* Granite runs.
+    This is the click-to-source spine: a cell's ``citation_ids`` resolve to these, and
+    each one points the viewer at the exact page and passage.
+    """
+
+    model_config = ConfigDict(extra="forbid")
+
+    id: str  # stable, e.g. "ifab-law12-p152"
+    source_doc: str  # e.g. "ifab-laws-2025-26"
+    doc_kind: DocKind
+    page: int | None = None  # 1-indexed Docling page_no; None if unpaginated
+    bbox: Bbox | None = None
+    extracted_text: str = ""
+    attribution: str | None = None  # e.g. StatsBomb credit when doc_kind is STATSBOMB_EVENT
+
+
 GuardianVerdict = Literal["GROUNDED", "UNGROUNDED"]
 """IBM Granite Guardian's groundedness verdict for a single claim. Note this is a
 verdict *flagged by a model*, recorded at build time — never asserted as ground truth."""
@@ -189,4 +224,4 @@ class TrustSeal(BaseModel):
 
 
 # Code-owned models, kept explicitly disjoint from the Granite-facing set.
-CODE_OWNED_MODELS: tuple[type[BaseModel], ...] = (TrustSeal,)
+CODE_OWNED_MODELS: tuple[type[BaseModel], ...] = (Bbox, Citation, TrustSeal)
