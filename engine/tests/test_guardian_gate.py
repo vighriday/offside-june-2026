@@ -15,7 +15,7 @@ class _FakeGuardian:
     """Returns a fixed verdict and records whether it was called."""
 
     def __init__(self, verdict: str):
-        self.model = "granite-guardian3:2b"
+        self.model = "granite3-guardian:2b"
         self._verdict = verdict
         self.called = False
 
@@ -44,7 +44,7 @@ def test_grounded_lens_survives_with_a_grounded_seal():
     assert res.output.state == "GROUNDED"
     assert res.seal.verdict == "GROUNDED"
     assert res.seal.checked_context_citation_ids == ["ifab-1"]
-    assert res.seal.guardian_model == "granite-guardian3:2b"
+    assert res.seal.guardian_model == "granite3-guardian:2b"
     assert g.called
 
 

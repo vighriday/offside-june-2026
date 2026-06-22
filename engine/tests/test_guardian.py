@@ -23,7 +23,7 @@ class _FakeOllama:
 
 
 def _client(content: str) -> tuple[GuardianClient, _FakeOllama]:
-    c = GuardianClient(model="granite-guardian3:2b")
+    c = GuardianClient(model="granite3-guardian:2b")
     fake = _FakeOllama(content)
     c._client = fake
     return c, fake

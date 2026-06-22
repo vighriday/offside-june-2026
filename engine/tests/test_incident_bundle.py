@@ -25,7 +25,7 @@ from offside_engine.analyze.split_schema import (
 
 
 def _seal(verdict="GROUNDED", ids=()):
-    return TrustSeal(verdict=verdict, guardian_model="granite-guardian3:2b",
+    return TrustSeal(verdict=verdict, guardian_model="granite3-guardian:2b",
                      checked_context_citation_ids=list(ids))
 
 
@@ -75,7 +75,7 @@ def _bundle(**overrides):
         cell_seals=cell_seals,
         citations=citations,
         provenance=BakeProvenance(granite_model="granite3.3:8b",
-                                  guardian_model="granite-guardian3:2b",
+                                  guardian_model="granite3-guardian:2b",
                                   embed_model="granite-embedding:30m"),
     )
     kwargs.update(overrides)

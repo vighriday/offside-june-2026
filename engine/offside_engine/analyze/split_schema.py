@@ -219,7 +219,7 @@ class TrustSeal(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
     verdict: GuardianVerdict
-    guardian_model: str  # e.g. "granite-guardian3:2b"
+    guardian_model: str  # e.g. "granite3-guardian:2b"
     checked_context_citation_ids: list[str]
 
 

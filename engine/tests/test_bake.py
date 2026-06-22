@@ -128,7 +128,7 @@ class _ScriptedGranite:
 
 
 class _AllGroundedGuardian:
-    model = "granite-guardian3:2b"
+    model = "granite3-guardian:2b"
 
     def check_groundedness(self, *, query, context_passages, response):
         return "GROUNDED"
@@ -205,12 +205,12 @@ def test_full_bake_produces_the_golden_bundle():
     assert tuple(sc.cell.axis for sc in bundle.cell_seals) == CANONICAL_AXIS_ORDER
     # provenance frozen
     assert bundle.provenance.corpus_git_sha == "deadbeef"
-    assert bundle.provenance.guardian_model == "granite-guardian3:2b"
+    assert bundle.provenance.guardian_model == "granite3-guardian:2b"
 
 
 def test_ungrounded_lens_is_demoted_in_the_bundle():
     class _RefereeUngrounded:
-        model = "granite-guardian3:2b"
+        model = "granite3-guardian:2b"
 
         def check_groundedness(self, *, query, context_passages, response):
             # flag only the referee reading; ground everything else

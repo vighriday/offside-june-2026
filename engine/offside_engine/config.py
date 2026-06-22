@@ -14,7 +14,7 @@ from dataclasses import dataclass
 DEFAULT_HOST = "http://127.0.0.1:11434"
 DEFAULT_MODEL = "granite3.3:8b"
 DEFAULT_EMBED_MODEL = "granite-embedding:30m"
-DEFAULT_GUARDIAN_MODEL = "granite-guardian3:2b"
+DEFAULT_GUARDIAN_MODEL = "granite3-guardian:2b"
 DEFAULT_SEED = 42
 DEFAULT_NUM_CTX = 8192
 DEFAULT_NUM_PREDICT = 1024
