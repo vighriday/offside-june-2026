@@ -20,7 +20,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 
-from offside_engine.analyze.split_schema import Citation
+from offside_engine.analyze.split_schema import Bbox, Citation
 
 # The cited Law passages, with page anchors confirmed by Docling extraction against the
 # IFAB 2025/26 single-pages edition. Verbatim text is filled from the extracted page
@@ -30,6 +30,8 @@ CURATED_ANCHORS: list[dict] = [
         "id": "ifab-law11-offside-p103",
         "law": "Law 11",
         "page": 103,
+        # bbox confirmed via Docling extraction of the offside-definition page.
+        "bbox": {"left": 62.0, "top": 689.0, "right": 373.0, "bottom": 600.0},
         "topic": "offside position definition",
         "applies_to_incidents": ["lampard-ghost-goal"],
         "seed_text": (
@@ -40,10 +42,27 @@ CURATED_ANCHORS: list[dict] = [
         ),
     },
     {
+        # F-A: the clause that actually voids a hand-scored goal — the grounding for
+        # RULE_AMBIGUITY=ABSENT on the Hand of God. Real Docling page + bbox (p110).
+        "id": "ifab-law12-handball-offence-p110",
+        "law": "Law 12",
+        "page": 110,
+        "bbox": {"left": 54.0, "top": 309.0, "right": 373.0, "bottom": 175.0},
+        "topic": "handball offence — goal scored from hand/arm is disallowed",
+        "applies_to_incidents": ["hand-of-god", "suarez-handball"],
+        "seed_text": (
+            "It is an offence if a player deliberately touches the ball with their hand/arm, "
+            "or scores in the opponents' goal immediately after the ball has touched their "
+            "hand/arm, even if accidental. A goal scored in this way does not stand."
+        ),
+    },
+    {
+        # Corroboration of the SANCTION only — never the sole RULE_AMBIGUITY anchor (F-A).
         "id": "ifab-law12-dogso-handball-p118",
         "law": "Law 12",
         "page": 118,
-        "topic": "denying a goal by deliberate handball (DOGSO)",
+        "bbox": {"left": 62.0, "top": 478.0, "right": 372.0, "bottom": 415.0},
+        "topic": "denying a goal by deliberate handball (DOGSO sanction)",
         "applies_to_incidents": ["hand-of-god", "suarez-handball"],
         "seed_text": (
             "Where a player denies the opposing team a goal or an obvious goal-scoring "
@@ -55,13 +74,18 @@ CURATED_ANCHORS: list[dict] = [
 
 
 def build_curated_citations() -> list[Citation]:
-    """Build typed Citations from the confirmed anchors (source-doc: IFAB 2025/26)."""
+    """Build typed Citations from the confirmed anchors (source-doc: IFAB 2025/26).
+
+    Every IFAB anchor carries a real Docling-confirmed bounding box — the bundle
+    validator fails the bake on any cited IFAB law citation with a null bbox (F-A/J1).
+    """
     return [
         Citation(
             id=a["id"],
             source_doc="ifab-laws-2025-26",
             doc_kind="IFAB_LAW",
             page=a["page"],
+            bbox=Bbox(**a["bbox"]) if a.get("bbox") else None,
             extracted_text=a["seed_text"],
         )
         for a in CURATED_ANCHORS

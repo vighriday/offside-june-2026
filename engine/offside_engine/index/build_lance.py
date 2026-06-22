@@ -18,10 +18,14 @@ from offside_engine.index.embed import EMBED_DIM, Embedder
 
 TABLE_NAME = "evidence"
 
-# Which lens each kind of source document belongs to. Referee evidence is the IFAB Laws.
-LENS_BY_DOC_KIND: dict[str, LensKind] = {
+# Which lens each kind of source document belongs to. Referee evidence is the IFAB
+# *Laws* — never the VAR review-procedure pages. The 2026 review procedure is about how
+# a decision is reviewed today; it says nothing about whether a Law is clear, so routing
+# it to the Referee lens would contaminate the rule-clarity reading (F-B). It maps to
+# None and is dropped from the index entirely.
+LENS_BY_DOC_KIND: dict[str, LensKind | None] = {
     "IFAB_LAW": "REFEREE",
-    "VAR_PROTOCOL": "REFEREE",
+    "VAR_PROTOCOL": None,
     "TABLE_CELL": "REFEREE",
     "STATSBOMB_EVENT": "TACTICAL",
     "HISTORICAL_REPORT": "HISTORICAL",

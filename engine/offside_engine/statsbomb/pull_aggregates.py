@@ -8,9 +8,12 @@ attribution required, **no redistribution**). To honour it:
 * every persisted aggregate carries the required StatsBomb attribution string.
 
 The signal that matters: in match 3750191 (Argentina v England, 1986) Maradona's 51'
-goal is recorded as a ``Shot`` with ``shot_body_part == "Other"`` — StatsBomb's own
-ontology cannot classify the illegal handball goal. That anomaly is grounded evidence
-for the Indeterminacy axis of THE SPLIT, and it comes from the dataset itself.
+goal is recorded as a ``Shot`` with ``shot_body_part == "Other"``. This is a statement
+about the *data model only*: StatsBomb's shot ontology has no category for a
+hand-scored goal, so the event falls back to the catch-all ``Other``. It is a
+corroborating exhibit of the incident's oddness — **not** evidence of intent, of the
+original officiating call, or that the fact is unknowable. It is cited by the Tactical
+lens as a captioned aside and never feeds the Decision-Time-Deficit axis.
 """
 
 from __future__ import annotations

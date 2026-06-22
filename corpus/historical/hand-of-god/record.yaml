@@ -31,10 +31,13 @@ facts:
     bearing: RESOLUTION
 
   - id: hist-context-malvinas
+    # bearing CONTEXT, never CULTURAL_PRIOR_BIAS: this renders only as neutral backdrop.
+    # A nation/war is never the *cause* of divergence in THE SPLIT — divergence is
+    # attributed to named sources reading the same fact oppositely, not to nationality.
     statement: >-
-      The match took place four years after the 1982 Falklands/Malvinas War, which
-      intensified the national framing of the result on both sides.
-    bearing: CULTURAL_PRIOR_BIAS
+      The match took place four years after the 1982 Falklands/Malvinas War. This is
+      recorded as historical backdrop only.
+    bearing: CONTEXT
 
 precedents:
   - "suarez-handball"   # deliberate handball denying a goal (2010 WC QF)

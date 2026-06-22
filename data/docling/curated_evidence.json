@@ -4,7 +4,12 @@
     "source_doc": "ifab-laws-2025-26",
     "doc_kind": "IFAB_LAW",
     "page": 103,
-    "bbox": null,
+    "bbox": {
+      "left": 62.0,
+      "top": 689.0,
+      "right": 373.0,
+      "bottom": 600.0
+    },
     "extracted_text": "A player is in an offside position if: any part of the head, body or feet is in the opponents' half (excluding the halfway line) and any part of the head, body or feet is nearer to the opponents' goal line than both the ball and the second-last opponent.",
     "attribution": null,
     "law": "Law 11",
@@ -13,16 +18,41 @@
       "lampard-ghost-goal"
     ]
   },
+  "ifab-law12-handball-offence-p110": {
+    "id": "ifab-law12-handball-offence-p110",
+    "source_doc": "ifab-laws-2025-26",
+    "doc_kind": "IFAB_LAW",
+    "page": 110,
+    "bbox": {
+      "left": 54.0,
+      "top": 309.0,
+      "right": 373.0,
+      "bottom": 175.0
+    },
+    "extracted_text": "It is an offence if a player deliberately touches the ball with their hand/arm, or scores in the opponents' goal immediately after the ball has touched their hand/arm, even if accidental. A goal scored in this way does not stand.",
+    "attribution": null,
+    "law": "Law 12",
+    "topic": "handball offence — goal scored from hand/arm is disallowed",
+    "applies_to_incidents": [
+      "hand-of-god",
+      "suarez-handball"
+    ]
+  },
   "ifab-law12-dogso-handball-p118": {
     "id": "ifab-law12-dogso-handball-p118",
     "source_doc": "ifab-laws-2025-26",
     "doc_kind": "IFAB_LAW",
     "page": 118,
-    "bbox": null,
+    "bbox": {
+      "left": 62.0,
+      "top": 478.0,
+      "right": 372.0,
+      "bottom": 415.0
+    },
     "extracted_text": "Where a player denies the opposing team a goal or an obvious goal-scoring opportunity by committing a deliberate handball offence the player is sent off whatever the position of the offence.",
     "attribution": null,
     "law": "Law 12",
-    "topic": "denying a goal by deliberate handball (DOGSO)",
+    "topic": "denying a goal by deliberate handball (DOGSO sanction)",
     "applies_to_incidents": [
       "hand-of-god",
       "suarez-handball"

@@ -27,6 +27,23 @@ def test_curated_citations_are_well_formed():
         assert len(c.extracted_text) > 20  # a real passage, not a stub
 
 
+def test_every_ifab_law_citation_has_a_real_bbox():
+    # F-A/J1: a cited IFAB law citation with a null bbox is a trust-spine failure.
+    for c in build_curated_citations():
+        if c.doc_kind == "IFAB_LAW":
+            assert c.bbox is not None, f"{c.id} has no bbox — would fail the bake"
+            assert c.bbox.right > c.bbox.left
+
+
+def test_handball_offence_clause_grounds_the_voided_goal():
+    # The clause that actually voids a hand-scored goal must be present (not just the
+    # p118 sanction clause). This is the RULE_AMBIGUITY=ABSENT grounding on HoG.
+    ids = {c.id for c in build_curated_citations()}
+    assert "ifab-law12-handball-offence-p110" in ids
+    offence = next(c for c in build_curated_citations() if c.id == "ifab-law12-handball-offence-p110")
+    assert "does not stand" in offence.extracted_text
+
+
 def test_every_anchor_id_is_unique():
     ids = [a["id"] for a in CURATED_ANCHORS]
     assert len(ids) == len(set(ids))

@@ -34,11 +34,11 @@ def test_each_citation_maps_to_the_right_lens():
     assert rows == {"ifab-1": "REFEREE", "sb-1": "TACTICAL", "fr-1": "FRAMING"}
 
 
-def test_unmapped_doc_kinds_are_dropped():
-    # A citation with no lens mapping should not produce a row.
+def test_var_protocol_is_dropped_not_routed_to_referee():
+    # F-B: the 2026 VAR review procedure says nothing about whether a Law is clear,
+    # so it must NOT feed the Referee lens. It maps to None and produces no row.
     c = Citation(id="x", source_doc="s", doc_kind="VAR_PROTOCOL", page=1, extracted_text="t")
-    rows = rows_from_citations([c])
-    assert rows[0].lens == "REFEREE"  # VAR protocol is a referee source
+    assert rows_from_citations([c]) == []
 
 
 def test_build_index_writes_a_queryable_table(tmp_path):
