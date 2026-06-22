@@ -25,6 +25,9 @@ engine/build/
 # ── Bulky Docling intermediates (rebuildable; only curated/frozen data is kept) ──
 data/docling/*.p*-*.json
 data/docling/*.citations.json
+
+# ── LanceDB index: a binary build artifact the bake regenerates deterministically ──
+data/lance/
 **/__pycache__/
 *.py[cod]
 .pytest_cache/
