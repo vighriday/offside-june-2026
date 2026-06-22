@@ -1,0 +1,42 @@
+# ── Local-only planning (never committed) ──────────────────────────────
+_local/
+*.local.md
+
+# ── Local tooling state (not part of the project) ─────────────────────
+.claude/
+.veris/
+
+# ── Secrets / env ──────────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+
+# ── Data licensing: raw StatsBomb must never be committed ──────────────
+corpus/statsbomb/**/*.json
+**/*.statsbomb.json
+**/events/
+
+# ── Python engine ──────────────────────────────────────────────────────
+engine/.venv/
+engine/.hf_cache/
+engine/spikes/
+engine/build/
+**/__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# ── Node / Next.js (web) ───────────────────────────────────────────────
+node_modules/
+web/.next/
+web/out/
+.vercel/
+*.tsbuildinfo
+
+# ── Caches / OS ────────────────────────────────────────────────────────
+.cache/
+**/.cache/
+.DS_Store
+Thumbs.db
+*.log
