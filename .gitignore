@@ -21,6 +21,10 @@ engine/.venv/
 engine/.hf_cache/
 engine/spikes/
 engine/build/
+
+# ── Bulky Docling intermediates (rebuildable; only curated/frozen data is kept) ──
+data/docling/*.p*-*.json
+data/docling/*.citations.json
 **/__pycache__/
 *.py[cod]
 .pytest_cache/

@@ -1,0 +1,31 @@
+{
+  "ifab-law11-offside-p103": {
+    "id": "ifab-law11-offside-p103",
+    "source_doc": "ifab-laws-2025-26",
+    "doc_kind": "IFAB_LAW",
+    "page": 103,
+    "bbox": null,
+    "extracted_text": "A player is in an offside position if: any part of the head, body or feet is in the opponents' half (excluding the halfway line) and any part of the head, body or feet is nearer to the opponents' goal line than both the ball and the second-last opponent.",
+    "attribution": null,
+    "law": "Law 11",
+    "topic": "offside position definition",
+    "applies_to_incidents": [
+      "lampard-ghost-goal"
+    ]
+  },
+  "ifab-law12-dogso-handball-p118": {
+    "id": "ifab-law12-dogso-handball-p118",
+    "source_doc": "ifab-laws-2025-26",
+    "doc_kind": "IFAB_LAW",
+    "page": 118,
+    "bbox": null,
+    "extracted_text": "Where a player denies the opposing team a goal or an obvious goal-scoring opportunity by committing a deliberate handball offence the player is sent off whatever the position of the offence.",
+    "attribution": null,
+    "law": "Law 12",
+    "topic": "denying a goal by deliberate handball (DOGSO)",
+    "applies_to_incidents": [
+      "hand-of-god",
+      "suarez-handball"
+    ]
+  }
+}
