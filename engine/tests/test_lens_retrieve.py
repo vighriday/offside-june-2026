@@ -73,3 +73,22 @@ def test_empty_when_lens_has_no_evidence(tmp_path):
     build_index(_citations()[:1], tmp_path / "lance", embedder=emb)
     r = LensRetriever(tmp_path / "lance", embedder=emb)
     assert r.retrieve(lens="HISTORICAL", query="anything", k=3) == []
+
+
+def test_allow_list_excludes_out_of_incident_evidence(tmp_path):
+    # F-C: an allow-list naming only sb-1 must exclude every other tactical hit.
+    r = _retriever(tmp_path)
+    hits = r.retrieve(lens="TACTICAL", query="shot anomaly", k=5,
+                      allowed_citation_ids={"sb-1"})
+    assert {h.citation_id for h in hits} == {"sb-1"}
+    # an allow-list that names nothing in this lens yields no hits
+    none = r.retrieve(lens="REFEREE", query="handball", k=5, allowed_citation_ids={"nope"})
+    assert none == []
+
+
+def test_retrieval_order_is_deterministic(tmp_path):
+    # F-D: same index, same query -> identical id order across calls.
+    r = _retriever(tmp_path)
+    a = [h.citation_id for h in r.retrieve(lens="REFEREE", query="handball offence", k=5)]
+    b = [h.citation_id for h in r.retrieve(lens="REFEREE", query="handball offence", k=5)]
+    assert a == b

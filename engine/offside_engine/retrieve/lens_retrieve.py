@@ -38,29 +38,49 @@ class LensRetriever:
         self._table = lancedb.connect(str(db_dir)).open_table(TABLE_NAME)
         self._embedder = embedder or Embedder()
 
-    def retrieve(self, *, lens: LensKind, query: str, k: int = 3) -> list[RetrievedHit]:
+    def retrieve(
+        self,
+        *,
+        lens: LensKind,
+        query: str,
+        k: int = 3,
+        allowed_citation_ids: set[str] | None = None,
+    ) -> list[RetrievedHit]:
         """Return up to ``k`` hits for ``lens``, scoped by the lens metadata filter.
 
         If the lens has no evidence above the index, the result is empty — the caller
         is expected to emit "insufficient evidence" rather than free-generate.
+
+        ``allowed_citation_ids`` is a per-incident allow-list (F-C): when given, only
+        evidence on that list may surface, so a lens can never cite a passage that does
+        not belong to the incident being baked.
+
+        Results are sorted deterministically by ``(rounded score, citation_id)`` (F-D)
+        so two index rebuilds inject the same evidence in the same order — a
+        prerequisite for byte-identical frozen fixtures.
         """
         qvec = self._embedder.embed_one(query)
+        # Over-fetch then filter+sort+trim in code, so the allow-list cannot starve k.
         results = (
             self._table.search(qvec)
             .where(f"lens = '{lens}'")
-            .limit(k)
+            .limit(max(k * 4, k))
             .to_list()
         )
         hits: list[RetrievedHit] = []
         for r in results:
+            cid = r["citation_id"]
+            if allowed_citation_ids is not None and cid not in allowed_citation_ids:
+                continue
             page = r.get("page")
             hits.append(
                 RetrievedHit(
-                    citation_id=r["citation_id"],
+                    citation_id=cid,
                     lens=r["lens"],
                     page=None if page in (None, -1) else int(page),
                     text=r["text"],
                     score=float(r.get("_distance", 0.0)),
                 )
             )
-        return hits
+        hits.sort(key=lambda h: (round(h.score, 6), h.citation_id))
+        return hits[:k]
