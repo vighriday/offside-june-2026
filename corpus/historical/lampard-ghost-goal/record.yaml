@@ -1,0 +1,50 @@
+# Curated historical record for the Lampard ghost goal — neutral, cited facts.
+# Used by the Historical lens. Frozen by design (no live historical source).
+#
+# This is the deliberate CONTRAST case to the Hand of God. Here the decisive fact (the
+# ball crossed the line) is fully knowable and was proven on video within seconds — yet
+# it was not available to the referee in the moment because goal-line technology did not
+# yet exist. The signature THE SPLIT should DERIVE is therefore different from the Hand of
+# God: the disagreement is almost entirely a decision-time deficit, with little cultural
+# divergence (nearly everyone, including German voices, agrees it was a goal). That
+# difference is the proof the engine is derived, not hard-coded.
+
+incident: lampard-ghost-goal
+title: "Lampard's ghost goal"
+match: "Germany 4 - 1 England"
+competition: "2010 FIFA World Cup, Round of 16"
+venue: "Free State Stadium, Bloemfontein"
+date: "2010-06-27"
+referee: "Jorge Larrionda (Uruguay)"
+
+facts:
+  - id: lampard-hist-crossed-line
+    statement: >-
+      Frank Lampard's shot struck the crossbar and bounced down well behind the goal
+      line before spinning back out. Television replays available within seconds showed
+      the whole ball had clearly crossed the line.
+    bearing: SETTLED_FACT
+
+  - id: lampard-hist-no-glt-2010
+    statement: >-
+      In 2010 there was no goal-line technology and no VAR. The referee and assistant
+      had to judge in real time whether the ball had crossed the line, with no review
+      available; the goal was not given.
+    bearing: DECISION_TIME_DEFICIT
+
+  - id: lampard-hist-sightline
+    statement: >-
+      The ball was in and out of the goal in a fraction of a second and neither official
+      was level with the goal line at the moment of the bounce, so neither had a clear
+      view of where it landed.
+    bearing: DECISION_TIME_DEFICIT
+
+  - id: lampard-hist-glt-introduced
+    statement: >-
+      The incident is widely cited as a catalyst for the introduction of goal-line
+      technology, which FIFA approved for use after 2012. The decisive fact was knowable;
+      the technology to surface it to officials simply did not yet exist in 2010.
+    bearing: RESOLUTION
+
+precedents:
+  - "hand-of-god"   # contrast: there the law/intent residual differs; here it is purely decision-time

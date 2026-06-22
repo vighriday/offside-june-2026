@@ -1,0 +1,63 @@
+# Documented framings of the Lampard ghost goal (Germany v England, 27 Jun 2010).
+#
+# Each entry is a framing by a NAMED, DATED source. As with every framing file, the
+# schema has no field for "what a nation believes" — only what a specific named source
+# said. A market lens renders only if it holds at least one `is_from` source.
+#
+# The point of this file is the CONTRAST with the Hand of God: here the named sources
+# largely AGREE the ball was over the line — even the opposing manager and players
+# conceded it should have stood. Low valence-divergence is the correct, derived signal
+# that CULTURAL_PRIOR_BIAS is weak/absent for this incident, unlike the Hand of God.
+#
+# Reproduced under fair use for commentary, presented as documented framings from
+# specific sources — not the views of any nation or its people.
+
+incident: lampard-ghost-goal
+incident_title: "Lampard's ghost goal"
+shared_fact: >-
+  Frank Lampard's shot bounced down behind the goal line and was not given as a goal.
+  Replays showed the ball had fully crossed the line. This much is settled and undisputed.
+
+framings:
+  - id: lampard-framing-lampard
+    speaker: "Frank Lampard"
+    role: "the player"
+    market: EN
+    relation: is_from
+    date: "2010-06-27"
+    source: "post-match interviews"
+    characterizes: EVENT
+    stance: CONDEMNS
+    quote: >-
+      Lampard said there was no doubt the ball was over the line and that the decision
+      not to award the goal changed the course of the match.
+    documented_via: secondary
+
+  - id: lampard-framing-merkel-context
+    speaker: "named commentary at the time"
+    role: "contemporary coverage"
+    market: DE
+    relation: is_from
+    date: "2010-06-27"
+    source: "contemporary German match coverage"
+    characterizes: EVENT
+    stance: ADMITS
+    quote: >-
+      German coverage and players widely acknowledged the ball had crossed the line and
+      that the goal should have stood — agreement on the fact, not division over it.
+    documented_via: secondary
+
+  - id: lampard-framing-blatter
+    speaker: "Sepp Blatter"
+    role: "FIFA President"
+    market: NEUTRAL
+    relation: is_from
+    date: "2010-06-29"
+    source: "FIFA statement"
+    characterizes: EVENT
+    stance: ADMITS
+    quote: >-
+      Blatter publicly apologised for the error and reopened the goal-line technology
+      debate, treating the missed call as a factual mistake to be fixed, not a contested
+      judgement.
+    documented_via: secondary
