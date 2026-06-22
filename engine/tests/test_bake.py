@@ -62,46 +62,68 @@ _GOLDEN_LENS = {
                           rationale="Two named sources frame the same goal in opposite valence."),
 }
 
-# The golden SPLIT Granite "returns" for synthesis — the documented Hand of God shape.
-_GOLDEN_SPLIT = Split(
-    cells=[
-        SplitCell(axis="RULE_AMBIGUITY", state="ABSENT", citation_ids=[],
-                  rationale="A single clear offence clause, no competing clause."),
-        SplitCell(axis="INDETERMINACY", state="ABSENT", citation_ids=[],
-                  rationale="The act is admitted, so deliberateness is resolved."),
-        SplitCell(axis="DECISION_TIME_DEFICIT", state="PRESENT",
-                  citation_ids=["hist-tech-1986"],
-                  rationale="No review tech and differing views in the moment (hist-tech-1986)."),
-        SplitCell(axis="CULTURAL_PRIOR_BIAS", state="PRESENT",
-                  citation_ids=["framing-maradona-1986", "framing-shilton"],
-                  rationale="Two named sources frame the same goal in opposite valence."),
-    ],
-    headline="It never resolved over what could be seen and who was watching, not the Law.",
-)
+# The golden SPLIT shape Granite "derives" — the documented Hand of God signature. The
+# PRESENT cells' citations are filled at synthesis time from the ids the gated lenses
+# actually carried (mirrors real synthesis routing), so the SPLIT never cites an id the
+# framing/historical lens did not surface under whichever retriever the test used.
+def _golden_split(historical_ids: list[str], framing_ids: list[str]) -> Split:
+    return Split(
+        cells=[
+            SplitCell(axis="RULE_AMBIGUITY", state="ABSENT", citation_ids=[],
+                      rationale="A single clear offence clause, no competing clause."),
+            SplitCell(axis="INDETERMINACY", state="ABSENT", citation_ids=[],
+                      rationale="The act is admitted, so deliberateness is resolved."),
+            SplitCell(axis="DECISION_TIME_DEFICIT", state="PRESENT",
+                      citation_ids=historical_ids or ["hist-tech-1986"],
+                      rationale="No review tech and differing views in the moment."),
+            SplitCell(axis="CULTURAL_PRIOR_BIAS", state="PRESENT",
+                      citation_ids=framing_ids or ["framing-maradona-1986"],
+                      rationale="Named sources frame the same goal in opposite valence."),
+        ],
+        headline="It never resolved over what could be seen and who was watching, not the Law.",
+    )
+
+
+_GOLDEN_SPLIT = _golden_split(["hist-tech-1986"], ["framing-maradona-1986", "framing-shilton"])
+
+
+def _ids_for_lens_in(user: str, lens: str) -> list[str]:
+    """Read back the citation_ids the gated LENS <lens> block carried in the synthesis input."""
+    import re
+    m = re.search(rf"LENS {lens}:.*?citation_ids: \[(.*?)\]", user, re.DOTALL)
+    if not m or not m.group(1).strip() or m.group(1).strip() == "(none)":
+        return []
+    return [s.strip() for s in m.group(1).split(",") if s.strip()]
 
 
 class _ScriptedGranite:
-    """Returns a golden LensOutput per lens query, then the golden Split for synthesis.
+    """Returns a golden LensOutput per lens query, then a golden Split for synthesis.
 
-    Dispatches on the schema it is asked for: LensOutput calls return the lens matching
-    the rendered evidence; the single Split call returns the golden SPLIT.
+    Lens calls return the golden output for whichever lens's evidence is in `user`,
+    citing only the ids actually shown. The synthesis call reads the gated lens ids back
+    out of `user` and routes them onto the PRESENT cells — so the derived SPLIT always
+    cites ids the lenses really carried, under any retriever.
     """
 
     class _Cfg:
         model = "granite3.3:8b"
 
-    def __init__(self, split=_GOLDEN_SPLIT):
+    def __init__(self):
         self.config = self._Cfg()
         self.options = {"temperature": 0.0, "seed": 42}
-        self._split = split
 
     def generate_structured(self, *, schema, system, user):
         if schema is Split:
-            return self._split
-        # a lens call — pick the golden output whose citation id appears in the evidence
+            return _golden_split(
+                historical_ids=_ids_for_lens_in(user, "HISTORICAL"),
+                framing_ids=_ids_for_lens_in(user, "FRAMING"),
+            )
         for lens, out in _GOLDEN_LENS.items():
             if out.citation_ids[0] in user:
-                return out
+                shown = [cid for cid in out.citation_ids if cid in user]
+                if not shown:
+                    continue
+                return out.model_copy(update={"citation_ids": shown})
         raise AssertionError(f"unexpected lens evidence: {user[:80]}")
 
 
