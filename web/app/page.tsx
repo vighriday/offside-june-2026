@@ -1,6 +1,8 @@
 import { loadIncident } from "@/lib/fixtures";
 import { SettledFact } from "@/components/SettledFact";
 import { SplitView } from "@/components/SplitView";
+import { LensPanels } from "@/components/LensPanels";
+import { ProvenanceFooter } from "@/components/ProvenanceFooter";
 
 // The root routes straight to the golden incident; incident selection lands in M8. For
 // the core artifact, the Hand of God is the front door.
@@ -18,6 +20,11 @@ export default async function Home() {
       <div className="incident__inner">
         <SettledFact fact={bundle.settled_fact} title={bundle.title} />
         <SplitView bundle={bundle} />
+        <LensPanels lenses={bundle.lenses} />
+        <ProvenanceFooter
+          provenance={bundle.provenance}
+          citations={bundle.citations}
+        />
       </div>
     </main>
   );

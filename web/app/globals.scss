@@ -390,3 +390,172 @@ body {
     color: var(--cds-text-secondary, #c6c6c6);
   }
 }
+
+// ── Lens panels ─────────────────────────────────────────────────────────────
+.lens-panels {
+  margin-top: clamp(3rem, 7vw, 5rem);
+
+  &__header {
+    border-top: 1px solid var(--cds-border-subtle-01, #393939);
+    padding-top: 1.5rem;
+    max-width: 44rem;
+  }
+
+  &__eyebrow {
+    margin: 0;
+    font-size: 0.6875rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--cds-text-secondary, #c6c6c6);
+  }
+
+  &__note {
+    margin: 0.5rem 0 0;
+    font-size: 0.875rem;
+    line-height: 1.5;
+    color: var(--cds-text-secondary, #c6c6c6);
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1px;
+    margin-top: 2rem;
+    background: var(--cds-border-subtle-01, #393939);
+
+    @media (max-width: 48rem) {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+
+.lens-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  padding: 1.5rem;
+  background: var(--cds-layer-01, #262626);
+
+  // An INSUFFICIENT_EVIDENCE lens reads muted — it made no claim, by design.
+  &[data-state="INSUFFICIENT_EVIDENCE"] {
+    .lens-panel__rationale {
+      color: var(--cds-text-secondary, #c6c6c6);
+      font-style: italic;
+    }
+  }
+
+  &__top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 0.75rem;
+  }
+
+  &__name {
+    margin: 0;
+    font-size: 1.125rem;
+    font-weight: 400;
+  }
+
+  &__stance {
+    font-size: 0.6875rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 0.125rem 0.5rem;
+    border: 1px solid var(--cds-border-subtle-01, #393939);
+    color: var(--cds-text-secondary, #c6c6c6);
+    white-space: nowrap;
+
+    &[data-stance="MIXED"] {
+      color: var(--split-present);
+      border-color: var(--split-present);
+    }
+    &[data-stance="INSUFFICIENT_EVIDENCE"] {
+      color: var(--split-undocumented);
+    }
+  }
+
+  &__source {
+    margin: 0;
+    font-size: 0.6875rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--cds-text-secondary, #c6c6c6);
+  }
+
+  &__rationale {
+    margin: 0.25rem 0 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.55;
+    color: var(--cds-text-primary, #f4f4f4);
+  }
+}
+
+// The Granite Guardian seal — the second-model audit, made visible.
+.guardian-seal {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: auto;
+  font-size: 0.6875rem;
+  letter-spacing: 0.02em;
+  color: var(--seal-grounded);
+
+  &__mark {
+    width: 0.5rem;
+    height: 0.5rem;
+    border-radius: 50%;
+    background: currentColor;
+    box-shadow: 0 0 0 3px rgba(66, 190, 101, 0.18);
+  }
+
+  &[data-verdict="UNGROUNDED"] {
+    color: var(--seal-ungrounded);
+    .guardian-seal__mark {
+      box-shadow: none;
+    }
+  }
+}
+
+// ── Provenance footer ───────────────────────────────────────────────────────
+.provenance {
+  margin-top: clamp(3rem, 7vw, 5rem);
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--cds-border-subtle-01, #393939);
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+  font-size: 0.75rem;
+  color: var(--cds-text-secondary, #c6c6c6);
+
+  &__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5rem 0.75rem;
+  }
+
+  &__label {
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-size: 0.625rem;
+    color: var(--cds-text-placeholder, #6f6f6f);
+    min-width: 4.5rem;
+  }
+
+  &__models,
+  &__sha {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    color: var(--cds-text-primary, #f4f4f4);
+  }
+
+  &__note {
+    color: var(--cds-text-placeholder, #6f6f6f);
+  }
+
+  &__attribution {
+    margin: 0.5rem 0 0;
+    font-style: italic;
+    color: var(--cds-text-placeholder, #6f6f6f);
+  }
+}
