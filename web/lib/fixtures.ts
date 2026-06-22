@@ -2,11 +2,11 @@ import { promises as fs } from "node:fs";
 import path from "node:path";
 import { CANONICAL_AXIS_ORDER, type IncidentBundle } from "@/types/contract";
 
-// Fixtures live at the repo root `fixtures/` once baked; until the Colab bake runs, a
-// schema-valid sample sits next to the web app. The loader prefers the real bake and
-// falls back to the sample so the UI is buildable before the bake — clearly flagged.
-const REPO_FIXTURES = path.join(process.cwd(), "..", "fixtures");
-const SAMPLE_FIXTURES = path.join(process.cwd(), "fixtures");
+// Fixtures all live in `web/fixtures/` so they sit inside the Vercel deploy root (root
+// dir: web/) and are always reachable at build time. The bake writes `<id>.json`; until
+// it runs, a schema-valid `<id>.sample.json` stands in. The loader prefers the real bake
+// and falls back to the sample, clearly flagged.
+const FIXTURES_DIR = path.join(process.cwd(), "fixtures");
 
 async function readFirst(candidates: string[]): Promise<string | null> {
   for (const file of candidates) {
@@ -34,8 +34,8 @@ export interface LoadedIncident {
  * for the sample and any hand-edited file.)
  */
 export async function loadIncident(incidentId: string): Promise<LoadedIncident> {
-  const baked = path.join(REPO_FIXTURES, `${incidentId}.json`);
-  const sample = path.join(SAMPLE_FIXTURES, `${incidentId}.sample.json`);
+  const baked = path.join(FIXTURES_DIR, `${incidentId}.json`);
+  const sample = path.join(FIXTURES_DIR, `${incidentId}.sample.json`);
 
   const realRaw = await readFirst([baked]);
   const raw = realRaw ?? (await readFirst([sample]));
