@@ -1,0 +1,69 @@
+# Documented framings of the Hand of God (Argentina v England, 22 Jun 1986).
+#
+# Each entry is a framing by a NAMED, DATED source. The schema deliberately has no
+# field for "what a nation believes" — only what a specific named source said. A market
+# lens renders only if it holds at least one `is_from` source, never `characterizes`.
+#
+# These are reproduced under fair use for commentary, presented as documented framings
+# from specific sources — not the views of any nation or its people.
+
+incident: hand-of-god
+incident_title: "The Hand of God"
+shared_fact: >-
+  Maradona's first goal (51st minute) was scored with his hand; he later admitted it.
+  This much is settled and undisputed.
+
+framings:
+  - id: framing-maradona-1986
+    speaker: "Diego Maradona"
+    role: "the player"
+    market: AR
+    relation: is_from           # an Argentine source speaking
+    date: "1986-06-22"
+    source: "post-match press conference"
+    characterizes: SELF
+    stance: JUSTIFIES
+    quote: >-
+      "a little with the head of Maradona and a little with the hand of God"
+    documented_via: secondary    # widely reported; exact wording from secondary sources
+
+  - id: framing-maradona-2000
+    speaker: "Diego Maradona"
+    role: "the player (autobiography)"
+    market: AR
+    relation: is_from
+    date: "2000-01-01"
+    source: "Yo soy el Diego (autobiography)"
+    characterizes: SELF
+    stance: ADMITS
+    quote: >-
+      Maradona later acknowledged he punched the ball into the net, calling it the
+      "hand of God".
+    documented_via: secondary
+
+  - id: framing-shilton
+    speaker: "Peter Shilton"
+    role: "England goalkeeper"
+    market: EN
+    relation: is_from           # an English source speaking
+    date: "1986-06-22"
+    source: "post-match and subsequent interviews"
+    characterizes: OPPONENT
+    stance: CONDEMNS
+    quote: >-
+      Shilton maintained it was cheating and that Maradona never apologised.
+    documented_via: secondary
+
+  - id: framing-robson
+    speaker: "Bobby Robson"
+    role: "England manager"
+    market: EN
+    relation: is_from
+    date: "1986-06-22"
+    source: "post-match comments"
+    characterizes: EVENT
+    stance: CONDEMNS
+    quote: >-
+      Robson described the goal as scored "with the hand of a rascal", not the hand of
+      God.
+    documented_via: secondary

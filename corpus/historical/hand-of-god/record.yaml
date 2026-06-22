@@ -1,0 +1,41 @@
+# Curated historical record for the Hand of God — neutral, cited facts.
+# Used by the Historical lens. Frozen by design (no live historical source).
+
+incident: hand-of-god
+title: "The Hand of God"
+match: "Argentina 2 - 1 England"
+competition: "1986 FIFA World Cup, Quarter-Final"
+venue: "Estadio Azteca, Mexico City"
+date: "1986-06-22"
+referee: "Ali Bin Nasser (Tunisia)"
+assistant_referee: "Bogdan Dotchev (Bulgaria)"
+
+facts:
+  - id: hist-tech-1986
+    statement: >-
+      In 1986 there was no VAR and no goal-line technology. The referee's decision on
+      the field was final and could not be reviewed. VAR did not enter the Laws of the
+      Game until 2018.
+    bearing: DECISION_TIME_DEFICIT
+
+  - id: hist-officials-accounts
+    statement: >-
+      The referee and assistant referee gave differing later accounts of what they saw;
+      neither had a clear, unobstructed view of the handling at full speed.
+    bearing: DECISION_TIME_DEFICIT
+
+  - id: hist-never-overturned
+    statement: >-
+      The goal stood and the result was never overturned. The handball was confirmed
+      only later, including by Maradona's own admission.
+    bearing: RESOLUTION
+
+  - id: hist-context-malvinas
+    statement: >-
+      The match took place four years after the 1982 Falklands/Malvinas War, which
+      intensified the national framing of the result on both sides.
+    bearing: CULTURAL_PRIOR_BIAS
+
+precedents:
+  - "suarez-handball"   # deliberate handball denying a goal (2010 WC QF)
+  - "lampard-ghost-goal" # a goal wrongly disallowed for lack of goal-line technology
