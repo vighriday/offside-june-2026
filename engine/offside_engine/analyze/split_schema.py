@@ -223,5 +223,116 @@ class TrustSeal(BaseModel):
     checked_context_citation_ids: list[str]
 
 
+class SettledFact(BaseModel):
+    """What is NOT in dispute, stated first. Code-owned, written by the bake, not Granite.
+
+    OFFSIDE never opens with refusal. It names the resolution status and the agreed facts
+    *before* decomposing the residual disagreement — a pure "it's contested" reads as
+    evasion. For the Hand of God: the goal stood, was later acknowledged as handball, and
+    was never overturned (``ADJUDICATED_CONTESTED``).
+    """
+
+    model_config = ConfigDict(extra="forbid")
+
+    status: ResolutionStatus
+    statement: str  # the agreed, non-disputed fact, in plain prose
+    citation_ids: list[str] = Field(default_factory=list)
+
+
+class SealedLens(BaseModel):
+    """A lens panel as it appears in a fixture: the gated reading plus its audit seal.
+
+    ``output`` is post-gate (an ungrounded reading has already collapsed to
+    INSUFFICIENT_EVIDENCE); ``seal`` records the Guardian verdict that decided it.
+    """
+
+    model_config = ConfigDict(extra="forbid")
+
+    output: LensOutput
+    seal: TrustSeal
+
+
+class SealedCell(BaseModel):
+    """A SPLIT cell as it appears in a fixture: the gated cell plus its audit seal."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    cell: SplitCell
+    seal: TrustSeal
+
+
+class BakeProvenance(BaseModel):
+    """How a bundle was produced — frozen so a reviewer can reproduce it byte-for-byte.
+
+    Records the models, the deterministic option block, and the corpus git SHA the bake
+    read from. Code-owned; carries whatever the build needs, never emitted by Granite.
+    """
+
+    model_config = ConfigDict(extra="forbid")
+
+    granite_model: str
+    guardian_model: str
+    embed_model: str
+    options: dict[str, int | float] = Field(default_factory=dict)
+    corpus_git_sha: str | None = None
+
+
+class IncidentBundle(BaseModel):
+    """THE frozen fixture for one incident — the whole contract the web app reads.
+
+    Self-contained and offline: it carries the settled fact, the four sealed lens
+    panels, the sealed four-cell SPLIT, every Citation any of them points at (so the
+    viewer resolves click-to-source with no second lookup), and the bake provenance.
+    No model or Python runs at web runtime — the web only reads this JSON.
+    """
+
+    model_config = ConfigDict(extra="forbid")
+
+    incident_id: str  # stable slug, e.g. "hand-of-god-1986"
+    title: str
+    settled_fact: SettledFact
+    lenses: Annotated[list[SealedLens], Field(min_length=4, max_length=4)]
+    split: Split
+    cell_seals: Annotated[list[SealedCell], Field(min_length=4, max_length=4)]
+    citations: dict[str, Citation]
+    provenance: BakeProvenance
+
+    @model_validator(mode="after")
+    def _bundle_is_internally_consistent(self) -> "IncidentBundle":
+        # one lens panel per lens, no duplicates
+        lens_kinds = [sl.output.lens for sl in self.lenses]
+        if len(set(lens_kinds)) != 4:
+            raise ValueError(f"expected one panel per lens, got {lens_kinds}")
+
+        # cell seals are in the same canonical axis order as the SPLIT cells
+        seal_axes = tuple(sc.cell.axis for sc in self.cell_seals)
+        if seal_axes != CANONICAL_AXIS_ORDER:
+            raise ValueError(f"cell_seals must be canonical axis order, got {seal_axes}")
+        split_axes = tuple(c.axis for c in self.split.cells)
+        if seal_axes != split_axes:
+            raise ValueError("cell_seals axes must match split.cells axes")
+
+        # every cited id anywhere in the bundle must resolve in the citation map
+        cited: set[str] = set()
+        for sl in self.lenses:
+            cited.update(sl.output.citation_ids)
+        for c in self.split.cells:
+            cited.update(c.citation_ids)
+        cited.update(self.settled_fact.citation_ids)
+        missing = sorted(cited - set(self.citations))
+        if missing:
+            raise ValueError(f"bundle cites ids with no citation: {missing}")
+        return self
+
+
 # Code-owned models, kept explicitly disjoint from the Granite-facing set.
-CODE_OWNED_MODELS: tuple[type[BaseModel], ...] = (Bbox, Citation, TrustSeal)
+CODE_OWNED_MODELS: tuple[type[BaseModel], ...] = (
+    Bbox,
+    Citation,
+    TrustSeal,
+    SettledFact,
+    SealedLens,
+    SealedCell,
+    BakeProvenance,
+    IncidentBundle,
+)
