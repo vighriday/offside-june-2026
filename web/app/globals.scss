@@ -1,0 +1,60 @@
+// OFFSIDE global styles.
+//
+// Two layers, kept distinct on purpose:
+//   1. IBM Carbon — the design system. Provides IBM Plex, the type scale, the spacing
+//      grid, the colour tokens, and component styles. This is what makes the app read
+//      like a real IBM product rather than a generic site.
+//   2. Tailwind v4 — layout utilities only (flex/grid/gap). It never overrides a Carbon
+//      token; colour and type always come from Carbon.
+
+// Carbon, serving IBM Plex from the Akamai CDN. This is a Carbon-supported font option
+// and it sidesteps bundling the split woff2 assets (which the bundler can't resolve from
+// inside the Carbon package on every platform). The CDN is IBM's own and production-safe.
+// Tailwind is imported separately in tailwind.css — it is a PostCSS layer, not Sass, so
+// mixing `@import "tailwindcss"` into this Sass file would have Sass swallow it.
+@use "@carbon/react" with (
+  $use-akamai-cdn: true
+);
+
+// ── App-level design tokens, expressed against Carbon's own tokens ──────────────
+// THE SPLIT cell states. Polarity is communicated by FILL STATE, never by width or a
+// magnitude — a deliberate rejection of the "73% confidence bar" the engine forbids.
+:root {
+  // PRESENT: a live tension. Carbon's interactive/“support-info” accent — it draws the eye.
+  --split-present: var(--cds-support-info, #4589ff);
+  --split-present-bg: rgba(69, 137, 255, 0.16);
+  // WEAK: a softer tension.
+  --split-weak: var(--cds-support-warning, #f1c21b);
+  --split-weak-bg: rgba(241, 194, 27, 0.12);
+  // ABSENT: a positive finding — "RULED OUT". Solid, settled, not empty.
+  --split-absent: var(--cds-text-secondary, #c6c6c6);
+  --split-absent-bg: var(--cds-layer-02, #262626);
+  // NOT_DOCUMENTED: unknown, rendered hatched — never silently collapsed into ABSENT.
+  --split-undocumented: var(--cds-text-placeholder, #6f6f6f);
+
+  // Guardian verdict accents.
+  --seal-grounded: var(--cds-support-success, #42be65);
+  --seal-ungrounded: var(--cds-text-placeholder, #6f6f6f);
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--cds-background, #161616);
+  color: var(--cds-text-primary, #f4f4f4);
+  // Carbon sets IBM Plex Sans as the body family via the theme; this is a safety net.
+  font-family: "IBM Plex Sans", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+// Respect the user's reduced-motion preference everywhere — the staged reveals are
+// enhancement, never required to read the content.
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}

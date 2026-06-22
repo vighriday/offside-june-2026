@@ -16,6 +16,10 @@ corpus/statsbomb/**/*.json
 **/*.statsbomb.json
 **/events/
 
+# ── Source PDFs: large reproducible inputs. Only the curated/frozen passages
+#    (curated_evidence.json) and the specific cited page images are committed.
+corpus/**/*.pdf
+
 # ── Python engine ──────────────────────────────────────────────────────
 engine/.venv/
 engine/.hf_cache/

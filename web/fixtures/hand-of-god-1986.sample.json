@@ -1,0 +1,248 @@
+{
+  "cell_seals": [
+    {
+      "cell": {
+        "axis": "RULE_AMBIGUITY",
+        "citation_ids": [],
+        "rationale": "A single clear offence clause governs a hand-scored goal, with no competing clause.",
+        "state": "ABSENT"
+      },
+      "seal": {
+        "checked_context_citation_ids": [],
+        "guardian_model": "granite-guardian3:2b",
+        "verdict": "GROUNDED"
+      }
+    },
+    {
+      "cell": {
+        "axis": "INDETERMINACY",
+        "citation_ids": [],
+        "rationale": "The act was admitted by the scorer, so the deliberateness residual is resolved.",
+        "state": "ABSENT"
+      },
+      "seal": {
+        "checked_context_citation_ids": [],
+        "guardian_model": "granite-guardian3:2b",
+        "verdict": "GROUNDED"
+      }
+    },
+    {
+      "cell": {
+        "axis": "DECISION_TIME_DEFICIT",
+        "citation_ids": [
+          "hist-tech-1986"
+        ],
+        "rationale": "No review technology existed and the call was unreviewable in the moment (hist-tech-1986).",
+        "state": "PRESENT"
+      },
+      "seal": {
+        "checked_context_citation_ids": [
+          "hist-tech-1986"
+        ],
+        "guardian_model": "granite-guardian3:2b",
+        "verdict": "GROUNDED"
+      }
+    },
+    {
+      "cell": {
+        "axis": "CULTURAL_PRIOR_BIAS",
+        "citation_ids": [
+          "framing-maradona-1986",
+          "framing-shilton"
+        ],
+        "rationale": "Named sources frame the same agreed handball in opposite valence — justification versus condemnation.",
+        "state": "PRESENT"
+      },
+      "seal": {
+        "checked_context_citation_ids": [
+          "framing-maradona-1986",
+          "framing-shilton"
+        ],
+        "guardian_model": "granite-guardian3:2b",
+        "verdict": "GROUNDED"
+      }
+    }
+  ],
+  "citations": {
+    "framing-maradona-1986": {
+      "attribution": "Diego Maradona, post-match (1986)",
+      "bbox": null,
+      "doc_kind": "FRAMING_SOURCE",
+      "extracted_text": "Diego Maradona (1986) — justifying: the goal was scored 'a little with the head of Maradona and a little with the hand of God'.",
+      "id": "framing-maradona-1986",
+      "page": null,
+      "source_doc": "framing"
+    },
+    "framing-shilton": {
+      "attribution": "Peter Shilton, England goalkeeper",
+      "bbox": null,
+      "doc_kind": "FRAMING_SOURCE",
+      "extracted_text": "Peter Shilton (England goalkeeper) — condemning: described the goal as cheating and said Maradona never apologised.",
+      "id": "framing-shilton",
+      "page": null,
+      "source_doc": "framing"
+    },
+    "hist-tech-1986": {
+      "attribution": "Curated historical record — The Hand of God",
+      "bbox": null,
+      "doc_kind": "HISTORICAL_REPORT",
+      "extracted_text": "No video review system existed at the 1986 World Cup; the referee's decision in the moment was final and unreviewable.",
+      "id": "hist-tech-1986",
+      "page": null,
+      "source_doc": "curated-historical"
+    },
+    "ifab-law12-handball-offence-p110": {
+      "attribution": null,
+      "bbox": {
+        "bottom": 175.0,
+        "left": 54.0,
+        "right": 373.0,
+        "top": 309.0
+      },
+      "doc_kind": "IFAB_LAW",
+      "extracted_text": "It is an offence if a player deliberately touches the ball with their hand/arm, or scores in the opponents' goal immediately after the ball has touched their hand/arm, even if accidental. A goal scored in this way does not stand.",
+      "id": "ifab-law12-handball-offence-p110",
+      "page": 110,
+      "source_doc": "ifab-laws-2025-26"
+    },
+    "sb-hand-of-god-body-part": {
+      "attribution": "Data provided by StatsBomb Open Data (StatsBomb User Agreement).",
+      "bbox": null,
+      "doc_kind": "STATSBOMB_EVENT",
+      "extracted_text": "In the event data this goal's body part is recorded as the catch-all label 'Other', while a comparable goal by the same player is recorded with a specific body-part class ('Left Foot'). The shot ontology has no category for a hand-scored goal, so the event falls back to 'Other'. This describes the data model only.",
+      "id": "sb-hand-of-god-body-part",
+      "page": null,
+      "source_doc": "statsbomb-open-data"
+    }
+  },
+  "incident_id": "hand-of-god-1986",
+  "lenses": [
+    {
+      "output": {
+        "citation_ids": [
+          "ifab-law12-handball-offence-p110"
+        ],
+        "lens": "REFEREE",
+        "rationale": "The retrieved Law states a goal scored from the hand or arm does not stand (ifab-law12-handball-offence-p110). The rule yields one outcome for a hand-scored goal, so it is clear; rule-ambiguity does not hold.",
+        "stance": "SUPPORTS",
+        "state": "GROUNDED"
+      },
+      "seal": {
+        "checked_context_citation_ids": [
+          "ifab-law12-handball-offence-p110"
+        ],
+        "guardian_model": "granite-guardian3:2b",
+        "verdict": "GROUNDED"
+      }
+    },
+    {
+      "output": {
+        "citation_ids": [
+          "sb-hand-of-god-body-part"
+        ],
+        "lens": "TACTICAL",
+        "rationale": "The aggregate records this goal's body part as the catch-all label 'Other' while a comparable goal is a specific class (sb-hand-of-god-body-part). The schema having no category for the action is a point where the data model strains. This describes the data model only.",
+        "stance": "SUPPORTS",
+        "state": "GROUNDED"
+      },
+      "seal": {
+        "checked_context_citation_ids": [
+          "sb-hand-of-god-body-part"
+        ],
+        "guardian_model": "granite-guardian3:2b",
+        "verdict": "GROUNDED"
+      }
+    },
+    {
+      "output": {
+        "citation_ids": [
+          "hist-tech-1986"
+        ],
+        "lens": "HISTORICAL",
+        "rationale": "The retrieved facts state no video review existed at the time and the decision was final in the moment (hist-tech-1986). The decisive truth was not available to the officials then, a decision-time deficit.",
+        "stance": "SUPPORTS",
+        "state": "GROUNDED"
+      },
+      "seal": {
+        "checked_context_citation_ids": [
+          "hist-tech-1986"
+        ],
+        "guardian_model": "granite-guardian3:2b",
+        "verdict": "GROUNDED"
+      }
+    },
+    {
+      "output": {
+        "citation_ids": [
+          "framing-maradona-1986",
+          "framing-shilton"
+        ],
+        "lens": "FRAMING",
+        "rationale": "Maradona is reported to have justified the goal as 'the hand of God' (framing-maradona-1986), while Shilton is reported to have condemned it as cheating (framing-shilton). Two named people describe one agreed event in opposing terms.",
+        "stance": "MIXED",
+        "state": "GROUNDED"
+      },
+      "seal": {
+        "checked_context_citation_ids": [
+          "framing-maradona-1986",
+          "framing-shilton"
+        ],
+        "guardian_model": "granite-guardian3:2b",
+        "verdict": "GROUNDED"
+      }
+    }
+  ],
+  "provenance": {
+    "corpus_git_sha": "sample-not-yet-baked",
+    "embed_model": "granite-embedding:30m",
+    "granite_model": "granite3.3:8b",
+    "guardian_model": "granite-guardian3:2b",
+    "options": {
+      "num_ctx": 8192,
+      "seed": 42,
+      "temperature": 0.0
+    }
+  },
+  "settled_fact": {
+    "citation_ids": [
+      "ifab-law12-handball-offence-p110"
+    ],
+    "statement": "Diego Maradona scored with his hand against England in the 1986 World Cup quarter-final. The referee allowed the goal, Argentina won, and the result was never overturned. The handball itself is not in dispute.",
+    "status": "ADJUDICATED_CONTESTED"
+  },
+  "split": {
+    "cells": [
+      {
+        "axis": "RULE_AMBIGUITY",
+        "citation_ids": [],
+        "rationale": "A single clear offence clause governs a hand-scored goal, with no competing clause.",
+        "state": "ABSENT"
+      },
+      {
+        "axis": "INDETERMINACY",
+        "citation_ids": [],
+        "rationale": "The act was admitted by the scorer, so the deliberateness residual is resolved.",
+        "state": "ABSENT"
+      },
+      {
+        "axis": "DECISION_TIME_DEFICIT",
+        "citation_ids": [
+          "hist-tech-1986"
+        ],
+        "rationale": "No review technology existed and the call was unreviewable in the moment (hist-tech-1986).",
+        "state": "PRESENT"
+      },
+      {
+        "axis": "CULTURAL_PRIOR_BIAS",
+        "citation_ids": [
+          "framing-maradona-1986",
+          "framing-shilton"
+        ],
+        "rationale": "Named sources frame the same agreed handball in opposite valence — justification versus condemnation.",
+        "state": "PRESENT"
+      }
+    ],
+    "headline": "It never resolved over what the referee could see and which nation was watching — not because the Law was unclear."
+  },
+  "title": "The Hand of God"
+}
