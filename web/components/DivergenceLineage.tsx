@@ -30,8 +30,10 @@ export function DivergenceLineage({ incidents, activeId, onSelect }: DivergenceL
   if (incidents.length < 2) return null;
 
   return (
-    <section className="lineage" aria-label="Divergence lineage">
-      <p className="lineage__eyebrow">▸ Divergence lineage — grouped by shared dominant axis</p>
+    <section className="lineage" aria-label="Choose an incident">
+      <p className="lineage__eyebrow">
+        ▸ Pick an incident — watch the diagnosis change (same engine, different answer)
+      </p>
       <ol className="lineage__chain">
         {incidents.map((b, i) => {
           const axes = dominantAxes(b);

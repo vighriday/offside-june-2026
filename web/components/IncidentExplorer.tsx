@@ -9,6 +9,7 @@ import { LensPanels } from "./LensPanels";
 import { ProvenanceFooter } from "./ProvenanceFooter";
 import { DivergenceLineage } from "./DivergenceLineage";
 import { RuleEvolution } from "./RuleEvolution";
+import { Hero } from "./Hero";
 
 export interface LoadedBundle {
   bundle: IncidentBundle;
@@ -37,6 +38,8 @@ export function IncidentExplorer({ incidents }: IncidentExplorerProps) {
       )}
 
       <div className="incident__inner">
+        <Hero />
+
         {bundles.length > 1 && (
           <DivergenceLineage
             incidents={bundles}

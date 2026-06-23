@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "motion/react";
 import type { CellState, SplitAxis, SplitCell as SplitCellData } from "@/types/contract";
 
 // Human-facing axis labels and the one-line question each axis answers. The enum value
@@ -12,11 +11,13 @@ const AXIS_LABEL: Record<SplitAxis, string> = {
   CULTURAL_PRIOR_BIAS: "Cultural prior bias",
 };
 
-const AXIS_QUESTION: Record<SplitAxis, string> = {
-  RULE_AMBIGUITY: "Are the Laws themselves unclear or in conflict?",
-  INDETERMINACY: "Does a fact stay contested even with all current technology?",
-  DECISION_TIME_DEFICIT: "Knowable now, but not available at the moment of the call?",
-  CULTURAL_PRIOR_BIAS: "Agreement on facts and rules, divergence on acceptable outcome?",
+// The plain-English version of each axis — the human translation under the formal name,
+// so the box is understood without a glossary.
+const AXIS_PLAIN: Record<SplitAxis, string> = {
+  RULE_AMBIGUITY: "Is the rulebook itself unclear?",
+  INDETERMINACY: "Is the truth impossible to ever know?",
+  DECISION_TIME_DEFICIT: "Could the ref see it in the moment — even if we can now?",
+  CULTURAL_PRIOR_BIAS: "Same facts agreed, but each side wants its own outcome?",
 };
 
 // What each state means on the cell face. ABSENT is a *positive* finding ("ruled out"),
@@ -41,27 +42,21 @@ export function SplitCell({ cell, index, selected, onSelect }: SplitCellProps) {
   const isAssertive = cell.state === "PRESENT" || cell.state === "WEAK";
 
   return (
-    <motion.button
+    <button
       type="button"
       data-state={cell.state}
       data-selected={selected}
       onClick={() => onSelect(cell.axis)}
-      className="split-cell"
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      // Carbon "productive" entrance easing; cells resolve in quick sequence (~0.6s total
-      // for four) so the diagnostic is readable fast, not a slow load.
-      transition={{
-        duration: 0.34,
-        delay: 0.09 * index,
-        ease: [0.4, 0.14, 0.3, 1],
-      }}
-      whileHover={{ y: -2 }}
+      // The cell is fully visible by default; `split-cell--enter` adds a one-shot CSS
+      // fade/rise that can never leave the cell stuck dim (the prior Motion opacity-0
+      // initial could, on a slow first paint). The per-cell delay staggers the entrance.
+      className="split-cell split-cell--enter"
+      style={{ animationDelay: `${0.08 * index}s` }}
       aria-pressed={selected}
       aria-label={`${AXIS_LABEL[cell.axis]}: ${face.tag}. ${face.meaning}.`}
     >
       <span className="split-cell__axis">{AXIS_LABEL[cell.axis]}</span>
-      <span className="split-cell__question">{AXIS_QUESTION[cell.axis]}</span>
+      <span className="split-cell__question">{AXIS_PLAIN[cell.axis]}</span>
 
       <span className="split-cell__state" data-assertive={isAssertive}>
         {face.tag}
@@ -70,7 +65,7 @@ export function SplitCell({ cell, index, selected, onSelect }: SplitCellProps) {
 
       {isAssertive && cell.citation_ids.length > 0 && (
         <span className="split-cell__trace">
-          Traces to {cell.citation_ids.length}{" "}
+          Click to see {cell.citation_ids.length}{" "}
           {cell.citation_ids.length === 1 ? "source" : "sources"} →
         </span>
       )}
@@ -80,6 +75,6 @@ export function SplitCell({ cell, index, selected, onSelect }: SplitCellProps) {
       {!isAssertive && cell.rationale && (
         <span className="split-cell__earned">{cell.rationale}</span>
       )}
-    </motion.button>
+    </button>
   );
 }

@@ -48,9 +48,9 @@ function GuardianSeal({
   const isLiveGuardian = model.includes("guardian");
   const label = isLiveGuardian
     ? verdict === "GROUNDED"
-      ? "Granite Guardian: grounded"
-      : "Granite Guardian: unverified"
-    : "Routed deterministically";
+      ? "✓ Granite Guardian confirmed this against its source"
+      : "Granite Guardian could not confirm — held back"
+    : "✓ Backed by a cited source";
   return (
     <span className="guardian-seal" data-verdict={verdict}>
       <span className="guardian-seal__mark" aria-hidden />
