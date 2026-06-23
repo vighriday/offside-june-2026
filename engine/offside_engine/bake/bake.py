@@ -10,9 +10,9 @@ The order matters and is load-bearing:
 1.  **Settled fact** — pure code, stated first (never refusal-only).
 2.  **Per-lens run** — retrieve (lens + incident allow-list) → Granite (cite-or-die).
 3.  **Per-lens gate** — Guardian demotes any ungrounded lens to INSUFFICIENT_EVIDENCE.
-4.  **Synthesis** — Granite routes the *gated* lens evidence onto the four axes, with
-    the settled fact (incl. the admission note) injected so the INDETERMINACY
-    precondition can fire. The synthesis never sees the expected answer.
+4.  **Synthesis** — the *gated* lens evidence is routed onto the four axes by the fixed
+    documented rules (deterministic code, not the model), with the admission note gating
+    the INDETERMINACY precondition. The routing never sees the expected answer.
 5.  **Per-cell gate** — Guardian demotes any ungrounded PRESENT/WEAK cell to
     NOT_DOCUMENTED.
 6.  **Thesis assertion** — the derived SPLIT must match the documented shape, else the
@@ -26,13 +26,11 @@ is the *post-hoc* assertion in step 6, never an input to any model call.
 
 from __future__ import annotations
 
-from pydantic import ValidationError
 
 from offside_engine.analyze.granite_client import GraniteClient
 from offside_engine.analyze.guardian import GuardianClient
 from offside_engine.analyze.guardian_gate import gate_cell, gate_lens
 from offside_engine.analyze.lens_runner import LensRun, run_lens
-from offside_engine.analyze.prompts import SPLIT_SYSTEM
 from offside_engine.analyze.split_schema import (
     CANONICAL_AXIS_ORDER,
     BakeProvenance,
@@ -157,39 +155,17 @@ def bake_incident(
         sealed_lenses.append(SealedLens(output=gated.output, seal=gated.seal))
         gated_outputs.append(gated.output)
 
-    # 4 — synthesis from the GATED lens evidence, settled fact + admission injected.
-    # We prefer the Granite synthesis (it keeps the "a model routed the evidence" story),
-    # but the Split schema is strict (four axes, canonical order, cite rules) and an 8B
-    # model can fail to emit it. So: try Granite twice, and if it still cannot produce a
-    # schema-valid SPLIT, fall back to the deterministic code router, which applies the
-    # SAME routing rules to the SAME gated lens evidence. Either path is evidence-derived
-    # (a different incident yields a different SPLIT); the fallback just never fails.
-    shared = f"{spec.settled_statement} {spec.admission_note}".strip()
-    synthesis_user = render_synthesis_input(gated_outputs, shared_settled_fact=shared)
-    split: Split | None = None
-    last_error = ""
-    for attempt in range(2):
-        sys_prompt = SPLIT_SYSTEM
-        if attempt > 0:
-            sys_prompt = SPLIT_SYSTEM + (
-                "\n\nCORRECTION: your previous output was not a valid SPLIT. Return exactly "
-                "four cells, one per axis, in canonical order, with PRESENT/WEAK cells "
-                "citing only ids that appear in the lens evidence above."
-            )
-        try:
-            split = granite.generate_structured(
-                schema=Split, system=sys_prompt, user=synthesis_user
-            )
-            break
-        except ValidationError as e:
-            last_error = str(e).splitlines()[0] if str(e) else repr(e)
-            continue
-    if split is None:
-        print(
-            f"NOTE: Granite synthesis did not emit a valid SPLIT ({last_error}); "
-            f"routing the gated lens evidence deterministically instead."
-        )
-        split = derive_split(gated_outputs, admitted_act=bool(spec.admission_note))
+    # 4 — synthesis: ROUTE the gated lens evidence onto the four axes.
+    #
+    # THE SPLIT routing is a fixed set of rules (see prompts.SPLIT_SYSTEM). We apply them
+    # in code (`derive_split`) rather than asking an 8B model to emit a strict four-cell
+    # schema every time — the rules are deterministic, so the code router is both faithful
+    # to the documented rules AND reliable, where the model is neither (it routinely fails
+    # the schema). This keeps the synthesis reproducible and is the honest division of
+    # labour: the models do the grounded, audited *lens readings* (the hard NL work); the
+    # routing of those readings onto the diagnostic is deterministic. It is still
+    # evidence-derived — a different incident's lens signatures yield a different SPLIT.
+    split = derive_split(gated_outputs, admitted_act=bool(spec.admission_note))
 
     # 5 — per-cell Guardian gate (demote ungrounded PRESENT/WEAK -> NOT_DOCUMENTED).
     gated_cells = []
