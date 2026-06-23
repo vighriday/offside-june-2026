@@ -36,7 +36,10 @@ from offside_engine.analyze.split_schema import (
 from offside_engine.bake.corpus_pool import assemble_pool
 from offside_engine.bake.incident import (
     HAND_OF_GOD,
+    HANDBALL_REWRITE,
     LAMPARD_GHOST_GOAL,
+    OFFSIDE_MARGIN,
+    PGMOL_SUBJECTIVE,
     SUAREZ_HANDBALL,
     IncidentSpec,
 )
@@ -145,6 +148,95 @@ _SUAREZ_LENSES = [
 ]
 
 
+# ── The modern handball call (RULE_AMBIGUITY PRESENT) ─────────────────────────
+# The Referee lens DISPUTES — the Law offers several competing tests for the same contact,
+# pointing to different outcomes. The Historical lens DISPUTES a decision-time deficit (the
+# contact was visible and replayable), which routes DECISION_TIME_DEFICIT to ABSENT without
+# touching INDETERMINACY. The framings share one complaint (one-sided) → CULTURAL ABSENT.
+
+_HANDBALL_REWRITE_LENSES = [
+    _lens("REFEREE", "DISPUTES",
+          ["ifab-law12-handball-deliberate-p110", "ifab-law12-handball-offence-p110"],
+          "The retrieved Law sets out several different tests for the same contact — a "
+          "deliberate movement of the hand/arm, the hand/arm making the body 'unnaturally "
+          "bigger', and an accidental touch that leads directly to a goal "
+          "(ifab-law12-handball-deliberate-p110) — each with a different consequence. "
+          "Competing clauses point to different outcomes for the same facts, so the rule "
+          "itself is ambiguous."),
+    LensOutput(lens="TACTICAL", stance="INSUFFICIENT_EVIDENCE",
+               state="INSUFFICIENT_EVIDENCE", citation_ids=[],
+               rationale="No event-data anomaly resolves which handball test applies."),
+    _lens("HISTORICAL", "DISPUTES",
+          ["hb-hist-three-tests", "hb-hist-visible-knowable"],
+          "The retrieved facts state that whether the ball touched the hand or arm is "
+          "almost always visible and, with modern replay, fully knowable "
+          "(hb-hist-visible-knowable); the information available at the moment was adequate, "
+          "so there is no decision-time deficit. What is contested is which clause applies."),
+    _lens("FRAMING", "DISPUTES", ["hb-framing-pundit", "hb-framing-coach"],
+          "Named officiating analysts and managers are reported to share one complaint — "
+          "that near-identical contact is judged differently because the Law offers several "
+          "tests rather than one (hb-framing-pundit, hb-framing-coach). The framings agree "
+          "on the problem rather than dividing by side, so there is no opposed valence."),
+]
+
+
+# ── The millimetre offside line (INDETERMINACY PRESENT) ───────────────────────
+# The Referee lens SUPPORTS — Law 11 fixes the line precisely (RULE ABSENT). The Historical
+# lens DISPUTES knowability AND cites the measurement-unrecoverable atom, which routes
+# INDETERMINACY to PRESENT and DECISION_TIME_DEFICIT to ABSENT (the tech can see it; the
+# exact truth still cannot be measured). Framings one-sided → CULTURAL ABSENT.
+
+_OFFSIDE_MARGIN_LENSES = [
+    _lens("REFEREE", "SUPPORTS", ["ifab-law11-offside-margin-p103"],
+          "The retrieved Law fixes the offside line precisely — a player is offside if any "
+          "part of the head, body or feet is nearer the goal line than the second-last "
+          "opponent (ifab-law11-offside-margin-p103). The rule is a single clear test, so "
+          "rule-ambiguity does not hold."),
+    LensOutput(lens="TACTICAL", stance="INSUFFICIENT_EVIDENCE",
+               state="INSUFFICIENT_EVIDENCE", citation_ids=[],
+               rationale="No event-data anomaly resolves the exact position at the margin."),
+    _lens("HISTORICAL", "DISPUTES",
+          ["om-hist-margin-unrecoverable", "om-hist-thicker-line"],
+          "The retrieved facts state that at a millimetre margin the kick frame, the limb "
+          "point and the motion of ball and players make the true position unrecoverable, "
+          "and the authorities answer with a deliberately thicker line "
+          "(om-hist-margin-unrecoverable, om-hist-thicker-line); the technology can see the "
+          "moment, but the exact truth cannot be measured to the precision the Law implies."),
+    _lens("FRAMING", "DISPUTES", ["om-framing-broadcaster", "om-framing-official"],
+          "Named broadcasters and officiating bodies are reported to agree that margins too "
+          "fine to see make the calls feel arbitrary and that a thicker line is used "
+          "precisely because the measurement is unreliable (om-framing-broadcaster, "
+          "om-framing-official); the framings converge rather than divide by side."),
+]
+
+
+# ── The 'subjective' VAR call (RULE_AMBIGUITY + CULTURAL_PRIOR_BIAS PRESENT) ───
+# The combined signature. Referee DISPUTES (the threshold is a matter of degree applied
+# inconsistently → RULE PRESENT). Historical DISPUTES a decision-time deficit (contact
+# visible and replayed → DTD ABSENT, no margin signal → INDET NOT_DOCUMENTED). Framing MIXED
+# (each side reads the same agreed contact in its own favour → CULTURAL PRESENT).
+
+_PGMOL_SUBJECTIVE_LENSES = [
+    _lens("REFEREE", "DISPUTES", ["pg-hist-threshold", "pg-hist-opposite-rulings"],
+          "The retrieved record shows the 'clear and obvious' and 'non-footballing action' "
+          "thresholds are matters of degree, not bright lines, so near-identical contact is "
+          "ruled in opposite ways across matches (pg-hist-threshold, pg-hist-opposite-rulings); "
+          "the rule's threshold itself generates the disagreement."),
+    LensOutput(lens="TACTICAL", stance="INSUFFICIENT_EVIDENCE",
+               state="INSUFFICIENT_EVIDENCE", citation_ids=[],
+               rationale="No event-data anomaly resolves whether the threshold was met."),
+    _lens("HISTORICAL", "DISPUTES", ["pg-hist-visible"],
+          "The retrieved facts state the contact was visible on replay and reviewed by VAR "
+          "(pg-hist-visible); the information available was adequate, so the dispute is not "
+          "about what could be seen but about whether the threshold was met."),
+    _lens("FRAMING", "MIXED", ["pg-framing-aggrieved", "pg-framing-benefiting"],
+          "The manager ruled against is reported to call the contact a clear, obvious foul "
+          "(pg-framing-aggrieved) while the manager who benefited calls the identical "
+          "contact part of the game (pg-framing-benefiting); two named sources frame the "
+          "same agreed contact in opposite valence."),
+]
+
+
 def bake_offline(spec: IncidentSpec, lenses: list[LensOutput], *, framing_yaml: Path,
                  historical_yaml: Path, aggregate: HandOfGodAggregate,
                  extra_citations: list[Citation], corpus_git_sha: str,
@@ -231,7 +323,41 @@ def main() -> None:
                        extra_citations=[], corpus_git_sha=sha,
                        rule_evolution=lampard_evolution)
 
-    for bundle in (hog, sz, lam):
+    # ── Current, unsettled disputes (light up the axes the archive never did) ──
+    hb_fr, hb_hist = _corpus("handball-rewrite")
+    handball = bake_offline(HANDBALL_REWRITE, _HANDBALL_REWRITE_LENSES, framing_yaml=hb_fr,
+                            historical_yaml=hb_hist, aggregate=_HAND_OF_GOD_AGG,
+                            extra_citations=[], corpus_git_sha=sha)
+
+    om_fr, om_hist = _corpus("offside-margin")
+    offside = bake_offline(OFFSIDE_MARGIN, _OFFSIDE_MARGIN_LENSES, framing_yaml=om_fr,
+                           historical_yaml=om_hist, aggregate=_HAND_OF_GOD_AGG,
+                           extra_citations=[], corpus_git_sha=sha)
+
+    pg_fr, pg_hist = _corpus("pgmol-subjective")
+    pgmol = bake_offline(PGMOL_SUBJECTIVE, _PGMOL_SUBJECTIVE_LENSES, framing_yaml=pg_fr,
+                         historical_yaml=pg_hist, aggregate=_HAND_OF_GOD_AGG,
+                         extra_citations=[], corpus_git_sha=sha)
+
+    # Assert each derived SPLIT matches the documented thesis shape — the oracle that keeps
+    # "derived, not hard-coded" honest. A drift fails the bake rather than freezing a fixture
+    # that silently diverged from the documented signature.
+    by_spec = [
+        (HAND_OF_GOD, hog), (SUAREZ_HANDBALL, sz), (LAMPARD_GHOST_GOAL, lam),
+        (HANDBALL_REWRITE, handball), (OFFSIDE_MARGIN, offside), (PGMOL_SUBJECTIVE, pgmol),
+    ]
+    for spec, bundle in by_spec:
+        if not spec.expected_thesis:
+            continue
+        for cell in bundle.split.cells:
+            allowed = spec.expected_thesis.get(cell.axis)
+            if allowed and cell.state not in allowed:
+                raise SystemExit(
+                    f"thesis mismatch for {spec.incident_id}: {cell.axis} derived "
+                    f"{cell.state}, expected one of {sorted(allowed)}"
+                )
+
+    for bundle in (hog, sz, lam, handball, offside, pgmol):
         out = write_fixture(bundle, fixtures)
         states = {c.axis: c.state for c in bundle.split.cells}
         print(f"\nwrote {out}\n  THE SPLIT: {states}\n  headline: {bundle.split.headline}")

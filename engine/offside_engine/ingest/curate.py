@@ -73,6 +73,47 @@ CURATED_ANCHORS: list[dict] = [
         ),
     },
     {
+        # The deliberate / non-deliberate / "unnaturally bigger" clause — the grounding for
+        # RULE_AMBIGUITY=PRESENT on the current handball-rewrite dispute. The same Law page
+        # (p110) carries three different tests an official must choose between in the moment,
+        # which is *why* the modern handball call generates disagreement. Real Docling bbox
+        # isolating the deliberate + unnaturally-bigger clause.
+        "id": "ifab-law12-handball-deliberate-p110",
+        "law": "Law 12",
+        "page": 110,
+        "bbox": {"left": 53.86, "top": 335.07, "right": 372.97, "bottom": 233.32},
+        "topic": "handball — deliberate vs 'unnaturally bigger' (the test the official must choose)",
+        "applies_to_incidents": ["handball-rewrite"],
+        "seed_text": (
+            "deliberately touches the ball with their hand/arm, for example moving the "
+            "hand/arm towards the ball … touches the ball with their hand/arm when it has "
+            "made their body unnaturally bigger. A player is considered to have made their "
+            "body unnaturally bigger when the position of their hand/arm is not a "
+            "consequence of, or justifiable by, the player's body movement for that specific "
+            "situation."
+        ),
+    },
+    {
+        # The offside-position definition — the grounding for the semi-automated offside
+        # margin dispute. The Law fixes the line precisely ("any part of the head, body or
+        # feet … nearer"), but the *measurement* of that line at millimetre margins is what
+        # is contested — so the rule is clear (RULE_AMBIGUITY absent) while the truth at the
+        # margin is practically indeterminate (INDETERMINACY present). Same page as the
+        # confirmed offside anchor (Law 11, p103).
+        "id": "ifab-law11-offside-margin-p103",
+        "law": "Law 11",
+        "page": 103,
+        "bbox": {"left": 62.0, "top": 689.0, "right": 373.0, "bottom": 600.0},
+        "topic": "offside position — the line the Law draws, measured at millimetre margins",
+        "applies_to_incidents": ["offside-margin"],
+        "seed_text": (
+            "A player is in an offside position if any part of the head, body or feet is "
+            "nearer to the opponents' goal line than both the ball and the second-last "
+            "opponent. The hands and arms of all players, including the goalkeepers, are not "
+            "considered."
+        ),
+    },
+    {
         # Corroboration of the SANCTION only — never the sole RULE_AMBIGUITY anchor (F-A).
         "id": "ifab-law12-dogso-handball-p118",
         "law": "Law 12",

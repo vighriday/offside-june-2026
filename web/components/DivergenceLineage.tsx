@@ -9,6 +9,14 @@ const AXIS_SHORT: Record<SplitAxis, string> = {
   CULTURAL_PRIOR_BIAS: "Cultural bias",
 };
 
+// The incidents drawn from the CURRENT Laws and season — the ones that make OFFSIDE a
+// rule-maker's instrument rather than a quiz about famous goals. Marked live in the chain.
+const CURRENT_INCIDENTS = new Set([
+  "handball-rewrite",
+  "offside-margin",
+  "pgmol-subjective",
+]);
+
 // The dominant axes of an incident = the cells that are PRESENT/WEAK (the live tensions).
 function dominantAxes(bundle: IncidentBundle): SplitAxis[] {
   return bundle.split.cells
@@ -32,7 +40,8 @@ export function DivergenceLineage({ incidents, activeId, onSelect }: DivergenceL
   return (
     <section className="lineage" aria-label="Choose an incident">
       <p className="lineage__eyebrow">
-        ▸ Pick an incident — watch the diagnosis change (same engine, different answer)
+        ▸ Pick an incident — watch the diagnosis change (same engine, different answer).
+        The <span className="lineage__live-key">live</span> ones are unsettled right now.
       </p>
       <ol className="lineage__chain">
         {incidents.map((b, i) => {
@@ -56,10 +65,18 @@ export function DivergenceLineage({ incidents, activeId, onSelect }: DivergenceL
                 type="button"
                 className="lineage__node"
                 data-active={b.incident_id === activeId}
+                data-current={CURRENT_INCIDENTS.has(b.incident_id)}
                 aria-pressed={b.incident_id === activeId}
                 onClick={() => onSelect(i)}
               >
-                <span className="lineage__node-title">{b.title}</span>
+                <span className="lineage__node-title">
+                  {b.title}
+                  {CURRENT_INCIDENTS.has(b.incident_id) && (
+                    <span className="lineage__live" title="A current, unsettled dispute">
+                      live
+                    </span>
+                  )}
+                </span>
                 <span className="lineage__node-axes">
                   {axes.map((a) => (
                     <span key={a} className="lineage__tag">

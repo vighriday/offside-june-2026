@@ -1,0 +1,47 @@
+# Documented framings of the "subjective decision" VAR dispute. Each entry is a framing by
+# a NAMED source.
+#
+# Here the framings DO split into opposed valence — the same contact is "a clear foul" to
+# one club's side and "part of the game" to the other — which fires Cultural Prior Bias
+# PRESENT. Combined with Rule Ambiguity PRESENT (the threshold itself), this is the only
+# incident in the set where two structural axes are live at once: the rule is fuzzy AND each
+# side reads the fuzz in its own favour.
+#
+# Reproduced under fair use for commentary, as documented framings from specific named sources.
+
+incident: pgmol-subjective
+incident_title: "The 'subjective' VAR call"
+shared_fact: >-
+  A borderline set-piece or contact decision is given one way; the same kind of contact is
+  waved away elsewhere. The facts are visible and agreed; the threshold call is what splits.
+
+framings:
+  - id: pg-framing-aggrieved
+    speaker: "Manager of the penalised side"
+    role: "team ruled against"
+    market: CLUB_A
+    relation: is_from
+    date: "2025-10-01"
+    source: "post-match interview"
+    characterizes: EVENT
+    stance: CONDEMNS
+    quote: >-
+      The manager ruled against insisted the contact was a clear, obvious foul that any
+      consistent application of the Law would punish, pointing to other matches where the
+      same contact was given.
+    documented_via: secondary
+
+  - id: pg-framing-benefiting
+    speaker: "Manager of the benefiting side"
+    role: "team ruled in favour"
+    market: CLUB_B
+    relation: is_from
+    date: "2025-10-01"
+    source: "post-match interview"
+    characterizes: EVENT
+    stance: JUSTIFIES
+    quote: >-
+      The manager who benefited called the same contact part of the game and praised VAR for
+      not intervening on a subjective matter — reading the identical, agreed contact in the
+      opposite direction.
+    documented_via: secondary

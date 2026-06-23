@@ -1,0 +1,39 @@
+# Curated record for the modern handball Law — the live, unsettled dispute the 2024/25
+# IFAB rewrite did NOT settle. Used by the Historical lens. Frozen by design.
+#
+# Unlike the archive incidents (Hand of God, Suárez, Lampard), this is a CURRENT structural
+# dispute: the Law itself now carries three different tests an official must choose between
+# in the moment — deliberate, "unnaturally bigger", and accidental-into-goal — each with a
+# different consequence. The fact (did hand touch ball) is usually plain and visible, and
+# modern replay makes it knowable: so this incident does NOT turn on what could be seen
+# (Decision-Time Deficit) — it turns on which clause of the Law applies. That is why the
+# Referee lens, not the Historical lens, carries the load here.
+
+incident: handball-rewrite
+title: "The modern handball call"
+match: "Recurring across the 2024/25 and 2025/26 seasons"
+competition: "IFAB Laws of the Game, Law 12 (2024/25 clarification)"
+venue: "Worldwide"
+date: "2024-07-01"
+referee: "Multiple — the dispute is structural, not a single match"
+
+facts:
+  - id: hb-hist-three-tests
+    statement: >-
+      The 2024/25 Law 12 retains three distinct handball tests — a deliberate movement of
+      the hand/arm to the ball, the hand/arm making the body "unnaturally bigger", and
+      scoring directly or immediately after a hand/arm touch even if accidental — each
+      carrying a different sanction. An official must decide which test applies in real time.
+    bearing: SETTLED_FACT
+  - id: hb-hist-visible-knowable
+    statement: >-
+      Whether the ball touched the hand or arm is almost always visible and, with modern
+      replay, fully knowable. What is contested is not what happened but which clause of the
+      Law the contact falls under. The decision-time information was adequate.
+    bearing: RESOLUTION
+  - id: hb-hist-inconsistent-application
+    statement: >-
+      Across the 2024/25 and 2025/26 seasons, comparable handball situations were penalised
+      in some matches and waved away in others, with officials and panels reaching different
+      conclusions on near-identical contact. The inconsistency tracks the choice of clause.
+    bearing: CONTEXT

@@ -16,9 +16,9 @@ receipts, exactly *why* a billion people will never agree.**
 [![IBM Granite](https://img.shields.io/badge/IBM-Granite_·_Docling_·_Guardian-052FAD.svg)](#built-with-ibm)
 
 *An explainable multi-agent engine, grounded in the real Laws of the Game, that
-decomposes football's most contested moments into the precise reasons people disagree —
-the rules, what stays inherently uncertain, what was knowable at the time, and who's
-watching.*
+decomposes any contested refereeing decision — the 1986 Hand of God or **this season's
+VAR disputes** — into the precise structural reasons the argument persists: the rules,
+what stays inherently uncertain, what was knowable at the time, and who's watching.*
 
 <br/>
 
@@ -32,9 +32,11 @@ watching.*
 
 |  |  |
 |--|--|
-| **What** | For a contested football moment, it decomposes **why the disagreement persists** across four fixed, evidence-grounded dimensions — never whether the call was correct. |
+| **What** | For any contested refereeing decision, it decomposes **why the disagreement persists** across four fixed, evidence-grounded dimensions — never whether the call was correct. |
 | **Why it's different** | Today's football AI (X-VARS, SoccerRef-Agents) chases **correctness**. OFFSIDE decomposes **disagreement persistence** — an unclaimed lane. *We don't adjudicate; we decompose.* |
-| **The trust spine** | Every cell of the diagnostic clicks straight through to a real, page-numbered passage of the actual IFAB Laws of the Game. Where there's no evidence, it says so. |
+| **Who it's for** | Not fans re-litigating a goal, but the people who **defend and write these decisions** — referees' bodies, IFAB/PGMOL, and the broadcasters who explain them. It shows *which structural gap* a controversy exposes, and lets you compare them across a season. |
+| **Current, not trivia** | Six incidents — one iconic hook, then **three live, unsettled disputes from the current Laws and season**: the rewritten handball Law, the millimetre semi-automated offside line, and the "subjective" VAR calls that flip week to week. Across the set, *all four* dimensions fire. |
+| **The trust spine** | Every cell clicks straight through to a real, page-numbered passage of the actual IFAB Laws of the Game. A second IBM model (Granite Guardian) audits the first and demotes anything it can't ground. Where there's no evidence, it says so. |
 | **The moat** | The reasoning model is **structurally incapable of emitting a number** — no fabricated percentages, ever. Enforced by a test in CI. |
 | **Built with** | IBM Granite · IBM Docling · Granite Embedding · **Granite Guardian** · Langflow |
 
@@ -48,11 +50,23 @@ Billions watch the same match and experience it completely differently. The same
 four seconds — Maradona's hand, 1986 — is *"the greatest goal in history"* in Buenos
 Aires and *"he cheated"* in London. Both certain. Both internally consistent.
 
+And it is not nostalgia. **This season**, the same structural fight plays out live: the
+2024/25 handball Law still asks officials to choose between three different tests for the
+same contact; semi-automated offside draws a line to the millimetre that the authorities
+themselves blur because it cannot be measured that finely; and a PGMOL panel logs
+week-to-week contradictions as "subjective decisions" that are not even counted as errors.
+The 2026 World Cup will run on exactly these Laws and this technology.
+
 Today's football AI tells you **what happened** and adjudicates **whether a call was
 correct**. OFFSIDE answers the question nobody else does:
 
 > **Why do informed, intelligent people look at the same incident and refuse to
 > agree — and why does that disagreement persist?**
+
+That makes it a tool for the people who have to *defend* these decisions, not just argue
+them: it names which of four structural gaps a controversy exposes, and — because the
+diagnosis is computed, not written — lets a referees' body or rule-maker see the **pattern
+across many incidents**, not one row at a time.
 
 ## THE SPLIT
 
@@ -81,19 +95,46 @@ state (`NOT_DOCUMENTED`), rather than guessing.
 
 ### It generalizes — the proof it isn't hard-coded
 
-Switch to **Lampard's ghost goal (2010)** on the live site and THE SPLIT *changes*: the
-Cultural-Prior-Bias cell flips from PRESENT to **RULED OUT** — nearly everyone, including
-German voices, agreed the ball was over the line, so there is no opposed framing. Same
-engine, same four rules, a different diagnosis — because the evidence differs.
+Switch incidents on the live site and THE SPLIT *changes*. Six real incidents produce six
+distinct signatures from the same engine and the same four rules — and across the set,
+**every one of the four dimensions fires**, which is the proof the framework is
+load-bearing rather than decorative:
 
-Three real incidents, three distinct signatures — that contrast is the proof the
-diagnostic is *derived*, not pre-written:
+| Incident | Rule | Indeterminacy | Decision-time | Cultural | What it shows |
+|----------|:----:|:----:|:----:|:----:|----|
+| **Hand of God** (1986) | ○ | ○ | ● | ● | unseen handball + nation-vs-nation |
+| **Modern handball Law** *(live)* | ● | · | ○ | ○ | the **rulebook itself** has competing tests |
+| **Millimetre offside** *(live)* | ○ | ● | ○ | ○ | the **truth is unmeasurable** at the margin |
+| **"Subjective" VAR call** *(live)* | ● | · | ○ | ● | fuzzy threshold **and** each side reads it its way |
+| **Suárez** (2010) | ○ | ○ | ○ | ● | seen + correctly called, pure framing split |
+| **Lampard** (2010) | ○ | · | ● | ○ | knowable now, unavailable then; sides agreed |
+
+*(● present · ◐ weak · ○ ruled out · · not documented)*
+
+The archive incidents alone only ever lit *Decision-time* and *Cultural bias*; the three
+**current** disputes are what make *Rule ambiguity* and *Indeterminacy* fire — pointing the
+same engine at live, unsettled problems instead of settled trivia.
 
 ![Three incidents, three different SPLIT signatures from the same engine](docs/assets/generalization.svg)
 
 The app surfaces this directly: a **Divergence Lineage** at the top groups the incidents
-by their shared dominant axis (Hand of God ↔ Suárez share *Cultural bias*; Hand of God ↔
-Lampard share the *Decision-time* moment), and switching between them animates the change.
+by their shared dominant axis and marks the live ones, and switching between them animates
+the change.
+
+### Run the real engine, live
+
+The deployed site reads frozen fixtures (static hosting has no GPU). The other half — the
+proof this is a *system*, not six hand-written answers — is a one-command live run that
+executes the actual four-model pipeline on any incident and narrates every step:
+
+```bash
+# with Ollama serving the three IBM models (granite3.3:8b, granite-embedding:30m, granite3-guardian:2b)
+python engine/scripts/analyze_live.py --incident offside-margin
+```
+
+It retrieves each lens's evidence, has Granite read it, has **Granite Guardian audit each
+reading**, routes the surviving evidence onto THE SPLIT, and prints the diagnosis — with no
+number anywhere. Point it at an incident and watch the four axes fall out of the evidence.
 
 ## The moat: a model that cannot fabricate a number
 

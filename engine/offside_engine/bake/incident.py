@@ -222,8 +222,168 @@ SUAREZ_HANDBALL = IncidentSpec(
 )
 
 
+# ══════════════════════════════════════════════════════════════════════════════
+# CURRENT, UNSETTLED DISPUTES (2024–2026)
+#
+# The archive incidents above all resolve with RULE_AMBIGUITY=ABSENT and
+# INDETERMINACY=ABSENT — the rule was clear and the fact knowable; only sightlines and
+# nationalism remained. The three incidents below are live, unsettled disputes from the
+# current Laws and the current season, and they are chosen precisely because they light up
+# the axes the archive never did — proving the four-axis framework is load-bearing, not
+# decorative. Each is a STRUCTURAL dispute (a class of incident, not a single moment),
+# which is what makes OFFSIDE a tool for the people who write and apply the Laws, not a
+# quiz about famous goals.
+# ══════════════════════════════════════════════════════════════════════════════
+
+
+# ── The modern handball call (Law 12, 2024/25 rewrite) ───────────────────────
+#
+# The RULE_AMBIGUITY=PRESENT signature — the first incident where the rulebook ITSELF is
+# the source of the dispute. The 2024/25 Law retains three different handball tests
+# (deliberate, "unnaturally bigger", accidental-into-goal) with different sanctions, and an
+# official must pick one in real time. The fact (hand touched ball) is visible and knowable,
+# so Decision-Time Deficit is ABSENT; the framings share one complaint rather than splitting
+# by nation, so Cultural Prior Bias is one-sided (ABSENT/WEAK). The Referee lens DISPUTES —
+# competing clauses point to different outcomes for the same contact.
+
+HANDBALL_REWRITE = IncidentSpec(
+    incident_id="handball-rewrite",
+    title="The modern handball call",
+    settled_status="ADJUDICATED_CONTESTED",
+    settled_statement=(
+        "Football's handball Law was rewritten for 2024/25, yet it still asks officials to "
+        "choose between several different tests for the same contact — deliberate movement, "
+        "an 'unnaturally bigger' body, or an accidental touch that leads to a goal — each "
+        "with a different consequence. Whether a given handball is an offence is genuinely "
+        "disputed, and the disagreement is about the rule, not about what happened."
+    ),
+    settled_citation_ids=("ifab-law12-handball-deliberate-p110",),
+    admission_note="",
+    lens_queries={
+        "REFEREE": "Does the Law give one clear test for handball, or several competing tests?",
+        "TACTICAL": "Does the event data resolve which handball test applies?",
+        "HISTORICAL": "Could officials see the contact, and was the information adequate at the moment?",
+        "FRAMING": "How did named figures describe the handball Law afterwards?",
+    },
+    allowed_citation_ids=frozenset(
+        {
+            "ifab-law12-handball-deliberate-p110",
+            "ifab-law12-handball-offence-p110",
+            "hb-hist-three-tests",
+            "hb-hist-visible-knowable",
+            "hb-hist-inconsistent-application",
+            "hb-framing-pundit",
+            "hb-framing-coach",
+        }
+    ),
+    expected_thesis={
+        "RULE_AMBIGUITY": {"PRESENT"},
+        "INDETERMINACY": {"ABSENT", "NOT_DOCUMENTED"},
+        "DECISION_TIME_DEFICIT": {"ABSENT"},
+        "CULTURAL_PRIOR_BIAS": {"ABSENT", "WEAK"},
+    },
+)
+
+
+# ── The millimetre offside line (semi-automated offside, 2024/25) ────────────
+#
+# The INDETERMINACY=PRESENT signature — the first incident where the truth itself is not
+# recoverable. Law 11 fixes the offside line precisely, so the RULE is clear (Rule Ambiguity
+# ABSENT). Semi-automated technology can now see the moment, so there is no Decision-Time
+# Deficit. But at a millimetre margin the exact position cannot be measured — the
+# authorities' own "thicker line" is an admission of it. The Historical lens DISPUTES
+# knowability, which the router maps to INDETERMINACY (not Decision-Time Deficit).
+
+OFFSIDE_MARGIN = IncidentSpec(
+    incident_id="offside-margin",
+    title="The millimetre offside line",
+    settled_status="ADJUDICATED_CONTESTED",
+    settled_statement=(
+        "Semi-automated offside technology draws the offside line to the millimetre and is "
+        "faster and more consistent than the old manual lines. Yet at the finest margins the "
+        "exact position is not physically recoverable — the authorities themselves apply a "
+        "deliberately 'thicker' line. The rule is clear and the technology can see it; what "
+        "is disputed is whether a truth measured that finely can be known at all."
+    ),
+    settled_citation_ids=("ifab-law11-offside-margin-p103",),
+    admission_note="",
+    lens_queries={
+        "REFEREE": "Does Law 11 define the offside line clearly?",
+        "TACTICAL": "Does the event data resolve the exact position at a millimetre margin?",
+        "HISTORICAL": "Can the exact line be measured to the precision the Law implies?",
+        "FRAMING": "How did named figures describe the millimetre offside calls?",
+    },
+    allowed_citation_ids=frozenset(
+        {
+            "ifab-law11-offside-margin-p103",
+            "ifab-law11-offside-p103",
+            "om-hist-line-defined",
+            "om-hist-margin-unrecoverable",
+            "om-hist-thicker-line",
+            "om-framing-broadcaster",
+            "om-framing-official",
+        }
+    ),
+    expected_thesis={
+        "RULE_AMBIGUITY": {"ABSENT"},
+        "INDETERMINACY": {"PRESENT"},
+        "DECISION_TIME_DEFICIT": {"ABSENT"},
+        "CULTURAL_PRIOR_BIAS": {"ABSENT"},
+    },
+)
+
+
+# ── The "subjective" VAR call (PGMOL, 2025/26) ───────────────────────────────
+#
+# The COMBINED signature — the only incident where two structural axes are live at once.
+# The "clear and obvious" / "non-footballing action" thresholds are matters of degree, so
+# near-identical contact is ruled in opposite ways across matches (Rule Ambiguity PRESENT,
+# Referee lens DISPUTES), AND each club's side reads the same agreed contact in its own
+# favour (Cultural Prior Bias PRESENT, opposed framings). The contact is visible and
+# replayed, so Decision-Time Deficit is ABSENT.
+
+PGMOL_SUBJECTIVE = IncidentSpec(
+    incident_id="pgmol-subjective",
+    title="The 'subjective' VAR call",
+    settled_status="ADJUDICATED_CONTESTED",
+    settled_statement=(
+        "Across the current Premier League season, near-identical fouls — holding at a "
+        "corner, minimal contact on a goalkeeper — are penalised in one match and waved away "
+        "in the next. Many are logged not as errors but as 'subjective decisions'. The "
+        "contact is agreed and visible; what splits the room is whether the Law's threshold "
+        "was met, and which side you support."
+    ),
+    settled_citation_ids=("pg-hist-threshold",),
+    admission_note="",
+    lens_queries={
+        "REFEREE": "Is the VAR threshold a bright line, or a matter of degree applied inconsistently?",
+        "TACTICAL": "Does the event data resolve whether the threshold was met?",
+        "HISTORICAL": "Could officials see the contact, and was the information adequate?",
+        "FRAMING": "How did named figures on each side describe the same contact?",
+    },
+    allowed_citation_ids=frozenset(
+        {
+            "pg-hist-threshold",
+            "pg-hist-opposite-rulings",
+            "pg-hist-visible",
+            "pg-framing-aggrieved",
+            "pg-framing-benefiting",
+        }
+    ),
+    expected_thesis={
+        "RULE_AMBIGUITY": {"PRESENT"},
+        "INDETERMINACY": {"ABSENT", "NOT_DOCUMENTED"},
+        "DECISION_TIME_DEFICIT": {"ABSENT"},
+        "CULTURAL_PRIOR_BIAS": {"PRESENT"},
+    },
+)
+
+
 INCIDENTS: dict[str, IncidentSpec] = {
     HAND_OF_GOD.incident_id: HAND_OF_GOD,
     SUAREZ_HANDBALL.incident_id: SUAREZ_HANDBALL,
     LAMPARD_GHOST_GOAL.incident_id: LAMPARD_GHOST_GOAL,
+    HANDBALL_REWRITE.incident_id: HANDBALL_REWRITE,
+    OFFSIDE_MARGIN.incident_id: OFFSIDE_MARGIN,
+    PGMOL_SUBJECTIVE.incident_id: PGMOL_SUBJECTIVE,
 }

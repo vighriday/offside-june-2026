@@ -49,6 +49,21 @@ def _grounded(lo: LensOutput | None) -> bool:
     return bool(lo and lo.state == "GROUNDED" and lo.citation_ids)
 
 
+# A HISTORICAL reading carries a MEASUREMENT-indeterminacy signal when it cites an atom
+# whose bearing is "the exact truth at the margin is not recoverable". Such atoms are
+# tagged with this id suffix in the historical corpus. Keying INDETERMINACY on the cited
+# atom — not on a reused stance — keeps the two HISTORICAL meanings ("info was adequate"
+# vs "the truth is unmeasurable") cleanly separable, so the router never conflates a
+# decision-time question with an indeterminacy one.
+_MARGIN_UNRECOVERABLE_SUFFIX = "-margin-unrecoverable"
+
+
+def _signals_measurement_indeterminacy(lo: LensOutput | None) -> bool:
+    return bool(lo) and any(
+        cid.endswith(_MARGIN_UNRECOVERABLE_SUFFIX) for cid in lo.citation_ids
+    )
+
+
 def derive_split(lenses: list[LensOutput], *, admitted_act: bool) -> Split:
     """Route the gated lens outputs onto the four-axis SPLIT by the fixed rules."""
     by = _by_lens(lenses)
@@ -71,16 +86,24 @@ def derive_split(lenses: list[LensOutput], *, admitted_act: bool) -> Split:
         rule = _cell("RULE_AMBIGUITY", "ABSENT", None,
                      "A clear single offence clause governs the act, with no competing clause.")
 
-    # INDETERMINACY ← REFEREE intent element, gated by the admission precondition.
+    # INDETERMINACY — is the decisive truth itself unrecoverable? Gated by the admission
+    # precondition first (an admitted act resolves any deliberateness residual and
+    # dominates). Otherwise it fires only on a genuine MEASUREMENT-indeterminacy signal
+    # carried by the HISTORICAL lens — the fact is defined precisely by the Law but cannot
+    # be measured to that precision in practice (the semi-automated-offside "thick line"
+    # case). Note this is independent of the REFEREE stance: rule ambiguity (competing
+    # clauses) is NOT the same as the truth being unknowable, so a DISPUTES referee reading
+    # must not leak into this axis.
     if admitted_act:
         indet = _cell("INDETERMINACY", "ABSENT", None,
                       "The act is admitted, so the deliberateness residual is resolved.")
-    elif _grounded(ref) and ref.stance in ("DISPUTES", "MIXED"):
-        indet = _cell("INDETERMINACY", "PRESENT", ref,
-                      "A load-bearing mental element remains unresolved by the evidence.")
+    elif _grounded(hist) and _signals_measurement_indeterminacy(hist):
+        indet = _cell("INDETERMINACY", "PRESENT", hist,
+                      "The fact is defined precisely by the Law but cannot be measured to "
+                      "that precision in the moment — the truth at the margin is not recoverable.")
     else:
         indet = _cell("INDETERMINACY", "NOT_DOCUMENTED", None,
-                      "No evidence makes an unresolved mental element load-bearing.")
+                      "No evidence makes the decisive truth unrecoverable.")
 
     # DECISION_TIME_DEFICIT ← HISTORICAL. Tech absent AND view obstructed → present.
     if not _grounded(hist):

@@ -1,0 +1,42 @@
+# Curated record for the "subjective decision" dispute — the 2025/26 Premier League VAR
+# inconsistency the officiating body itself acknowledged. Used by the Historical lens.
+# Frozen by design.
+#
+# This is the COMBINED signature: Rule Ambiguity AND Cultural Prior Bias both present. The
+# same category of incident — holding at a corner, minimal contact on a goalkeeper — was
+# ruled one way in one match and the opposite way in another, and many were classified as
+# "subjective decisions" that are not even recorded as VAR errors. So the Law's threshold
+# ("clear and obvious", "non-footballing action") is what generates the dispute (Rule
+# Ambiguity PRESENT, carried by the Referee lens), AND each fan base reads the same contact
+# in its own favour (Cultural Prior Bias PRESENT, carried by Framing). The contact itself is
+# visible and replayed — there is no decision-time deficit.
+
+incident: pgmol-subjective
+title: "The 'subjective' VAR call"
+match: "Recurring across the 2025/26 Premier League season"
+competition: "Premier League VAR / PGMOL Key Match Incidents Panel"
+venue: "England"
+date: "2025-08-01"
+referee: "Multiple — adjudicated by VAR and the KMI Panel"
+
+facts:
+  - id: pg-hist-threshold
+    statement: >-
+      VAR intervenes only for a "clear and obvious" error, and fouls such as holding or
+      blocking at a set-piece turn on whether the contact is a "non-footballing action".
+      These thresholds are matters of degree, not bright lines, and reasonable officials
+      apply them differently to similar contact.
+    bearing: SETTLED_FACT
+  - id: pg-hist-opposite-rulings
+    statement: >-
+      Across the 2025/26 season, near-identical situations were ruled in opposite ways in
+      different matches — a penalty for minimal contact one week, a clear block waved away
+      the next — and the Key Match Incidents Panel split on several, recording them as
+      "subjective" rather than as errors.
+    bearing: RESOLUTION
+  - id: pg-hist-visible
+    statement: >-
+      The contact in these incidents was visible on replay and reviewed by VAR; the dispute
+      is not about what happened but about whether the threshold was met. The decision-time
+      information was adequate.
+    bearing: CONTEXT

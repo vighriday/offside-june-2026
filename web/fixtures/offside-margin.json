@@ -1,0 +1,237 @@
+{
+  "cell_seals": [
+    {
+      "cell": {
+        "axis": "RULE_AMBIGUITY",
+        "citation_ids": [],
+        "rationale": "A clear single offence clause governs the act, with no competing clause.",
+        "state": "ABSENT"
+      },
+      "seal": {
+        "checked_context_citation_ids": [],
+        "guardian_model": "deterministic-router",
+        "verdict": "GROUNDED"
+      }
+    },
+    {
+      "cell": {
+        "axis": "INDETERMINACY",
+        "citation_ids": [
+          "om-hist-margin-unrecoverable",
+          "om-hist-thicker-line"
+        ],
+        "rationale": "The fact is defined precisely by the Law but cannot be measured to that precision in the moment — the truth at the margin is not recoverable.",
+        "state": "PRESENT"
+      },
+      "seal": {
+        "checked_context_citation_ids": [
+          "om-hist-margin-unrecoverable",
+          "om-hist-thicker-line"
+        ],
+        "guardian_model": "deterministic-router",
+        "verdict": "GROUNDED"
+      }
+    },
+    {
+      "cell": {
+        "axis": "DECISION_TIME_DEFICIT",
+        "citation_ids": [],
+        "rationale": "Review technology existed and the view was clear at the moment of the call.",
+        "state": "ABSENT"
+      },
+      "seal": {
+        "checked_context_citation_ids": [],
+        "guardian_model": "deterministic-router",
+        "verdict": "GROUNDED"
+      }
+    },
+    {
+      "cell": {
+        "axis": "CULTURAL_PRIOR_BIAS",
+        "citation_ids": [],
+        "rationale": "Named sources agree on the outcome; there is no opposed framing.",
+        "state": "ABSENT"
+      },
+      "seal": {
+        "checked_context_citation_ids": [],
+        "guardian_model": "deterministic-router",
+        "verdict": "GROUNDED"
+      }
+    }
+  ],
+  "citations": {
+    "ifab-law11-offside-margin-p103": {
+      "attribution": null,
+      "bbox": {
+        "bottom": 600.0,
+        "left": 62.0,
+        "right": 373.0,
+        "top": 689.0
+      },
+      "doc_kind": "IFAB_LAW",
+      "extracted_text": "A player is in an offside position if any part of the head, body or feet is nearer to the opponents' goal line than both the ball and the second-last opponent. The hands and arms of all players, including the goalkeepers, are not considered.",
+      "id": "ifab-law11-offside-margin-p103",
+      "page": 103,
+      "source_doc": "ifab-laws-2025-26"
+    },
+    "om-framing-broadcaster": {
+      "attribution": "Lead match broadcaster, live broadcast commentary (2024-09-15)",
+      "bbox": null,
+      "doc_kind": "FRAMING_SOURCE",
+      "extracted_text": "Lead match broadcaster (2024-09-15) — CONDEMNS: Commentators repeatedly observed that goals were being disallowed by a margin too fine to see with the naked eye, questioning whether a line drawn to the millimetre means anything when the measurement itself carries that much uncertainty.",
+      "id": "om-framing-broadcaster",
+      "page": null,
+      "source_doc": "live broadcast commentary"
+    },
+    "om-framing-official": {
+      "attribution": "Competition officiating body, officiating-body explainer (2024-08-10)",
+      "bbox": null,
+      "doc_kind": "FRAMING_SOURCE",
+      "extracted_text": "Competition officiating body (2024-08-10) — JUSTIFIES: The officiating authorities explained that a deliberately thicker line is used for marginal offsides precisely so that calls are not decided on a measurement the system cannot make reliably — conceding the exact position at the margin is not recoverable.",
+      "id": "om-framing-official",
+      "page": null,
+      "source_doc": "officiating-body explainer"
+    },
+    "om-hist-margin-unrecoverable": {
+      "attribution": "Curated historical record — The millimetre offside line",
+      "bbox": null,
+      "doc_kind": "HISTORICAL_REPORT",
+      "extracted_text": "At a millimetre margin the true position is not recoverable: the kick frame must be chosen from discrete video frames, the relevant limb point is selected by the system, and the ball and players are in motion. Different valid choices flip the decision. The exact truth at the margin cannot be measured to the precision the Law implies.",
+      "id": "om-hist-margin-unrecoverable",
+      "page": null,
+      "source_doc": "curated-historical"
+    },
+    "om-hist-thicker-line": {
+      "attribution": "Curated historical record — The millimetre offside line",
+      "bbox": null,
+      "doc_kind": "HISTORICAL_REPORT",
+      "extracted_text": "In response, the authorities deliberately apply a deliberately \"thicker\" offside line and tolerance band so marginal calls are not decided on a measurement the system cannot make reliably — an explicit acknowledgement that the exact line is not knowable.",
+      "id": "om-hist-thicker-line",
+      "page": null,
+      "source_doc": "curated-historical"
+    }
+  },
+  "incident_id": "offside-margin",
+  "lenses": [
+    {
+      "output": {
+        "citation_ids": [
+          "ifab-law11-offside-margin-p103"
+        ],
+        "lens": "REFEREE",
+        "rationale": "The retrieved Law fixes the offside line precisely — a player is offside if any part of the head, body or feet is nearer the goal line than the second-last opponent (ifab-law11-offside-margin-p103). The rule is a single clear test, so rule-ambiguity does not hold.",
+        "stance": "SUPPORTS",
+        "state": "GROUNDED"
+      },
+      "seal": {
+        "checked_context_citation_ids": [
+          "ifab-law11-offside-margin-p103"
+        ],
+        "guardian_model": "deterministic-router",
+        "verdict": "GROUNDED"
+      }
+    },
+    {
+      "output": {
+        "citation_ids": [],
+        "lens": "TACTICAL",
+        "rationale": "No event-data anomaly resolves the exact position at the margin.",
+        "stance": "INSUFFICIENT_EVIDENCE",
+        "state": "INSUFFICIENT_EVIDENCE"
+      },
+      "seal": {
+        "checked_context_citation_ids": [],
+        "guardian_model": "deterministic-router",
+        "verdict": "GROUNDED"
+      }
+    },
+    {
+      "output": {
+        "citation_ids": [
+          "om-hist-margin-unrecoverable",
+          "om-hist-thicker-line"
+        ],
+        "lens": "HISTORICAL",
+        "rationale": "The retrieved facts state that at a millimetre margin the kick frame, the limb point and the motion of ball and players make the true position unrecoverable, and the authorities answer with a deliberately thicker line (om-hist-margin-unrecoverable, om-hist-thicker-line); the technology can see the moment, but the exact truth cannot be measured to the precision the Law implies.",
+        "stance": "DISPUTES",
+        "state": "GROUNDED"
+      },
+      "seal": {
+        "checked_context_citation_ids": [
+          "om-hist-margin-unrecoverable",
+          "om-hist-thicker-line"
+        ],
+        "guardian_model": "deterministic-router",
+        "verdict": "GROUNDED"
+      }
+    },
+    {
+      "output": {
+        "citation_ids": [
+          "om-framing-broadcaster",
+          "om-framing-official"
+        ],
+        "lens": "FRAMING",
+        "rationale": "Named broadcasters and officiating bodies are reported to agree that margins too fine to see make the calls feel arbitrary and that a thicker line is used precisely because the measurement is unreliable (om-framing-broadcaster, om-framing-official); the framings converge rather than divide by side.",
+        "stance": "DISPUTES",
+        "state": "GROUNDED"
+      },
+      "seal": {
+        "checked_context_citation_ids": [
+          "om-framing-broadcaster",
+          "om-framing-official"
+        ],
+        "guardian_model": "deterministic-router",
+        "verdict": "GROUNDED"
+      }
+    }
+  ],
+  "provenance": {
+    "corpus_git_sha": "d89303572841d82fa35a7e0365da6da37099c948",
+    "embed_model": "granite-embedding:30m",
+    "granite_model": "granite3.3:8b",
+    "guardian_model": "granite3-guardian:2b",
+    "options": {}
+  },
+  "rule_evolution": null,
+  "settled_fact": {
+    "citation_ids": [
+      "ifab-law11-offside-margin-p103"
+    ],
+    "statement": "Semi-automated offside technology draws the offside line to the millimetre and is faster and more consistent than the old manual lines. Yet at the finest margins the exact position is not physically recoverable — the authorities themselves apply a deliberately 'thicker' line. The rule is clear and the technology can see it; what is disputed is whether a truth measured that finely can be known at all.",
+    "status": "ADJUDICATED_CONTESTED"
+  },
+  "split": {
+    "cells": [
+      {
+        "axis": "RULE_AMBIGUITY",
+        "citation_ids": [],
+        "rationale": "A clear single offence clause governs the act, with no competing clause.",
+        "state": "ABSENT"
+      },
+      {
+        "axis": "INDETERMINACY",
+        "citation_ids": [
+          "om-hist-margin-unrecoverable",
+          "om-hist-thicker-line"
+        ],
+        "rationale": "The fact is defined precisely by the Law but cannot be measured to that precision in the moment — the truth at the margin is not recoverable.",
+        "state": "PRESENT"
+      },
+      {
+        "axis": "DECISION_TIME_DEFICIT",
+        "citation_ids": [],
+        "rationale": "Review technology existed and the view was clear at the moment of the call.",
+        "state": "ABSENT"
+      },
+      {
+        "axis": "CULTURAL_PRIOR_BIAS",
+        "citation_ids": [],
+        "rationale": "Named sources agree on the outcome; there is no opposed framing.",
+        "state": "ABSENT"
+      }
+    ],
+    "headline": "It stays contested over whether the fact is knowable — not over the dimensions ruled out."
+  },
+  "title": "The millimetre offside line"
+}

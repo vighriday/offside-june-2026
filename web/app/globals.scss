@@ -335,6 +335,29 @@ body {
     font-size: 0.9375rem;
     line-height: 1.6;
     color: var(--cds-text-secondary, #c6c6c6);
+    em {
+      font-style: normal;
+      color: var(--cds-text-primary, #f4f4f4);
+    }
+    strong {
+      font-weight: 500;
+      color: var(--cds-text-primary, #f4f4f4);
+    }
+  }
+
+  // Who it's for — the line that reframes OFFSIDE from a fan toy to a rule-maker's tool.
+  &__for {
+    margin: 1rem auto 0;
+    max-width: 42rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--cds-border-subtle-01, #393939);
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    color: var(--cds-text-placeholder, #8d8d8d);
+    em {
+      font-style: normal;
+      color: var(--cds-text-secondary, #c6c6c6);
+    }
   }
 
   @media (max-width: 36rem) {
@@ -380,6 +403,25 @@ body {
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--split-present);
+  }
+
+  // The little "live" key in the eyebrow + the per-node badge marking a current dispute.
+  &__live-key {
+    color: var(--split-weak);
+    font-weight: 600;
+  }
+
+  &__live {
+    display: inline-block;
+    margin-left: 0.4rem;
+    padding: 0.05rem 0.35rem;
+    font-size: 0.5rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--cds-background, #161616);
+    background: var(--split-weak);
+    border-radius: 1px;
+    vertical-align: middle;
   }
 
   &__chain {
@@ -450,6 +492,11 @@ body {
       border-top-color: var(--split-present);
       background: linear-gradient(var(--split-present-bg), var(--split-present-bg)),
         var(--cds-layer-01, #262626);
+    }
+    // a current/unsettled dispute carries a left accent in the season colour, so the
+    // demo set visibly splits into "archive" and "live right now".
+    &[data-current="true"] {
+      border-left: 2px solid var(--split-weak);
     }
     &:focus-visible {
       outline: 2px solid var(--cds-focus, #ffffff);

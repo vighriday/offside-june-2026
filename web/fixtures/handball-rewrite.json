@@ -1,0 +1,253 @@
+{
+  "cell_seals": [
+    {
+      "cell": {
+        "axis": "RULE_AMBIGUITY",
+        "citation_ids": [
+          "ifab-law12-handball-deliberate-p110",
+          "ifab-law12-handball-offence-p110"
+        ],
+        "rationale": "Retrieved clauses point to different outcomes for the same facts.",
+        "state": "PRESENT"
+      },
+      "seal": {
+        "checked_context_citation_ids": [
+          "ifab-law12-handball-deliberate-p110",
+          "ifab-law12-handball-offence-p110"
+        ],
+        "guardian_model": "deterministic-router",
+        "verdict": "GROUNDED"
+      }
+    },
+    {
+      "cell": {
+        "axis": "INDETERMINACY",
+        "citation_ids": [],
+        "rationale": "No evidence makes the decisive truth unrecoverable.",
+        "state": "NOT_DOCUMENTED"
+      },
+      "seal": {
+        "checked_context_citation_ids": [],
+        "guardian_model": "deterministic-router",
+        "verdict": "GROUNDED"
+      }
+    },
+    {
+      "cell": {
+        "axis": "DECISION_TIME_DEFICIT",
+        "citation_ids": [],
+        "rationale": "Review technology existed and the view was clear at the moment of the call.",
+        "state": "ABSENT"
+      },
+      "seal": {
+        "checked_context_citation_ids": [],
+        "guardian_model": "deterministic-router",
+        "verdict": "GROUNDED"
+      }
+    },
+    {
+      "cell": {
+        "axis": "CULTURAL_PRIOR_BIAS",
+        "citation_ids": [],
+        "rationale": "Named sources agree on the outcome; there is no opposed framing.",
+        "state": "ABSENT"
+      },
+      "seal": {
+        "checked_context_citation_ids": [],
+        "guardian_model": "deterministic-router",
+        "verdict": "GROUNDED"
+      }
+    }
+  ],
+  "citations": {
+    "hb-framing-coach": {
+      "attribution": "Top-flight head coach, post-match press conference (2024-11-01)",
+      "bbox": null,
+      "doc_kind": "FRAMING_SOURCE",
+      "extracted_text": "Top-flight head coach (2024-11-01) — CONDEMNS: Managers on both sides of disputed handball penalties said publicly that nobody — players, coaches or officials — could reliably predict whether a given arm position would be penalised, framing the problem as the rule itself rather than the referee.",
+      "id": "hb-framing-coach",
+      "page": null,
+      "source_doc": "post-match press conference"
+    },
+    "hb-framing-pundit": {
+      "attribution": "Broadcast officiating analyst, matchday officiating analysis (2024-09-01)",
+      "bbox": null,
+      "doc_kind": "FRAMING_SOURCE",
+      "extracted_text": "Broadcast officiating analyst (2024-09-01) — CONDEMNS: Officiating analysts repeatedly noted that near-identical handball contact was being judged differently week to week, attributing it to the Law offering several tests rather than one, and called for the wording to be simplified.",
+      "id": "hb-framing-pundit",
+      "page": null,
+      "source_doc": "matchday officiating analysis"
+    },
+    "hb-hist-three-tests": {
+      "attribution": "Curated historical record — The modern handball call",
+      "bbox": null,
+      "doc_kind": "HISTORICAL_REPORT",
+      "extracted_text": "The 2024/25 Law 12 retains three distinct handball tests — a deliberate movement of the hand/arm to the ball, the hand/arm making the body \"unnaturally bigger\", and scoring directly or immediately after a hand/arm touch even if accidental — each carrying a different sanction. An official must decide which test applies in real time.",
+      "id": "hb-hist-three-tests",
+      "page": null,
+      "source_doc": "curated-historical"
+    },
+    "hb-hist-visible-knowable": {
+      "attribution": "Curated historical record — The modern handball call",
+      "bbox": null,
+      "doc_kind": "HISTORICAL_REPORT",
+      "extracted_text": "Whether the ball touched the hand or arm is almost always visible and, with modern replay, fully knowable. What is contested is not what happened but which clause of the Law the contact falls under. The decision-time information was adequate.",
+      "id": "hb-hist-visible-knowable",
+      "page": null,
+      "source_doc": "curated-historical"
+    },
+    "ifab-law12-handball-deliberate-p110": {
+      "attribution": null,
+      "bbox": {
+        "bottom": 233.32,
+        "left": 53.86,
+        "right": 372.97,
+        "top": 335.07
+      },
+      "doc_kind": "IFAB_LAW",
+      "extracted_text": "deliberately touches the ball with their hand/arm, for example moving the hand/arm towards the ball … touches the ball with their hand/arm when it has made their body unnaturally bigger. A player is considered to have made their body unnaturally bigger when the position of their hand/arm is not a consequence of, or justifiable by, the player's body movement for that specific situation.",
+      "id": "ifab-law12-handball-deliberate-p110",
+      "page": 110,
+      "source_doc": "ifab-laws-2025-26"
+    },
+    "ifab-law12-handball-offence-p110": {
+      "attribution": null,
+      "bbox": {
+        "bottom": 175.0,
+        "left": 54.0,
+        "right": 373.0,
+        "top": 309.0
+      },
+      "doc_kind": "IFAB_LAW",
+      "extracted_text": "It is an offence if a player deliberately touches the ball with their hand/arm, or scores in the opponents' goal immediately after the ball has touched their hand/arm, even if accidental. A goal scored in this way does not stand.",
+      "id": "ifab-law12-handball-offence-p110",
+      "page": 110,
+      "source_doc": "ifab-laws-2025-26"
+    }
+  },
+  "incident_id": "handball-rewrite",
+  "lenses": [
+    {
+      "output": {
+        "citation_ids": [
+          "ifab-law12-handball-deliberate-p110",
+          "ifab-law12-handball-offence-p110"
+        ],
+        "lens": "REFEREE",
+        "rationale": "The retrieved Law sets out several different tests for the same contact — a deliberate movement of the hand/arm, the hand/arm making the body 'unnaturally bigger', and an accidental touch that leads directly to a goal (ifab-law12-handball-deliberate-p110) — each with a different consequence. Competing clauses point to different outcomes for the same facts, so the rule itself is ambiguous.",
+        "stance": "DISPUTES",
+        "state": "GROUNDED"
+      },
+      "seal": {
+        "checked_context_citation_ids": [
+          "ifab-law12-handball-deliberate-p110",
+          "ifab-law12-handball-offence-p110"
+        ],
+        "guardian_model": "deterministic-router",
+        "verdict": "GROUNDED"
+      }
+    },
+    {
+      "output": {
+        "citation_ids": [],
+        "lens": "TACTICAL",
+        "rationale": "No event-data anomaly resolves which handball test applies.",
+        "stance": "INSUFFICIENT_EVIDENCE",
+        "state": "INSUFFICIENT_EVIDENCE"
+      },
+      "seal": {
+        "checked_context_citation_ids": [],
+        "guardian_model": "deterministic-router",
+        "verdict": "GROUNDED"
+      }
+    },
+    {
+      "output": {
+        "citation_ids": [
+          "hb-hist-three-tests",
+          "hb-hist-visible-knowable"
+        ],
+        "lens": "HISTORICAL",
+        "rationale": "The retrieved facts state that whether the ball touched the hand or arm is almost always visible and, with modern replay, fully knowable (hb-hist-visible-knowable); the information available at the moment was adequate, so there is no decision-time deficit. What is contested is which clause applies.",
+        "stance": "DISPUTES",
+        "state": "GROUNDED"
+      },
+      "seal": {
+        "checked_context_citation_ids": [
+          "hb-hist-three-tests",
+          "hb-hist-visible-knowable"
+        ],
+        "guardian_model": "deterministic-router",
+        "verdict": "GROUNDED"
+      }
+    },
+    {
+      "output": {
+        "citation_ids": [
+          "hb-framing-pundit",
+          "hb-framing-coach"
+        ],
+        "lens": "FRAMING",
+        "rationale": "Named officiating analysts and managers are reported to share one complaint — that near-identical contact is judged differently because the Law offers several tests rather than one (hb-framing-pundit, hb-framing-coach). The framings agree on the problem rather than dividing by side, so there is no opposed valence.",
+        "stance": "DISPUTES",
+        "state": "GROUNDED"
+      },
+      "seal": {
+        "checked_context_citation_ids": [
+          "hb-framing-pundit",
+          "hb-framing-coach"
+        ],
+        "guardian_model": "deterministic-router",
+        "verdict": "GROUNDED"
+      }
+    }
+  ],
+  "provenance": {
+    "corpus_git_sha": "d89303572841d82fa35a7e0365da6da37099c948",
+    "embed_model": "granite-embedding:30m",
+    "granite_model": "granite3.3:8b",
+    "guardian_model": "granite3-guardian:2b",
+    "options": {}
+  },
+  "rule_evolution": null,
+  "settled_fact": {
+    "citation_ids": [
+      "ifab-law12-handball-deliberate-p110"
+    ],
+    "statement": "Football's handball Law was rewritten for 2024/25, yet it still asks officials to choose between several different tests for the same contact — deliberate movement, an 'unnaturally bigger' body, or an accidental touch that leads to a goal — each with a different consequence. Whether a given handball is an offence is genuinely disputed, and the disagreement is about the rule, not about what happened.",
+    "status": "ADJUDICATED_CONTESTED"
+  },
+  "split": {
+    "cells": [
+      {
+        "axis": "RULE_AMBIGUITY",
+        "citation_ids": [
+          "ifab-law12-handball-deliberate-p110",
+          "ifab-law12-handball-offence-p110"
+        ],
+        "rationale": "Retrieved clauses point to different outcomes for the same facts.",
+        "state": "PRESENT"
+      },
+      {
+        "axis": "INDETERMINACY",
+        "citation_ids": [],
+        "rationale": "No evidence makes the decisive truth unrecoverable.",
+        "state": "NOT_DOCUMENTED"
+      },
+      {
+        "axis": "DECISION_TIME_DEFICIT",
+        "citation_ids": [],
+        "rationale": "Review technology existed and the view was clear at the moment of the call.",
+        "state": "ABSENT"
+      },
+      {
+        "axis": "CULTURAL_PRIOR_BIAS",
+        "citation_ids": [],
+        "rationale": "Named sources agree on the outcome; there is no opposed framing.",
+        "state": "ABSENT"
+      }
+    ],
+    "headline": "It stays contested over whether the Law is clear — not over the dimensions ruled out."
+  },
+  "title": "The modern handball call"
+}

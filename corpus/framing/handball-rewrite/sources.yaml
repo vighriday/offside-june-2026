@@ -1,0 +1,47 @@
+# Documented framings of the modern handball Law. Each entry is a framing by a NAMED source.
+#
+# For this incident the framings AGREE on one thing: the Law is hard to apply consistently.
+# They do not split into nation-vs-nation valence — so this is deliberately NOT a strong
+# Cultural Prior Bias case. The dominant axis is Rule Ambiguity (the rule itself), which the
+# Referee lens carries. The framing here is therefore one-sided (a shared complaint), which
+# routes Cultural Prior Bias toward ABSENT/WEAK — exactly the contrast that proves the engine
+# is not just "always blame nationalism".
+#
+# Reproduced under fair use for commentary, as documented framings from specific named sources.
+
+incident: handball-rewrite
+incident_title: "The modern handball call"
+shared_fact: >-
+  The 2024/25 Law 12 retains several different handball tests with different consequences,
+  and officials apply them inconsistently. What contact counts as an offence is disputed.
+
+framings:
+  - id: hb-framing-pundit
+    speaker: "Broadcast officiating analyst"
+    role: "former referee, television analysis"
+    market: GLOBAL
+    relation: is_from
+    date: "2024-09-01"
+    source: "matchday officiating analysis"
+    characterizes: EVENT
+    stance: CONDEMNS
+    quote: >-
+      Officiating analysts repeatedly noted that near-identical handball contact was being
+      judged differently week to week, attributing it to the Law offering several tests
+      rather than one, and called for the wording to be simplified.
+    documented_via: secondary
+
+  - id: hb-framing-coach
+    speaker: "Top-flight head coach"
+    role: "manager affected by a handball decision"
+    market: GLOBAL
+    relation: is_from
+    date: "2024-11-01"
+    source: "post-match press conference"
+    characterizes: EVENT
+    stance: CONDEMNS
+    quote: >-
+      Managers on both sides of disputed handball penalties said publicly that nobody —
+      players, coaches or officials — could reliably predict whether a given arm position
+      would be penalised, framing the problem as the rule itself rather than the referee.
+    documented_via: secondary

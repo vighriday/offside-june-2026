@@ -33,14 +33,24 @@ export function Hero() {
       <h1 className="hero__line">
         Every football AI tells you <em>whether a call was right.</em>
         <br />
-        OFFSIDE tells you <strong>why a billion people will never agree</strong> —
-        and backs every reason with the actual Laws of the Game.
+        OFFSIDE tells you <strong>why the argument never ends</strong> — and proves every
+        reason against the actual Laws of the Game.
       </h1>
 
       <p className="hero__sub">
-        It doesn&rsquo;t officiate and it doesn&rsquo;t predict. It decomposes a contested
-        moment into the four reasons disagreement persists — and proves each one against a
-        real source page. It cannot output a number, and a second IBM model audits the first.
+        It decomposes a contested decision into the four structural reasons disagreement
+        persists — is the <em>rule</em> unclear, is the <em>truth</em> unknowable, could the
+        official <em>see</em> it, or do both sides just <em>want</em> their own outcome — and
+        marks which are in play. The same engine reads the Hand of God and{" "}
+        <strong>this season&rsquo;s VAR disputes</strong>: the rewritten handball Law, the
+        millimetre offside line, the &ldquo;subjective&rdquo; calls that flip week to week. It
+        cannot output a number, and a second IBM model audits the first.
+      </p>
+
+      <p className="hero__for">
+        Built for the people who have to defend these decisions — referees&rsquo; bodies,
+        rule-makers, and the broadcasters who explain them — not to re-litigate a goal, but to
+        show <em>which structural gap</em> each controversy exposes.
       </p>
     </header>
   );

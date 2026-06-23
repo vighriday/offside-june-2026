@@ -1,0 +1,42 @@
+# Curated record for the semi-automated offside "margin" dispute. Used by the Historical
+# lens. Frozen by design.
+#
+# This is the INDETERMINACY signature — the one the archive incidents never produced. The
+# Law (Law 11) defines the offside line precisely: any part of the head, body or feet
+# nearer than the second-last opponent. So the RULE is clear (Rule Ambiguity ABSENT). And
+# semi-automated technology, rolled out across LaLiga and English football in 2024/25, CAN
+# now see the moment — so there is no decision-time deficit either. What remains is that the
+# true position at a millimetre margin is not physically recoverable: the ball is in flight,
+# the limb is moving, frame rate and limb-point selection introduce irreducible uncertainty.
+# The authorities' own response — deliberately drawing a THICKER line — is an admission that
+# the exact truth at the margin cannot be known. The Historical lens therefore DISPUTES
+# knowability, which routes INDETERMINACY to PRESENT (not Decision-Time Deficit).
+
+incident: offside-margin
+title: "The millimetre offside line"
+match: "Recurring since semi-automated offside rollout, 2024/25"
+competition: "Law 11 + semi-automated offside technology (SAOT)"
+venue: "LaLiga, Serie A, English football and beyond"
+date: "2024-08-01"
+referee: "VAR + SAOT, multiple competitions"
+
+facts:
+  - id: om-hist-line-defined
+    statement: >-
+      Law 11 fixes the offside line precisely: a player is offside if any part of the head,
+      body or feet is nearer to the opponents' goal line than the second-last opponent. The
+      rule itself is unambiguous about where the line is.
+    bearing: SETTLED_FACT
+  - id: om-hist-margin-unrecoverable
+    statement: >-
+      At a millimetre margin the true position is not recoverable: the kick frame must be
+      chosen from discrete video frames, the relevant limb point is selected by the system,
+      and the ball and players are in motion. Different valid choices flip the decision. The
+      exact truth at the margin cannot be measured to the precision the Law implies.
+    bearing: RESOLUTION
+  - id: om-hist-thicker-line
+    statement: >-
+      In response, the authorities deliberately apply a deliberately "thicker" offside line
+      and tolerance band so marginal calls are not decided on a measurement the system
+      cannot make reliably — an explicit acknowledgement that the exact line is not knowable.
+    bearing: CONTEXT

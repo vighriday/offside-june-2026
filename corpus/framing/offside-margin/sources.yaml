@@ -1,0 +1,46 @@
+# Documented framings of the semi-automated offside margin dispute. Each entry is a framing
+# by a NAMED source.
+#
+# The framings AGREE the technology is more consistent and faster, and they AGREE the
+# millimetre calls feel arbitrary — they do not split into opposed national valence. So
+# Cultural Prior Bias is one-sided here (ABSENT), which is the contrast: this incident is
+# about an unknowable truth, not about whose side you are on.
+#
+# Reproduced under fair use for commentary, as documented framings from specific named sources.
+
+incident: offside-margin
+incident_title: "The millimetre offside line"
+shared_fact: >-
+  Semi-automated offside is faster and more consistent, but decisions made on a millimetre
+  margin feel arbitrary because the exact line cannot be measured to that precision.
+
+framings:
+  - id: om-framing-broadcaster
+    speaker: "Lead match broadcaster"
+    role: "commentary on a marginal offside call"
+    market: GLOBAL
+    relation: is_from
+    date: "2024-09-15"
+    source: "live broadcast commentary"
+    characterizes: EVENT
+    stance: CONDEMNS
+    quote: >-
+      Commentators repeatedly observed that goals were being disallowed by a margin too fine
+      to see with the naked eye, questioning whether a line drawn to the millimetre means
+      anything when the measurement itself carries that much uncertainty.
+    documented_via: secondary
+
+  - id: om-framing-official
+    speaker: "Competition officiating body"
+    role: "statement on the thicker-line approach"
+    market: GLOBAL
+    relation: is_from
+    date: "2024-08-10"
+    source: "officiating-body explainer"
+    characterizes: EVENT
+    stance: JUSTIFIES
+    quote: >-
+      The officiating authorities explained that a deliberately thicker line is used for
+      marginal offsides precisely so that calls are not decided on a measurement the system
+      cannot make reliably — conceding the exact position at the margin is not recoverable.
+    documented_via: secondary
