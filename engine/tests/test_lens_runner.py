@@ -7,7 +7,6 @@ behaviour.
 
 from __future__ import annotations
 
-import pytest
 
 from offside_engine.analyze.lens_runner import (
     LensRun,

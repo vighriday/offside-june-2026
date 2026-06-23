@@ -322,6 +322,18 @@ class IncidentBundle(BaseModel):
         missing = sorted(cited - set(self.citations))
         if missing:
             raise ValueError(f"bundle cites ids with no citation: {missing}")
+
+        # Click-to-source guarantee (spec §2.2): every CITED IFAB law passage must carry
+        # a page AND a bounding box, or the cell would click through to a dead source.
+        # Uncited IFAB atoms in the pool are not subject to this — only what the bundle
+        # actually points at must resolve to a real page region.
+        for cid in cited:
+            c = self.citations.get(cid)
+            if c is not None and c.doc_kind == "IFAB_LAW" and (c.page is None or c.bbox is None):
+                raise ValueError(
+                    f"cited IFAB_LAW citation '{cid}' is missing page or bbox — it would "
+                    f"break click-to-source (spec §2.2). Extract it from the PDF via Docling."
+                )
         return self
 
 

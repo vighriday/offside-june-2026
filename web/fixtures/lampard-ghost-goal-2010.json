@@ -60,13 +60,18 @@
     }
   ],
   "citations": {
-    "ifab-law10-goal-scored": {
+    "ifab-law10-goal-scored-p97": {
       "attribution": null,
-      "bbox": null,
+      "bbox": {
+        "bottom": 218.95,
+        "left": 62.36,
+        "right": 372.96,
+        "top": 182.21
+      },
       "doc_kind": "IFAB_LAW",
       "extracted_text": "A goal is scored when the whole of the ball passes over the goal line, between the goalposts and under the crossbar, provided that no offence has been committed by the team scoring the goal.",
-      "id": "ifab-law10-goal-scored",
-      "page": null,
+      "id": "ifab-law10-goal-scored-p97",
+      "page": 97,
       "source_doc": "ifab-laws-2025-26"
     },
     "lampard-framing-blatter": {
@@ -120,16 +125,16 @@
     {
       "output": {
         "citation_ids": [
-          "ifab-law10-goal-scored"
+          "ifab-law10-goal-scored-p97"
         ],
         "lens": "REFEREE",
-        "rationale": "The retrieved Law states a goal is scored when the whole of the ball passes over the goal line (ifab-law10-goal-scored); the rule is a single clear test with no competing clause, so rule-ambiguity does not hold.",
+        "rationale": "The retrieved Law states a goal is scored when the whole of the ball passes over the goal line (ifab-law10-goal-scored-p97); the rule is a single clear test with no competing clause, so rule-ambiguity does not hold.",
         "stance": "SUPPORTS",
         "state": "GROUNDED"
       },
       "seal": {
         "checked_context_citation_ids": [
-          "ifab-law10-goal-scored"
+          "ifab-law10-goal-scored-p97"
         ],
         "guardian_model": "deterministic-router",
         "verdict": "GROUNDED"
@@ -191,7 +196,7 @@
     }
   ],
   "provenance": {
-    "corpus_git_sha": "6d5230b0289d20539d107017e67fe016bdec50b0",
+    "corpus_git_sha": "7d1993610801574a43897c4836460e0d5f141342",
     "embed_model": "granite-embedding:30m",
     "granite_model": "granite3.3:8b",
     "guardian_model": "granite3-guardian:2b",

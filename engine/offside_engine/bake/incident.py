@@ -147,7 +147,7 @@ LAMPARD_GHOST_GOAL = IncidentSpec(
     allowed_citation_ids=frozenset(
         {
             # Referee — the Law 10 method-of-scoring clause (whole ball over the line).
-            "ifab-law10-goal-scored",
+            "ifab-law10-goal-scored-p97",
             # Historical — no goal-line tech, obstructed sightline in the moment.
             "lampard-hist-crossed-line",
             "lampard-hist-no-glt-2010",

@@ -12,6 +12,7 @@ import pytest
 
 from offside_engine.analyze.split_schema import (
     CANONICAL_AXIS_ORDER,
+    Bbox,
     Citation,
     LensOutput,
     Split,
@@ -39,11 +40,26 @@ _GOLDEN_CITES = {
 }
 
 
+def _doc_kind(cid: str) -> str:
+    if cid.startswith("ifab"):
+        return "IFAB_LAW"
+    if cid.startswith("sb-"):
+        return "STATSBOMB_EVENT"
+    if cid.startswith("hist"):
+        return "HISTORICAL_REPORT"
+    return "FRAMING_SOURCE"
+
+
 def _citations():
-    return {
-        cid: Citation(id=cid, source_doc="x", doc_kind="IFAB_LAW", extracted_text=txt)
-        for cid, txt in _GOLDEN_CITES.items()
-    }
+    out = {}
+    for cid, txt in _GOLDEN_CITES.items():
+        kind = _doc_kind(cid)
+        # cited IFAB_LAW atoms must carry page + bbox (click-to-source guarantee)
+        bbox = Bbox(left=54.0, top=309.0, right=373.0, bottom=175.0) if kind == "IFAB_LAW" else None
+        page = 110 if kind == "IFAB_LAW" else None
+        out[cid] = Citation(id=cid, source_doc="x", doc_kind=kind, page=page,
+                            bbox=bbox, extracted_text=txt)
+    return out
 
 
 # The golden gated lens outputs Granite "returns", keyed by lens.

@@ -42,6 +42,22 @@ CURATED_ANCHORS: list[dict] = [
         ),
     },
     {
+        # The Referee grounding for the Lampard ghost goal: the goal/no-goal rule is a
+        # single clear test (the WHOLE ball must cross the line), so RULE_AMBIGUITY=ABSENT.
+        # Real Docling-extracted page + bbox from the born-digital 2025/26 PDF (Law 10, p97).
+        "id": "ifab-law10-goal-scored-p97",
+        "law": "Law 10",
+        "page": 97,
+        "bbox": {"left": 62.36, "top": 182.21, "right": 372.96, "bottom": 218.95},
+        "topic": "method of scoring — the whole ball must cross the goal line",
+        "applies_to_incidents": ["lampard-ghost-goal"],
+        "seed_text": (
+            "A goal is scored when the whole of the ball passes over the goal line, "
+            "between the goalposts and under the crossbar, provided that no offence has "
+            "been committed by the team scoring the goal."
+        ),
+    },
+    {
         # F-A: the clause that actually voids a hand-scored goal — the grounding for
         # RULE_AMBIGUITY=ABSENT on the Hand of God. Real Docling page + bbox (p110).
         "id": "ifab-law12-handball-offence-p110",

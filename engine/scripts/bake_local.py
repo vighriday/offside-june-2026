@@ -86,27 +86,15 @@ _HAND_OF_GOD_LENSES = [
 
 
 # ── Lampard ghost goal ───────────────────────────────────────────────────────
-# The Law 10 method-of-scoring clause is the Referee grounding. Its verbatim text is the
-# real IFAB Law 10 wording; supplied here as an offline citation (the cloud bake extracts
-# the same clause from the born-digital PDF with a page + bbox).
-
-_LAW10_CITATION = Citation(
-    id="ifab-law10-goal-scored",
-    source_doc="ifab-laws-2025-26",
-    doc_kind="IFAB_LAW",
-    page=None,
-    extracted_text=(
-        "A goal is scored when the whole of the ball passes over the goal line, between "
-        "the goalposts and under the crossbar, provided that no offence has been committed "
-        "by the team scoring the goal."
-    ),
-)
+# The Referee grounding is the Law 10 method-of-scoring clause, now a curated anchor with
+# a real Docling-extracted page + bbox (Law 10, p97) — so it ships into the pool via
+# build_curated_citations() and click-to-source resolves to the real page.
 
 _LAMPARD_LENSES = [
-    _lens("REFEREE", "SUPPORTS", ["ifab-law10-goal-scored"],
+    _lens("REFEREE", "SUPPORTS", ["ifab-law10-goal-scored-p97"],
           "The retrieved Law states a goal is scored when the whole of the ball passes "
-          "over the goal line (ifab-law10-goal-scored); the rule is a single clear test "
-          "with no competing clause, so rule-ambiguity does not hold."),
+          "over the goal line (ifab-law10-goal-scored-p97); the rule is a single clear "
+          "test with no competing clause, so rule-ambiguity does not hold."),
     # No StatsBomb anomaly bears on this incident — the Tactical lens honestly says so,
     # which is a valued answer, not a gap. (This is the empty-retrieval case made visible.)
     LensOutput(lens="TACTICAL", stance="INSUFFICIENT_EVIDENCE",
@@ -192,7 +180,7 @@ def main() -> None:
     lam_fr, lam_hist = _corpus("lampard-ghost-goal")
     lam = bake_offline(LAMPARD_GHOST_GOAL, _LAMPARD_LENSES, framing_yaml=lam_fr,
                        historical_yaml=lam_hist, aggregate=_HAND_OF_GOD_AGG,
-                       extra_citations=[_LAW10_CITATION], corpus_git_sha=sha)
+                       extra_citations=[], corpus_git_sha=sha)
 
     for bundle in (hog, lam):
         out = write_fixture(bundle, fixtures)

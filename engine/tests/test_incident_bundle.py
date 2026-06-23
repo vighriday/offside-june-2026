@@ -12,6 +12,7 @@ import pytest
 from offside_engine.analyze.split_schema import (
     CANONICAL_AXIS_ORDER,
     BakeProvenance,
+    Bbox,
     Citation,
     IncidentBundle,
     LensOutput,
@@ -45,7 +46,9 @@ def _present_cell(axis, ids):
 
 def _bundle(**overrides):
     citations = {
+        # cited IFAB_LAW atoms must carry page + bbox (click-to-source guarantee, §2.2)
         "c-ref": Citation(id="c-ref", source_doc="ifab", doc_kind="IFAB_LAW", page=110,
+                          bbox=Bbox(left=54.0, top=309.0, right=373.0, bottom=175.0),
                           extracted_text="law"),
         "c-frame": Citation(id="c-frame", source_doc="framing", doc_kind="FRAMING_SOURCE",
                             extracted_text="quote"),
@@ -111,6 +114,24 @@ def test_cited_id_with_no_citation_is_rejected():
     ]
     with pytest.raises(ValueError, match="no citation"):
         _bundle(lenses=bad)
+
+
+def test_cited_ifab_law_without_bbox_is_rejected():
+    # click-to-source guarantee (§2.2): a cited IFAB_LAW atom with no bbox would dead-link
+    bad_citations = {
+        "c-ref": Citation(id="c-ref", source_doc="ifab", doc_kind="IFAB_LAW", page=110,
+                          extracted_text="law"),  # page but NO bbox
+        "c-frame": Citation(id="c-frame", source_doc="framing", doc_kind="FRAMING_SOURCE",
+                            extracted_text="quote"),
+    }
+    with pytest.raises(ValueError, match="missing page or bbox"):
+        _bundle(citations=bad_citations)
+
+
+def test_framing_citation_without_page_is_allowed():
+    # non-IFAB sources (quotes, historical) legitimately have no page — not penalised
+    b = _bundle()  # c-frame has no page/bbox and the bundle is valid
+    assert b.citations["c-frame"].page is None
 
 
 def test_bundle_round_trips_through_json():
