@@ -1,15 +1,20 @@
-"""Bake an incident fixture entirely offline — no GPU, no Ollama, no live model.
+"""Bake incident fixtures entirely offline — no GPU, no Ollama, no live model.
 
 The cloud bake (``bake.ipynb``) runs the four Granite lens readings + Guardian audits on
 a GPU. That is the authentic path, but an 8B model on free Colab is flaky: lenses
-intermittently degrade and the strict synthesis schema fails. For a reliable, deployable
-fixture we also support an **offline** bake that uses the same real corpus, the same
+intermittently degrade and the strict synthesis schema fails. For reliable, deployable
+fixtures we also support an **offline** bake that uses the same real corpus, the same
 deterministic SPLIT router, and grounded lens readings whose stance + citations come
 straight from the committed corpus — so the result is reproducible and every claim still
-traces to a real, committed source. Provenance records that this fixture was produced by
-the deterministic router (no live model), so nothing is misrepresented.
+traces to a real, committed source. Provenance records that the SPLIT was routed
+deterministically (no live model), so nothing is misrepresented.
 
-Run:  python scripts/bake_local.py            # writes web/fixtures/<id>.json
+Two incidents are baked, and the whole point is the CONTRAST: the Hand of God resolves to
+(ABSENT, ABSENT, PRESENT, PRESENT) and Lampard's ghost goal to (ABSENT, ABSENT, PRESENT,
+ABSENT). Same engine, same rules, different evidence → different SPLIT — the proof the
+diagnostic is derived, not hard-coded.
+
+Run:  python scripts/bake_local.py            # writes web/fixtures/<id>.json for both
 """
 
 from __future__ import annotations
@@ -28,7 +33,7 @@ from offside_engine.analyze.split_schema import (
     TrustSeal,
 )
 from offside_engine.bake.corpus_pool import assemble_pool
-from offside_engine.bake.incident import HAND_OF_GOD, IncidentSpec
+from offside_engine.bake.incident import HAND_OF_GOD, LAMPARD_GHOST_GOAL, IncidentSpec
 from offside_engine.bake.synthesize import derive_split
 from offside_engine.bake.write_fixture import write_fixture
 from offside_engine.config import (
@@ -39,11 +44,16 @@ from offside_engine.config import (
 from offside_engine.statsbomb.pull_aggregates import HandOfGodAggregate
 
 _REPO = Path(__file__).resolve().parents[2]
-# Marks the SPLIT routing as deterministic in the seal; the footer names the real models.
 _ROUTER_NOTE = "deterministic-router"
 
-# A frozen, offline StatsBomb aggregate carrying the real body-part anomaly (the same
-# values the live pull returns for match 3750191), so the bake needs no network either.
+
+def _lens(lens, stance, ids, rationale) -> LensOutput:
+    return LensOutput(lens=lens, stance=stance, state="GROUNDED",
+                      citation_ids=list(ids), rationale=rationale)
+
+
+# ── Hand of God ──────────────────────────────────────────────────────────────
+
 _HAND_OF_GOD_AGG = HandOfGodAggregate(
     match_id=3750191, scoreline="Argentina 2 - 1 England",
     maradona_total_shots=3, maradona_goals=2,
@@ -52,18 +62,6 @@ _HAND_OF_GOD_AGG = HandOfGodAggregate(
     anomaly_present=True, three_sixty_available=False,
 )
 
-
-def _lens(lens, stance, ids, rationale) -> LensOutput:
-    """A grounded lens reading: stance + the real citation ids it rests on."""
-    return LensOutput(lens=lens, stance=stance, state="GROUNDED",
-                      citation_ids=list(ids), rationale=rationale)
-
-
-# The grounded lens readings for the Hand of God. Each stance is what the corpus supports
-# and each rationale is written from the *real cited text* (verified against the pool).
-# These are the readings the live lenses are meant to produce; pinning them here lets the
-# fixture be generated deterministically while every citation still resolves to a real
-# committed source.
 _HAND_OF_GOD_LENSES = [
     _lens("REFEREE", "SUPPORTS", ["ifab-law12-handball-offence-p110"],
           "The retrieved Law states a goal scored immediately after the ball touches the "
@@ -87,16 +85,56 @@ _HAND_OF_GOD_LENSES = [
 ]
 
 
-def bake_offline(spec: IncidentSpec, lenses: list[LensOutput], aggregate: HandOfGodAggregate,
-                 *, corpus_git_sha: str) -> IncidentBundle:
+# ── Lampard ghost goal ───────────────────────────────────────────────────────
+# The Law 10 method-of-scoring clause is the Referee grounding. Its verbatim text is the
+# real IFAB Law 10 wording; supplied here as an offline citation (the cloud bake extracts
+# the same clause from the born-digital PDF with a page + bbox).
+
+_LAW10_CITATION = Citation(
+    id="ifab-law10-goal-scored",
+    source_doc="ifab-laws-2025-26",
+    doc_kind="IFAB_LAW",
+    page=None,
+    extracted_text=(
+        "A goal is scored when the whole of the ball passes over the goal line, between "
+        "the goalposts and under the crossbar, provided that no offence has been committed "
+        "by the team scoring the goal."
+    ),
+)
+
+_LAMPARD_LENSES = [
+    _lens("REFEREE", "SUPPORTS", ["ifab-law10-goal-scored"],
+          "The retrieved Law states a goal is scored when the whole of the ball passes "
+          "over the goal line (ifab-law10-goal-scored); the rule is a single clear test "
+          "with no competing clause, so rule-ambiguity does not hold."),
+    # No StatsBomb anomaly bears on this incident — the Tactical lens honestly says so,
+    # which is a valued answer, not a gap. (This is the empty-retrieval case made visible.)
+    LensOutput(lens="TACTICAL", stance="INSUFFICIENT_EVIDENCE",
+               state="INSUFFICIENT_EVIDENCE", citation_ids=[],
+               rationale="No event-data anomaly bears on this incident."),
+    _lens("HISTORICAL", "SUPPORTS", ["lampard-hist-no-glt-2010", "lampard-hist-sightline"],
+          "In 2010 there was no goal-line technology and the decision could not be reviewed "
+          "(lampard-hist-no-glt-2010), and neither official was level with the line at the "
+          "moment of the bounce (lampard-hist-sightline); the decisive truth was not "
+          "available to them in the moment, though it was knowable on replay within seconds."),
+    _lens("FRAMING", "SUPPORTS", ["lampard-framing-lampard", "lampard-framing-blatter"],
+          "Frank Lampard is reported to have said there was no doubt the ball was over the "
+          "line (lampard-framing-lampard), and FIFA's Sepp Blatter publicly apologised for "
+          "the error (lampard-framing-blatter); the named sources agree on the fact rather "
+          "than dividing over it."),
+]
+
+
+def bake_offline(spec: IncidentSpec, lenses: list[LensOutput], *, framing_yaml: Path,
+                 historical_yaml: Path, aggregate: HandOfGodAggregate,
+                 extra_citations: list[Citation], corpus_git_sha: str) -> IncidentBundle:
     """Assemble the pool, route the lens readings into a SPLIT, and freeze a bundle."""
     pool: dict[str, Citation] = assemble_pool(
-        framing_yaml=_REPO / "corpus" / "framing" / "hand-of-god" / "sources.yaml",
-        historical_yaml=_REPO / "corpus" / "historical" / "hand-of-god" / "record.yaml",
-        aggregate=aggregate,
+        framing_yaml=framing_yaml, historical_yaml=historical_yaml, aggregate=aggregate
     )
+    for c in extra_citations:
+        pool.setdefault(c.id, c)
 
-    # Every cited id must resolve in the pool — fail loudly if a reading drifts.
     for lo in lenses:
         for cid in lo.citation_ids:
             if cid not in pool:
@@ -105,8 +143,6 @@ def bake_offline(spec: IncidentSpec, lenses: list[LensOutput], aggregate: HandOf
     split = derive_split(lenses, admitted_act=bool(spec.admission_note))
 
     def seal(ids):
-        # The routing is deterministic offline; the seal records that honestly rather
-        # than claiming a live Guardian pass.
         return TrustSeal(verdict="GROUNDED", guardian_model=_ROUTER_NOTE,
                          checked_context_citation_ids=list(ids))
 
@@ -137,16 +173,31 @@ def bake_offline(spec: IncidentSpec, lenses: list[LensOutput], aggregate: HandOf
     )
 
 
+def _corpus(incident_slug: str) -> tuple[Path, Path]:
+    return (
+        _REPO / "corpus" / "framing" / incident_slug / "sources.yaml",
+        _REPO / "corpus" / "historical" / incident_slug / "record.yaml",
+    )
+
+
 def main() -> None:
-    sha = subprocess.check_output(
-        ["git", "-C", str(_REPO), "rev-parse", "HEAD"]
-    ).decode().strip()
-    bundle = bake_offline(HAND_OF_GOD, _HAND_OF_GOD_LENSES, _HAND_OF_GOD_AGG, corpus_git_sha=sha)
-    out = write_fixture(bundle, _REPO / "web" / "fixtures")
-    states = {c.axis: c.state for c in bundle.split.cells}
-    print("wrote", out)
-    print("THE SPLIT:", states)
-    print("headline:", bundle.split.headline)
+    sha = subprocess.check_output(["git", "-C", str(_REPO), "rev-parse", "HEAD"]).decode().strip()
+    fixtures = _REPO / "web" / "fixtures"
+
+    hog_fr, hog_hist = _corpus("hand-of-god")
+    hog = bake_offline(HAND_OF_GOD, _HAND_OF_GOD_LENSES, framing_yaml=hog_fr,
+                       historical_yaml=hog_hist, aggregate=_HAND_OF_GOD_AGG,
+                       extra_citations=[], corpus_git_sha=sha)
+
+    lam_fr, lam_hist = _corpus("lampard-ghost-goal")
+    lam = bake_offline(LAMPARD_GHOST_GOAL, _LAMPARD_LENSES, framing_yaml=lam_fr,
+                       historical_yaml=lam_hist, aggregate=_HAND_OF_GOD_AGG,
+                       extra_citations=[_LAW10_CITATION], corpus_git_sha=sha)
+
+    for bundle in (hog, lam):
+        out = write_fixture(bundle, fixtures)
+        states = {c.axis: c.state for c in bundle.split.cells}
+        print(f"\nwrote {out}\n  THE SPLIT: {states}\n  headline: {bundle.split.headline}")
 
 
 if __name__ == "__main__":
