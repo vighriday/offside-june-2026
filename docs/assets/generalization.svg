@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520" width="1200" height="520" font-family="'IBM Plex Sans','Segoe UI',system-ui,sans-serif" role="img" aria-label="Three incidents, three different SPLIT signatures from the same engine — the generalization proof">
+  <defs>
+    <style>
+      .bg{fill:#161616}
+      .eyebrow{fill:#4589ff;font-size:13px;letter-spacing:2.4px;font-weight:600}
+      .prompt{fill:#f4f4f4;font-size:26px;font-weight:300;letter-spacing:-0.4px}
+      .sub{fill:#c6c6c6;font-size:13px}
+      .col-title{fill:#f4f4f4;font-size:16px;font-weight:600}
+      .col-meta{fill:#6f6f6f;font-size:11px;letter-spacing:0.6px}
+      .axis-label{fill:#c6c6c6;font-size:12.5px;text-anchor:end}
+      .chip-present{fill:#4589ff;font-size:12px;font-weight:600}
+      .chip-out{fill:#8d8d8d;font-size:12px}
+      .chip-nd{fill:#6f6f6f;font-size:12px;font-style:italic}
+      .foot{fill:#c6c6c6;font-size:14px}
+      .foot-strong{fill:#f4f4f4;font-size:14px;font-weight:600}
+    </style>
+    <pattern id="hatch" width="6" height="6" patternTransform="rotate(45)" patternUnits="userSpaceOnUse">
+      <rect width="6" height="6" fill="#1a1a1a"/>
+      <line x1="0" y1="0" x2="0" y2="6" stroke="#3a3a3a" stroke-width="2"/>
+    </pattern>
+  </defs>
+
+  <rect class="bg" width="1200" height="520"/>
+
+  <g transform="translate(40,44)">
+    <text class="eyebrow">▸ THE GENERALIZATION PROOF</text>
+    <text class="prompt" y="32">Same engine. Same four rules. Three different diagnoses.</text>
+    <text class="sub" y="58">Each column is a real baked fixture. The diagnostic is derived from evidence — not hard-coded.</text>
+  </g>
+
+  <!-- column headers -->
+  <g transform="translate(0,150)">
+    <text class="col-title" x="400" text-anchor="middle">The Hand of God</text>
+    <text class="col-meta" x="400" y="20" text-anchor="middle">ARG–ENG · 1986</text>
+    <text class="col-title" x="700" text-anchor="middle">Suárez handball</text>
+    <text class="col-meta" x="700" y="20" text-anchor="middle">URU–GHA · 2010</text>
+    <text class="col-title" x="1000" text-anchor="middle">Lampard ghost goal</text>
+    <text class="col-meta" x="1000" y="20" text-anchor="middle">GER–ENG · 2010</text>
+  </g>
+
+  <!-- grid: 4 axis rows × 3 incident columns -->
+  <!-- column x-centers: 400, 700, 1000 ; chip box width 200 centered -->
+  <!-- row y baselines: 232, 286, 340, 394 -->
+
+  <!-- helper guides (axis labels at x=250 right-aligned) -->
+  <g>
+    <!-- Rule ambiguity -->
+    <text class="axis-label" x="250" y="236">Rule ambiguity</text>
+    <g transform="translate(300,216)">
+      <rect width="200" height="34" fill="#262626" stroke="#393939"/><text class="chip-out" x="100" y="22" text-anchor="middle" text-decoration="line-through">Ruled out</text>
+    </g>
+    <g transform="translate(600,216)">
+      <rect width="200" height="34" fill="#262626" stroke="#393939"/><text class="chip-out" x="100" y="22" text-anchor="middle" text-decoration="line-through">Ruled out</text>
+    </g>
+    <g transform="translate(900,216)">
+      <rect width="200" height="34" fill="#262626" stroke="#393939"/><text class="chip-out" x="100" y="22" text-anchor="middle" text-decoration="line-through">Ruled out</text>
+    </g>
+
+    <!-- Indeterminacy -->
+    <text class="axis-label" x="250" y="290">Indeterminacy</text>
+    <g transform="translate(300,270)">
+      <rect width="200" height="34" fill="#262626" stroke="#393939"/><text class="chip-out" x="100" y="22" text-anchor="middle" text-decoration="line-through">Ruled out</text>
+    </g>
+    <g transform="translate(600,270)">
+      <rect width="200" height="34" fill="#262626" stroke="#393939"/><text class="chip-out" x="100" y="22" text-anchor="middle" text-decoration="line-through">Ruled out</text>
+    </g>
+    <g transform="translate(900,270)">
+      <rect width="200" height="34" fill="url(#hatch)" stroke="#393939"/><text class="chip-nd" x="100" y="22" text-anchor="middle">Not documented</text>
+    </g>
+
+    <!-- Decision-time deficit -->
+    <text class="axis-label" x="250" y="344">Decision-time deficit</text>
+    <g transform="translate(300,324)">
+      <rect width="200" height="34" fill="#1b2b44" stroke="#4589ff"/><text class="chip-present" x="100" y="22" text-anchor="middle">PRESENT</text>
+    </g>
+    <g transform="translate(600,324)">
+      <rect width="200" height="34" fill="#262626" stroke="#393939"/><text class="chip-out" x="100" y="22" text-anchor="middle" text-decoration="line-through">Ruled out</text>
+    </g>
+    <g transform="translate(900,324)">
+      <rect width="200" height="34" fill="#1b2b44" stroke="#4589ff"/><text class="chip-present" x="100" y="22" text-anchor="middle">PRESENT</text>
+    </g>
+
+    <!-- Cultural prior bias -->
+    <text class="axis-label" x="250" y="398">Cultural prior bias</text>
+    <g transform="translate(300,378)">
+      <rect width="200" height="34" fill="#1b2b44" stroke="#4589ff"/><text class="chip-present" x="100" y="22" text-anchor="middle">PRESENT</text>
+    </g>
+    <g transform="translate(600,378)">
+      <rect width="200" height="34" fill="#1b2b44" stroke="#4589ff"/><text class="chip-present" x="100" y="22" text-anchor="middle">PRESENT</text>
+    </g>
+    <g transform="translate(900,378)">
+      <rect width="200" height="34" fill="#262626" stroke="#393939"/><text class="chip-out" x="100" y="22" text-anchor="middle" text-decoration="line-through">Ruled out</text>
+    </g>
+  </g>
+
+  <!-- footer: what each pair shares -->
+  <g transform="translate(40,452)">
+    <rect width="3" height="44" fill="#4589ff"/>
+    <text class="foot" x="20" y="18"><tspan class="foot-strong">Hand of God &amp; Suárez</tspan> share Cultural prior bias — the same fact framed two ways.</text>
+    <text class="foot" x="20" y="40"><tspan class="foot-strong">Hand of God &amp; Lampard</tspan> share the Decision-time deficit — what could be seen in the moment.</text>
+  </g>
+</svg>

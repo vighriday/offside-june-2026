@@ -84,8 +84,16 @@ state (`NOT_DOCUMENTED`), rather than guessing.
 Switch to **Lampard's ghost goal (2010)** on the live site and THE SPLIT *changes*: the
 Cultural-Prior-Bias cell flips from PRESENT to **RULED OUT** — nearly everyone, including
 German voices, agreed the ball was over the line, so there is no opposed framing. Same
-engine, same four rules, a different diagnosis — because the evidence differs. That
-contrast is the proof the diagnostic is *derived*, not pre-written.
+engine, same four rules, a different diagnosis — because the evidence differs.
+
+Three real incidents, three distinct signatures — that contrast is the proof the
+diagnostic is *derived*, not pre-written:
+
+![Three incidents, three different SPLIT signatures from the same engine](docs/assets/generalization.svg)
+
+The app surfaces this directly: a **Divergence Lineage** at the top groups the incidents
+by their shared dominant axis (Hand of God ↔ Suárez share *Cultural bias*; Hand of God ↔
+Lampard share the *Decision-time* moment), and switching between them animates the change.
 
 ## The moat: a model that cannot fabricate a number
 
