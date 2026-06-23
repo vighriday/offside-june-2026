@@ -20,6 +20,10 @@ decomposes football's most contested moments into the precise reasons people dis
 the rules, what stays inherently uncertain, what was knowable at the time, and who's
 watching.*
 
+<br/>
+
+![THE SPLIT — the Hand of God resolving across four diagnostic dimensions](docs/assets/the-split.svg)
+
 </div>
 
 ---
@@ -63,19 +67,12 @@ decomposes the disagreement into a single artifact — **THE SPLIT** — that at
 | **Decision-time deficit** | Knowable now, but not available at the moment of the call? |
 | **Cultural prior bias** | Agreement on facts and rules, divergence on the acceptable outcome? |
 
-For the Hand of God, THE SPLIT resolves to a precise diagnosis:
+For the Hand of God, THE SPLIT resolves to a precise diagnosis — **it stays debated not
+because the Law is unclear, and not because the act is unknowable, but because of what the
+referee could see and which nation is watching** (the animated diagnostic above shows it
+resolving). Here it is live:
 
-```text
-            THE SPLIT — Why This Moment Never Resolved
-
-   Rule ambiguity         ▰ RULED OUT     the Law is clear
-   Indeterminacy          ▰ RULED OUT     the act is admitted, so knowable
-   Decision-time deficit  ▰ PRESENT  ◀    what the referee could see
-   Cultural prior bias    ▰ PRESENT  ◀    which nation is watching
-
-   By the rules: settled. To half the world: never.
-   Not unclear law — what the ref could see, and who was watching.
-```
+![THE SPLIT on the live site — the Hand of God, with the Divergence Lineage above it](docs/assets/screenshot-hand-of-god.png)
 
 Each cell click-traces to a specific, page-numbered passage of the actual source — the
 **IFAB Laws of the Game**, StatsBomb event data, the curated historical record, or a
