@@ -1,0 +1,129 @@
+{
+  "name": "OFFSIDE — The Disagreement Pipeline",
+  "description": "Docling evidence → per-lens retrieval → four Granite lens readings → Granite Guardian groundedness gate → deterministic SPLIT routing → frozen fixture. The orchestration OFFSIDE runs at bake time, as a Langflow graph.",
+  "data": {
+    "nodes": [
+      {
+        "id": "docling",
+        "type": "noteNode",
+        "position": { "x": 0, "y": 240 },
+        "data": {
+          "node": {
+            "template": {},
+            "description": "IBM Docling extracts the IFAB Laws of the Game into structured, page-cited evidence (page number + bounding box + verbatim text). This is the click-to-source spine.",
+            "display_name": "IBM Docling — Evidence Extraction"
+          }
+        }
+      },
+      {
+        "id": "embed_index",
+        "type": "noteNode",
+        "position": { "x": 320, "y": 240 },
+        "data": {
+          "node": {
+            "template": {},
+            "description": "granite-embedding:30m embeds every evidence atom into a per-lens LanceDB index. Each lens sees only its own evidence via a metadata filter — disagreement emerges because the retrieved evidence differs, not because tone differs.",
+            "display_name": "Granite Embedding + LanceDB — Per-Lens Index"
+          }
+        }
+      },
+      {
+        "id": "lens_referee",
+        "type": "noteNode",
+        "position": { "x": 680, "y": 0 },
+        "data": {
+          "node": {
+            "template": {},
+            "description": "Granite reads only the IFAB Law evidence. Cite-or-die: every sentence cites a real clause, or the lens returns INSUFFICIENT_EVIDENCE. No numbers, ever.",
+            "display_name": "Referee Lens — Granite"
+          }
+        }
+      },
+      {
+        "id": "lens_tactical",
+        "type": "noteNode",
+        "position": { "x": 680, "y": 160 },
+        "data": {
+          "node": {
+            "template": {},
+            "description": "Granite reads only the StatsBomb event aggregate. Reports where the data model strains (a goal forced into the catch-all body-part label 'Other'); never a stat value.",
+            "display_name": "Tactical Lens — Granite"
+          }
+        }
+      },
+      {
+        "id": "lens_historical",
+        "type": "noteNode",
+        "position": { "x": 680, "y": 320 },
+        "data": {
+          "node": {
+            "template": {},
+            "description": "Granite reads only the curated historical record. Reconstructs what was knowable AT THE MOMENT of the decision versus now — the decision-time deficit.",
+            "display_name": "Historical Lens — Granite"
+          }
+        }
+      },
+      {
+        "id": "lens_framing",
+        "type": "noteNode",
+        "position": { "x": 680, "y": 480 },
+        "data": {
+          "node": {
+            "template": {},
+            "description": "Granite reads only named-source quotes. Reports what each NAMED person said; a nationality is never a source. The structural guard against stereotyping.",
+            "display_name": "Framing Lens — Granite"
+          }
+        }
+      },
+      {
+        "id": "guardian",
+        "type": "noteNode",
+        "position": { "x": 1040, "y": 240 },
+        "data": {
+          "node": {
+            "template": {},
+            "description": "Granite Guardian — a SECOND IBM model — audits each lens reading for groundedness against its cited page. Any reading it cannot confirm is demoted to INSUFFICIENT_EVIDENCE. The build-time trust gate.",
+            "display_name": "Granite Guardian — Groundedness Gate"
+          }
+        }
+      },
+      {
+        "id": "split",
+        "type": "noteNode",
+        "position": { "x": 1400, "y": 240 },
+        "data": {
+          "node": {
+            "template": {},
+            "description": "The gated lens evidence is routed onto the four MECE axes (Rule Ambiguity, Indeterminacy, Decision-Time Deficit, Cultural Prior Bias) by fixed deterministic rules. THE SPLIT carries states, never magnitudes.",
+            "display_name": "THE SPLIT — Deterministic Routing"
+          }
+        }
+      },
+      {
+        "id": "fixture",
+        "type": "noteNode",
+        "position": { "x": 1760, "y": 240 },
+        "data": {
+          "node": {
+            "template": {},
+            "description": "The audited bundle is frozen to byte-identical JSON with full provenance (models + corpus git SHA). The web app reads this offline — no model runs at runtime.",
+            "display_name": "Frozen IncidentBundle — Fixture"
+          }
+        }
+      }
+    ],
+    "edges": [
+      { "id": "e1", "source": "docling", "target": "embed_index" },
+      { "id": "e2", "source": "embed_index", "target": "lens_referee" },
+      { "id": "e3", "source": "embed_index", "target": "lens_tactical" },
+      { "id": "e4", "source": "embed_index", "target": "lens_historical" },
+      { "id": "e5", "source": "embed_index", "target": "lens_framing" },
+      { "id": "e6", "source": "lens_referee", "target": "guardian" },
+      { "id": "e7", "source": "lens_tactical", "target": "guardian" },
+      { "id": "e8", "source": "lens_historical", "target": "guardian" },
+      { "id": "e9", "source": "lens_framing", "target": "guardian" },
+      { "id": "e10", "source": "guardian", "target": "split" },
+      { "id": "e11", "source": "split", "target": "fixture" }
+    ]
+  }
+}
