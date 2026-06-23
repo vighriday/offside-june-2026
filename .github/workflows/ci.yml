@@ -1,0 +1,67 @@
+name: CI
+
+# The trust claims OFFSIDE makes are enforced here, not asserted: the no-numbers moat,
+# the cite-or-die schema, and the contract→TypeScript sync all run on every push. A red
+# build means a trust guarantee regressed.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  engine:
+    name: Engine — lint, types, tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: engine
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install engine (with dev tools)
+        run: pip install -e ".[dev]"
+
+      - name: Ruff (lint)
+        run: ruff check .
+
+      - name: Pytest (118 tests incl. the no-numbers moat + cite-or-die)
+        run: pytest -q
+
+      - name: Contract is in sync with the TypeScript export
+        # Regenerate the TS contract and fail if it differs from what is committed —
+        # the web types can never silently drift from the Pydantic schema.
+        run: |
+          python -m offside_engine.export_types /tmp/contract.ts
+          diff -u ../web/types/contract.ts /tmp/contract.ts
+
+  web:
+    name: Web — typecheck and build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: web/package-lock.json
+
+      - name: Install
+        run: npm ci
+
+      - name: Typecheck
+        run: npx tsc --noEmit
+
+      - name: Build (next build --webpack)
+        run: npm run build
