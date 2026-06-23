@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { motion } from "motion/react";
 
 // The front door. A judge (or anyone) must understand WHAT this is and WHY it matters
@@ -19,14 +18,9 @@ export function Hero() {
         transition={{ duration: 0.6, ease: [0.4, 0.14, 0.3, 1] }}
       >
         <h1 className="hero__wordmark-wrap" aria-label="OFFSIDE">
-          <Image
-            className="hero__logo"
-            src="/offside-logo.png"
-            alt="OFFSIDE"
-            width={560}
-            height={373}
-            priority
-          />
+          {/* Transparent vector wordmark — no boxed PNG backing, crisp at any size. */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img className="hero__logo" src="/offside-wordmark.svg" alt="OFFSIDE" />
         </h1>
         <span className="hero__tagline">The Football Disagreement Engine</span>
         <span className="hero__ibm">Built on IBM Granite · Docling · Guardian</span>

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 150" role="img" aria-label="OFFSIDE" fill="none">
+  <!-- Transparent-background OFFSIDE wordmark: the letters in Carbon light-grey, with the
+       offside-line motif (a thin electric-blue line) slicing through at a slight angle.
+       Vector, so it stays crisp at any size and has no boxed backing. -->
+  <text x="280" y="98"
+        font-family="'IBM Plex Sans', system-ui, sans-serif"
+        font-size="86" font-weight="600" letter-spacing="14"
+        text-anchor="middle" fill="#f4f4f4">OFFSIDE</text>
+  <line x1="24" y1="92" x2="536" y2="74" stroke="#4589ff" stroke-width="2.5" />
+</svg>

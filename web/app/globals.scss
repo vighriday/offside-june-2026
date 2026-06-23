@@ -307,14 +307,12 @@ body {
     line-height: 0;
   }
 
-  // The generated OFFSIDE logo (the offside-line wordmark). Capped so it reads as a
-  // masthead, not a banner; scales down on narrow viewports. `mix-blend-mode: lighten`
-  // drops the logo's near-black backing into the page so there is no visible tile seam —
-  // the light wordmark and the blue offside line composite cleanly onto the dark surface.
+  // The OFFSIDE wordmark — a transparent SVG (no boxed backing), capped so it reads as a
+  // masthead, not a banner; scales down on narrow viewports.
   &__logo {
+    display: block;
     width: clamp(15rem, 42vw, 26rem);
     height: auto;
-    mix-blend-mode: lighten;
   }
 
   &__tagline {
@@ -1168,12 +1166,12 @@ body {
   font-size: 0.75rem;
   color: var(--cds-text-secondary, #c6c6c6);
 
-  // A small OFFSIDE mark closing the page — blends into the surface like the masthead.
+  // A small OFFSIDE wordmark (transparent SVG) closing the page.
   &__logo {
+    display: block;
     width: 8.5rem;
     height: auto;
     margin-bottom: 0.75rem;
-    mix-blend-mode: lighten;
     opacity: 0.85;
   }
 
