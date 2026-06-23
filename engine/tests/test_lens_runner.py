@@ -103,18 +103,65 @@ def test_allow_list_is_passed_through_to_retrieval():
     assert k == 5
 
 
-def test_citation_outside_the_retrieved_set_is_rejected():
-    # Granite returns an id the lens was never shown -> hallucinated citation -> raise.
+class _SequenceGranite:
+    """Returns a scripted sequence of outputs (or raises), one per call — to drive retry."""
+
+    def __init__(self, outputs):
+        self._outputs = list(outputs)
+        self.calls = 0
+        self.last_system = None
+
+    def generate_structured(self, *, schema, system, user):
+        self.last_system = system
+        item = self._outputs[min(self.calls, len(self._outputs) - 1)]
+        self.calls += 1
+        if isinstance(item, Exception):
+            raise item
+        return item
+
+
+def test_persistently_hallucinated_citation_degrades_not_crashes():
+    # A lens that keeps citing an id it was never shown must NOT crash the bake; after a
+    # retry it degrades to INSUFFICIENT_EVIDENCE so the run continues.
     retr = _FakeRetriever([_hit("ifab-1", "clause")])
     out = LensOutput(lens="REFEREE", stance="SUPPORTS", state="GROUNDED",
                      citation_ids=["ifab-999"], rationale="invented (ifab-999).")
-    with pytest.raises(ValueError, match="never shown"):
-        run_lens(lens="REFEREE", query="q", retriever=retr, granite=_FakeGranite(out))
+    run = run_lens(lens="REFEREE", query="q", retriever=retr, granite=_FakeGranite(out))
+    assert run.output.state == "INSUFFICIENT_EVIDENCE"
+    assert run.output.citation_ids == []
 
 
-def test_output_labelled_for_the_wrong_lens_is_rejected():
+def test_retry_recovers_after_one_bad_output():
+    # First call cites a stray id; the corrective retry returns a clean reading.
     retr = _FakeRetriever([_hit("ifab-1", "clause")])
-    out = LensOutput(lens="TACTICAL", stance="SUPPORTS", state="GROUNDED",
-                     citation_ids=["ifab-1"], rationale="ok (ifab-1).")
-    with pytest.raises(ValueError, match="labelled TACTICAL"):
-        run_lens(lens="REFEREE", query="q", retriever=retr, granite=_FakeGranite(out))
+    bad = LensOutput(lens="REFEREE", stance="SUPPORTS", state="GROUNDED",
+                     citation_ids=["ifab-999"], rationale="invented (ifab-999).")
+    good = LensOutput(lens="REFEREE", stance="SUPPORTS", state="GROUNDED",
+                      citation_ids=["ifab-1"], rationale="grounded (ifab-1).")
+    gran = _SequenceGranite([bad, good])
+    run = run_lens(lens="REFEREE", query="q", retriever=retr, granite=gran)
+    assert run.output.state == "GROUNDED"
+    assert run.output.citation_ids == ["ifab-1"]
+    assert gran.calls == 2  # took the retry
+    assert "CORRECTION" in gran.last_system  # the nudge was applied
+
+
+def test_validation_error_on_first_call_is_retried_then_degrades():
+    # The model returns content the schema rejects (e.g. GROUNDED with no citation).
+    # The runner must catch the ValidationError, retry, and degrade if it persists.
+    from pydantic import ValidationError
+
+    retr = _FakeRetriever([_hit("ifab-1", "clause")])
+
+    def _make_err():
+        try:
+            LensOutput(lens="FRAMING", stance="MIXED", state="GROUNDED",
+                       citation_ids=[], rationale="no citation")
+        except ValidationError as e:
+            return e
+        raise AssertionError("expected a ValidationError")
+
+    gran = _SequenceGranite([_make_err(), _make_err()])
+    run = run_lens(lens="FRAMING", query="q", retriever=retr, granite=gran)
+    assert run.output.state == "INSUFFICIENT_EVIDENCE"
+    assert gran.calls == 2  # retried once before degrading

@@ -20,6 +20,8 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
+from pydantic import ValidationError
+
 from offside_engine.analyze.granite_client import GraniteClient
 from offside_engine.analyze.prompts import LENS_SYSTEM
 from offside_engine.analyze.split_schema import LensKind, LensOutput
@@ -97,21 +99,42 @@ def run_lens(
     if not hits:
         return LensRun(output=_insufficient(lens), hits=())
 
-    user = render_evidence(lens, hits)
-    output = granite.generate_structured(
-        schema=LensOutput, system=LENS_SYSTEM[lens], user=user
-    )
-
     shown = {h.citation_id for h in hits}
-    stray = [cid for cid in output.citation_ids if cid not in shown]
-    if stray:
-        raise ValueError(
-            f"{lens} lens cited ids it was never shown: {stray} "
-            f"(shown: {sorted(shown)}) — refusing to freeze a hallucinated citation"
-        )
-    # The schema already forbids GROUNDED-with-no-citation and the reverse; the lens
-    # column on the output must also match the lens we asked for.
-    if output.lens != lens:
-        raise ValueError(f"asked the {lens} lens, got an output labelled {output.lens}")
+    user = render_evidence(lens, hits)
 
-    return LensRun(output=output, hits=tuple(hits))
+    # The model occasionally slips — e.g. emits a GROUNDED reading with no citation_ids,
+    # cites an id it was not shown, or mislabels the lens. The schema rightly rejects the
+    # first; the latter two we reject here. None of these should crash the whole bake: we
+    # retry once with a corrective nudge, and if the model still cannot produce a clean
+    # reading we degrade THIS lens to INSUFFICIENT_EVIDENCE (a valued answer) and carry
+    # on. A single fumbled lens never costs the run.
+    last_error = ""
+    for attempt in range(2):
+        system = LENS_SYSTEM[lens]
+        if attempt > 0:
+            system = system + "\n\nCORRECTION: " + last_error + (
+                " Either return a GROUNDED reading that cites at least one of the exact "
+                "ids shown above, or return INSUFFICIENT_EVIDENCE with no citations."
+            )
+        try:
+            output = granite.generate_structured(
+                schema=LensOutput, system=system, user=user
+            )
+        except ValidationError as e:
+            last_error = f"the previous output was not a valid lens reading ({e.error_count()} errors)."
+            continue
+
+        stray = [cid for cid in output.citation_ids if cid not in shown]
+        if stray:
+            last_error = (
+                f"you cited ids you were not shown ({stray}); cite only: {sorted(shown)}."
+            )
+            continue
+        if output.lens != lens:
+            last_error = f"you labelled the output {output.lens}; it must be {lens}."
+            continue
+
+        return LensRun(output=output, hits=tuple(hits))
+
+    # Both attempts failed cleanly — degrade rather than crash the bake.
+    return LensRun(output=_insufficient(lens), hits=tuple(hits))
