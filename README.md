@@ -91,19 +91,28 @@ Four IBM tools, each load-bearing — not decoration:
 
 | Tool | Role |
 |------|------|
-| **IBM Granite** (`granite3.3:8b`) | Grounded synthesis of *why* disagreement persists — never a verdict, never a number |
+| **IBM Granite** (`granite3.3:8b`) | Grounded reading of *why* disagreement persists — never a verdict, never a number |
 | **Granite Embedding** (`granite-embedding:30m`) | Embeds the evidence so each lens retrieves only its own |
 | **IBM Docling** | Extracts the IFAB Laws into structured, page-cited evidence — the click-to-source spine |
-| **Granite Guardian** (`granite-guardian3:2b`) | A **second IBM model audits the first**: it checks every reading's groundedness against its cited page and demotes anything it cannot confirm |
+| **Granite Guardian** (`granite3-guardian:2b`) | A **second IBM model audits the first**: it checks every reading's groundedness against its cited page and demotes anything it cannot confirm |
 
 The Granite Guardian gate is the move a single-model entry cannot make: a claim reaches a
 fixture only if the first model asserted it **and** the second model could not refute it
 against the source. The audit is recorded as a trust seal, frozen at temperature 0.
 
+The four diagnostic axes are then assigned by **deterministic routing rules** over the
+gated lens readings — so THE SPLIT is reproducible and the models are never asked to
+fabricate a magnitude. The models do the grounded, audited natural-language readings; the
+diagnostic routing is code.
+
+> Built using **IBM Project Bob** (Architect and Code modes) during development — the
+> architecture and engine were shaped with Bob and reviewed for issues along the way. Bob
+> is part of how this was built, not a runtime component of the product.
+
 ## Repository
 
 ```text
-engine/     Python build-time factory (the bake). Run on Colab; 113 tests.
+engine/     Python build-time factory (the bake). Run on Colab; 118 tests.
   bake.ipynb  the factory runner — pulls the Granite models and bakes a fixture
 web/        Next.js 16 + IBM Carbon app. Reads the frozen fixtures; deploys to Vercel.
 corpus/     curated evidence (framing quotes, historical record) as YAML
