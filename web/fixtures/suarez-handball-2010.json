@@ -1,0 +1,226 @@
+{
+  "cell_seals": [
+    {
+      "cell": {
+        "axis": "RULE_AMBIGUITY",
+        "citation_ids": [],
+        "rationale": "A clear single offence clause governs the act, with no competing clause.",
+        "state": "ABSENT"
+      },
+      "seal": {
+        "checked_context_citation_ids": [],
+        "guardian_model": "deterministic-router",
+        "verdict": "GROUNDED"
+      }
+    },
+    {
+      "cell": {
+        "axis": "INDETERMINACY",
+        "citation_ids": [],
+        "rationale": "The act is admitted, so the deliberateness residual is resolved.",
+        "state": "ABSENT"
+      },
+      "seal": {
+        "checked_context_citation_ids": [],
+        "guardian_model": "deterministic-router",
+        "verdict": "GROUNDED"
+      }
+    },
+    {
+      "cell": {
+        "axis": "DECISION_TIME_DEFICIT",
+        "citation_ids": [],
+        "rationale": "Review technology existed and the view was clear at the moment of the call.",
+        "state": "ABSENT"
+      },
+      "seal": {
+        "checked_context_citation_ids": [],
+        "guardian_model": "deterministic-router",
+        "verdict": "GROUNDED"
+      }
+    },
+    {
+      "cell": {
+        "axis": "CULTURAL_PRIOR_BIAS",
+        "citation_ids": [
+          "suarez-framing-suarez",
+          "suarez-framing-gyan"
+        ],
+        "rationale": "Named sources frame the same settled fact in opposed valence.",
+        "state": "PRESENT"
+      },
+      "seal": {
+        "checked_context_citation_ids": [
+          "suarez-framing-suarez",
+          "suarez-framing-gyan"
+        ],
+        "guardian_model": "deterministic-router",
+        "verdict": "GROUNDED"
+      }
+    }
+  ],
+  "citations": {
+    "ifab-law12-dogso-handball-p118": {
+      "attribution": null,
+      "bbox": {
+        "bottom": 415.0,
+        "left": 62.0,
+        "right": 372.0,
+        "top": 478.0
+      },
+      "doc_kind": "IFAB_LAW",
+      "extracted_text": "Where a player denies the opposing team a goal or an obvious goal-scoring opportunity by committing a deliberate handball offence the player is sent off whatever the position of the offence.",
+      "id": "ifab-law12-dogso-handball-p118",
+      "page": 118,
+      "source_doc": "ifab-laws-2025-26"
+    },
+    "suarez-framing-gyan": {
+      "attribution": "Asamoah Gyan, post-match and subsequent interviews (2010-07-03)",
+      "bbox": null,
+      "doc_kind": "FRAMING_SOURCE",
+      "extracted_text": "Asamoah Gyan (2010-07-03) — CONDEMNS: Gyan is reported to have described the moment as a cruel injustice that denied Ghana a deserved place in the semi-final, a wound that the missed penalty made permanent.",
+      "id": "suarez-framing-gyan",
+      "page": null,
+      "source_doc": "post-match and subsequent interviews"
+    },
+    "suarez-framing-suarez": {
+      "attribution": "Luis Suárez, post-match comments (2010-07-03)",
+      "bbox": null,
+      "doc_kind": "FRAMING_SOURCE",
+      "extracted_text": "Luis Suárez (2010-07-03) — JUSTIFIES: Suárez is reported to have called it the \"save of the tournament\" and said the Hand of God now belonged to him, framing the handball as a worthwhile sacrifice for the team.",
+      "id": "suarez-framing-suarez",
+      "page": null,
+      "source_doc": "post-match comments"
+    },
+    "suarez-hist-correctly-adjudicated": {
+      "attribution": "Curated historical record — Suárez's handball on the line",
+      "bbox": null,
+      "doc_kind": "HISTORICAL_REPORT",
+      "extracted_text": "The referee saw the handball in real time and applied the Law exactly: Suárez was sent off and a penalty was awarded to Ghana. The officiating decision itself was correct and uncontested.",
+      "id": "suarez-hist-correctly-adjudicated",
+      "page": null,
+      "source_doc": "curated-historical"
+    }
+  },
+  "incident_id": "suarez-handball-2010",
+  "lenses": [
+    {
+      "output": {
+        "citation_ids": [
+          "ifab-law12-dogso-handball-p118"
+        ],
+        "lens": "REFEREE",
+        "rationale": "The retrieved Law states that denying a goal by deliberate handball is a sending-off offence (ifab-law12-dogso-handball-p118); the sanction is a single clear rule, so rule-ambiguity does not hold.",
+        "stance": "SUPPORTS",
+        "state": "GROUNDED"
+      },
+      "seal": {
+        "checked_context_citation_ids": [
+          "ifab-law12-dogso-handball-p118"
+        ],
+        "guardian_model": "deterministic-router",
+        "verdict": "GROUNDED"
+      }
+    },
+    {
+      "output": {
+        "citation_ids": [
+          "suarez-hist-correctly-adjudicated"
+        ],
+        "lens": "HISTORICAL",
+        "rationale": "The retrieved facts state the referee saw the handball in real time and applied the Law exactly — a red card and a penalty (suarez-hist-correctly-adjudicated); the decisive truth WAS available in the moment, so there is no decision-time deficit.",
+        "stance": "DISPUTES",
+        "state": "GROUNDED"
+      },
+      "seal": {
+        "checked_context_citation_ids": [
+          "suarez-hist-correctly-adjudicated"
+        ],
+        "guardian_model": "deterministic-router",
+        "verdict": "GROUNDED"
+      }
+    },
+    {
+      "output": {
+        "citation_ids": [],
+        "lens": "TACTICAL",
+        "rationale": "No event-data anomaly bears on this incident.",
+        "stance": "INSUFFICIENT_EVIDENCE",
+        "state": "INSUFFICIENT_EVIDENCE"
+      },
+      "seal": {
+        "checked_context_citation_ids": [],
+        "guardian_model": "deterministic-router",
+        "verdict": "GROUNDED"
+      }
+    },
+    {
+      "output": {
+        "citation_ids": [
+          "suarez-framing-suarez",
+          "suarez-framing-gyan"
+        ],
+        "lens": "FRAMING",
+        "rationale": "Luis Suárez is reported to have called the handball the 'save of the tournament' (suarez-framing-suarez), while Asamoah Gyan is reported to have described it as a cruel injustice (suarez-framing-gyan); two named sources frame the same admitted act in opposite valence.",
+        "stance": "MIXED",
+        "state": "GROUNDED"
+      },
+      "seal": {
+        "checked_context_citation_ids": [
+          "suarez-framing-suarez",
+          "suarez-framing-gyan"
+        ],
+        "guardian_model": "deterministic-router",
+        "verdict": "GROUNDED"
+      }
+    }
+  ],
+  "provenance": {
+    "corpus_git_sha": "36fd9a2e7f684bad735f1ddb6a89c5dc8e5dc576",
+    "embed_model": "granite-embedding:30m",
+    "granite_model": "granite3.3:8b",
+    "guardian_model": "granite3-guardian:2b",
+    "options": {}
+  },
+  "rule_evolution": null,
+  "settled_fact": {
+    "citation_ids": [
+      "ifab-law12-dogso-handball-p118"
+    ],
+    "statement": "In the last minute against Ghana in the 2010 World Cup, Luis Suárez deliberately handled a goal-bound ball on the line. He was sent off and a penalty was awarded — the call was correct. Ghana missed the penalty and Uruguay won the shootout. The handball, and the red card for it, are not in dispute.",
+    "status": "ADJUDICATED_CONTESTED"
+  },
+  "split": {
+    "cells": [
+      {
+        "axis": "RULE_AMBIGUITY",
+        "citation_ids": [],
+        "rationale": "A clear single offence clause governs the act, with no competing clause.",
+        "state": "ABSENT"
+      },
+      {
+        "axis": "INDETERMINACY",
+        "citation_ids": [],
+        "rationale": "The act is admitted, so the deliberateness residual is resolved.",
+        "state": "ABSENT"
+      },
+      {
+        "axis": "DECISION_TIME_DEFICIT",
+        "citation_ids": [],
+        "rationale": "Review technology existed and the view was clear at the moment of the call.",
+        "state": "ABSENT"
+      },
+      {
+        "axis": "CULTURAL_PRIOR_BIAS",
+        "citation_ids": [
+          "suarez-framing-suarez",
+          "suarez-framing-gyan"
+        ],
+        "rationale": "Named sources frame the same settled fact in opposed valence.",
+        "state": "PRESENT"
+      }
+    ],
+    "headline": "It stays contested over how named sources frame the same fact — not over the dimensions ruled out."
+  },
+  "title": "Suárez's handball on the line"
+}

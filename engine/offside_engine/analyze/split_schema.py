@@ -277,6 +277,26 @@ class BakeProvenance(BaseModel):
     corpus_git_sha: str | None = None
 
 
+class RuleEvolution(BaseModel):
+    """A verdict-free temporal counterfactual on ONE axis. Code-owned.
+
+    For incidents where football technology changed what was knowable at the moment, this
+    records how a single SPLIT axis would resolve under a later era's officiating tech —
+    without ever claiming the *call* would change. For Lampard: in 2010 the Decision-Time
+    Deficit was PRESENT (no goal-line tech); with goal-line technology it is RESOLVED. The
+    fact (ball over the line) was always settled; only its availability in the moment shifts.
+    """
+
+    model_config = ConfigDict(extra="forbid")
+
+    axis: SplitAxis  # the axis that shifts
+    from_era: str  # e.g. "2010 — no goal-line technology"
+    to_era: str  # e.g. "2026 — automatic goal-line detection"
+    from_state: CellState  # e.g. PRESENT
+    to_state: CellState  # e.g. ABSENT (resolved)
+    note: str  # verdict-free one-liner: what was undetectable then is automatic now
+
+
 class IncidentBundle(BaseModel):
     """THE frozen fixture for one incident — the whole contract the web app reads.
 
@@ -296,6 +316,9 @@ class IncidentBundle(BaseModel):
     cell_seals: Annotated[list[SealedCell], Field(min_length=4, max_length=4)]
     citations: dict[str, Citation]
     provenance: BakeProvenance
+    # Optional verdict-free temporal counterfactual (Rule Evolution). Present only for
+    # incidents where officiating technology changed what was knowable in the moment.
+    rule_evolution: RuleEvolution | None = None
 
     @model_validator(mode="after")
     def _bundle_is_internally_consistent(self) -> "IncidentBundle":
@@ -346,5 +369,6 @@ CODE_OWNED_MODELS: tuple[type[BaseModel], ...] = (
     SealedLens,
     SealedCell,
     BakeProvenance,
+    RuleEvolution,
     IncidentBundle,
 )

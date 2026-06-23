@@ -4,7 +4,11 @@ import { IncidentExplorer, type LoadedBundle } from "@/components/IncidentExplor
 // The incidents OFFSIDE ships, in demo order: the Hand of God hero first, then Lampard's
 // ghost goal as the contrast that proves the diagnostic generalizes. Any incident whose
 // fixture is not present is skipped, so the app renders whatever has been baked.
-const INCIDENT_IDS = ["hand-of-god-1986", "lampard-ghost-goal-2010"];
+const INCIDENT_IDS = [
+  "hand-of-god-1986",
+  "suarez-handball-2010",
+  "lampard-ghost-goal-2010",
+];
 
 export default async function Home() {
   const loaded: LoadedBundle[] = [];

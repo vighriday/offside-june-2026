@@ -1,0 +1,39 @@
+# Curated historical record for the Suárez handball — neutral, cited facts.
+# Used by the Historical lens. Frozen by design (no live historical source).
+#
+# The THIRD signature in the lineage. Unlike the Hand of God (the handball was unseen and
+# unpunished in the moment) and Lampard (a correct call was impossible without technology),
+# the Suárez handball was SEEN and CORRECTLY ADJUDICATED in real time — deliberate handball
+# on the line, red card, penalty awarded. So Decision-Time Deficit is ABSENT here: the
+# officials had everything they needed and applied the Law exactly. What remains contested
+# is purely the framing — hero vs cheat — which makes Cultural Prior Bias the dominant axis,
+# the same axis it shares with the Hand of God.
+
+incident: suarez-handball
+title: "Suárez's handball on the line"
+match: "Uruguay 1 - 1 Ghana (Uruguay won 4-2 on penalties)"
+competition: "2010 FIFA World Cup, Quarter-Final"
+venue: "Soccer City, Johannesburg"
+date: "2010-07-02"
+referee: "Olegário Benquerença (Portugal)"
+
+facts:
+  - id: suarez-hist-on-the-line
+    statement: >-
+      In the final minute of extra time, Luis Suárez deliberately handled a goal-bound
+      ball on the goal line to stop a certain Ghana goal. The act was clear and admitted.
+    bearing: SETTLED_FACT
+
+  - id: suarez-hist-correctly-adjudicated
+    statement: >-
+      The referee saw the handball in real time and applied the Law exactly: Suárez was
+      sent off and a penalty was awarded to Ghana. The officiating decision itself was
+      correct and uncontested.
+    bearing: RESOLUTION
+
+  - id: suarez-hist-penalty-missed
+    statement: >-
+      Ghana's Asamoah Gyan struck the resulting penalty against the crossbar, Uruguay won
+      the subsequent shootout, and Suárez's sending-off achieved its purpose. The outcome,
+      not the call, is what endured.
+    bearing: CONTEXT

@@ -169,7 +169,60 @@ LAMPARD_GHOST_GOAL = IncidentSpec(
 )
 
 
+# ── Suárez's handball on the line (Uruguay v Ghana, 2010) ────────────────────
+#
+# The THIRD signature — and the one that completes the lineage. The handball was SEEN and
+# CORRECTLY ADJUDICATED in the moment (red card + penalty), so Decision-Time Deficit is
+# ABSENT — the clean contrast with both the Hand of God (unseen) and Lampard (unknowable
+# without tech). What remains is pure framing: a smart sacrifice versus a cheat. So
+# Cultural Prior Bias is the dominant axis, the SAME axis the Hand of God shares — which is
+# exactly why the Divergence Lineage groups Hand of God and Suárez together.
+
+SUAREZ_HANDBALL = IncidentSpec(
+    incident_id="suarez-handball-2010",
+    title="Suárez's handball on the line",
+    settled_status="ADJUDICATED_CONTESTED",
+    settled_statement=(
+        "In the last minute against Ghana in the 2010 World Cup, Luis Suárez deliberately "
+        "handled a goal-bound ball on the line. He was sent off and a penalty was awarded — "
+        "the call was correct. Ghana missed the penalty and Uruguay won the shootout. The "
+        "handball, and the red card for it, are not in dispute."
+    ),
+    settled_citation_ids=("ifab-law12-dogso-handball-p118",),
+    admission_note=(
+        "The handball was deliberate and is admitted; the act itself is not in dispute."
+    ),
+    lens_queries={
+        "REFEREE": "What is the sanction for denying a goal by deliberate handball?",
+        "TACTICAL": "How is the handball represented in the event data?",
+        "HISTORICAL": "Could the officials see and correctly rule on the handball in the moment?",
+        "FRAMING": "How did named figures describe the handball afterwards?",
+    },
+    allowed_citation_ids=frozenset(
+        {
+            # Referee — the DOGSO deliberate-handball sanction clause (sent off).
+            "ifab-law12-dogso-handball-p118",
+            "ifab-law12-handball-offence-p110",
+            # Historical — the call was correctly made in the moment (DTD absent).
+            "suarez-hist-on-the-line",
+            "suarez-hist-correctly-adjudicated",
+            # Framing — Suárez vs Gyan, opposed valence on the same admitted act.
+            "suarez-framing-suarez",
+            "suarez-framing-gyan",
+        }
+    ),
+    expected_thesis={
+        "RULE_AMBIGUITY": {"ABSENT"},
+        "INDETERMINACY": {"ABSENT"},
+        # The contrast: the officials saw it and ruled correctly, so no decision-time gap.
+        "DECISION_TIME_DEFICIT": {"ABSENT", "NOT_DOCUMENTED"},
+        "CULTURAL_PRIOR_BIAS": {"PRESENT"},
+    },
+)
+
+
 INCIDENTS: dict[str, IncidentSpec] = {
     HAND_OF_GOD.incident_id: HAND_OF_GOD,
+    SUAREZ_HANDBALL.incident_id: SUAREZ_HANDBALL,
     LAMPARD_GHOST_GOAL.incident_id: LAMPARD_GHOST_GOAL,
 }

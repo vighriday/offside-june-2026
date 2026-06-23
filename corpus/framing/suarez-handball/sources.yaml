@@ -1,0 +1,47 @@
+# Documented framings of the Suárez handball (Uruguay v Ghana, 2 Jul 2010).
+#
+# Each entry is a framing by a NAMED, DATED source. As always, the schema has no field for
+# "what a nation believes" — only what a specific named source said. A market lens renders
+# only if it holds at least one `is_from` source.
+#
+# This is the axis that makes Suárez sit beside the Hand of God in the lineage: named
+# sources, looking at the SAME admitted handball, frame it in OPPOSITE valence — a smart
+# sacrifice versus a cheat. Same-facts-opposite-reading fires CULTURAL_PRIOR_BIAS.
+#
+# Reproduced under fair use for commentary, presented as documented framings from specific
+# named sources — not the views of any nation or its people.
+
+incident: suarez-handball
+incident_title: "Suárez's handball on the line"
+shared_fact: >-
+  Luis Suárez deliberately handled a goal-bound ball on the line to deny Ghana a certain
+  goal, was sent off, and a penalty was awarded. The handball is admitted and not disputed.
+
+framings:
+  - id: suarez-framing-suarez
+    speaker: "Luis Suárez"
+    role: "the player"
+    market: UY
+    relation: is_from
+    date: "2010-07-03"
+    source: "post-match comments"
+    characterizes: SELF
+    stance: JUSTIFIES
+    quote: >-
+      Suárez is reported to have called it the "save of the tournament" and said the Hand
+      of God now belonged to him, framing the handball as a worthwhile sacrifice for the team.
+    documented_via: secondary
+
+  - id: suarez-framing-gyan
+    speaker: "Asamoah Gyan"
+    role: "Ghana forward"
+    market: GH
+    relation: is_from
+    date: "2010-07-03"
+    source: "post-match and subsequent interviews"
+    characterizes: EVENT
+    stance: CONDEMNS
+    quote: >-
+      Gyan is reported to have described the moment as a cruel injustice that denied Ghana
+      a deserved place in the semi-final, a wound that the missed penalty made permanent.
+    documented_via: secondary

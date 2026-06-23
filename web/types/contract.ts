@@ -80,6 +80,15 @@ export interface BakeProvenance {
   corpus_git_sha: string | null;
 }
 
+export interface RuleEvolution {
+  axis: SplitAxis;
+  from_era: string;
+  to_era: string;
+  from_state: CellState;
+  to_state: CellState;
+  note: string;
+}
+
 export interface IncidentBundle {
   incident_id: string;
   title: string;
@@ -89,6 +98,7 @@ export interface IncidentBundle {
   cell_seals: SealedCell[];
   citations: Record<string, Citation>;
   provenance: BakeProvenance;
+  rule_evolution: RuleEvolution | null;
 }
 
 // The four axes in the canonical order the SPLIT always renders them.

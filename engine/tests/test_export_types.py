@@ -14,6 +14,7 @@ from offside_engine.analyze.split_schema import (
     Citation,
     IncidentBundle,
     LensOutput,
+    RuleEvolution,
     SealedCell,
     SealedLens,
     SettledFact,
@@ -25,7 +26,7 @@ from offside_engine.export_types import build_ts
 
 _CONTRACT_MODELS = (
     Bbox, Citation, TrustSeal, LensOutput, SplitCell, Split,
-    SettledFact, SealedLens, SealedCell, BakeProvenance, IncidentBundle,
+    SettledFact, SealedLens, SealedCell, BakeProvenance, RuleEvolution, IncidentBundle,
 )
 
 

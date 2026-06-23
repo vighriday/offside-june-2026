@@ -27,13 +27,19 @@ from offside_engine.analyze.split_schema import (
     Citation,
     IncidentBundle,
     LensOutput,
+    RuleEvolution,
     SealedCell,
     SealedLens,
     SettledFact,
     TrustSeal,
 )
 from offside_engine.bake.corpus_pool import assemble_pool
-from offside_engine.bake.incident import HAND_OF_GOD, LAMPARD_GHOST_GOAL, IncidentSpec
+from offside_engine.bake.incident import (
+    HAND_OF_GOD,
+    LAMPARD_GHOST_GOAL,
+    SUAREZ_HANDBALL,
+    IncidentSpec,
+)
 from offside_engine.bake.synthesize import derive_split
 from offside_engine.bake.write_fixture import write_fixture
 from offside_engine.config import (
@@ -113,9 +119,36 @@ _LAMPARD_LENSES = [
 ]
 
 
+# ── Suárez handball ──────────────────────────────────────────────────────────
+# The decisive contrast: the Historical lens DISPUTES a decision-time deficit (the
+# officials saw it and ruled correctly), which routes DECISION_TIME_DEFICIT to ABSENT.
+# Only Cultural Prior Bias remains PRESENT — the axis it shares with the Hand of God.
+
+_SUAREZ_LENSES = [
+    _lens("REFEREE", "SUPPORTS", ["ifab-law12-dogso-handball-p118"],
+          "The retrieved Law states that denying a goal by deliberate handball is a "
+          "sending-off offence (ifab-law12-dogso-handball-p118); the sanction is a single "
+          "clear rule, so rule-ambiguity does not hold."),
+    _lens("HISTORICAL", "DISPUTES", ["suarez-hist-correctly-adjudicated"],
+          "The retrieved facts state the referee saw the handball in real time and applied "
+          "the Law exactly — a red card and a penalty (suarez-hist-correctly-adjudicated); "
+          "the decisive truth WAS available in the moment, so there is no decision-time "
+          "deficit."),
+    LensOutput(lens="TACTICAL", stance="INSUFFICIENT_EVIDENCE",
+               state="INSUFFICIENT_EVIDENCE", citation_ids=[],
+               rationale="No event-data anomaly bears on this incident."),
+    _lens("FRAMING", "MIXED", ["suarez-framing-suarez", "suarez-framing-gyan"],
+          "Luis Suárez is reported to have called the handball the 'save of the tournament' "
+          "(suarez-framing-suarez), while Asamoah Gyan is reported to have described it as a "
+          "cruel injustice (suarez-framing-gyan); two named sources frame the same admitted "
+          "act in opposite valence."),
+]
+
+
 def bake_offline(spec: IncidentSpec, lenses: list[LensOutput], *, framing_yaml: Path,
                  historical_yaml: Path, aggregate: HandOfGodAggregate,
-                 extra_citations: list[Citation], corpus_git_sha: str) -> IncidentBundle:
+                 extra_citations: list[Citation], corpus_git_sha: str,
+                 rule_evolution: RuleEvolution | None = None) -> IncidentBundle:
     """Assemble the pool, route the lens readings into a SPLIT, and freeze a bundle."""
     pool: dict[str, Citation] = assemble_pool(
         framing_yaml=framing_yaml, historical_yaml=historical_yaml, aggregate=aggregate
@@ -158,6 +191,7 @@ def bake_offline(spec: IncidentSpec, lenses: list[LensOutput], *, framing_yaml: 
             embed_model=DEFAULT_EMBED_MODEL,
             corpus_git_sha=corpus_git_sha,
         ),
+        rule_evolution=rule_evolution,
     )
 
 
@@ -177,12 +211,27 @@ def main() -> None:
                        historical_yaml=hog_hist, aggregate=_HAND_OF_GOD_AGG,
                        extra_citations=[], corpus_git_sha=sha)
 
+    sz_fr, sz_hist = _corpus("suarez-handball")
+    sz = bake_offline(SUAREZ_HANDBALL, _SUAREZ_LENSES, framing_yaml=sz_fr,
+                      historical_yaml=sz_hist, aggregate=_HAND_OF_GOD_AGG,
+                      extra_citations=[], corpus_git_sha=sha)
+
     lam_fr, lam_hist = _corpus("lampard-ghost-goal")
+    lampard_evolution = RuleEvolution(
+        axis="DECISION_TIME_DEFICIT",
+        from_era="2010 — no goal-line technology",
+        to_era="2026 — automatic goal-line detection",
+        from_state="PRESENT",
+        to_state="ABSENT",
+        note="What was undetectable in the moment is automatic now — the fact was always "
+             "settled; only its availability to the officials changed.",
+    )
     lam = bake_offline(LAMPARD_GHOST_GOAL, _LAMPARD_LENSES, framing_yaml=lam_fr,
                        historical_yaml=lam_hist, aggregate=_HAND_OF_GOD_AGG,
-                       extra_citations=[], corpus_git_sha=sha)
+                       extra_citations=[], corpus_git_sha=sha,
+                       rule_evolution=lampard_evolution)
 
-    for bundle in (hog, lam):
+    for bundle in (hog, sz, lam):
         out = write_fixture(bundle, fixtures)
         states = {c.axis: c.state for c in bundle.split.cells}
         print(f"\nwrote {out}\n  THE SPLIT: {states}\n  headline: {bundle.split.headline}")

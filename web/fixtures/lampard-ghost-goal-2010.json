@@ -196,11 +196,19 @@
     }
   ],
   "provenance": {
-    "corpus_git_sha": "7d1993610801574a43897c4836460e0d5f141342",
+    "corpus_git_sha": "36fd9a2e7f684bad735f1ddb6a89c5dc8e5dc576",
     "embed_model": "granite-embedding:30m",
     "granite_model": "granite3.3:8b",
     "guardian_model": "granite3-guardian:2b",
     "options": {}
+  },
+  "rule_evolution": {
+    "axis": "DECISION_TIME_DEFICIT",
+    "from_era": "2010 — no goal-line technology",
+    "from_state": "PRESENT",
+    "note": "What was undetectable in the moment is automatic now — the fact was always settled; only its availability to the officials changed.",
+    "to_era": "2026 — automatic goal-line detection",
+    "to_state": "ABSENT"
   },
   "settled_fact": {
     "citation_ids": [
