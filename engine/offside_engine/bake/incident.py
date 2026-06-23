@@ -71,7 +71,8 @@ HAND_OF_GOD = IncidentSpec(
     settled_statement=(
         "Diego Maradona scored with his hand against England in the 1986 World Cup "
         "quarter-final. The referee allowed the goal, Argentina won, and the result was "
-        "never overturned. The handball itself is not in dispute."
+        "never overturned. The handball is admitted — the facts are settled. What stays "
+        "contested is the acceptable outcome, not what happened."
     ),
     settled_citation_ids=("ifab-law12-handball-offence-p110",),
     admission_note=(

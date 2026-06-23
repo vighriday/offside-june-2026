@@ -18,8 +18,8 @@ export function SplitView({ bundle }: SplitViewProps) {
   const selectedCell =
     bundle.split.cells.find((c) => c.axis === selectedAxis) ?? null;
 
-  // The headline reveals after the last cell's entrance (4 cells × 0.15s stagger + buffer).
-  const headlineDelay = 0.15 * bundle.split.cells.length + 0.45;
+  // The headline reveals just after the last cell's entrance (4 cells × 0.09s stagger).
+  const headlineDelay = 0.09 * bundle.split.cells.length + 0.35;
 
   return (
     <section className="split-view" aria-label="THE SPLIT — disagreement diagnostic">

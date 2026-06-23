@@ -196,7 +196,7 @@
     }
   ],
   "provenance": {
-    "corpus_git_sha": "36fd9a2e7f684bad735f1ddb6a89c5dc8e5dc576",
+    "corpus_git_sha": "9de3b0f634624873f977b8cc482464fea97c7089",
     "embed_model": "granite-embedding:30m",
     "granite_model": "granite3.3:8b",
     "guardian_model": "granite3-guardian:2b",

@@ -47,12 +47,13 @@ export function SplitCell({ cell, index, selected, onSelect }: SplitCellProps) {
       data-selected={selected}
       onClick={() => onSelect(cell.axis)}
       className="split-cell"
-      initial={{ opacity: 0, y: 12 }}
+      initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
-      // Carbon "productive" entrance easing; cells resolve in sequence, not all at once.
+      // Carbon "productive" entrance easing; cells resolve in quick sequence (~0.6s total
+      // for four) so the diagnostic is readable fast, not a slow load.
       transition={{
-        duration: 0.4,
-        delay: 0.15 * index,
+        duration: 0.34,
+        delay: 0.09 * index,
         ease: [0.4, 0.14, 0.3, 1],
       }}
       whileHover={{ y: -2 }}

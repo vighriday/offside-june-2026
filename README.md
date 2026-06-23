@@ -34,7 +34,7 @@ watching.*
 | **The moat** | The reasoning model is **structurally incapable of emitting a number** — no fabricated percentages, ever. Enforced by a test in CI. |
 | **Built with** | IBM Granite · IBM Docling · Granite Embedding · **Granite Guardian** · Langflow |
 
-**[► Open the live demo](https://offside-june-2026.vercel.app/)** — try clicking a cell, then switch incidents to watch the diagnosis change.
+**[► Open the live demo](https://offside-june-2026.vercel.app/)** — try clicking a cell, then switch incidents to watch the diagnosis change. New here? The **[90-second judge's guide](JUDGE.md)** walks the five things worth trying.
 
 ---
 
