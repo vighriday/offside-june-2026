@@ -121,6 +121,15 @@ body {
     opacity: 0.9;
   }
 
+  // The earned rationale on a ruled-out / undocumented cell face.
+  &__earned {
+    margin-top: 0.5rem;
+    font-size: 0.6875rem;
+    line-height: 1.4;
+    font-style: italic;
+    color: var(--cds-text-secondary, #c6c6c6);
+  }
+
   // PRESENT — a live tension. Hot accent, filled tint; the eye lands here first.
   &[data-state="PRESENT"] {
     border-left-color: var(--split-present);
@@ -200,6 +209,241 @@ body {
     letter-spacing: 0.02em;
     color: var(--cds-background, #161616);
     background: var(--split-weak);
+  }
+}
+
+// ── Divergence Lineage (curated chain, grouped by shared axis) ───────────────
+.lineage {
+  margin-bottom: 2.5rem;
+
+  &__eyebrow {
+    margin: 0 0 1rem;
+    font-size: 0.6875rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--split-present);
+  }
+
+  &__chain {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__node-wrap {
+    display: flex;
+    align-items: stretch;
+  }
+
+  &__link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0.75rem;
+    min-width: 6rem;
+  }
+
+  &__link-line {
+    width: 100%;
+    height: 1px;
+    // a pitch line — restrained football motif, on a Carbon accent
+    background: repeating-linear-gradient(
+      90deg,
+      var(--split-present),
+      var(--split-present) 6px,
+      transparent 6px,
+      transparent 11px
+    );
+    opacity: 0.5;
+  }
+
+  &__link-axis {
+    margin-top: 0.375rem;
+    font-size: 0.5625rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--cds-text-placeholder, #6f6f6f);
+    white-space: nowrap;
+  }
+
+  &__node {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: left;
+    cursor: pointer;
+    background: var(--cds-layer-01, #262626);
+    border: 1px solid var(--cds-border-subtle-01, #393939);
+    border-top: 2px solid var(--cds-border-subtle-01, #393939);
+    padding: 0.875rem 1rem;
+    min-width: 11rem;
+    color: var(--cds-text-primary, #f4f4f4);
+    transition: border-color 110ms, background 110ms;
+
+    &:hover {
+      border-top-color: var(--split-present);
+    }
+    &[data-active="true"] {
+      border-top-color: var(--split-present);
+      background: linear-gradient(var(--split-present-bg), var(--split-present-bg)),
+        var(--cds-layer-01, #262626);
+    }
+    &:focus-visible {
+      outline: 2px solid var(--cds-focus, #ffffff);
+      outline-offset: -2px;
+    }
+  }
+
+  &__node-title {
+    font-size: 0.9375rem;
+    font-weight: 500;
+  }
+
+  &__node-axes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+  }
+
+  &__tag {
+    font-size: 0.5625rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 0.125rem 0.375rem;
+    color: var(--split-present);
+    border: 1px solid rgba(69, 137, 255, 0.4);
+  }
+
+  @media (max-width: 52rem) {
+    &__chain {
+      flex-direction: column;
+    }
+    &__link {
+      flex-direction: row;
+      min-width: 0;
+      padding: 0.5rem 0;
+      justify-content: flex-start;
+      gap: 0.5rem;
+    }
+    &__link-line {
+      width: 1.5rem;
+    }
+  }
+}
+
+// ── Generalization callout (names the flipped axis on incident switch) ────────
+.generalization-callout {
+  margin: 1.5rem 0 0;
+  padding: 0.875rem 1.125rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--cds-text-primary, #f4f4f4);
+  background: linear-gradient(var(--split-present-bg), var(--split-present-bg)),
+    var(--cds-layer-01, #262626);
+  border-left: 3px solid var(--split-present);
+
+  &__mark {
+    display: inline-block;
+    margin-right: 0.5rem;
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--split-present);
+  }
+}
+
+// ── Rule Evolution (verdict-free temporal counterfactual) ────────────────────
+.rule-evo {
+  margin: 2.5rem 0 0;
+  padding: 1.5rem;
+  background: var(--cds-layer-01, #262626);
+  border: 1px solid var(--cds-border-subtle-01, #393939);
+  border-top: 2px solid var(--split-weak);
+
+  &__head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  &__eyebrow {
+    margin: 0;
+    font-size: 0.6875rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--split-weak);
+  }
+
+  &__toggle {
+    display: inline-flex;
+    border: 1px solid var(--cds-border-subtle-01, #393939);
+
+    button {
+      appearance: none;
+      background: transparent;
+      border: 0;
+      padding: 0.375rem 0.75rem;
+      font-family: inherit;
+      font-size: 0.75rem;
+      color: var(--cds-text-secondary, #c6c6c6);
+      cursor: pointer;
+      transition: background 110ms, color 110ms;
+
+      &[data-active="true"] {
+        background: var(--split-present);
+        color: var(--cds-background, #161616);
+        font-weight: 600;
+      }
+      &:focus-visible {
+        outline: 2px solid var(--cds-focus, #ffffff);
+        outline-offset: -2px;
+      }
+    }
+  }
+
+  &__body {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.75rem 1.25rem;
+    margin-top: 1.25rem;
+  }
+
+  &__axis {
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  &__state {
+    font-size: 1.5rem;
+    font-weight: 300;
+    letter-spacing: -0.01em;
+    &[data-state="PRESENT"] {
+      color: var(--split-present);
+    }
+    &[data-state="ABSENT"] {
+      color: var(--seal-grounded);
+    }
+  }
+
+  &__era {
+    font-size: 0.75rem;
+    color: var(--cds-text-secondary, #c6c6c6);
+  }
+
+  &__note {
+    margin: 1rem 0 0;
+    font-size: 0.8125rem;
+    line-height: 1.5;
+    color: var(--cds-text-secondary, #c6c6c6);
   }
 }
 
@@ -305,6 +549,11 @@ body {
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--split-present);
+    // play-direction marker — a restrained football motif within Carbon
+    &::before {
+      content: "▸ ";
+      opacity: 0.8;
+    }
   }
 
   &__prompt {

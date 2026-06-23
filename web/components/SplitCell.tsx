@@ -73,6 +73,12 @@ export function SplitCell({ cell, index, selected, onSelect }: SplitCellProps) {
           {cell.citation_ids.length === 1 ? "source" : "sources"} →
         </span>
       )}
+
+      {/* A ruled-out / undocumented cell carries its earned rationale on its own face,
+          so the empty cell reads as a finding rather than a blank. */}
+      {!isAssertive && cell.rationale && (
+        <span className="split-cell__earned">{cell.rationale}</span>
+      )}
     </motion.button>
   );
 }
