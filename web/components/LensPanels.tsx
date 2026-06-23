@@ -34,13 +34,26 @@ const STANCE_LABEL: Record<LensStance, string> = {
   INSUFFICIENT_EVIDENCE: "Insufficient evidence",
 };
 
-function GuardianSeal({ verdict }: { verdict: GuardianVerdict }) {
+function GuardianSeal({
+  verdict,
+  model,
+}: {
+  verdict: GuardianVerdict;
+  model: string;
+}) {
+  // The seal reflects how the reading was confirmed. A live Granite Guardian pass reads
+  // as "Granite Guardian: grounded"; a deterministic offline build reads honestly as
+  // "Routed deterministically" rather than overclaiming a model audit that did not run.
+  const isLiveGuardian = model.includes("guardian");
+  const label = isLiveGuardian
+    ? verdict === "GROUNDED"
+      ? "Granite Guardian: grounded"
+      : "Granite Guardian: unverified"
+    : "Routed deterministically";
   return (
     <span className="guardian-seal" data-verdict={verdict}>
       <span className="guardian-seal__mark" aria-hidden />
-      {verdict === "GROUNDED"
-        ? "Granite Guardian: grounded"
-        : "Granite Guardian: unverified"}
+      {label}
     </span>
   );
 }
@@ -80,7 +93,7 @@ export function LensPanels({ lenses }: LensPanelsProps) {
               </div>
               <p className="lens-panel__source">{LENS_SOURCE[output.lens]}</p>
               <p className="lens-panel__rationale">{output.rationale}</p>
-              <GuardianSeal verdict={seal.verdict} />
+              <GuardianSeal verdict={seal.verdict} model={seal.guardian_model} />
             </motion.article>
           );
         })}

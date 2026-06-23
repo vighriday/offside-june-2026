@@ -1,0 +1,258 @@
+{
+  "cell_seals": [
+    {
+      "cell": {
+        "axis": "RULE_AMBIGUITY",
+        "citation_ids": [],
+        "rationale": "A clear single offence clause governs the act, with no competing clause.",
+        "state": "ABSENT"
+      },
+      "seal": {
+        "checked_context_citation_ids": [],
+        "guardian_model": "deterministic-router",
+        "verdict": "GROUNDED"
+      }
+    },
+    {
+      "cell": {
+        "axis": "INDETERMINACY",
+        "citation_ids": [],
+        "rationale": "The act is admitted, so the deliberateness residual is resolved.",
+        "state": "ABSENT"
+      },
+      "seal": {
+        "checked_context_citation_ids": [],
+        "guardian_model": "deterministic-router",
+        "verdict": "GROUNDED"
+      }
+    },
+    {
+      "cell": {
+        "axis": "DECISION_TIME_DEFICIT",
+        "citation_ids": [
+          "hist-tech-1986",
+          "hist-officials-accounts"
+        ],
+        "rationale": "Resolving technology was absent and the view was obstructed in the moment.",
+        "state": "PRESENT"
+      },
+      "seal": {
+        "checked_context_citation_ids": [
+          "hist-tech-1986",
+          "hist-officials-accounts"
+        ],
+        "guardian_model": "deterministic-router",
+        "verdict": "GROUNDED"
+      }
+    },
+    {
+      "cell": {
+        "axis": "CULTURAL_PRIOR_BIAS",
+        "citation_ids": [
+          "framing-maradona-1986",
+          "framing-shilton"
+        ],
+        "rationale": "Named sources frame the same settled fact in opposed valence.",
+        "state": "PRESENT"
+      },
+      "seal": {
+        "checked_context_citation_ids": [
+          "framing-maradona-1986",
+          "framing-shilton"
+        ],
+        "guardian_model": "deterministic-router",
+        "verdict": "GROUNDED"
+      }
+    }
+  ],
+  "citations": {
+    "framing-maradona-1986": {
+      "attribution": "Diego Maradona, post-match press conference (1986-06-22)",
+      "bbox": null,
+      "doc_kind": "FRAMING_SOURCE",
+      "extracted_text": "Diego Maradona (1986-06-22) — JUSTIFIES: \"a little with the head of Maradona and a little with the hand of God\"",
+      "id": "framing-maradona-1986",
+      "page": null,
+      "source_doc": "post-match press conference"
+    },
+    "framing-shilton": {
+      "attribution": "Peter Shilton, post-match and subsequent interviews (1986-06-22)",
+      "bbox": null,
+      "doc_kind": "FRAMING_SOURCE",
+      "extracted_text": "Peter Shilton (1986-06-22) — CONDEMNS: Shilton maintained it was cheating and that Maradona never apologised.",
+      "id": "framing-shilton",
+      "page": null,
+      "source_doc": "post-match and subsequent interviews"
+    },
+    "hist-officials-accounts": {
+      "attribution": "Curated historical record — The Hand of God",
+      "bbox": null,
+      "doc_kind": "HISTORICAL_REPORT",
+      "extracted_text": "The referee and assistant referee gave differing later accounts of what they saw; neither had a clear, unobstructed view of the handling at full speed.",
+      "id": "hist-officials-accounts",
+      "page": null,
+      "source_doc": "curated-historical"
+    },
+    "hist-tech-1986": {
+      "attribution": "Curated historical record — The Hand of God",
+      "bbox": null,
+      "doc_kind": "HISTORICAL_REPORT",
+      "extracted_text": "In 1986 there was no VAR and no goal-line technology. The referee's decision on the field was final and could not be reviewed. VAR did not enter the Laws of the Game until 2018.",
+      "id": "hist-tech-1986",
+      "page": null,
+      "source_doc": "curated-historical"
+    },
+    "ifab-law12-handball-offence-p110": {
+      "attribution": null,
+      "bbox": {
+        "bottom": 175.0,
+        "left": 54.0,
+        "right": 373.0,
+        "top": 309.0
+      },
+      "doc_kind": "IFAB_LAW",
+      "extracted_text": "It is an offence if a player deliberately touches the ball with their hand/arm, or scores in the opponents' goal immediately after the ball has touched their hand/arm, even if accidental. A goal scored in this way does not stand.",
+      "id": "ifab-law12-handball-offence-p110",
+      "page": 110,
+      "source_doc": "ifab-laws-2025-26"
+    },
+    "sb-hand-of-god-body-part": {
+      "attribution": "Data provided by StatsBomb Open Data (StatsBomb User Agreement).",
+      "bbox": null,
+      "doc_kind": "STATSBOMB_EVENT",
+      "extracted_text": "In the event data this goal's body part is recorded as the catch-all label 'Other', while a comparable goal by the same player is recorded with a specific body-part class ('Left Foot'). The shot ontology has no category for a hand-scored goal, so the event falls back to 'Other'. This describes the data model only — not officiating, intent, or knowability.",
+      "id": "sb-hand-of-god-body-part",
+      "page": null,
+      "source_doc": "statsbomb-open-data"
+    }
+  },
+  "incident_id": "hand-of-god-1986",
+  "lenses": [
+    {
+      "output": {
+        "citation_ids": [
+          "ifab-law12-handball-offence-p110"
+        ],
+        "lens": "REFEREE",
+        "rationale": "The retrieved Law states a goal scored immediately after the ball touches the hand or arm does not stand (ifab-law12-handball-offence-p110); the rule yields one outcome for a hand-scored goal, so it is clear and rule-ambiguity does not hold.",
+        "stance": "SUPPORTS",
+        "state": "GROUNDED"
+      },
+      "seal": {
+        "checked_context_citation_ids": [
+          "ifab-law12-handball-offence-p110"
+        ],
+        "guardian_model": "deterministic-router",
+        "verdict": "GROUNDED"
+      }
+    },
+    {
+      "output": {
+        "citation_ids": [
+          "sb-hand-of-god-body-part"
+        ],
+        "lens": "TACTICAL",
+        "rationale": "The event data records this goal's body part as the catch-all label 'Other' while a comparable goal is a specific class (sb-hand-of-god-body-part); the schema having no category for the action is where the data model strains. This describes the data model only.",
+        "stance": "SUPPORTS",
+        "state": "GROUNDED"
+      },
+      "seal": {
+        "checked_context_citation_ids": [
+          "sb-hand-of-god-body-part"
+        ],
+        "guardian_model": "deterministic-router",
+        "verdict": "GROUNDED"
+      }
+    },
+    {
+      "output": {
+        "citation_ids": [
+          "hist-tech-1986",
+          "hist-officials-accounts"
+        ],
+        "lens": "HISTORICAL",
+        "rationale": "In 1986 there was no VAR or goal-line technology and the decision could not be reviewed (hist-tech-1986), and the officials gave differing accounts with no clear view of the handling (hist-officials-accounts); the decisive truth was not available to them in the moment.",
+        "stance": "SUPPORTS",
+        "state": "GROUNDED"
+      },
+      "seal": {
+        "checked_context_citation_ids": [
+          "hist-tech-1986",
+          "hist-officials-accounts"
+        ],
+        "guardian_model": "deterministic-router",
+        "verdict": "GROUNDED"
+      }
+    },
+    {
+      "output": {
+        "citation_ids": [
+          "framing-maradona-1986",
+          "framing-shilton"
+        ],
+        "lens": "FRAMING",
+        "rationale": "Diego Maradona is reported to have justified the goal as 'a little with the head of Maradona and a little with the hand of God' (framing-maradona-1986), while Peter Shilton is reported to have condemned it as cheating (framing-shilton); two named sources frame the same agreed handball in opposite valence.",
+        "stance": "MIXED",
+        "state": "GROUNDED"
+      },
+      "seal": {
+        "checked_context_citation_ids": [
+          "framing-maradona-1986",
+          "framing-shilton"
+        ],
+        "guardian_model": "deterministic-router",
+        "verdict": "GROUNDED"
+      }
+    }
+  ],
+  "provenance": {
+    "corpus_git_sha": "b1fe0f3c6ebc47bb4f885645e47b83e746c31fb6",
+    "embed_model": "granite-embedding:30m",
+    "granite_model": "granite3.3:8b",
+    "guardian_model": "granite3-guardian:2b",
+    "options": {}
+  },
+  "settled_fact": {
+    "citation_ids": [
+      "ifab-law12-handball-offence-p110"
+    ],
+    "statement": "Diego Maradona scored with his hand against England in the 1986 World Cup quarter-final. The referee allowed the goal, Argentina won, and the result was never overturned. The handball itself is not in dispute.",
+    "status": "ADJUDICATED_CONTESTED"
+  },
+  "split": {
+    "cells": [
+      {
+        "axis": "RULE_AMBIGUITY",
+        "citation_ids": [],
+        "rationale": "A clear single offence clause governs the act, with no competing clause.",
+        "state": "ABSENT"
+      },
+      {
+        "axis": "INDETERMINACY",
+        "citation_ids": [],
+        "rationale": "The act is admitted, so the deliberateness residual is resolved.",
+        "state": "ABSENT"
+      },
+      {
+        "axis": "DECISION_TIME_DEFICIT",
+        "citation_ids": [
+          "hist-tech-1986",
+          "hist-officials-accounts"
+        ],
+        "rationale": "Resolving technology was absent and the view was obstructed in the moment.",
+        "state": "PRESENT"
+      },
+      {
+        "axis": "CULTURAL_PRIOR_BIAS",
+        "citation_ids": [
+          "framing-maradona-1986",
+          "framing-shilton"
+        ],
+        "rationale": "Named sources frame the same settled fact in opposed valence.",
+        "state": "PRESENT"
+      }
+    ],
+    "headline": "It stays contested over what could be seen in the moment and how named sources frame the same fact — not over the dimensions ruled out."
+  },
+  "title": "The Hand of God"
+}
