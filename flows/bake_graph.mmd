@@ -1,0 +1,29 @@
+---
+config:
+  flowchart:
+    curve: linear
+---
+graph TD;
+	__start__([<p>__start__</p>]):::first
+	lens_referee(lens_referee)
+	lens_tactical(lens_tactical)
+	lens_historical(lens_historical)
+	lens_framing(lens_framing)
+	route(route)
+	gate_cells(gate_cells)
+	assemble(assemble)
+	__end__([<p>__end__</p>]):::last
+	__start__ --> lens_framing;
+	__start__ --> lens_historical;
+	__start__ --> lens_referee;
+	__start__ --> lens_tactical;
+	gate_cells --> assemble;
+	lens_framing --> route;
+	lens_historical --> route;
+	lens_referee --> route;
+	lens_tactical --> route;
+	route --> gate_cells;
+	assemble --> __end__;
+	classDef default fill:#f2f0ff,line-height:1.2
+	classDef first fill-opacity:0
+	classDef last fill:#bfb6fc

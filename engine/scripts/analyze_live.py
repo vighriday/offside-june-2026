@@ -34,8 +34,10 @@ from offside_engine.analyze.split_schema import Citation
 from offside_engine.bake.bake import bake_incident
 from offside_engine.bake.corpus_pool import assemble_pool
 from offside_engine.bake.incident import INCIDENTS, IncidentSpec
-from offside_engine.config import DEFAULT_GUARDIAN_MODEL, load_granite_config
+from offside_engine.config import DEFAULT_EMBED_MODEL, DEFAULT_GUARDIAN_MODEL, load_granite_config
+from offside_engine.eval.groundedness import score_bundle, write_report
 from offside_engine.index.build_lance import build_index
+from offside_engine.orchestrate.graph import GraphDeps, run_bake_graph
 from offside_engine.retrieve.lens_retrieve import LensRetriever
 from offside_engine.statsbomb.pull_aggregates import HandOfGodAggregate
 
@@ -103,6 +105,10 @@ def main() -> None:
     ap = argparse.ArgumentParser(description="Run the real OFFSIDE engine live on one incident.")
     ap.add_argument("--incident", help="incident id (see --list)")
     ap.add_argument("--list", action="store_true", help="list available incidents and exit")
+    ap.add_argument("--graph", action="store_true",
+                    help="run through the executable LangGraph StateGraph (same engine)")
+    ap.add_argument("--ragas", action="store_true",
+                    help="also score lens groundedness with RAGAS (needs the [eval] extra)")
     args = ap.parse_args()
 
     if args.list or not args.incident:
@@ -110,7 +116,7 @@ def main() -> None:
         for iid, spec in INCIDENTS.items():
             _say(f"  {iid:<24} {spec.title}")
         if not args.incident:
-            _say(f"\nrun: python scripts/analyze_live.py --incident <id>")
+            _say("\nrun: python scripts/analyze_live.py --incident <id>")
         return
 
     spec: IncidentSpec | None = INCIDENTS.get(args.incident)
@@ -142,11 +148,18 @@ def main() -> None:
         except Exception:
             sha = None
 
-        _say(f"\n{_DIM}· running four lenses (Granite reads each, Guardian audits each)…{_RST}")
-        bundle = bake_incident(
-            spec, retriever=retriever, granite=granite, guardian=guardian,
-            citations=pool, corpus_git_sha=sha, strict_thesis=False,
-        )
+        if args.graph:
+            _say(f"\n{_DIM}· running the LangGraph StateGraph "
+                 f"(4 lens nodes → route → gate → assemble)…{_RST}")
+            deps = GraphDeps(retriever=retriever, granite=granite, guardian=guardian,
+                             embed_model=DEFAULT_EMBED_MODEL, corpus_git_sha=sha)
+            bundle = run_bake_graph(spec, deps=deps, citations=pool)
+        else:
+            _say(f"\n{_DIM}· running four lenses (Granite reads each, Guardian audits each)…{_RST}")
+            bundle = bake_incident(
+                spec, retriever=retriever, granite=granite, guardian=guardian,
+                citations=pool, corpus_git_sha=sha, strict_thesis=False,
+            )
 
     # Narrate the audited lens readings, then the routed SPLIT.
     _say(f"\n{_BOLD}Lens readings (each audited by Granite Guardian):{_RST}")
@@ -160,6 +173,16 @@ def main() -> None:
     _print_split(bundle)
     _say(f"{_DIM}Every PRESENT/WEAK cell above survived a Granite Guardian groundedness "
          f"audit against its cited source. No number was produced anywhere.{_RST}")
+
+    # Build-time audit: score how grounded each lens reading is, written to a report. These
+    # numbers are an external audit of the pipeline — they never enter THE SPLIT or the UI.
+    rows = score_bundle(bundle, use_ragas=args.ragas)
+    out_dir = _REPO / "engine" / "data" / "eval"
+    jp, mp = write_report(rows, out_dir)
+    grounded = sum(1 for r in rows if r.groundedness >= 0.999)
+    backend = rows[0].backend if rows else "deterministic"
+    _say(f"\n{_DIM}· groundedness audit ({backend}): {grounded}/{len(rows)} lens readings "
+         f"fully grounded → {mp}{_RST}")
 
 
 if __name__ == "__main__":

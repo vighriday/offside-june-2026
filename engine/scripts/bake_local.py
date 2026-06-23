@@ -47,8 +47,6 @@ from offside_engine.bake.synthesize import derive_split
 from offside_engine.bake.write_fixture import write_fixture
 from offside_engine.config import (
     DEFAULT_EMBED_MODEL,
-    DEFAULT_GUARDIAN_MODEL,
-    DEFAULT_MODEL,
 )
 from offside_engine.statsbomb.pull_aggregates import HandOfGodAggregate
 
