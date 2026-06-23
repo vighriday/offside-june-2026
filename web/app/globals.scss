@@ -590,6 +590,7 @@ body {
     border-top: 2px solid var(--cds-border-subtle-01, #393939);
     padding: 0.875rem 1rem;
     min-width: 11rem;
+    max-width: 14rem;
     color: var(--cds-text-primary, #f4f4f4);
     transition: border-color 110ms, background 110ms;
 
@@ -612,10 +613,15 @@ body {
     }
   }
 
-  // The schematic thumbnail at the top of each selector card — small, full-width, blends in.
+  // The schematic thumbnail at the top of each selector card — small and fixed, so the huge
+  // intrinsic PNG can't blow the card width.
   &__thumb {
+    display: block;
     width: 100%;
+    max-width: 11rem;
     height: auto;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
     margin-bottom: 0.5rem;
     border: 1px solid var(--cds-border-subtle-01, #393939);
     opacity: 0.85;
@@ -830,6 +836,9 @@ body {
 
 // ── Per-incident SVG schematic — the spatial truth, as restrained line art ───
 .incident-diagram {
+  // Hard-cap so the schematic reads as a figure, not a billboard. The unoptimized PNGs are
+  // 1536px wide intrinsically; without this cap they fill the page.
+  max-width: 30rem;
   margin: 1.75rem 0 0;
   padding: 1.25rem 1.25rem 1rem;
   border: 1px solid var(--cds-border-subtle-01, #393939);
@@ -840,6 +849,7 @@ body {
     display: block;
     width: 100%;
     height: auto;
+    max-width: 100%;
     border: 1px solid var(--cds-border-subtle-01, #393939);
   }
 
