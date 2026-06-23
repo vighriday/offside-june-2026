@@ -1,31 +1,20 @@
 import { loadIncident } from "@/lib/fixtures";
-import { SettledFact } from "@/components/SettledFact";
-import { SplitView } from "@/components/SplitView";
-import { LensPanels } from "@/components/LensPanels";
-import { ProvenanceFooter } from "@/components/ProvenanceFooter";
+import { IncidentExplorer, type LoadedBundle } from "@/components/IncidentExplorer";
 
-// The root routes straight to the golden incident; incident selection lands in M8. For
-// the core artifact, the Hand of God is the front door.
+// The incidents OFFSIDE ships, in demo order: the Hand of God hero first, then Lampard's
+// ghost goal as the contrast that proves the diagnostic generalizes. Any incident whose
+// fixture is not present is skipped, so the app renders whatever has been baked.
+const INCIDENT_IDS = ["hand-of-god-1986", "lampard-ghost-goal-2010"];
+
 export default async function Home() {
-  const { bundle, isSample } = await loadIncident("hand-of-god-1986");
+  const loaded: LoadedBundle[] = [];
+  for (const id of INCIDENT_IDS) {
+    try {
+      loaded.push(await loadIncident(id));
+    } catch {
+      // fixture not baked yet — skip it rather than fail the page
+    }
+  }
 
-  return (
-    <main className="incident">
-      {isSample && (
-        <p className="incident__sample-banner">
-          Pre-bake sample fixture — the audited bundle replaces this once the bake runs.
-        </p>
-      )}
-
-      <div className="incident__inner">
-        <SettledFact fact={bundle.settled_fact} title={bundle.title} />
-        <SplitView bundle={bundle} />
-        <LensPanels lenses={bundle.lenses} citations={bundle.citations} />
-        <ProvenanceFooter
-          provenance={bundle.provenance}
-          citations={bundle.citations}
-        />
-      </div>
-    </main>
-  );
+  return <IncidentExplorer incidents={loaded} />;
 }

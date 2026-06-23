@@ -1,0 +1,240 @@
+{
+  "cell_seals": [
+    {
+      "cell": {
+        "axis": "RULE_AMBIGUITY",
+        "citation_ids": [],
+        "rationale": "A clear single offence clause governs the act, with no competing clause.",
+        "state": "ABSENT"
+      },
+      "seal": {
+        "checked_context_citation_ids": [],
+        "guardian_model": "deterministic-router",
+        "verdict": "GROUNDED"
+      }
+    },
+    {
+      "cell": {
+        "axis": "INDETERMINACY",
+        "citation_ids": [],
+        "rationale": "No evidence makes an unresolved mental element load-bearing.",
+        "state": "NOT_DOCUMENTED"
+      },
+      "seal": {
+        "checked_context_citation_ids": [],
+        "guardian_model": "deterministic-router",
+        "verdict": "GROUNDED"
+      }
+    },
+    {
+      "cell": {
+        "axis": "DECISION_TIME_DEFICIT",
+        "citation_ids": [
+          "lampard-hist-no-glt-2010",
+          "lampard-hist-sightline"
+        ],
+        "rationale": "Resolving technology was absent and the view was obstructed in the moment.",
+        "state": "PRESENT"
+      },
+      "seal": {
+        "checked_context_citation_ids": [
+          "lampard-hist-no-glt-2010",
+          "lampard-hist-sightline"
+        ],
+        "guardian_model": "deterministic-router",
+        "verdict": "GROUNDED"
+      }
+    },
+    {
+      "cell": {
+        "axis": "CULTURAL_PRIOR_BIAS",
+        "citation_ids": [],
+        "rationale": "Named sources agree on the outcome; there is no opposed framing.",
+        "state": "ABSENT"
+      },
+      "seal": {
+        "checked_context_citation_ids": [],
+        "guardian_model": "deterministic-router",
+        "verdict": "GROUNDED"
+      }
+    }
+  ],
+  "citations": {
+    "ifab-law10-goal-scored": {
+      "attribution": null,
+      "bbox": null,
+      "doc_kind": "IFAB_LAW",
+      "extracted_text": "A goal is scored when the whole of the ball passes over the goal line, between the goalposts and under the crossbar, provided that no offence has been committed by the team scoring the goal.",
+      "id": "ifab-law10-goal-scored",
+      "page": null,
+      "source_doc": "ifab-laws-2025-26"
+    },
+    "lampard-framing-blatter": {
+      "attribution": "Sepp Blatter, FIFA statement (2010-06-29)",
+      "bbox": null,
+      "doc_kind": "FRAMING_SOURCE",
+      "extracted_text": "Sepp Blatter (2010-06-29) — ADMITS: Blatter publicly apologised for the error and reopened the goal-line technology debate, treating the missed call as a factual mistake to be fixed, not a contested judgement.",
+      "id": "lampard-framing-blatter",
+      "page": null,
+      "source_doc": "FIFA statement"
+    },
+    "lampard-framing-lampard": {
+      "attribution": "Frank Lampard, post-match interviews (2010-06-27)",
+      "bbox": null,
+      "doc_kind": "FRAMING_SOURCE",
+      "extracted_text": "Frank Lampard (2010-06-27) — CONDEMNS: Lampard said there was no doubt the ball was over the line and that the decision not to award the goal changed the course of the match.",
+      "id": "lampard-framing-lampard",
+      "page": null,
+      "source_doc": "post-match interviews"
+    },
+    "lampard-hist-crossed-line": {
+      "attribution": "Curated historical record — Lampard's ghost goal",
+      "bbox": null,
+      "doc_kind": "HISTORICAL_REPORT",
+      "extracted_text": "Frank Lampard's shot struck the crossbar and bounced down well behind the goal line before spinning back out. Television replays available within seconds showed the whole ball had clearly crossed the line.",
+      "id": "lampard-hist-crossed-line",
+      "page": null,
+      "source_doc": "curated-historical"
+    },
+    "lampard-hist-no-glt-2010": {
+      "attribution": "Curated historical record — Lampard's ghost goal",
+      "bbox": null,
+      "doc_kind": "HISTORICAL_REPORT",
+      "extracted_text": "In 2010 there was no goal-line technology and no VAR. The referee and assistant had to judge in real time whether the ball had crossed the line, with no review available; the goal was not given.",
+      "id": "lampard-hist-no-glt-2010",
+      "page": null,
+      "source_doc": "curated-historical"
+    },
+    "lampard-hist-sightline": {
+      "attribution": "Curated historical record — Lampard's ghost goal",
+      "bbox": null,
+      "doc_kind": "HISTORICAL_REPORT",
+      "extracted_text": "The ball was in and out of the goal in a fraction of a second and neither official was level with the goal line at the moment of the bounce, so neither had a clear view of where it landed.",
+      "id": "lampard-hist-sightline",
+      "page": null,
+      "source_doc": "curated-historical"
+    }
+  },
+  "incident_id": "lampard-ghost-goal-2010",
+  "lenses": [
+    {
+      "output": {
+        "citation_ids": [
+          "ifab-law10-goal-scored"
+        ],
+        "lens": "REFEREE",
+        "rationale": "The retrieved Law states a goal is scored when the whole of the ball passes over the goal line (ifab-law10-goal-scored); the rule is a single clear test with no competing clause, so rule-ambiguity does not hold.",
+        "stance": "SUPPORTS",
+        "state": "GROUNDED"
+      },
+      "seal": {
+        "checked_context_citation_ids": [
+          "ifab-law10-goal-scored"
+        ],
+        "guardian_model": "deterministic-router",
+        "verdict": "GROUNDED"
+      }
+    },
+    {
+      "output": {
+        "citation_ids": [],
+        "lens": "TACTICAL",
+        "rationale": "No event-data anomaly bears on this incident.",
+        "stance": "INSUFFICIENT_EVIDENCE",
+        "state": "INSUFFICIENT_EVIDENCE"
+      },
+      "seal": {
+        "checked_context_citation_ids": [],
+        "guardian_model": "deterministic-router",
+        "verdict": "GROUNDED"
+      }
+    },
+    {
+      "output": {
+        "citation_ids": [
+          "lampard-hist-no-glt-2010",
+          "lampard-hist-sightline"
+        ],
+        "lens": "HISTORICAL",
+        "rationale": "In 2010 there was no goal-line technology and the decision could not be reviewed (lampard-hist-no-glt-2010), and neither official was level with the line at the moment of the bounce (lampard-hist-sightline); the decisive truth was not available to them in the moment, though it was knowable on replay within seconds.",
+        "stance": "SUPPORTS",
+        "state": "GROUNDED"
+      },
+      "seal": {
+        "checked_context_citation_ids": [
+          "lampard-hist-no-glt-2010",
+          "lampard-hist-sightline"
+        ],
+        "guardian_model": "deterministic-router",
+        "verdict": "GROUNDED"
+      }
+    },
+    {
+      "output": {
+        "citation_ids": [
+          "lampard-framing-lampard",
+          "lampard-framing-blatter"
+        ],
+        "lens": "FRAMING",
+        "rationale": "Frank Lampard is reported to have said there was no doubt the ball was over the line (lampard-framing-lampard), and FIFA's Sepp Blatter publicly apologised for the error (lampard-framing-blatter); the named sources agree on the fact rather than dividing over it.",
+        "stance": "SUPPORTS",
+        "state": "GROUNDED"
+      },
+      "seal": {
+        "checked_context_citation_ids": [
+          "lampard-framing-lampard",
+          "lampard-framing-blatter"
+        ],
+        "guardian_model": "deterministic-router",
+        "verdict": "GROUNDED"
+      }
+    }
+  ],
+  "provenance": {
+    "corpus_git_sha": "6d5230b0289d20539d107017e67fe016bdec50b0",
+    "embed_model": "granite-embedding:30m",
+    "granite_model": "granite3.3:8b",
+    "guardian_model": "granite3-guardian:2b",
+    "options": {}
+  },
+  "settled_fact": {
+    "citation_ids": [
+      "lampard-hist-crossed-line"
+    ],
+    "statement": "Frank Lampard's shot struck the crossbar and bounced down well behind the goal line against Germany in the 2010 World Cup. The goal was not given, England lost, and replays showed the whole ball had clearly crossed the line. That the ball crossed the line is not in dispute.",
+    "status": "ADJUDICATED_CONTESTED"
+  },
+  "split": {
+    "cells": [
+      {
+        "axis": "RULE_AMBIGUITY",
+        "citation_ids": [],
+        "rationale": "A clear single offence clause governs the act, with no competing clause.",
+        "state": "ABSENT"
+      },
+      {
+        "axis": "INDETERMINACY",
+        "citation_ids": [],
+        "rationale": "No evidence makes an unresolved mental element load-bearing.",
+        "state": "NOT_DOCUMENTED"
+      },
+      {
+        "axis": "DECISION_TIME_DEFICIT",
+        "citation_ids": [
+          "lampard-hist-no-glt-2010",
+          "lampard-hist-sightline"
+        ],
+        "rationale": "Resolving technology was absent and the view was obstructed in the moment.",
+        "state": "PRESENT"
+      },
+      {
+        "axis": "CULTURAL_PRIOR_BIAS",
+        "citation_ids": [],
+        "rationale": "Named sources agree on the outcome; there is no opposed framing.",
+        "state": "ABSENT"
+      }
+    ],
+    "headline": "It stays contested over what could be seen in the moment — not over the dimensions ruled out."
+  },
+  "title": "Lampard's ghost goal"
+}
