@@ -46,6 +46,7 @@ from offside_engine.analyze.split_schema import (
     Split,
 )
 from offside_engine.bake.incident import IncidentSpec, ThesisShape
+from offside_engine.bake.synthesize import derive_split
 from offside_engine.config import DEFAULT_EMBED_MODEL
 from offside_engine.retrieve.lens_retrieve import LensRetriever
 
@@ -157,12 +158,16 @@ def bake_incident(
         gated_outputs.append(gated.output)
 
     # 4 — synthesis from the GATED lens evidence, settled fact + admission injected.
-    # The Split schema is strict (four axes, canonical order, cite rules); the model can
-    # occasionally violate it. Retry once before giving up, so a single slip does not cost
-    # the whole bake.
+    # We prefer the Granite synthesis (it keeps the "a model routed the evidence" story),
+    # but the Split schema is strict (four axes, canonical order, cite rules) and an 8B
+    # model can fail to emit it. So: try Granite twice, and if it still cannot produce a
+    # schema-valid SPLIT, fall back to the deterministic code router, which applies the
+    # SAME routing rules to the SAME gated lens evidence. Either path is evidence-derived
+    # (a different incident yields a different SPLIT); the fallback just never fails.
     shared = f"{spec.settled_statement} {spec.admission_note}".strip()
     synthesis_user = render_synthesis_input(gated_outputs, shared_settled_fact=shared)
     split: Split | None = None
+    last_error = ""
     for attempt in range(2):
         sys_prompt = SPLIT_SYSTEM
         if attempt > 0:
@@ -176,12 +181,15 @@ def bake_incident(
                 schema=Split, system=sys_prompt, user=synthesis_user
             )
             break
-        except ValidationError:
+        except ValidationError as e:
+            last_error = str(e).splitlines()[0] if str(e) else repr(e)
             continue
     if split is None:
-        raise ThesisMismatch(
-            f"synthesis for {spec.incident_id} did not produce a valid SPLIT after retry"
+        print(
+            f"NOTE: Granite synthesis did not emit a valid SPLIT ({last_error}); "
+            f"routing the gated lens evidence deterministically instead."
         )
+        split = derive_split(gated_outputs, admitted_act=bool(spec.admission_note))
 
     # 5 — per-cell Guardian gate (demote ungrounded PRESENT/WEAK -> NOT_DOCUMENTED).
     gated_cells = []
