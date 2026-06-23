@@ -17,10 +17,10 @@ export function Hero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: [0.4, 0.14, 0.3, 1] }}
       >
-        <span className="hero__wordmark" aria-label="OFFSIDE">
+        <h1 className="hero__wordmark" aria-label="OFFSIDE">
           <span className="hero__wordmark-line" aria-hidden />
           OFFSIDE
-        </span>
+        </h1>
         <span className="hero__tagline">The Football Disagreement Engine</span>
         <span className="hero__ibm">Built on IBM Granite · Docling · Guardian</span>
       </motion.div>
@@ -44,12 +44,12 @@ export function Hero() {
         </div>
       </motion.div>
 
-      <h1 className="hero__line">
+      <p className="hero__line">
         Every football AI tells you <em>whether a call was right.</em>
         <br />
         OFFSIDE tells you <strong>why the argument never ends</strong> — and proves every
         reason against the actual Laws of the Game.
-      </h1>
+      </p>
 
       <p className="hero__sub">
         It decomposes a contested decision into the four structural reasons disagreement

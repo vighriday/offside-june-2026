@@ -4,7 +4,7 @@
       "cell": {
         "axis": "RULE_AMBIGUITY",
         "citation_ids": [],
-        "rationale": "A clear single offence clause governs the act, with no competing clause.",
+        "rationale": "A clear single clause governs the act — the retrieved Law states that denying a goal by deliberate handball is a sending-off offence (ifab-law12-dogso-handball-p118).",
         "state": "ABSENT"
       },
       "seal": {
@@ -30,7 +30,7 @@
       "cell": {
         "axis": "DECISION_TIME_DEFICIT",
         "citation_ids": [],
-        "rationale": "Review technology existed and the view was clear at the moment of the call.",
+        "rationale": "The decisive truth was available at the moment — the retrieved facts state the referee saw the handball in real time and applied the Law exactly — a red card and a penalty (suarez-hist-correctly-adjudicated).",
         "state": "ABSENT"
       },
       "seal": {
@@ -176,10 +176,10 @@
     }
   ],
   "provenance": {
-    "corpus_git_sha": "d89303572841d82fa35a7e0365da6da37099c948",
+    "corpus_git_sha": "52499cff84ff95f7281b24bef4aa2fca471483af",
     "embed_model": "granite-embedding:30m",
-    "granite_model": "granite3.3:8b",
-    "guardian_model": "granite3-guardian:2b",
+    "granite_model": "deterministic-router",
+    "guardian_model": "deterministic-router",
     "options": {}
   },
   "rule_evolution": null,
@@ -195,7 +195,7 @@
       {
         "axis": "RULE_AMBIGUITY",
         "citation_ids": [],
-        "rationale": "A clear single offence clause governs the act, with no competing clause.",
+        "rationale": "A clear single clause governs the act — the retrieved Law states that denying a goal by deliberate handball is a sending-off offence (ifab-law12-dogso-handball-p118).",
         "state": "ABSENT"
       },
       {
@@ -207,7 +207,7 @@
       {
         "axis": "DECISION_TIME_DEFICIT",
         "citation_ids": [],
-        "rationale": "Review technology existed and the view was clear at the moment of the call.",
+        "rationale": "The decisive truth was available at the moment — the retrieved facts state the referee saw the handball in real time and applied the Law exactly — a red card and a penalty (suarez-hist-correctly-adjudicated).",
         "state": "ABSENT"
       },
       {

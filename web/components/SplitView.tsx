@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { IncidentBundle, SplitAxis } from "@/types/contract";
 import { SplitCell } from "./SplitCell";
 import { CitationPanel } from "./CitationPanel";
@@ -18,6 +18,17 @@ export function SplitView({ bundle }: SplitViewProps) {
   const selectedCell =
     bundle.split.cells.find((c) => c.axis === selectedAxis) ?? null;
 
+  // On a narrow viewport the citation panel renders below the grid, so a tap can scroll
+  // the trace off-screen. Bring it into view when a cell is selected (no-op on desktop,
+  // where the panel sits beside the grid). Matters because the demo may be judged on mobile.
+  const panelRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    if (!selectedCell || !panelRef.current) return;
+    if (window.matchMedia("(max-width: 60rem)").matches) {
+      panelRef.current.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    }
+  }, [selectedCell]);
+
   return (
     <section className="split-view" aria-label="THE SPLIT — disagreement diagnostic">
       <header className="split-view__header">
@@ -33,6 +44,9 @@ export function SplitView({ bundle }: SplitViewProps) {
       <div className="split-legend" aria-hidden>
         <span className="split-legend__item" data-k="present">
           <span className="split-legend__swatch" /> Present — a live reason it stays contested
+        </span>
+        <span className="split-legend__item" data-k="weak">
+          <span className="split-legend__swatch" /> Weak — a faint tension, not decisive
         </span>
         <span className="split-legend__item" data-k="out">
           <span className="split-legend__swatch" /> Ruled out — checked and not the reason
@@ -57,7 +71,9 @@ export function SplitView({ bundle }: SplitViewProps) {
           ))}
         </div>
 
-        <CitationPanel cell={selectedCell} citations={bundle.citations} />
+        <div ref={panelRef} className="split-view__panel-anchor">
+          <CitationPanel cell={selectedCell} citations={bundle.citations} />
+        </div>
       </div>
 
       <p className="split-view__headline">{bundle.split.headline}</p>

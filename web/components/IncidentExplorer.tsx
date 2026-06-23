@@ -50,7 +50,11 @@ export function IncidentExplorer({ incidents }: IncidentExplorerProps) {
 
         {/* Re-key on incident id so the inner staged reveals replay on switch. */}
         <div key={bundle.incident_id}>
-          <SettledFact fact={bundle.settled_fact} title={bundle.title} />
+          <SettledFact
+            fact={bundle.settled_fact}
+            title={bundle.title}
+            incidentId={bundle.incident_id}
+          />
 
           {active > 0 && (
             <GeneralizationCallout

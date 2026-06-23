@@ -23,7 +23,7 @@
       "cell": {
         "axis": "INDETERMINACY",
         "citation_ids": [],
-        "rationale": "No evidence makes the decisive truth unrecoverable.",
+        "rationale": "Nothing makes the truth unrecoverable — the retrieved facts state the contact was visible on replay and reviewed by VAR (pg-hist-visible).",
         "state": "NOT_DOCUMENTED"
       },
       "seal": {
@@ -36,7 +36,7 @@
       "cell": {
         "axis": "DECISION_TIME_DEFICIT",
         "citation_ids": [],
-        "rationale": "Review technology existed and the view was clear at the moment of the call.",
+        "rationale": "The decisive truth was available at the moment — the retrieved facts state the contact was visible on replay and reviewed by VAR (pg-hist-visible).",
         "state": "ABSENT"
       },
       "seal": {
@@ -188,10 +188,10 @@
     }
   ],
   "provenance": {
-    "corpus_git_sha": "d89303572841d82fa35a7e0365da6da37099c948",
+    "corpus_git_sha": "52499cff84ff95f7281b24bef4aa2fca471483af",
     "embed_model": "granite-embedding:30m",
-    "granite_model": "granite3.3:8b",
-    "guardian_model": "granite3-guardian:2b",
+    "granite_model": "deterministic-router",
+    "guardian_model": "deterministic-router",
     "options": {}
   },
   "rule_evolution": null,
@@ -216,13 +216,13 @@
       {
         "axis": "INDETERMINACY",
         "citation_ids": [],
-        "rationale": "No evidence makes the decisive truth unrecoverable.",
+        "rationale": "Nothing makes the truth unrecoverable — the retrieved facts state the contact was visible on replay and reviewed by VAR (pg-hist-visible).",
         "state": "NOT_DOCUMENTED"
       },
       {
         "axis": "DECISION_TIME_DEFICIT",
         "citation_ids": [],
-        "rationale": "Review technology existed and the view was clear at the moment of the call.",
+        "rationale": "The decisive truth was available at the moment — the retrieved facts state the contact was visible on replay and reviewed by VAR (pg-hist-visible).",
         "state": "ABSENT"
       },
       {

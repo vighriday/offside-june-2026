@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import type { ResolutionStatus, SettledFact as SettledFactData } from "@/types/contract";
+import { IncidentDiagram } from "./IncidentDiagram";
 
 // The settled fact is stated FIRST, before any decomposition. OFFSIDE never opens with
 // refusal — it names what is agreed, then explains why the residual stays contested.
@@ -15,9 +16,10 @@ const STATUS_LABEL: Record<ResolutionStatus, string> = {
 interface SettledFactProps {
   fact: SettledFactData;
   title: string;
+  incidentId: string;
 }
 
-export function SettledFact({ fact, title }: SettledFactProps) {
+export function SettledFact({ fact, title, incidentId }: SettledFactProps) {
   return (
     <motion.header
       className="settled-fact"
@@ -25,10 +27,7 @@ export function SettledFact({ fact, title }: SettledFactProps) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5, ease: [0.4, 0.14, 0.3, 1] }}
     >
-      <p className="settled-fact__eyebrow">
-        OFFSIDE — The Football Disagreement Engine
-      </p>
-      <h1 className="settled-fact__title">{title}</h1>
+      <h2 className="settled-fact__title">{title}</h2>
 
       <div className="settled-fact__status">
         <span className="settled-fact__status-dot" data-status={fact.status} />
@@ -38,6 +37,8 @@ export function SettledFact({ fact, title }: SettledFactProps) {
       </div>
 
       <p className="settled-fact__statement">{fact.statement}</p>
+
+      <IncidentDiagram incidentId={incidentId} />
     </motion.header>
   );
 }

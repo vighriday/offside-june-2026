@@ -277,9 +277,15 @@ def bake_offline(spec: IncidentSpec, lenses: list[LensOutput], *, framing_yaml: 
         split=split,
         cell_seals=sealed_cells,
         citations={cid: pool[cid] for cid in referenced if cid in pool},
+        # Honest provenance for the OFFLINE bake: no Granite or Guardian model ran here —
+        # the lens readings are grounded against the committed corpus and the SPLIT is
+        # routed deterministically. The provenance must say exactly that, so it matches the
+        # per-lens/-cell seals (which already read _ROUTER_NOTE) and never advertises a model
+        # that did not execute on these bytes. The live bake (bake.ipynb / analyze_live.py)
+        # records the real model ids.
         provenance=BakeProvenance(
-            granite_model=DEFAULT_MODEL,
-            guardian_model=DEFAULT_GUARDIAN_MODEL,
+            granite_model=_ROUTER_NOTE,
+            guardian_model=_ROUTER_NOTE,
             embed_model=DEFAULT_EMBED_MODEL,
             corpus_git_sha=corpus_git_sha,
         ),

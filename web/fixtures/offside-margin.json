@@ -4,7 +4,7 @@
       "cell": {
         "axis": "RULE_AMBIGUITY",
         "citation_ids": [],
-        "rationale": "A clear single offence clause governs the act, with no competing clause.",
+        "rationale": "A clear single clause governs the act — the retrieved Law fixes the offside line precisely — a player is offside if any part of the head, body or feet is nearer the goal line than the second-last opponent (ifab-law11-offside-margin-p103).",
         "state": "ABSENT"
       },
       "seal": {
@@ -36,7 +36,7 @@
       "cell": {
         "axis": "DECISION_TIME_DEFICIT",
         "citation_ids": [],
-        "rationale": "Review technology existed and the view was clear at the moment of the call.",
+        "rationale": "The decisive truth was available at the moment — the retrieved facts state that at a millimetre margin the kick frame, the limb point and the motion of ball and players make the true position unrecoverable, and the authorities answer with a deliberately thicker line (om-hist-margin-unrecoverable, om-hist-thicker-line).",
         "state": "ABSENT"
       },
       "seal": {
@@ -49,7 +49,7 @@
       "cell": {
         "axis": "CULTURAL_PRIOR_BIAS",
         "citation_ids": [],
-        "rationale": "Named sources agree on the outcome; there is no opposed framing.",
+        "rationale": "Named sources are one-sided — named broadcasters and officiating bodies are reported to agree that margins too fine to see make the calls feel arbitrary and that a thicker line is used precisely because the measurement is unreliable (om-framing-broadcaster, om-framing-official).",
         "state": "ABSENT"
       },
       "seal": {
@@ -187,10 +187,10 @@
     }
   ],
   "provenance": {
-    "corpus_git_sha": "d89303572841d82fa35a7e0365da6da37099c948",
+    "corpus_git_sha": "52499cff84ff95f7281b24bef4aa2fca471483af",
     "embed_model": "granite-embedding:30m",
-    "granite_model": "granite3.3:8b",
-    "guardian_model": "granite3-guardian:2b",
+    "granite_model": "deterministic-router",
+    "guardian_model": "deterministic-router",
     "options": {}
   },
   "rule_evolution": null,
@@ -206,7 +206,7 @@
       {
         "axis": "RULE_AMBIGUITY",
         "citation_ids": [],
-        "rationale": "A clear single offence clause governs the act, with no competing clause.",
+        "rationale": "A clear single clause governs the act — the retrieved Law fixes the offside line precisely — a player is offside if any part of the head, body or feet is nearer the goal line than the second-last opponent (ifab-law11-offside-margin-p103).",
         "state": "ABSENT"
       },
       {
@@ -221,13 +221,13 @@
       {
         "axis": "DECISION_TIME_DEFICIT",
         "citation_ids": [],
-        "rationale": "Review technology existed and the view was clear at the moment of the call.",
+        "rationale": "The decisive truth was available at the moment — the retrieved facts state that at a millimetre margin the kick frame, the limb point and the motion of ball and players make the true position unrecoverable, and the authorities answer with a deliberately thicker line (om-hist-margin-unrecoverable, om-hist-thicker-line).",
         "state": "ABSENT"
       },
       {
         "axis": "CULTURAL_PRIOR_BIAS",
         "citation_ids": [],
-        "rationale": "Named sources agree on the outcome; there is no opposed framing.",
+        "rationale": "Named sources are one-sided — named broadcasters and officiating bodies are reported to agree that margins too fine to see make the calls feel arbitrary and that a thicker line is used precisely because the measurement is unreliable (om-framing-broadcaster, om-framing-official).",
         "state": "ABSENT"
       }
     ],

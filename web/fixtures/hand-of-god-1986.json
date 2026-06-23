@@ -4,7 +4,7 @@
       "cell": {
         "axis": "RULE_AMBIGUITY",
         "citation_ids": [],
-        "rationale": "A clear single offence clause governs the act, with no competing clause.",
+        "rationale": "A clear single clause governs the act — the retrieved Law states a goal scored immediately after the ball touches the hand or arm does not stand (ifab-law12-handball-offence-p110).",
         "state": "ABSENT"
       },
       "seal": {
@@ -206,10 +206,10 @@
     }
   ],
   "provenance": {
-    "corpus_git_sha": "d89303572841d82fa35a7e0365da6da37099c948",
+    "corpus_git_sha": "52499cff84ff95f7281b24bef4aa2fca471483af",
     "embed_model": "granite-embedding:30m",
-    "granite_model": "granite3.3:8b",
-    "guardian_model": "granite3-guardian:2b",
+    "granite_model": "deterministic-router",
+    "guardian_model": "deterministic-router",
     "options": {}
   },
   "rule_evolution": null,
@@ -225,7 +225,7 @@
       {
         "axis": "RULE_AMBIGUITY",
         "citation_ids": [],
-        "rationale": "A clear single offence clause governs the act, with no competing clause.",
+        "rationale": "A clear single clause governs the act — the retrieved Law states a goal scored immediately after the ball touches the hand or arm does not stand (ifab-law12-handball-offence-p110).",
         "state": "ABSENT"
       },
       {

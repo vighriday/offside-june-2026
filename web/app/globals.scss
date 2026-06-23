@@ -87,6 +87,17 @@ body {
     outline-offset: -2px;
   }
 
+  // Hover lifts the cell — the click affordance on the one thing the demo asks judges to
+  // click. Brighten one layer, raise the border, and nudge the trace arrow forward.
+  &:hover {
+    background: var(--cds-layer-02, #393939);
+    border-color: var(--cds-border-strong-01, #6f6f6f);
+    .split-cell__trace {
+      opacity: 1;
+      transform: translateX(2px);
+    }
+  }
+
   &__axis {
     font-size: 0.875rem;
     font-weight: 600;
@@ -119,6 +130,7 @@ body {
     text-transform: uppercase;
     color: var(--split-present);
     opacity: 0.9;
+    transition: opacity 110ms, transform 110ms cubic-bezier(0.2, 0, 0.38, 0.9);
   }
 
   // The earned rationale on a ruled-out / undocumented cell face.
@@ -231,6 +243,9 @@ body {
 
   &__item[data-k="present"] .split-legend__swatch {
     background: var(--split-present);
+  }
+  &__item[data-k="weak"] .split-legend__swatch {
+    background: var(--split-weak);
   }
   &__item[data-k="out"] .split-legend__swatch {
     background: var(--split-absent-bg, #262626);
@@ -700,39 +715,6 @@ body {
 }
 
 // ── Incident switch (Carbon tabs) ───────────────────────────────────────────
-.incident-switch {
-  display: flex;
-  gap: 0;
-  margin-bottom: 2.5rem;
-  border-bottom: 1px solid var(--cds-border-subtle-01, #393939);
-
-  &__tab {
-    appearance: none;
-    background: transparent;
-    border: 0;
-    border-bottom: 2px solid transparent;
-    margin-bottom: -1px;
-    padding: 0.75rem 1.25rem;
-    font-family: inherit;
-    font-size: 0.875rem;
-    color: var(--cds-text-secondary, #c6c6c6);
-    cursor: pointer;
-    transition: color 110ms, border-color 110ms;
-
-    &:hover {
-      color: var(--cds-text-primary, #f4f4f4);
-    }
-    &[data-active="true"] {
-      color: var(--cds-text-primary, #f4f4f4);
-      border-bottom-color: var(--split-present);
-    }
-    &:focus-visible {
-      outline: 2px solid var(--cds-focus, #ffffff);
-      outline-offset: -2px;
-    }
-  }
-}
-
 // ── Settled fact ────────────────────────────────────────────────────────────
 .settled-fact {
   max-width: 48rem;
@@ -783,6 +765,29 @@ body {
     font-size: 1.0625rem;
     line-height: 1.6;
     color: var(--cds-text-primary, #f4f4f4);
+  }
+}
+
+// ── Per-incident SVG schematic — the spatial truth, as restrained line art ───
+.incident-diagram {
+  margin: 1.75rem 0 0;
+  padding: 1.25rem 1.25rem 1rem;
+  border: 1px solid var(--cds-border-subtle-01, #393939);
+  border-left: 2px solid var(--split-present);
+  background: var(--cds-layer-01, #262626);
+
+  &__svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 11rem;
+  }
+
+  &__caption {
+    margin-top: 0.75rem;
+    font-size: 0.75rem;
+    line-height: 1.5;
+    color: var(--cds-text-secondary, #c6c6c6);
   }
 }
 
@@ -1116,6 +1121,17 @@ body {
 
   &__note {
     color: var(--cds-text-placeholder, #6f6f6f);
+  }
+
+  &__honesty {
+    margin: 0;
+    max-width: 52rem;
+    line-height: 1.55;
+    color: var(--cds-text-placeholder, #8d8d8d);
+    code {
+      font-family: "IBM Plex Mono", ui-monospace, monospace;
+      color: var(--cds-text-secondary, #c6c6c6);
+    }
   }
 
   &__attribution {

@@ -213,7 +213,7 @@ you why an Argentine pundit, an English keeper, and a neutral analyst will never
 ## Repository
 
 ```text
-engine/     Python build-time factory (the bake) — 118 tests, runs on Colab
+engine/     Python build-time factory (the bake) — 123 tests, runs on Colab
   bake.ipynb         the cloud factory runner (pulls the Granite models, bakes a fixture)
   scripts/bake_local.py   the offline deterministic baker (no GPU; reproducible fixtures)
   offside_engine/    the pipeline: ingest → index → retrieve → lenses → guardian → split
@@ -251,7 +251,7 @@ fixtures deterministically without a GPU.
 ```bash
 cd engine
 pip install -e ".[dev]"
-pytest -q          # 118 tests, incl. the no-numbers moat + cite-or-die guards
+pytest -q          # 123 tests, incl. the no-numbers moat + cite-or-die guards
 ```
 
 ## License

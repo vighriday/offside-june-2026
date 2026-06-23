@@ -4,7 +4,7 @@
       "cell": {
         "axis": "RULE_AMBIGUITY",
         "citation_ids": [],
-        "rationale": "A clear single offence clause governs the act, with no competing clause.",
+        "rationale": "A clear single clause governs the act — the retrieved Law states a goal is scored when the whole of the ball passes over the goal line (ifab-law10-goal-scored-p97).",
         "state": "ABSENT"
       },
       "seal": {
@@ -17,7 +17,7 @@
       "cell": {
         "axis": "INDETERMINACY",
         "citation_ids": [],
-        "rationale": "No evidence makes the decisive truth unrecoverable.",
+        "rationale": "Nothing makes the truth unrecoverable — in 2010 there was no goal-line technology and the decision could not be reviewed (lampard-hist-no-glt-2010), and neither official was level with the line at the moment of the bounce (lampard-hist-sightline).",
         "state": "NOT_DOCUMENTED"
       },
       "seal": {
@@ -49,7 +49,7 @@
       "cell": {
         "axis": "CULTURAL_PRIOR_BIAS",
         "citation_ids": [],
-        "rationale": "Named sources agree on the outcome; there is no opposed framing.",
+        "rationale": "Named sources are one-sided — frank Lampard is reported to have said there was no doubt the ball was over the line (lampard-framing-lampard), and FIFA's Sepp Blatter publicly apologised for the error (lampard-framing-blatter).",
         "state": "ABSENT"
       },
       "seal": {
@@ -196,10 +196,10 @@
     }
   ],
   "provenance": {
-    "corpus_git_sha": "d89303572841d82fa35a7e0365da6da37099c948",
+    "corpus_git_sha": "52499cff84ff95f7281b24bef4aa2fca471483af",
     "embed_model": "granite-embedding:30m",
-    "granite_model": "granite3.3:8b",
-    "guardian_model": "granite3-guardian:2b",
+    "granite_model": "deterministic-router",
+    "guardian_model": "deterministic-router",
     "options": {}
   },
   "rule_evolution": {
@@ -222,13 +222,13 @@
       {
         "axis": "RULE_AMBIGUITY",
         "citation_ids": [],
-        "rationale": "A clear single offence clause governs the act, with no competing clause.",
+        "rationale": "A clear single clause governs the act — the retrieved Law states a goal is scored when the whole of the ball passes over the goal line (ifab-law10-goal-scored-p97).",
         "state": "ABSENT"
       },
       {
         "axis": "INDETERMINACY",
         "citation_ids": [],
-        "rationale": "No evidence makes the decisive truth unrecoverable.",
+        "rationale": "Nothing makes the truth unrecoverable — in 2010 there was no goal-line technology and the decision could not be reviewed (lampard-hist-no-glt-2010), and neither official was level with the line at the moment of the bounce (lampard-hist-sightline).",
         "state": "NOT_DOCUMENTED"
       },
       {
@@ -243,7 +243,7 @@
       {
         "axis": "CULTURAL_PRIOR_BIAS",
         "citation_ids": [],
-        "rationale": "Named sources agree on the outcome; there is no opposed framing.",
+        "rationale": "Named sources are one-sided — frank Lampard is reported to have said there was no doubt the ball was over the line (lampard-framing-lampard), and FIFA's Sepp Blatter publicly apologised for the error (lampard-framing-blatter).",
         "state": "ABSENT"
       }
     ],
