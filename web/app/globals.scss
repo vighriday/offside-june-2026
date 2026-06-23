@@ -265,11 +265,33 @@ body {
 
 // ── Hero (the front door — hook + plain "what this is") ──────────────────────
 .hero {
+  position: relative;
   max-width: 60rem;
   // Proper entry space at the top — the masthead breathes before anything else loads.
   margin: 0 auto clamp(2.5rem, 6vw, 4rem);
   padding-top: clamp(2rem, 7vw, 5rem);
   text-align: center;
+
+  // A very faint pitch-line texture behind the masthead — barely there, anchored top,
+  // fading out before the copy so it never competes with text. Pure atmosphere.
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0 -20vw auto -20vw;
+    height: 32rem;
+    background: url("/hero-texture.png") center top / cover no-repeat;
+    -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5), transparent 70%);
+    mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.5), transparent 70%);
+    opacity: 0.5;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  // keep all real content above the texture
+  > * {
+    position: relative;
+    z-index: 1;
+  }
 
   // ── Masthead: the wordmark + tagline that make this read as a product ──────
   &__masthead {
@@ -588,6 +610,20 @@ body {
       outline: 2px solid var(--cds-focus, #ffffff);
       outline-offset: -2px;
     }
+  }
+
+  // The schematic thumbnail at the top of each selector card — small, full-width, blends in.
+  &__thumb {
+    width: 100%;
+    height: auto;
+    margin-bottom: 0.5rem;
+    border: 1px solid var(--cds-border-subtle-01, #393939);
+    opacity: 0.85;
+    transition: opacity 110ms;
+  }
+  &__node:hover &__thumb,
+  &__node[data-active="true"] &__thumb {
+    opacity: 1;
   }
 
   &__node-title {
@@ -1121,6 +1157,15 @@ body {
   gap: 0.625rem;
   font-size: 0.75rem;
   color: var(--cds-text-secondary, #c6c6c6);
+
+  // A small OFFSIDE mark closing the page — blends into the surface like the masthead.
+  &__logo {
+    width: 8.5rem;
+    height: auto;
+    margin-bottom: 0.75rem;
+    mix-blend-mode: lighten;
+    opacity: 0.85;
+  }
 
   &__row {
     display: flex;

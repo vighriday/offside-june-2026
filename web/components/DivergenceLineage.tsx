@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import type { IncidentBundle, SplitAxis } from "@/types/contract";
 
 const AXIS_SHORT: Record<SplitAxis, string> = {
@@ -7,6 +8,17 @@ const AXIS_SHORT: Record<SplitAxis, string> = {
   INDETERMINACY: "Indeterminacy",
   DECISION_TIME_DEFICIT: "Decision-time",
   CULTURAL_PRIOR_BIAS: "Cultural bias",
+};
+
+// A small schematic thumbnail per incident, shown in its selector card so the chain reads
+// visually, not just as text — the same generated diagrams used on each incident page.
+const THUMB: Record<string, string> = {
+  "hand-of-god-1986": "/incidents/hand-of-god.png",
+  "handball-rewrite": "/incidents/handball-rewrite.png",
+  "offside-margin": "/incidents/offside-margin.png",
+  "pgmol-subjective": "/incidents/pgmol-subjective.png",
+  "suarez-handball-2010": "/incidents/suarez.png",
+  "lampard-ghost-goal-2010": "/incidents/lampard.png",
 };
 
 // The incidents drawn from the CURRENT Laws and season — the ones that make OFFSIDE a
@@ -69,6 +81,16 @@ export function DivergenceLineage({ incidents, activeId, onSelect }: DivergenceL
                 aria-pressed={b.incident_id === activeId}
                 onClick={() => onSelect(i)}
               >
+                {THUMB[b.incident_id] && (
+                  <Image
+                    className="lineage__thumb"
+                    src={THUMB[b.incident_id]}
+                    alt=""
+                    width={176}
+                    height={99}
+                    aria-hidden
+                  />
+                )}
                 <span className="lineage__node-title">
                   {b.title}
                   {CURRENT_INCIDENTS.has(b.incident_id) && (

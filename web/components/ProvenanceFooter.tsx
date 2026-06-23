@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { BakeProvenance, Citation } from "@/types/contract";
 
 // The provenance footer makes the reproducibility claim concrete: which IBM models
@@ -30,6 +31,13 @@ export function ProvenanceFooter({ provenance, citations }: ProvenanceFooterProp
 
   return (
     <footer className="provenance">
+      <Image
+        className="provenance__logo"
+        src="/offside-logo.png"
+        alt="OFFSIDE"
+        width={220}
+        height={147}
+      />
       <div className="provenance__row">
         <span className="provenance__label">Produced by</span>
         <span className="provenance__models">
