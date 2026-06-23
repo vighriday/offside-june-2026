@@ -20,7 +20,7 @@ export default async function Home() {
       <div className="incident__inner">
         <SettledFact fact={bundle.settled_fact} title={bundle.title} />
         <SplitView bundle={bundle} />
-        <LensPanels lenses={bundle.lenses} />
+        <LensPanels lenses={bundle.lenses} citations={bundle.citations} />
         <ProvenanceFooter
           provenance={bundle.provenance}
           citations={bundle.citations}

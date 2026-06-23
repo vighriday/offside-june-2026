@@ -2,6 +2,7 @@
 
 import { motion } from "motion/react";
 import type {
+  Citation,
   GuardianVerdict,
   LensKind,
   LensStance,
@@ -60,9 +61,23 @@ function GuardianSeal({
 
 interface LensPanelsProps {
   lenses: SealedLens[];
+  citations: Record<string, Citation>;
 }
 
-export function LensPanels({ lenses }: LensPanelsProps) {
+// The StatsBomb User Agreement requires visible attribution wherever its data is shown.
+// We surface it as a badge on the Tactical card, pulled from the cited StatsBomb atom.
+function statsbombAttribution(
+  output: SealedLens["output"],
+  citations: Record<string, Citation>,
+): string | null {
+  for (const id of output.citation_ids) {
+    const c = citations[id];
+    if (c?.doc_kind === "STATSBOMB_EVENT" && c.attribution) return c.attribution;
+  }
+  return null;
+}
+
+export function LensPanels({ lenses, citations }: LensPanelsProps) {
   return (
     <section className="lens-panels" aria-label="The four lenses">
       <header className="lens-panels__header">
@@ -76,6 +91,10 @@ export function LensPanels({ lenses }: LensPanelsProps) {
       <div className="lens-panels__grid">
         {lenses.map((sealed, i) => {
           const { output, seal } = sealed;
+          const attribution =
+            output.lens === "TACTICAL"
+              ? statsbombAttribution(output, citations)
+              : null;
           return (
             <motion.article
               key={output.lens}
@@ -93,6 +112,12 @@ export function LensPanels({ lenses }: LensPanelsProps) {
               </div>
               <p className="lens-panel__source">{LENS_SOURCE[output.lens]}</p>
               <p className="lens-panel__rationale">{output.rationale}</p>
+              {attribution && (
+                <p className="lens-panel__attribution" title={attribution}>
+                  <span className="lens-panel__attribution-mark">StatsBomb</span>
+                  Open Data — used under the StatsBomb User Agreement
+                </p>
+              )}
               <GuardianSeal verdict={seal.verdict} model={seal.guardian_model} />
             </motion.article>
           );
