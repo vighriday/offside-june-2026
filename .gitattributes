@@ -1,10 +1,13 @@
 # Normalize line endings — author on Windows, run on Linux (Vercel/Colab)
 * text=auto eol=lf
 
-# Binary assets tracked with Git LFS
+# Binary assets tracked with Git LFS.
+# NOTE: PNGs are deliberately NOT in LFS — Vercel does not pull LFS objects at build time,
+# so LFS-tracked images deploy as 132-byte pointer stubs and render broken. The web/docs
+# PNGs are small (~1MB each) and ship as normal git blobs so the deployment serves real
+# pixels. Only the large born-digital PDF and any webp stay in LFS.
 *.pdf      filter=lfs diff=lfs merge=lfs -text
 *.webp     filter=lfs diff=lfs merge=lfs -text
-*.png      filter=lfs diff=lfs merge=lfs -text
 
 # Generated / vendored — collapse in diffs and exclude from language stats
 fixtures/**           linguist-generated=true
