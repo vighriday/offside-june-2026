@@ -31,7 +31,7 @@ jobs:
       - name: Ruff (lint)
         run: ruff check .
 
-      - name: Pytest (118 tests incl. the no-numbers moat + cite-or-die)
+      - name: Pytest (no-numbers moat + cite-or-die + LangGraph + MCP + eval)
         run: pytest -q
 
       - name: Contract is in sync with the TypeScript export

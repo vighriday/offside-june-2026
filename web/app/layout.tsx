@@ -9,14 +9,18 @@ export const metadata: Metadata = {
     "each proved against the real Laws of the Game and audited by a second IBM model.",
   applicationName: "OFFSIDE",
   authors: [{ name: "Hriday Vig" }],
-  // app/icon.png and app/opengraph-image.png are auto-detected by Next; these make the
-  // social card explicit for crawlers that read the tags directly.
+  // Reference the favicon and social card from /public directly rather than the
+  // app/icon.png + app/opengraph-image.png file conventions: the webpack metadata-image
+  // loader fails on those binaries in the Vercel/Linux build ("unsupported file type"),
+  // and pointing metadata at static /public assets sidesteps that loader entirely.
+  icons: { icon: "/favicon.png", apple: "/favicon.png" },
   openGraph: {
     title: "OFFSIDE — The Football Disagreement Engine",
     description:
       "Why a billion people never agree on the same call — decomposed into four reasons, " +
       "proved against the Laws of the Game.",
     type: "website",
+    images: [{ url: "/og-card.png", width: 1536, height: 1024, alt: "OFFSIDE" }],
   },
 };
 
