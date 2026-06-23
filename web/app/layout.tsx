@@ -5,10 +5,19 @@ import "./tailwind.css";
 export const metadata: Metadata = {
   title: "OFFSIDE — The Football Disagreement Engine",
   description:
-    "OFFSIDE decomposes why a football moment stays contested across four diagnostic " +
-    "dimensions, every reading traced to a real source and audited by IBM Granite Guardian.",
+    "OFFSIDE shows why a football decision stays argued — broken into four plain reasons, " +
+    "each proved against the real Laws of the Game and audited by a second IBM model.",
   applicationName: "OFFSIDE",
   authors: [{ name: "Hriday Vig" }],
+  // app/icon.png and app/opengraph-image.png are auto-detected by Next; these make the
+  // social card explicit for crawlers that read the tags directly.
+  openGraph: {
+    title: "OFFSIDE — The Football Disagreement Engine",
+    description:
+      "Why a billion people never agree on the same call — decomposed into four reasons, " +
+      "proved against the Laws of the Game.",
+    type: "website",
+  },
 };
 
 export default function RootLayout({

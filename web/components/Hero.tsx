@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "motion/react";
 
 // The front door. A judge (or anyone) must understand WHAT this is and WHY it matters
@@ -17,9 +18,15 @@ export function Hero() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, ease: [0.4, 0.14, 0.3, 1] }}
       >
-        <h1 className="hero__wordmark" aria-label="OFFSIDE">
-          <span className="hero__wordmark-line" aria-hidden />
-          OFFSIDE
+        <h1 className="hero__wordmark-wrap" aria-label="OFFSIDE">
+          <Image
+            className="hero__logo"
+            src="/offside-logo.png"
+            alt="OFFSIDE"
+            width={560}
+            height={373}
+            priority
+          />
         </h1>
         <span className="hero__tagline">The Football Disagreement Engine</span>
         <span className="hero__ibm">Built on IBM Granite · Docling · Guardian</span>
@@ -52,19 +59,27 @@ export function Hero() {
       </p>
 
       <p className="hero__sub">
-        It decomposes a contested decision into the four structural reasons disagreement
-        persists — is the <em>rule</em> unclear, is the <em>truth</em> unknowable, could the
-        official <em>see</em> it, or do both sides just <em>want</em> their own outcome — and
-        marks which are in play. The same engine reads the Hand of God and{" "}
-        <strong>this season&rsquo;s VAR disputes</strong>: the rewritten handball Law, the
-        millimetre offside line, the &ldquo;subjective&rdquo; calls that flip week to week. It
-        cannot output a number, and a second IBM model audits the first.
+        It breaks a contested call into the <strong>four reasons an argument lasts</strong>,
+        and shows which ones apply:
+      </p>
+
+      <ol className="hero__reasons">
+        <li><span>1</span> Is the rule unclear?</li>
+        <li><span>2</span> Is the truth unknowable?</li>
+        <li><span>3</span> Could the ref see it in time?</li>
+        <li><span>4</span> Do the sides just want their own way?</li>
+      </ol>
+
+      <p className="hero__sub hero__sub--tight">
+        Same engine on the 1986 Hand of God <em>and</em>{" "}
+        <strong>this season&rsquo;s VAR disputes</strong>. Every answer is proved against a
+        real page of the Laws of the Game — and a <strong>second IBM model checks the
+        first</strong>. It never invents a number.
       </p>
 
       <p className="hero__for">
-        Built for the people who have to defend these decisions — referees&rsquo; bodies,
-        rule-makers, and the broadcasters who explain them — not to re-litigate a goal, but to
-        show <em>which structural gap</em> each controversy exposes.
+        A tool for the people who <em>defend</em> these calls — referees&rsquo; bodies,
+        rule-makers, broadcasters — not to re-argue a goal, but to show which gap each one exposes.
       </p>
     </header>
   );

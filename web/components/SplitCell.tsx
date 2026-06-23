@@ -4,20 +4,21 @@ import type { CellState, SplitAxis, SplitCell as SplitCellData } from "@/types/c
 
 // Human-facing axis labels and the one-line question each axis answers. The enum value
 // is the contract; these are the presentation copy, kept in the component layer.
+// LEAD with the plain-English question — that is what a judge reads first and understands
+// without a glossary. The formal axis name is kept as a small subtitle for the record.
 const AXIS_LABEL: Record<SplitAxis, string> = {
-  RULE_AMBIGUITY: "Rule ambiguity",
-  INDETERMINACY: "Indeterminacy",
-  DECISION_TIME_DEFICIT: "Decision-time deficit",
-  CULTURAL_PRIOR_BIAS: "Cultural prior bias",
+  RULE_AMBIGUITY: "Is the rule unclear?",
+  INDETERMINACY: "Is the truth unknowable?",
+  DECISION_TIME_DEFICIT: "Could the ref see it in time?",
+  CULTURAL_PRIOR_BIAS: "Do the sides just want their own way?",
 };
 
-// The plain-English version of each axis — the human translation under the formal name,
-// so the box is understood without a glossary.
+// The formal name, shown small under the plain question (the contract term, for the record).
 const AXIS_PLAIN: Record<SplitAxis, string> = {
-  RULE_AMBIGUITY: "Is the rulebook itself unclear?",
-  INDETERMINACY: "Is the truth impossible to ever know?",
-  DECISION_TIME_DEFICIT: "Could the ref see it in the moment — even if we can now?",
-  CULTURAL_PRIOR_BIAS: "Same facts agreed, but each side wants its own outcome?",
+  RULE_AMBIGUITY: "Rule ambiguity — the rulebook itself is unclear",
+  INDETERMINACY: "Indeterminacy — the truth can't ever be known",
+  DECISION_TIME_DEFICIT: "Decision-time deficit — unseeable then, clear now",
+  CULTURAL_PRIOR_BIAS: "Cultural prior bias — same facts, opposite wishes",
 };
 
 // What each state means on the cell face. ABSENT is a *positive* finding ("ruled out"),

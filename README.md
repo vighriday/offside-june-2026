@@ -1,11 +1,11 @@
 <div align="center">
 
-# OFFSIDE
+<img src="docs/assets/offside-logo.png" alt="OFFSIDE" width="440" />
 
 ### The Football Disagreement Engine
 
-**OFFSIDE doesn't tell you whether the referee was right — it shows you, with the
-receipts, exactly *why* a billion people will never agree.**
+**Every football AI tells you *whether* a call was right. OFFSIDE tells you *why* the
+argument never ends — and proves every reason against the real Laws of the Game.**
 
 [![Live demo](https://img.shields.io/badge/▶_Live_demo-offside--june--2026.vercel.app-0f62fe?style=for-the-badge)](https://offside-june-2026.vercel.app/)
 
@@ -113,7 +113,13 @@ load-bearing rather than decorative:
 
 The archive incidents alone only ever lit *Decision-time* and *Cultural bias*; the three
 **current** disputes are what make *Rule ambiguity* and *Indeterminacy* fire — pointing the
-same engine at live, unsettled problems instead of settled trivia.
+same engine at live, unsettled problems instead of settled trivia. Each incident ships a
+schematic of the disputed moment, so you *see* it before you read it:
+
+| The modern handball Law | The millimetre offside line | The "subjective" VAR call |
+|:--:|:--:|:--:|
+| ![Modern handball Law — one contact, three competing tests](docs/assets/incident-handball-rewrite.png) | ![Millimetre offside — the precise line vs the thick tolerance band](docs/assets/incident-offside-margin.png) | ![Subjective VAR — same contact, opposite calls](docs/assets/incident-pgmol-subjective.png) |
+| RULE AMBIGUITY · present | INDETERMINACY · present | RULE + CULTURAL · present |
 
 ![Three incidents, three different SPLIT signatures from the same engine](docs/assets/generalization.svg)
 

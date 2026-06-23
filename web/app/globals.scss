@@ -280,34 +280,16 @@ body {
     margin-bottom: clamp(2rem, 5vw, 3.25rem);
   }
 
-  &__wordmark {
-    position: relative;
-    display: inline-block;
-    font-size: clamp(2.75rem, 9vw, 5rem);
-    font-weight: 600;
-    letter-spacing: 0.06em;
-    line-height: 1;
-    color: var(--cds-text-primary, #f4f4f4);
-    // the offside-line motif: a thin angled pitch line cutting across the wordmark
-    padding: 0.15em 0.1em;
+  &__wordmark-wrap {
+    margin: 0;
+    line-height: 0;
   }
 
-  &__wordmark-line {
-    position: absolute;
-    left: -6%;
-    right: -6%;
-    top: 54%;
-    height: 2px;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      var(--split-present) 18%,
-      var(--split-present) 82%,
-      transparent
-    );
-    transform: rotate(-3.5deg);
-    transform-origin: center;
-    opacity: 0.85;
+  // The generated OFFSIDE logo (the offside-line wordmark). Capped so it reads as a
+  // masthead, not a banner; scales down on narrow viewports.
+  &__logo {
+    width: clamp(15rem, 42vw, 26rem);
+    height: auto;
   }
 
   &__tagline {
@@ -404,6 +386,45 @@ body {
     strong {
       font-weight: 500;
       color: var(--cds-text-primary, #f4f4f4);
+    }
+    &--tight {
+      margin-top: 1rem;
+    }
+  }
+
+  // The four questions as a tight, scannable list — the fastest way a judge "gets it".
+  &__reasons {
+    list-style: none;
+    margin: 1rem auto 0;
+    padding: 0;
+    max-width: 32rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.5rem 1.25rem;
+    text-align: left;
+
+    li {
+      display: flex;
+      align-items: baseline;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      color: var(--cds-text-primary, #f4f4f4);
+    }
+    span {
+      flex: none;
+      width: 1.1rem;
+      height: 1.1rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.625rem;
+      font-weight: 600;
+      color: var(--split-present);
+      border: 1px solid var(--split-present);
+      border-radius: 1px;
+    }
+    @media (max-width: 36rem) {
+      grid-template-columns: 1fr;
     }
   }
 
@@ -776,11 +797,11 @@ body {
   border-left: 2px solid var(--split-present);
   background: var(--cds-layer-01, #262626);
 
-  &__svg {
+  &__img {
     display: block;
     width: 100%;
     height: auto;
-    max-height: 11rem;
+    border: 1px solid var(--cds-border-subtle-01, #393939);
   }
 
   &__caption {

@@ -33,11 +33,11 @@ export function SplitView({ bundle }: SplitViewProps) {
     <section className="split-view" aria-label="THE SPLIT — disagreement diagnostic">
       <header className="split-view__header">
         <p className="split-view__eyebrow">THE SPLIT</p>
-        <p className="split-view__prompt">Why this moment never resolved</p>
+        <p className="split-view__prompt">Why is this still argued?</p>
         <p className="split-view__intro">
-          A disagreement can come from four places. OFFSIDE checks all four against the
-          evidence and marks which ones are actually in play here. Click any box to see the
-          source behind it.
+          Every argument about a call comes down to four questions. OFFSIDE answers all four
+          from the evidence and lights up the ones that are <strong>actually the reason</strong>
+          {" "}here. <strong>Click any box</strong> to see the exact rulebook page behind it.
         </p>
       </header>
 
