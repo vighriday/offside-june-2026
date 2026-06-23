@@ -3,11 +3,12 @@
 **[► Open the live app](https://offside-june-2026.vercel.app/)** and try these five things —
 each maps to one judging criterion.
 
-### 1. Read THE SPLIT (Innovation)
-The four cells under the title are the whole idea: *why* the Hand of God stays contested,
-decomposed across four fixed dimensions. Two are **RULED OUT** (the Law is clear; the act
-is admitted) and two are **PRESENT** (what the referee could see; which nation is watching).
-No percentages — the model **cannot** emit a number.
+### 1. Start on a *current* dispute — read THE SPLIT (Innovation + Challenge fit)
+Click **The modern handball call** (marked `live`). A schematic shows the moment, then THE
+SPLIT — four plain questions, with the real reason lit. Here **"Is the rule unclear?" is
+PRESENT**: the 2024/25 Law gives the referee three competing handball tests, so the dispute
+is the rulebook itself, not the official. This is *this season*, not a famous old goal — and
+no percentages anywhere, because the model **cannot** emit a number.
 
 ### 2. Click any PRESENT cell (Trust / Responsible AI)
 A cell with a live tension traces straight to its source — the exact IFAB Law passage with

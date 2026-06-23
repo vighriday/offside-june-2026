@@ -286,10 +286,13 @@ body {
   }
 
   // The generated OFFSIDE logo (the offside-line wordmark). Capped so it reads as a
-  // masthead, not a banner; scales down on narrow viewports.
+  // masthead, not a banner; scales down on narrow viewports. `mix-blend-mode: lighten`
+  // drops the logo's near-black backing into the page so there is no visible tile seam —
+  // the light wordmark and the blue offside line composite cleanly onto the dark surface.
   &__logo {
     width: clamp(15rem, 42vw, 26rem);
     height: auto;
+    mix-blend-mode: lighten;
   }
 
   &__tagline {

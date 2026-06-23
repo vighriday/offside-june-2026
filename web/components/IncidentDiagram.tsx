@@ -21,7 +21,7 @@ const DIAGRAMS: Record<string, Diagram> = {
   "handball-rewrite": {
     src: "/incidents/handball-rewrite.png",
     caption:
-      "One contact, three different tests the Law asks the official to choose between — which is why the call splits.",
+      "One contact, three tests the Law makes the official choose between: was it deliberate, did the arm make the body unnaturally bigger, or did it go straight in off the hand? Different tests, different outcomes — which is why the call splits.",
   },
   "offside-margin": {
     src: "/incidents/offside-margin.png",
