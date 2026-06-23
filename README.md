@@ -38,7 +38,7 @@ what stays inherently uncertain, what was knowable at the time, and who's watchi
 | **Current, not trivia** | Six incidents — one iconic hook, then **three live, unsettled disputes from the current Laws and season**: the rewritten handball Law, the millimetre semi-automated offside line, and the "subjective" VAR calls that flip week to week. Across the set, *all four* dimensions fire. |
 | **The trust spine** | Every cell clicks straight through to a real, page-numbered passage of the actual IFAB Laws of the Game. A second IBM model (Granite Guardian) audits the first and demotes anything it can't ground. Where there's no evidence, it says so. |
 | **The moat** | The reasoning model is **structurally incapable of emitting a number** — no fabricated percentages, ever. Enforced by a test in CI. |
-| **Built with** | IBM Granite · IBM Docling · Granite Embedding · **Granite Guardian** · Langflow |
+| **Built with** | IBM Granite · IBM Docling · Granite Embedding · **Granite Guardian** · **LangGraph** · **Context Forge (MCP)** · Langflow · RAGAS audit |
 
 **[► Open the live demo](https://offside-june-2026.vercel.app/)** — try clicking a cell, then switch incidents to watch the diagnosis change. New here? The **[90-second judge's guide](JUDGE.md)** walks the five things worth trying.
 
@@ -181,7 +181,7 @@ own provenance (the models used and the corpus git SHA) so any result can be rep
 
 ## Built with IBM
 
-Five IBM tools, each load-bearing — not decoration:
+Seven tools, each load-bearing — not decoration:
 
 | Tool | What it does | Where a judge sees it |
 |------|--------------|------------------------|
@@ -189,7 +189,11 @@ Five IBM tools, each load-bearing — not decoration:
 | **IBM Docling** | Extracts the IFAB Laws into structured, page-cited evidence (page + bounding box) — the click-to-source spine | Click any cell → the cited IFAB page and passage |
 | **Granite Embedding** (`granite-embedding:30m`) | Turns evidence into a searchable form so each lens retrieves only its own (Laws for Referee, event data for Tactical, …) | Silent infrastructure — it's *why* the lenses disagree |
 | **Granite Guardian** (`granite3-guardian:2b`) | A **second IBM model audits the first** — it checks each reading's groundedness against its cited page and demotes anything it cannot confirm | The "Granite Guardian: grounded" seal on each lens panel |
-| **Langflow** | The bake pipeline as an importable visual graph (evidence → 4 lenses → Guardian → THE SPLIT) | [`flows/offside_pipeline.json`](flows/offside_pipeline.json) — import into Langflow Studio |
+| **LangGraph** | The bake as an **executable** `StateGraph` — four lens nodes fan out, converge on routing, gate, and assemble; a test proves it yields the identical SPLIT as the direct bake | [`orchestrate/graph.py`](engine/offside_engine/orchestrate/graph.py), [`flows/bake_graph.mmd`](flows/bake_graph.mmd) |
+| **IBM Context Forge** (MCP) | The engine exposed as an **agent-callable MCP tool** (`decompose_disagreement`) behind the IBM MCP gateway — OFFSIDE as a reusable capability, not just a site | [`mcp_server.py`](engine/offside_engine/mcp_server.py), [`flows/context_forge.md`](flows/context_forge.md) |
+| **Langflow** | The same pipeline as an importable visual canvas | [`flows/offside_pipeline.json`](flows/offside_pipeline.json) |
+
+Plus a build-time **RAGAS / groundedness audit** ([`eval/groundedness.py`](engine/offside_engine/eval/groundedness.py)) that scores how grounded each lens reading is — written to [`a report`](engine/data/eval/groundedness_report.md), never into THE SPLIT or the UI, so the no-numbers moat stays intact.
 
 The **Granite Guardian gate** is the move a single-model entry cannot make: a lens reading
 survives only if the first model asserted it **and** the second model could not refute it
