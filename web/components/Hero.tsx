@@ -9,13 +9,27 @@ import { motion } from "motion/react";
 export function Hero() {
   return (
     <header className="hero">
-      <p className="hero__brand">OFFSIDE — The Football Disagreement Engine</p>
+      {/* The masthead — a proper wordmark with the offside-line motif slicing through it,
+          so the front door reads as a product, not a label. */}
+      <motion.div
+        className="hero__masthead"
+        initial={{ opacity: 0, y: 10 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, ease: [0.4, 0.14, 0.3, 1] }}
+      >
+        <span className="hero__wordmark" aria-label="OFFSIDE">
+          <span className="hero__wordmark-line" aria-hidden />
+          OFFSIDE
+        </span>
+        <span className="hero__tagline">The Football Disagreement Engine</span>
+        <span className="hero__ibm">Built on IBM Granite · Docling · Guardian</span>
+      </motion.div>
 
       <motion.div
         className="hero__clash"
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: [0.4, 0.14, 0.3, 1] }}
+        transition={{ duration: 0.5, delay: 0.15, ease: [0.4, 0.14, 0.3, 1] }}
       >
         <div className="hero__side hero__side--a">
           <span className="hero__side-tag">Buenos Aires</span>

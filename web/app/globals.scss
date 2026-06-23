@@ -251,15 +251,62 @@ body {
 // ── Hero (the front door — hook + plain "what this is") ──────────────────────
 .hero {
   max-width: 60rem;
+  // Proper entry space at the top — the masthead breathes before anything else loads.
   margin: 0 auto clamp(2.5rem, 6vw, 4rem);
+  padding-top: clamp(2rem, 7vw, 5rem);
   text-align: center;
 
-  &__brand {
-    margin: 0;
-    font-size: 0.6875rem;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
+  // ── Masthead: the wordmark + tagline that make this read as a product ──────
+  &__masthead {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.55rem;
+    margin-bottom: clamp(2rem, 5vw, 3.25rem);
+  }
+
+  &__wordmark {
+    position: relative;
+    display: inline-block;
+    font-size: clamp(2.75rem, 9vw, 5rem);
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    line-height: 1;
+    color: var(--cds-text-primary, #f4f4f4);
+    // the offside-line motif: a thin angled pitch line cutting across the wordmark
+    padding: 0.15em 0.1em;
+  }
+
+  &__wordmark-line {
+    position: absolute;
+    left: -6%;
+    right: -6%;
+    top: 54%;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      var(--split-present) 18%,
+      var(--split-present) 82%,
+      transparent
+    );
+    transform: rotate(-3.5deg);
+    transform-origin: center;
+    opacity: 0.85;
+  }
+
+  &__tagline {
+    font-size: clamp(0.875rem, 2vw, 1.0625rem);
+    font-weight: 300;
+    letter-spacing: 0.04em;
     color: var(--cds-text-secondary, #c6c6c6);
+  }
+
+  &__ibm {
+    font-size: 0.625rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--cds-text-placeholder, #6f6f6f);
   }
 
   // The clash: two opposite verdicts on one moment.
