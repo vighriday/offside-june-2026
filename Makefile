@@ -1,0 +1,4 @@
+.PHONY: studio
+
+studio:
+	docker compose -f docker-compose.studio.yml up

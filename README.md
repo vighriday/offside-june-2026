@@ -305,6 +305,18 @@ pip install -e ".[dev]"
 pytest -q          # 145 tests, incl. the no-numbers moat, cite-or-die guards, and the probe integrity lock
 ```
 
+### Run the Studio yourself (live decomposition of your own incident)
+
+The deployed site is $0 static — live runs the real Granite models on *your* machine.
+
+```bash
+docker compose -f docker-compose.studio.yml up   # starts Ollama, pulls the 3 IBM models, serves :8000
+cd web && NEXT_PUBLIC_STUDIO_BASE=http://localhost:8000 npm run dev   # the Studio tab goes live
+```
+
+Open the Studio tab, paste a controversy's facts and two named quotes, and watch the four
+SPLIT boxes fill in as Granite reads each lens and Granite Guardian audits it — live.
+
 ## License
 
 Source code: [MIT](LICENSE). Data sources (StatsBomb Open Data, the IFAB Laws of the

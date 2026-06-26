@@ -1,0 +1,17 @@
+# One command to run the OFFSIDE Studio backend with the real IBM models locally.
+# Usage: docker compose -f docker-compose.studio.yml up
+services:
+  ollama:
+    image: ollama/ollama:latest
+    ports: ["11434:11434"]
+    volumes: ["ollama:/root/.ollama"]
+  studio:
+    build: { context: ./engine, dockerfile: Dockerfile.studio }
+    command: >
+      sh -c "ollama pull granite3.3:8b && ollama pull granite-embedding:30m &&
+             ollama pull granite3-guardian:2b &&
+             uv run uvicorn offside_engine.serve.app:app --host 0.0.0.0 --port 8000"
+    environment: { OLLAMA_HOST: "ollama:11434" }
+    ports: ["8000:8000"]
+    depends_on: ["ollama"]
+volumes: { ollama: {} }

@@ -1,0 +1,15 @@
+FROM python:3.12-slim
+
+# Install uv
+RUN pip install --no-cache-dir uv
+
+WORKDIR /app
+
+# Copy the package files
+COPY pyproject.toml .
+COPY offside_engine/ offside_engine/
+
+# Install with the serve extra (fastapi + uvicorn + sse-starlette)
+RUN uv sync --extra serve
+
+EXPOSE 8000
