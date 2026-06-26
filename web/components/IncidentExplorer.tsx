@@ -10,8 +10,6 @@ import { ProvenanceFooter } from "./ProvenanceFooter";
 import { DivergenceLineage } from "./DivergenceLineage";
 import { RuleEvolution } from "./RuleEvolution";
 import { FalsificationPanel } from "./FalsificationPanel";
-import { HowItWorks } from "./HowItWorks";
-import { Hero } from "./Hero";
 
 export interface LoadedBundle {
   bundle: IncidentBundle;
@@ -32,7 +30,7 @@ export function IncidentExplorer({ incidents }: IncidentExplorerProps) {
   const bundles = incidents.map((i) => i.bundle);
 
   return (
-    <main className="incident">
+    <div className="incident">
       {isSample && (
         <p className="incident__sample-banner">
           ⚽ Pre-bake sample fixture — the audited bundle replaces this once the bake runs.
@@ -40,10 +38,6 @@ export function IncidentExplorer({ incidents }: IncidentExplorerProps) {
       )}
 
       <div className="incident__inner">
-        <Hero />
-
-        <HowItWorks />
-
         {bundles.length > 1 && (
           <DivergenceLineage
             incidents={bundles}
@@ -82,7 +76,7 @@ export function IncidentExplorer({ incidents }: IncidentExplorerProps) {
           />
         </div>
       </div>
-    </main>
+    </div>
   );
 }
 

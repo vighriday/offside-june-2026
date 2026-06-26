@@ -27,6 +27,7 @@ export function ProvenanceFooter({ provenance, citations }: ProvenanceFooterProp
   const isDeterministic =
     provenance.guardian_model === "deterministic-router" ||
     provenance.granite_model === "deterministic-router";
+  const isLiveUser = provenance.mode === "live-user";
 
   return (
     <footer className="provenance">
@@ -39,6 +40,11 @@ export function ProvenanceFooter({ provenance, citations }: ProvenanceFooterProp
             <>
               deterministic evidence router · {provenance.embed_model} (IBM Granite
               Embedding) · grounded against the committed IFAB / StatsBomb corpus
+            </>
+          ) : isLiveUser ? (
+            <>
+              live · user-supplied evidence · {provenance.granite_model} ·{" "}
+              {provenance.embed_model} · {provenance.guardian_model}
             </>
           ) : (
             <>

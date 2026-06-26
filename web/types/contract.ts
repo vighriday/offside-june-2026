@@ -79,6 +79,7 @@ export interface BakeProvenance {
   embed_model: string;
   options: Record<string, number>;
   corpus_git_sha: string | null;
+  mode: "frozen" | "live-user";
 }
 
 export interface RuleEvolution {
@@ -123,3 +124,12 @@ export const CANONICAL_AXIS_ORDER: SplitAxis[] = [
   "DECISION_TIME_DEFICIT",
   "CULTURAL_PRIOR_BIAS",
 ];
+
+
+export type StudioStreamEvent =
+  | { type: "retrieve"; lens: LensKind; found: { citation_id: string; page: number | null }[] }
+  | { type: "lens"; lens: LensKind; stance: LensStance; rationale: string; citation_ids: string[] }
+  | { type: "audit"; lens: LensKind; verdict: GuardianVerdict; guardian_model: string }
+  | { type: "cell"; axis: SplitAxis; state: CellState }
+  | { type: "done"; bundle: IncidentBundle }
+  | { type: "error"; message: string };

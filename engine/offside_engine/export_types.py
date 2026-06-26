@@ -42,6 +42,17 @@ def _union(name: str, literal_type: object) -> str:
     return f"export type {name} = {members};"
 
 
+_STUDIO_EVENTS_TS = '''
+export type StudioStreamEvent =
+  | { type: "retrieve"; lens: LensKind; found: { citation_id: string; page: number | null }[] }
+  | { type: "lens"; lens: LensKind; stance: LensStance; rationale: string; citation_ids: string[] }
+  | { type: "audit"; lens: LensKind; verdict: GuardianVerdict; guardian_model: string }
+  | { type: "cell"; axis: SplitAxis; state: CellState }
+  | { type: "done"; bundle: IncidentBundle }
+  | { type: "error"; message: string };
+'''
+
+
 def build_ts() -> str:
     """Build the full TypeScript contract source."""
     enums = [
@@ -121,6 +132,7 @@ export interface BakeProvenance {
   embed_model: string;
   options: Record<string, number>;
   corpus_git_sha: string | null;
+  mode: "frozen" | "live-user";
 }
 
 export interface RuleEvolution {
@@ -167,7 +179,7 @@ export const CANONICAL_AXIS_ORDER: SplitAxis[] = [
 ];
 """
 
-    return _HEADER + "\n" + "\n".join(enums) + "\n\n" + interfaces
+    return _HEADER + "\n" + "\n".join(enums) + "\n\n" + interfaces + "\n" + _STUDIO_EVENTS_TS
 
 
 def write_ts(out_path: Path) -> Path:

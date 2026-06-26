@@ -30,6 +30,7 @@ dev = [
 eval = [
     "ragas>=0.2",
 ]
+serve = ["fastapi>=0.115", "sse-starlette>=2.1", "uvicorn>=0.30"]
 
 [project.scripts]
 offside = "offside_engine.cli:app"

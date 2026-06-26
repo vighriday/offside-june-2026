@@ -1,0 +1,263 @@
+{
+  "cell_seals": [
+    {
+      "cell": {
+        "axis": "RULE_AMBIGUITY",
+        "citation_ids": [],
+        "rationale": "A clear single clause governs the act — the retrieved Law states that a player is sent off for denying a goal or an obvious goal-scoring opportunity by committing a deliberate handball offence (ifab-law12-dogso-handball-p118).",
+        "state": "ABSENT"
+      },
+      "seal": {
+        "checked_context_citation_ids": [],
+        "guardian_model": "granite3-guardian:2b",
+        "verdict": "UNGROUNDED"
+      }
+    },
+    {
+      "cell": {
+        "axis": "INDETERMINACY",
+        "citation_ids": [],
+        "rationale": "The decisive truth is recoverable — the retrieved facts state that VAR reviewed the incident on a clear, side-on replay where the contact was fully visible and reviewable in real time (studio-a-disputed-penalty-hist).",
+        "state": "ABSENT"
+      },
+      "seal": {
+        "checked_context_citation_ids": [],
+        "guardian_model": "granite3-guardian:2b",
+        "verdict": "UNGROUNDED"
+      }
+    },
+    {
+      "cell": {
+        "axis": "DECISION_TIME_DEFICIT",
+        "citation_ids": [],
+        "rationale": "The decisive truth was available at the moment — the retrieved facts state that VAR reviewed the incident on a clear, side-on replay where the contact was fully visible and reviewable in real time (studio-a-disputed-penalty-hist).",
+        "state": "ABSENT"
+      },
+      "seal": {
+        "checked_context_citation_ids": [],
+        "guardian_model": "granite3-guardian:2b",
+        "verdict": "UNGROUNDED"
+      }
+    },
+    {
+      "cell": {
+        "axis": "CULTURAL_PRIOR_BIAS",
+        "citation_ids": [
+          "studio-a-disputed-penalty-framing-0",
+          "studio-a-disputed-penalty-framing-1"
+        ],
+        "rationale": "The home manager is reported to have said 'That's a clear penalty - the arm was out, away from the body' (studio-a-disputed-penalty-framing-0), while the away manager is reported to have said 'Never a penalty - it's ball to hand, the arm didn't move' (studio-a-disputed-penalty-framing-1). These two named people describe one agreed event in opposing terms. The divergence is between what each named source said.",
+        "state": "PRESENT"
+      },
+      "seal": {
+        "checked_context_citation_ids": [
+          "studio-a-disputed-penalty-framing-0",
+          "studio-a-disputed-penalty-framing-1"
+        ],
+        "guardian_model": "granite3-guardian:2b",
+        "verdict": "GROUNDED"
+      }
+    }
+  ],
+  "citations": {
+    "ifab-law10-goal-scored-p97": {
+      "attribution": null,
+      "bbox": {
+        "bottom": 218.95,
+        "left": 62.36,
+        "right": 372.96,
+        "top": 182.21
+      },
+      "doc_kind": "IFAB_LAW",
+      "extracted_text": "A goal is scored when the whole of the ball passes over the goal line, between the goalposts and under the crossbar, provided that no offence has been committed by the team scoring the goal.",
+      "id": "ifab-law10-goal-scored-p97",
+      "page": 97,
+      "source_doc": "ifab-laws-2025-26"
+    },
+    "ifab-law12-dogso-handball-p118": {
+      "attribution": null,
+      "bbox": {
+        "bottom": 415.0,
+        "left": 62.0,
+        "right": 372.0,
+        "top": 478.0
+      },
+      "doc_kind": "IFAB_LAW",
+      "extracted_text": "Where a player denies the opposing team a goal or an obvious goal-scoring opportunity by committing a deliberate handball offence the player is sent off whatever the position of the offence.",
+      "id": "ifab-law12-dogso-handball-p118",
+      "page": 118,
+      "source_doc": "ifab-laws-2025-26"
+    },
+    "ifab-law12-handball-offence-p110": {
+      "attribution": null,
+      "bbox": {
+        "bottom": 175.0,
+        "left": 54.0,
+        "right": 373.0,
+        "top": 309.0
+      },
+      "doc_kind": "IFAB_LAW",
+      "extracted_text": "It is an offence if a player deliberately touches the ball with their hand/arm, or scores in the opponents' goal immediately after the ball has touched their hand/arm, even if accidental. A goal scored in this way does not stand.",
+      "id": "ifab-law12-handball-offence-p110",
+      "page": 110,
+      "source_doc": "ifab-laws-2025-26"
+    },
+    "studio-a-disputed-penalty-framing-0": {
+      "attribution": null,
+      "bbox": null,
+      "doc_kind": "FRAMING_SOURCE",
+      "extracted_text": "Home manager (post-match interview): That's a clear penalty - the arm was out, away from the body.",
+      "id": "studio-a-disputed-penalty-framing-0",
+      "page": null,
+      "source_doc": "studio-user-input"
+    },
+    "studio-a-disputed-penalty-framing-1": {
+      "attribution": null,
+      "bbox": null,
+      "doc_kind": "FRAMING_SOURCE",
+      "extracted_text": "Away manager (post-match interview): Never a penalty - it's ball to hand, the arm didn't move.",
+      "id": "studio-a-disputed-penalty-framing-1",
+      "page": null,
+      "source_doc": "studio-user-input"
+    },
+    "studio-a-disputed-penalty-hist": {
+      "attribution": null,
+      "bbox": null,
+      "doc_kind": "HISTORICAL_REPORT",
+      "extracted_text": "VAR reviewed the incident on a clear, side-on replay; the contact was fully visible and reviewable in real time.",
+      "id": "studio-a-disputed-penalty-hist",
+      "page": null,
+      "source_doc": "studio-user-input"
+    }
+  },
+  "incident_id": "studio-a-disputed-penalty",
+  "lenses": [
+    {
+      "output": {
+        "citation_ids": [
+          "ifab-law12-dogso-handball-p118",
+          "ifab-law12-handball-offence-p110",
+          "ifab-law10-goal-scored-p97"
+        ],
+        "lens": "REFEREE",
+        "rationale": "The retrieved Law states that a player is sent off for denying a goal or an obvious goal-scoring opportunity by committing a deliberate handball offence (ifab-law12-dogso-handball-p118). The Law also specifies that a player is guilty of a handball offence if they deliberately touch the ball with their hand/arm, or score in the opponents' goal immediately after the ball has touched their hand/arm, even if accidental (ifab-law12-handball-offence-p110). The Law further clarifies that a goal scored in this way does not stand (ifab-law12-handball-offence-p110). Therefore, the Law clearly governs the incident and there is no ambiguity as to the outcome of a deliberate handball offence leading to a goal.",
+        "stance": "SUPPORTS",
+        "state": "GROUNDED"
+      },
+      "seal": {
+        "checked_context_citation_ids": [
+          "ifab-law12-dogso-handball-p118",
+          "ifab-law12-handball-offence-p110",
+          "ifab-law10-goal-scored-p97"
+        ],
+        "guardian_model": "granite3-guardian:2b",
+        "verdict": "GROUNDED"
+      }
+    },
+    {
+      "output": {
+        "citation_ids": [],
+        "lens": "TACTICAL",
+        "rationale": "No evidence was retrieved for this lens on this incident.",
+        "stance": "INSUFFICIENT_EVIDENCE",
+        "state": "INSUFFICIENT_EVIDENCE"
+      },
+      "seal": {
+        "checked_context_citation_ids": [],
+        "guardian_model": "granite3-guardian:2b",
+        "verdict": "UNGROUNDED"
+      }
+    },
+    {
+      "output": {
+        "citation_ids": [
+          "studio-a-disputed-penalty-hist"
+        ],
+        "lens": "HISTORICAL",
+        "rationale": "The retrieved facts state that VAR reviewed the incident on a clear, side-on replay where the contact was fully visible and reviewable in real time (studio-a-disputed-penalty-hist). This indicates that at the moment of the decision, the officials had access to the decisive truth. However, without further information about whether this technology was standard or if there were any acknowledged limitations in interpreting the replay, we cannot definitively conclude if there was a decision-time deficit or an indeterminacy.",
+        "stance": "MIXED",
+        "state": "GROUNDED"
+      },
+      "seal": {
+        "checked_context_citation_ids": [
+          "studio-a-disputed-penalty-hist"
+        ],
+        "guardian_model": "granite3-guardian:2b",
+        "verdict": "GROUNDED"
+      }
+    },
+    {
+      "output": {
+        "citation_ids": [
+          "studio-a-disputed-penalty-framing-0",
+          "studio-a-disputed-penalty-framing-1"
+        ],
+        "lens": "FRAMING",
+        "rationale": "The home manager is reported to have said 'That's a clear penalty - the arm was out, away from the body' (studio-a-disputed-penalty-framing-0), while the away manager is reported to have said 'Never a penalty - it's ball to hand, the arm didn't move' (studio-a-disputed-penalty-framing-1). These two named people describe one agreed event in opposing terms. The divergence is between what each named source said.",
+        "stance": "MIXED",
+        "state": "GROUNDED"
+      },
+      "seal": {
+        "checked_context_citation_ids": [
+          "studio-a-disputed-penalty-framing-0",
+          "studio-a-disputed-penalty-framing-1"
+        ],
+        "guardian_model": "granite3-guardian:2b",
+        "verdict": "GROUNDED"
+      }
+    }
+  ],
+  "probes": [],
+  "provenance": {
+    "corpus_git_sha": null,
+    "embed_model": "granite-embedding:30m",
+    "granite_model": "granite3.3:8b",
+    "guardian_model": "granite3-guardian:2b",
+    "mode": "live-user",
+    "options": {
+      "num_ctx": 8192,
+      "num_predict": 1024,
+      "seed": 42,
+      "temperature": 0.0
+    }
+  },
+  "rule_evolution": null,
+  "settled_fact": {
+    "citation_ids": [],
+    "statement": "A defender's arm blocked the ball inside the box. The arm-to-ball contact is agreed by both sides.",
+    "status": "ADJUDICATED_CONTESTED"
+  },
+  "split": {
+    "cells": [
+      {
+        "axis": "RULE_AMBIGUITY",
+        "citation_ids": [],
+        "rationale": "A clear single clause governs the act — the retrieved Law states that a player is sent off for denying a goal or an obvious goal-scoring opportunity by committing a deliberate handball offence (ifab-law12-dogso-handball-p118).",
+        "state": "ABSENT"
+      },
+      {
+        "axis": "INDETERMINACY",
+        "citation_ids": [],
+        "rationale": "The decisive truth is recoverable — the retrieved facts state that VAR reviewed the incident on a clear, side-on replay where the contact was fully visible and reviewable in real time (studio-a-disputed-penalty-hist).",
+        "state": "ABSENT"
+      },
+      {
+        "axis": "DECISION_TIME_DEFICIT",
+        "citation_ids": [],
+        "rationale": "The decisive truth was available at the moment — the retrieved facts state that VAR reviewed the incident on a clear, side-on replay where the contact was fully visible and reviewable in real time (studio-a-disputed-penalty-hist).",
+        "state": "ABSENT"
+      },
+      {
+        "axis": "CULTURAL_PRIOR_BIAS",
+        "citation_ids": [
+          "studio-a-disputed-penalty-framing-0",
+          "studio-a-disputed-penalty-framing-1"
+        ],
+        "rationale": "The home manager is reported to have said 'That's a clear penalty - the arm was out, away from the body' (studio-a-disputed-penalty-framing-0), while the away manager is reported to have said 'Never a penalty - it's ball to hand, the arm didn't move' (studio-a-disputed-penalty-framing-1). These two named people describe one agreed event in opposing terms. The divergence is between what each named source said.",
+        "state": "PRESENT"
+      }
+    ],
+    "headline": "It stays contested over how named sources frame the same fact — not over the dimensions ruled out."
+  },
+  "title": "A disputed penalty"
+}

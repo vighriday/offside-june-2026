@@ -58,3 +58,9 @@ def test_canonical_axis_order_is_exported_for_the_web():
     assert tail.index("RULE_AMBIGUITY") < tail.index("INDETERMINACY") < tail.index(
         "DECISION_TIME_DEFICIT"
     ) < tail.index("CULTURAL_PRIOR_BIAS")
+
+
+def test_contract_exports_studio_stream_event_and_mode():
+    ts = build_ts()
+    assert "StudioStreamEvent" in ts
+    assert "live-user" in ts and "frozen" in ts
