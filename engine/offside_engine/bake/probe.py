@@ -25,13 +25,12 @@ from __future__ import annotations
 import tempfile
 from dataclasses import dataclass
 from pathlib import Path
+from typing import Literal
 
 from offside_engine.analyze.granite_client import GraniteClient
 from offside_engine.analyze.guardian import GuardianClient
 from offside_engine.analyze.guardian_gate import gate_lens
 from offside_engine.analyze.lens_runner import run_lens
-from typing import Literal
-
 from offside_engine.analyze.split_schema import (
     Citation,
     LensKind,
@@ -39,6 +38,10 @@ from offside_engine.analyze.split_schema import (
     ProbeKind,
     SplitAxis,
 )
+from offside_engine.bake.incident import IncidentSpec
+from offside_engine.bake.synthesize import derive_split
+from offside_engine.index.build_lance import build_index
+from offside_engine.retrieve.lens_retrieve import LensRetriever, RetrievedHit
 
 # How a probe presents its injected evidence to the target lens:
 #   REPLACE — the lens sees ONLY the injected atom(s): a clean counterfactual ("if the record
@@ -47,10 +50,6 @@ from offside_engine.analyze.split_schema import (
 #   ADD     — the lens sees its real evidence PLUS the injected atom: used by NOISE, the
 #             negative control, where irrelevant evidence must not disturb the real reading.
 ProbeMode = Literal["REPLACE", "ADD"]
-from offside_engine.bake.incident import IncidentSpec
-from offside_engine.bake.synthesize import derive_split
-from offside_engine.index.build_lance import build_index
-from offside_engine.retrieve.lens_retrieve import LensRetriever, RetrievedHit
 
 # Which lens carries each axis — the lens a probe must perturb to move that axis.
 _AXIS_LENS: dict[SplitAxis, LensKind] = {

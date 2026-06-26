@@ -38,7 +38,7 @@ else:  # pragma: no cover - very old interpreters
 
 from offside_engine.analyze.granite_client import GraniteClient
 from offside_engine.analyze.guardian import GuardianClient
-from offside_engine.analyze.split_schema import Citation, IncidentBundle
+from offside_engine.analyze.split_schema import Citation
 from offside_engine.bake.bake import bake_incident
 from offside_engine.bake.corpus_pool import assemble_pool
 from offside_engine.bake.incident import INCIDENTS, IncidentSpec

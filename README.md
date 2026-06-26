@@ -166,6 +166,8 @@ python engine/scripts/analyze_live.py --incident offside-margin --probe
 This is the Trust & Transparency claim made concrete: hand a skeptic the attack, and the
 engine holds — because a second IBM model is checking the first, on camera.
 
+![The falsification engine on the live site — FLIP moves the axis, NOISE does nothing, and Granite Guardian returns UNGROUNDED to overrule the first model](docs/assets/screenshot-falsification.png)
+
 ## The moat: a model that cannot fabricate a number
 
 The reasoning model is **structurally forbidden from emitting a number**. The schemas it
