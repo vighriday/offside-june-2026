@@ -556,13 +556,255 @@ body {
   }
 }
 
-// ── Studio placeholder ────────────────────────────────────────────────────────
+// ── Studio — form + live result ───────────────────────────────────────────────
 .studio {
   max-width: 84rem;
   margin: 0 auto;
   padding: clamp(2rem, 5vw, 4.5rem) clamp(1.25rem, 4vw, 3rem) 5rem;
   font-size: 0.9375rem;
   color: var(--cds-text-secondary, #c6c6c6);
+
+  &__head {
+    max-width: 52rem;
+    margin-bottom: clamp(2rem, 5vw, 3.5rem);
+
+    h2 {
+      margin: 0 0 0.75rem;
+      font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      color: var(--cds-text-primary, #f4f4f4);
+    }
+
+    p {
+      margin: 0;
+      font-size: 0.9375rem;
+      line-height: 1.6;
+      color: var(--cds-text-secondary, #c6c6c6);
+    }
+  }
+
+  &__banner {
+    margin-bottom: 2rem;
+    padding: 1rem 1.25rem;
+    border-left: 3px solid var(--split-weak, #f1c21b);
+    background: var(--cds-layer-01, #262626);
+    font-size: 0.875rem;
+    line-height: 1.55;
+    color: var(--cds-text-secondary, #c6c6c6);
+
+    strong {
+      color: var(--cds-text-primary, #f4f4f4);
+    }
+  }
+
+  &__error {
+    margin-top: 1rem;
+    padding: 0.75rem 1rem;
+    background: rgba(250, 77, 86, 0.12);
+    border-left: 3px solid var(--cds-support-error, #fa4d56);
+    font-size: 0.875rem;
+    color: var(--cds-support-error, #fa4d56);
+  }
+}
+
+// ── Studio form ───────────────────────────────────────────────────────────────
+.studio-form {
+  display: grid;
+  gap: 1.25rem;
+  max-width: 52rem;
+
+  label {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--cds-text-secondary, #c6c6c6);
+  }
+
+  input,
+  textarea {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.6rem 0.875rem;
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    color: var(--cds-text-primary, #f4f4f4);
+    background: var(--cds-field-01, #262626);
+    border: 1px solid var(--cds-border-strong-01, #525252);
+    border-radius: 0;
+    outline: none;
+    transition: border-color 0.15s ease;
+    text-transform: none;
+    font-weight: 400;
+    letter-spacing: 0;
+
+    &:focus {
+      border-color: var(--cds-focus, #4589ff);
+      box-shadow: inset 0 0 0 1px var(--cds-focus, #4589ff);
+    }
+
+    &::placeholder {
+      color: var(--cds-text-placeholder, #6f6f6f);
+    }
+  }
+
+  textarea {
+    min-height: 5rem;
+    resize: vertical;
+  }
+
+  fieldset {
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0.75rem;
+    border: 1px solid var(--cds-border-subtle-01, #393939);
+    background: var(--cds-layer-01, #1c1c1c);
+  }
+
+  &__actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+
+    button {
+      padding: 0.65rem 1.25rem;
+      font-family: "IBM Plex Sans", system-ui, sans-serif;
+      font-size: 0.875rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      border: none;
+      transition: background 0.15s ease, opacity 0.15s ease;
+
+      &[type="submit"] {
+        background: var(--cds-interactive, #4589ff);
+        color: var(--cds-text-on-color, #ffffff);
+
+        &:hover:not(:disabled) {
+          background: var(--cds-interactive-hover, #0f62fe);
+        }
+
+        &:disabled {
+          opacity: 0.4;
+          cursor: not-allowed;
+        }
+      }
+
+      &[type="button"] {
+        background: var(--cds-layer-02, #393939);
+        color: var(--cds-text-primary, #f4f4f4);
+
+        &:hover {
+          background: var(--cds-layer-hover-02, #4c4c4c);
+        }
+      }
+    }
+  }
+
+  &__hint {
+    margin: 0;
+    font-size: 0.8125rem;
+    color: var(--split-weak, #f1c21b);
+    line-height: 1.5;
+  }
+
+  // The "+ add a quote" button sits outside __actions
+  > button[type="button"] {
+    justify-self: start;
+    padding: 0.4rem 0.75rem;
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    background: transparent;
+    color: var(--cds-link-primary, #78a9ff);
+    border: 1px dashed var(--cds-border-subtle-01, #393939);
+    cursor: pointer;
+    transition: border-color 0.15s ease, color 0.15s ease;
+
+    &:hover {
+      color: var(--cds-link-primary-hover, #a6c8ff);
+      border-color: var(--cds-link-primary, #78a9ff);
+    }
+  }
+}
+
+// ── Live split — four boxes filling in as cell events arrive ──────────────────
+.live-split {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  margin-top: clamp(2rem, 5vw, 3rem);
+  border: 1px solid var(--cds-border-subtle-01, #393939);
+
+  @media (max-width: 40rem) {
+    grid-template-columns: 1fr;
+  }
+
+  &__cell {
+    padding: 1.5rem 1.25rem;
+    background: var(--cds-layer-01, #1c1c1c);
+    border: 1px solid var(--cds-border-subtle-01, #393939);
+    transition: background 0.3s ease, border-color 0.3s ease;
+
+    &[data-state="PRESENT"] {
+      background: var(--split-present-bg, rgba(69, 137, 255, 0.16));
+      border-color: var(--split-present, #4589ff);
+    }
+
+    &[data-state="WEAK"] {
+      background: var(--split-weak-bg, rgba(241, 194, 27, 0.12));
+      border-color: var(--split-weak, #f1c21b);
+    }
+
+    &[data-state="ABSENT"] {
+      background: var(--split-absent-bg, #262626);
+      border-color: var(--cds-border-subtle-01, #393939);
+    }
+
+    &[data-state="NOT_DOCUMENTED"] {
+      background: repeating-linear-gradient(
+        45deg,
+        var(--cds-layer-01, #1c1c1c),
+        var(--cds-layer-01, #1c1c1c) 4px,
+        var(--cds-layer-02, #262626) 4px,
+        var(--cds-layer-02, #262626) 8px
+      );
+    }
+  }
+
+  &__q {
+    margin: 0 0 0.5rem;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--cds-text-secondary, #c6c6c6);
+  }
+
+  &__state {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--cds-text-primary, #f4f4f4);
+    letter-spacing: 0.02em;
+
+    // Show the states in their accent colours — same as THE SPLIT cells.
+    [data-state="PRESENT"] & { color: var(--split-present, #4589ff); }
+    [data-state="WEAK"] & { color: var(--split-weak, #f1c21b); }
+    [data-state="ABSENT"] & { color: var(--split-absent, #c6c6c6); }
+    [data-state="NOT_DOCUMENTED"] & { color: var(--split-undocumented, #6f6f6f); }
+    [data-state="pending"] & { color: var(--cds-text-placeholder, #6f6f6f); font-style: italic; }
+  }
 }
 
 // ── Divergence Lineage (curated chain, grouped by shared axis) ───────────────
