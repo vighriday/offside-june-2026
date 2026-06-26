@@ -16,6 +16,7 @@ from offside_engine.serve.form_models import FormPayload
 
 def _slug(text: str) -> str:
     s = re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-")
+    s = s[:48].rstrip("-")
     return s or "incident"
 
 
