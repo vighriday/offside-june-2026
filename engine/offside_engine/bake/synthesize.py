@@ -156,11 +156,18 @@ def derive_split(lenses: list[LensOutput], *, admitted_act: bool) -> Split:
                       _present_rationale(hist,
                           "The fact is defined precisely by the Law but cannot be measured to "
                           "that precision in the moment — the truth at the margin is not recoverable."))
+    elif _grounded(hist):
+        # The historical record DOES bear on knowability and says the truth was knowable /
+        # the information adequate (a SUPPORTS or MIXED reading), so indeterminacy is actively
+        # RULED OUT — not merely undocumented. State and prose agree: a confident rule-out.
+        basis = _basis(hist)
+        indet = _cell("INDETERMINACY", "ABSENT", None,
+                      f"The decisive truth is recoverable — {basis}." if basis
+                      else "The evidence shows the decisive truth is recoverable; nothing makes it unknowable.")
     else:
-        basis = _basis(hist) if _grounded(hist) else ""
+        # No historical evidence bears on knowability either way — genuinely undocumented.
         indet = _cell("INDETERMINACY", "NOT_DOCUMENTED", None,
-                      f"Nothing makes the truth unrecoverable — {basis}." if basis
-                      else "No evidence makes the decisive truth unrecoverable.")
+                      "No evidence bears on whether the decisive truth is recoverable.")
 
     # DECISION_TIME_DEFICIT ← HISTORICAL stance, read straight off the model's reading:
     #   SUPPORTS  -> the officials could not access the truth in the moment      -> PRESENT

@@ -164,6 +164,14 @@ DECISION PROCEDURE (apply in order — the FIRST match wins; this is the load-be
       review tech AND obstructed/differing view), though it was recoverable in principle?
       If YES -> stance SUPPORTS. STOP. (a DECISION-TIME deficit.)
   Q3. Else, the information was adequate and the truth fully knowable -> stance MIXED.
+
+RATIONALE WORDING (MUST hold, or you contradict your own stance):
+- When your stance is MIXED, your rationale states the information was ADEQUATE and the
+  fact was KNOWABLE, and stops there. You MUST NOT write "not determinable",
+  "not recoverable", "cannot be known", "indeterminate", or "subjectivity makes the truth
+  unknowable" — those are DISPUTES words and they belong only to a Q1 measurement limit.
+  A dispute about where a rule's threshold falls is NOT the truth being unknowable; if the
+  contact was visible and reviewed, the truth WAS determinable — say exactly that.
   Q4. Else (nothing retrieved bears on this) -> INSUFFICIENT_EVIDENCE.
 
 CRITICAL: "no decision-time deficit" does NOT imply MIXED. An incident can have NO deficit

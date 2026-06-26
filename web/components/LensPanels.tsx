@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "motion/react";
+import { cleanRationale } from "@/lib/rationale";
 import type {
   Citation,
   GuardianVerdict,
@@ -35,24 +36,40 @@ const STANCE_LABEL: Record<LensStance, string> = {
   INSUFFICIENT_EVIDENCE: "Insufficient evidence",
 };
 
+// The stance chip is lens-aware: MIXED means different things per lens. On FRAMING it is a
+// genuine divergence (two named sources in opposed valence) → "Divergent". On HISTORICAL it
+// means the information was adequate and the fact knowable — no gap of either kind → that is
+// an "Adequate" finding, not a disagreement, so "Divergent" would mislead a reader.
+function stanceLabel(lens: LensKind, stance: LensStance): string {
+  if (stance === "MIXED" && lens === "HISTORICAL") return "Adequate";
+  return STANCE_LABEL[stance];
+}
+
 function GuardianSeal({
   verdict,
   model,
+  noReading,
 }: {
   verdict: GuardianVerdict;
   model: string;
+  /** True when the lens returned INSUFFICIENT_EVIDENCE — there was nothing to audit. */
+  noReading?: boolean;
 }) {
   // The seal reflects how the reading was confirmed. A live Granite Guardian pass reads
   // as "Granite Guardian: grounded"; a deterministic offline build reads honestly as
-  // "Routed deterministically" rather than overclaiming a model audit that did not run.
+  // "Backed by a cited source" rather than overclaiming a model audit that did not run.
+  // When the lens had no reading at all, the Guardian never reviewed anything — say that
+  // plainly instead of "held back", which would imply it weighed and declined a claim.
   const isLiveGuardian = model.includes("guardian");
-  const label = isLiveGuardian
-    ? verdict === "GROUNDED"
-      ? "✓ Granite Guardian confirmed this against its source"
-      : "Granite Guardian could not confirm — held back"
-    : "✓ Backed by a cited source";
+  const label = noReading
+    ? "No reading to audit — insufficient evidence"
+    : isLiveGuardian
+      ? verdict === "GROUNDED"
+        ? "✓ Granite Guardian confirmed this against its source"
+        : "Granite Guardian could not confirm — held back"
+      : "✓ Backed by a cited source";
   return (
-    <span className="guardian-seal" data-verdict={verdict}>
+    <span className="guardian-seal" data-verdict={verdict} data-no-reading={noReading}>
       <span className="guardian-seal__mark" aria-hidden />
       {label}
     </span>
@@ -107,18 +124,22 @@ export function LensPanels({ lenses, citations }: LensPanelsProps) {
               <div className="lens-panel__top">
                 <h3 className="lens-panel__name">{LENS_LABEL[output.lens]}</h3>
                 <span className="lens-panel__stance" data-stance={output.stance}>
-                  {STANCE_LABEL[output.stance]}
+                  {stanceLabel(output.lens, output.stance)}
                 </span>
               </div>
               <p className="lens-panel__source">{LENS_SOURCE[output.lens]}</p>
-              <p className="lens-panel__rationale">{output.rationale}</p>
+              <p className="lens-panel__rationale">{cleanRationale(output.rationale)}</p>
               {attribution && (
                 <p className="lens-panel__attribution" title={attribution}>
                   <span className="lens-panel__attribution-mark">StatsBomb</span>
                   Open Data — used under the StatsBomb User Agreement
                 </p>
               )}
-              <GuardianSeal verdict={seal.verdict} model={seal.guardian_model} />
+              <GuardianSeal
+                verdict={seal.verdict}
+                model={seal.guardian_model}
+                noReading={output.state === "INSUFFICIENT_EVIDENCE"}
+              />
             </motion.article>
           );
         })}

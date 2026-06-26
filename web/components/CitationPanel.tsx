@@ -1,6 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "motion/react";
+import { cleanRationale } from "@/lib/rationale";
 import type { Citation, SplitCell } from "@/types/contract";
 
 interface CitationPanelProps {
@@ -25,7 +26,7 @@ export function CitationPanel({ cell, citations }: CitationPanelProps) {
           transition={{ duration: 0.28, ease: [0.4, 0.14, 0.3, 1] }}
         >
           <p className="citation-panel__eyebrow">Traced to source</p>
-          <h3 className="citation-panel__rationale">{cell.rationale}</h3>
+          <h3 className="citation-panel__rationale">{cleanRationale(cell.rationale)}</h3>
 
           <ol className="citation-panel__list">
             {cell.citation_ids.map((id) => {

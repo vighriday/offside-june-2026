@@ -1,6 +1,7 @@
 "use client";
 
 import type { CellState, SplitAxis, SplitCell as SplitCellData } from "@/types/contract";
+import { cleanRationale } from "@/lib/rationale";
 
 // Human-facing axis labels and the one-line question each axis answers. The enum value
 // is the contract; these are the presentation copy, kept in the component layer.
@@ -74,7 +75,7 @@ export function SplitCell({ cell, index, selected, onSelect }: SplitCellProps) {
       {/* A ruled-out / undocumented cell carries its earned rationale on its own face,
           so the empty cell reads as a finding rather than a blank. */}
       {!isAssertive && cell.rationale && (
-        <span className="split-cell__earned">{cell.rationale}</span>
+        <span className="split-cell__earned">{cleanRationale(cell.rationale)}</span>
       )}
     </button>
   );

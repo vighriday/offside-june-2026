@@ -72,7 +72,7 @@ export function Hero() {
       </p>
 
       <p className="hero__for">
-        A tool for the people who <em>defend</em> these calls — referees&rsquo; bodies,
+        A tool for the people who <em>defend</em>{" "}these calls — referees&rsquo; bodies,
         rule-makers, broadcasters — not to re-argue a goal, but to show which gap each one exposes.
       </p>
     </header>

@@ -30,13 +30,13 @@ export function HowItWorks() {
       </div>
 
       <div className="how__models">
-        <p className="how__models-label">Four IBM models do the work</p>
+        <p className="how__models-label">Three Granite models, plus Docling</p>
         <ul className="how__model-list">
           <li>
             <strong>Granite</strong> reads each piece of evidence and says what it means.
           </li>
           <li>
-            <strong>Granite Guardian</strong> is a <em>second</em> model that checks the first —
+            <strong>Granite Guardian</strong> is a <em>second</em>{" "}model that checks the first —
             it throws out any reading the source page doesn&rsquo;t actually support.
           </li>
           <li>
@@ -44,8 +44,8 @@ export function HowItWorks() {
             question.
           </li>
           <li>
-            <strong>Docling</strong> reads the official Laws PDF so every answer can point at a
-            real page and the exact spot on it.
+            <strong>Docling</strong>, IBM&rsquo;s open-source document parser, reads the official
+            Laws PDF so every answer can point at a real page and the exact spot on it.
           </li>
         </ul>
       </div>
@@ -53,9 +53,10 @@ export function HowItWorks() {
       <p className="how__honest">
         <span className="how__honest-tag">Straight answer</span>
         The page you see is a frozen result, so it loads instantly with no model running.
-        We built it that way on purpose — and to prove it&rsquo;s not a stored trick, the
-        section further down <strong>attacks the answer live</strong> with the real models and
-        lets the second one overrule the first. It never invents a number.
+        We built it that way on purpose — and to prove it&rsquo;s not a stored trick, open the
+        <strong>millimetre offside</strong> case below: it <strong>attacks its own answer
+        live</strong> with the real models and lets the second one overrule the first. The
+        schema makes it structurally unable to invent a number.
       </p>
     </section>
   );
@@ -75,7 +76,7 @@ const STEPS = [
   {
     k: "answer",
     title: "It answers each from the real Laws",
-    body: "Every answer points at the exact page of the Laws of the Game — click it and you land on the spot.",
+    body: "Where the Laws speak, the answer points at the exact page of the Laws of the Game — click it and you land on the spot.",
   },
   {
     k: "why",

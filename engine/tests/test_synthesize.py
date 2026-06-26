@@ -105,7 +105,9 @@ def test_indeterminacy_keys_on_stance_not_any_citation_id():
     d = _states(derive_split(disputes, admitted_act=False))
     s = _states(derive_split(supports, admitted_act=False))
     assert d["INDETERMINACY"] == "PRESENT"
-    assert s["INDETERMINACY"] == "NOT_DOCUMENTED"      # same id, but SUPPORTS != indeterminacy
+    # same id, but a SUPPORTS reading means the truth was knowable -> indeterminacy RULED OUT,
+    # not merely undocumented (the record bears on knowability and says it is recoverable).
+    assert s["INDETERMINACY"] == "ABSENT"
     assert s["DECISION_TIME_DEFICIT"] == "PRESENT"     # SUPPORTS is a decision-time gap
 
 
@@ -119,7 +121,7 @@ def test_historical_mixed_rules_out_both_gaps():
     ]
     states = _states(derive_split(lenses, admitted_act=False))
     assert states["DECISION_TIME_DEFICIT"] == "ABSENT"        # fully knowable, no sightline gap
-    assert states["INDETERMINACY"] == "NOT_DOCUMENTED"        # nothing unrecoverable
+    assert states["INDETERMINACY"] == "ABSENT"               # truth recoverable -> ruled out
     assert states["RULE_AMBIGUITY"] == "PRESENT"              # the dispute is the rule
 
 

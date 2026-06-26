@@ -38,7 +38,7 @@ else:  # pragma: no cover - very old interpreters
 
 from offside_engine.analyze.granite_client import GraniteClient
 from offside_engine.analyze.guardian import GuardianClient
-from offside_engine.analyze.split_schema import Citation
+from offside_engine.analyze.split_schema import Citation, RuleEvolution
 from offside_engine.bake.bake import bake_incident
 from offside_engine.bake.corpus_pool import assemble_pool
 from offside_engine.bake.incident import INCIDENTS, IncidentSpec
@@ -89,6 +89,22 @@ _SLUG = {
     "handball-rewrite": "handball-rewrite",
     "offside-margin": "offside-margin",
     "pgmol-subjective": "pgmol-subjective",
+}
+
+
+# Code-owned, verdict-free temporal counterfactuals (Rule Evolution) — documented facts, not
+# model outputs, so they are attached to the live fixture the same way the offline bake does.
+# Only Lampard has one: goal-line technology resolves the 2010 decision-time deficit.
+_RULE_EVOLUTION: dict[str, RuleEvolution] = {
+    "lampard-ghost-goal-2010": RuleEvolution(
+        axis="DECISION_TIME_DEFICIT",
+        from_era="2010 — no goal-line technology",
+        to_era="2026 — automatic goal-line detection",
+        from_state="PRESENT",
+        to_state="ABSENT",
+        note="What was undetectable in the moment is automatic now — the fact was always "
+             "settled; only its availability to the officials changed.",
+    ),
 }
 
 
@@ -229,6 +245,14 @@ def main() -> None:
             _say(f"\n{_GRN}✓ integrity lock passed — every probe verdict is a real Granite "
                  f"Guardian token.{_RST}")
             bundle = bundle.model_copy(update={"probes": probes})
+
+    # Rule Evolution is a code-owned, verdict-free temporal counterfactual (not a model
+    # output): for Lampard, goal-line technology resolves the Decision-Time Deficit that was
+    # PRESENT in 2010. Attach it so the live fixture carries the same documented fact the
+    # offline bake does and the web toggle renders.
+    evo = _RULE_EVOLUTION.get(spec.incident_id)
+    if evo is not None:
+        bundle = bundle.model_copy(update={"rule_evolution": evo})
 
     if args.write:
         fixtures_dir = _REPO / "web" / "fixtures"

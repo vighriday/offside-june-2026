@@ -60,8 +60,9 @@ export function ProvenanceFooter({ provenance, citations }: ProvenanceFooterProp
           <span className="provenance__label">Corpus</span>
           <span className="provenance__sha">{shaShort}</span>
           <span className="provenance__note">
-            deterministic bake — re-running at this commit reproduces this fixture
-            byte-for-byte
+            {isDeterministic
+              ? "deterministic bake — re-running at this commit reproduces this fixture byte-for-byte"
+              : "baked live from this corpus commit with Granite at temperature 0 (fixed seed) — re-running reproduces the same SPLIT signature, citations, and Guardian verdicts"}
           </span>
         </div>
       )}
