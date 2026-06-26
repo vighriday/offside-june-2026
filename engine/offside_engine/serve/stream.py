@@ -29,4 +29,7 @@ def stream_decompose(payload: FormPayload) -> Iterator[dict]:
                "guardian_model": seal.guardian_model}
     for cell in bundle.split.cells:
         yield {"type": "cell", "axis": cell.axis, "state": cell.state}
+    bundle = bundle.model_copy(update={
+        "provenance": bundle.provenance.model_copy(update={"mode": "live-user"})
+    })
     yield {"type": "done", "bundle": bundle.model_dump(mode="json")}

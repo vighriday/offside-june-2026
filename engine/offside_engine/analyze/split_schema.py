@@ -275,6 +275,10 @@ class BakeProvenance(BaseModel):
     embed_model: str
     options: dict[str, int | float] = Field(default_factory=dict)
     corpus_git_sha: str | None = None
+    mode: Literal["frozen", "live-user"] = "frozen"
+    """Whether this bundle was frozen from the committed corpus (default) or produced live
+    from user-supplied evidence in the Studio. A live-user result never claims byte
+    reproducibility — only the same SPLIT/citations/verdicts for the same input."""
 
 
 class RuleEvolution(BaseModel):
