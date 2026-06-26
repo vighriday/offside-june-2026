@@ -16,11 +16,16 @@ const EXAMPLE: StudioFormPayload = {
   tactical_note: null,
 };
 
-export function StudioForm({ disabled, onRun, onExample }: {
+export function StudioForm({ disabled, onRun, onExample, liveEnabled }: {
   disabled: boolean;
   onRun: (p: StudioFormPayload) => void;
   /** When provided, overrides the default "fill the form" behaviour of the example button. */
   onExample?: () => void;
+  /** Whether a live backend is reachable. When false (the public $0 static site), the
+   *  "Decompose live" submit is hidden entirely — Studio is example-only there, and live
+   *  decomposition is a local / self-hosted action. This is what keeps the public site from
+   *  POSTing to a backend that isn't there (no hang, no CORS error). */
+  liveEnabled: boolean;
 }) {
   const [form, setForm] = useState<StudioFormPayload>({
     title: "", settled_statement: "", historical_note: "",
@@ -63,11 +68,19 @@ export function StudioForm({ disabled, onRun, onExample }: {
       </label>
 
       <div className="studio-form__actions">
-        <button type="button" onClick={() => onExample ? onExample() : setForm(EXAMPLE)}>Load an example</button>
-        <button type="submit" disabled={!canRun}>Decompose live</button>
+        <button type="button" onClick={() => onExample ? onExample() : setForm(EXAMPLE)}>
+          {liveEnabled ? "Load an example" : "Show a worked example"}
+        </button>
+        {liveEnabled && <button type="submit" disabled={!canRun}>Decompose live</button>}
       </div>
-      {!canRun && filledQuotes.length < 2 && (
+      {liveEnabled && !canRun && filledQuotes.length < 2 && (
         <p className="studio-form__hint">Add at least two named quotes in opposed valence for Cultural bias to fire.</p>
+      )}
+      {!liveEnabled && (
+        <p className="studio-form__hint">
+          Live decomposition runs the real Granite models locally — see the README
+          &ldquo;Run the Studio yourself&rdquo;. Here, the worked example shows a complete real result.
+        </p>
       )}
     </form>
   );

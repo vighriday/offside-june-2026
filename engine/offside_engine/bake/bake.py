@@ -26,6 +26,7 @@ is the *post-hoc* assertion in step 6, never an input to any model call.
 
 from __future__ import annotations
 
+from collections.abc import Iterator
 
 from offside_engine.analyze.granite_client import GraniteClient
 from offside_engine.analyze.guardian import GuardianClient
@@ -112,7 +113,13 @@ def assert_thesis_shape(split: Split, expected: ThesisShape) -> None:
         )
 
 
-def bake_incident(
+_LENS_LABEL: dict[LensKind, str] = {
+    "REFEREE": "Referee", "TACTICAL": "Tactical",
+    "HISTORICAL": "Historical", "FRAMING": "Framing",
+}
+
+
+def bake_incident_streaming(
     spec: IncidentSpec,
     *,
     retriever: LensRetriever,
@@ -122,16 +129,21 @@ def bake_incident(
     embed_model: str = DEFAULT_EMBED_MODEL,
     corpus_git_sha: str | None = None,
     strict_thesis: bool = False,
-) -> IncidentBundle:
-    """Run the full bake for one incident and return its frozen IncidentBundle.
+) -> Iterator[dict]:
+    """Run the bake step by step, yielding a progress event as each step completes.
 
-    ``citations`` is the complete pool of evidence atoms (laws + curated + statsbomb);
-    the per-incident allow-list on ``spec`` scopes which of them any lens may surface.
+    Identical pipeline to :func:`bake_incident` — same lens runs, same Guardian gate, same
+    deterministic routing — but instead of returning only the final bundle it ``yield``s a
+    dict per visible step so a caller (the Studio backend) can stream genuine progress to
+    the UI while the multi-minute bake is still running:
 
-    ``strict_thesis`` controls what happens if the derived SPLIT does not match the
-    incident's documented thesis shape. The default (``False``) prints a loud warning and
-    still returns the fixture, so a live bake always produces something inspectable.
-    Set it ``True`` (CI, regression checks) to raise :class:`ThesisMismatch` instead.
+    * ``{"type": "lens", lens, stance, rationale, citation_ids}``   — a lens reading landed
+    * ``{"type": "audit", lens, verdict, guardian_model}``          — Guardian audited it
+    * ``{"type": "cell", axis, state}``                             — an axis resolved
+    * ``{"type": "done", bundle}``                                  — the assembled bundle
+
+    Every event is real — read off the actual step result, never synthesised. The final
+    ``done`` event carries the same :class:`IncidentBundle` :func:`bake_incident` returns.
     """
     # 1 — settled fact, stated first.
     settled = SettledFact(
@@ -140,7 +152,8 @@ def bake_incident(
         citation_ids=list(spec.settled_citation_ids),
     )
 
-    # 2 + 3 — per-lens run, then per-lens Guardian gate.
+    # 2 + 3 — per-lens run, then per-lens Guardian gate. Emit after each so the UI shows
+    # "Granite read the Referee lens" then "Guardian: GROUNDED" as it actually happens.
     sealed_lenses: list[SealedLens] = []
     gated_outputs: list[LensOutput] = []
     for lens in _LENS_ORDER:
@@ -154,30 +167,29 @@ def bake_incident(
         gated = gate_lens(run.output, citations=citations, guardian=guardian)
         sealed_lenses.append(SealedLens(output=gated.output, seal=gated.seal))
         gated_outputs.append(gated.output)
+        yield {
+            "type": "lens", "lens": lens, "stance": gated.output.stance,
+            "rationale": gated.output.rationale, "citation_ids": list(gated.output.citation_ids),
+        }
+        yield {
+            "type": "audit", "lens": lens, "verdict": gated.seal.verdict,
+            "guardian_model": gated.seal.guardian_model,
+        }
 
-    # 4 — synthesis: ROUTE the gated lens evidence onto the four axes.
-    #
-    # THE SPLIT routing is a fixed set of rules (see prompts.SPLIT_SYSTEM). We apply them
-    # in code (`derive_split`) rather than asking an 8B model to emit a strict four-cell
-    # schema every time — the rules are deterministic, so the code router is both faithful
-    # to the documented rules AND reliable, where the model is neither (it routinely fails
-    # the schema). This keeps the synthesis reproducible and is the honest division of
-    # labour: the models do the grounded, audited *lens readings* (the hard NL work); the
-    # routing of those readings onto the diagnostic is deterministic. It is still
-    # evidence-derived — a different incident's lens signatures yield a different SPLIT.
+    # 4 — synthesis: ROUTE the gated lens evidence onto the four axes (deterministic code).
     split = derive_split(gated_outputs, admitted_act=bool(spec.admission_note))
 
-    # 5 — per-cell Guardian gate (demote ungrounded PRESENT/WEAK -> NOT_DOCUMENTED).
+    # 5 — per-cell Guardian gate; emit each axis as it resolves so the boxes fill live.
     gated_cells = []
     sealed_cells: list[SealedCell] = []
     for cell in split.cells:
         gc = gate_cell(cell, citations=citations, guardian=guardian)
         gated_cells.append(gc.cell)
         sealed_cells.append(SealedCell(cell=gc.cell, seal=gc.seal))
+        yield {"type": "cell", "axis": gc.cell.axis, "state": gc.cell.state}
     gated_split = Split(cells=gated_cells, headline=split.headline)
 
-    # 6 — thesis check on the gated SPLIT (oracle, not an input). Strict callers raise;
-    # a live bake warns and still freezes so the derived SPLIT is always inspectable.
+    # 6 — thesis check (oracle, not an input). Strict callers raise; a live bake warns.
     problems = check_thesis_shape(gated_split, spec.expected_thesis)
     if problems:
         message = (
@@ -204,7 +216,7 @@ def bake_incident(
         corpus_git_sha=corpus_git_sha,
     )
 
-    return IncidentBundle(
+    bundle = IncidentBundle(
         incident_id=spec.incident_id,
         title=spec.title,
         settled_fact=settled,
@@ -214,3 +226,41 @@ def bake_incident(
         citations=bundle_citations,
         provenance=provenance,
     )
+    yield {"type": "done", "bundle": bundle}
+
+
+def bake_incident(
+    spec: IncidentSpec,
+    *,
+    retriever: LensRetriever,
+    granite: GraniteClient,
+    guardian: GuardianClient,
+    citations: dict[str, Citation],
+    embed_model: str = DEFAULT_EMBED_MODEL,
+    corpus_git_sha: str | None = None,
+    strict_thesis: bool = False,
+) -> IncidentBundle:
+    """Run the full bake for one incident and return its frozen IncidentBundle.
+
+    ``citations`` is the complete pool of evidence atoms (laws + curated + statsbomb);
+    the per-incident allow-list on ``spec`` scopes which of them any lens may surface.
+
+    ``strict_thesis`` controls what happens if the derived SPLIT does not match the
+    incident's documented thesis shape. The default (``False``) prints a loud warning and
+    still returns the fixture, so a live bake always produces something inspectable.
+    Set it ``True`` (CI, regression checks) to raise :class:`ThesisMismatch` instead.
+
+    This is the non-streaming entry point: it drives :func:`bake_incident_streaming` to
+    completion and returns the bundle from its final ``done`` event, so the two share one
+    implementation of the bake steps and can never drift.
+    """
+    bundle: IncidentBundle | None = None
+    for event in bake_incident_streaming(
+        spec, retriever=retriever, granite=granite, guardian=guardian,
+        citations=citations, embed_model=embed_model, corpus_git_sha=corpus_git_sha,
+        strict_thesis=strict_thesis,
+    ):
+        if event["type"] == "done":
+            bundle = event["bundle"]
+    assert bundle is not None, "streaming bake did not yield a done event"
+    return bundle
