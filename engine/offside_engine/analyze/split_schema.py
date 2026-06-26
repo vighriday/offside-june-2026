@@ -297,6 +297,46 @@ class RuleEvolution(BaseModel):
     note: str  # verdict-free one-liner: what was undetectable then is automatic now
 
 
+ProbeKind = Literal["FLIP", "NOISE", "OVERREACH"]
+"""The three falsification experiments run against a baked incident, each through the SAME
+real Granite + Granite Guardian pipeline:
+
+* ``FLIP``      — inject a grounded counter-passage that legitimately shifts one lens's
+                  reading. A correct engine MOVES the axis. Proves it reasons from evidence
+                  rather than replaying a fixed answer.
+* ``NOISE``     — inject an irrelevant passage. A correct engine does NOT move. Proves it is
+                  not merely flipping at any push.
+* ``OVERREACH`` — inject a passage whose claim exceeds what it supports. Granite may read it,
+                  but Granite Guardian (the second model) flags it UNGROUNDED and the gate
+                  demotes it. Proves the second IBM model publicly overrules the first.
+"""
+
+
+class Probe(BaseModel):
+    """One falsification experiment and its REAL, captured outcome. Code-owned.
+
+    A probe is honest only if its ``guardian_verdict`` was emitted by a live Granite Guardian
+    token at bake time — never hand-authored. The integrity lock (CI) enforces exactly that:
+    a probe whose seal names ``deterministic-router`` or whose claimed effect did not actually
+    occur fails the build. The probe carries no numeric field — only states, a verdict, and
+    the injected passage's text — so it stays inside the no-numbers guarantee for anything a
+    viewer reads as a magnitude.
+    """
+
+    model_config = ConfigDict(extra="forbid")
+
+    kind: ProbeKind
+    axis: SplitAxis  # the axis the probe targets
+    label: str  # short human title, e.g. "Push it the right way"
+    plain_question: str  # what a non-expert is watching for, in one line
+    injected_text: str  # the exact passage fed into the real pipeline
+    state_before: CellState  # the axis state in the untouched bake
+    state_after: CellState  # the axis state after the probe ran through the real pipeline
+    guardian_verdict: GuardianVerdict  # the REAL second-model verdict on the injected reading
+    guardian_model: str  # the model id that emitted it (must be a real granite* id)
+    outcome: str  # one-line, verdict-free description of what happened and why it matters
+
+
 class IncidentBundle(BaseModel):
     """THE frozen fixture for one incident — the whole contract the web app reads.
 
@@ -319,6 +359,9 @@ class IncidentBundle(BaseModel):
     # Optional verdict-free temporal counterfactual (Rule Evolution). Present only for
     # incidents where officiating technology changed what was knowable in the moment.
     rule_evolution: RuleEvolution | None = None
+    # Optional falsification probes — the self-attack centerpiece. Present only on incidents
+    # that were probed with a live pipeline; each carries a real captured Guardian verdict.
+    probes: list[Probe] = Field(default_factory=list)
 
     @model_validator(mode="after")
     def _bundle_is_internally_consistent(self) -> "IncidentBundle":
@@ -370,5 +413,6 @@ CODE_OWNED_MODELS: tuple[type[BaseModel], ...] = (
     SealedCell,
     BakeProvenance,
     RuleEvolution,
+    Probe,
     IncidentBundle,
 )

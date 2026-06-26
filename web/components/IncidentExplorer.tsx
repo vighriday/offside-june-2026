@@ -9,6 +9,8 @@ import { LensPanels } from "./LensPanels";
 import { ProvenanceFooter } from "./ProvenanceFooter";
 import { DivergenceLineage } from "./DivergenceLineage";
 import { RuleEvolution } from "./RuleEvolution";
+import { FalsificationPanel } from "./FalsificationPanel";
+import { HowItWorks } from "./HowItWorks";
 import { Hero } from "./Hero";
 
 export interface LoadedBundle {
@@ -40,6 +42,8 @@ export function IncidentExplorer({ incidents }: IncidentExplorerProps) {
       <div className="incident__inner">
         <Hero />
 
+        <HowItWorks />
+
         {bundles.length > 1 && (
           <DivergenceLineage
             incidents={bundles}
@@ -64,6 +68,10 @@ export function IncidentExplorer({ incidents }: IncidentExplorerProps) {
           )}
 
           <SplitView bundle={bundle} />
+
+          {bundle.probes && bundle.probes.length > 0 && (
+            <FalsificationPanel probes={bundle.probes} />
+          )}
 
           {bundle.rule_evolution && <RuleEvolution evo={bundle.rule_evolution} />}
 

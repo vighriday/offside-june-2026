@@ -3,64 +3,58 @@
     {
       "cell": {
         "axis": "RULE_AMBIGUITY",
-        "citation_ids": [
-          "pg-hist-threshold",
-          "pg-hist-opposite-rulings"
-        ],
-        "rationale": "Retrieved clauses point to different outcomes for the same facts.",
-        "state": "PRESENT"
+        "citation_ids": [],
+        "rationale": "No referee-law evidence bears on this incident.",
+        "state": "NOT_DOCUMENTED"
       },
       "seal": {
-        "checked_context_citation_ids": [
-          "pg-hist-threshold",
-          "pg-hist-opposite-rulings"
-        ],
-        "guardian_model": "deterministic-router",
-        "verdict": "GROUNDED"
+        "checked_context_citation_ids": [],
+        "guardian_model": "granite3-guardian:2b",
+        "verdict": "UNGROUNDED"
       }
     },
     {
       "cell": {
         "axis": "INDETERMINACY",
         "citation_ids": [],
-        "rationale": "Nothing makes the truth unrecoverable — the retrieved facts state the contact was visible on replay and reviewed by VAR (pg-hist-visible).",
+        "rationale": "Nothing makes the truth unrecoverable — the retrieved facts state that the contact in these incidents was visible on replay and reviewed by VAR ([pg-hist-visible]).",
         "state": "NOT_DOCUMENTED"
       },
       "seal": {
         "checked_context_citation_ids": [],
-        "guardian_model": "deterministic-router",
-        "verdict": "GROUNDED"
+        "guardian_model": "granite3-guardian:2b",
+        "verdict": "UNGROUNDED"
       }
     },
     {
       "cell": {
         "axis": "DECISION_TIME_DEFICIT",
         "citation_ids": [],
-        "rationale": "The decisive truth was available at the moment — the retrieved facts state the contact was visible on replay and reviewed by VAR (pg-hist-visible).",
+        "rationale": "The decisive truth was available at the moment — the retrieved facts state that the contact in these incidents was visible on replay and reviewed by VAR ([pg-hist-visible]).",
         "state": "ABSENT"
       },
       "seal": {
         "checked_context_citation_ids": [],
-        "guardian_model": "deterministic-router",
-        "verdict": "GROUNDED"
+        "guardian_model": "granite3-guardian:2b",
+        "verdict": "UNGROUNDED"
       }
     },
     {
       "cell": {
         "axis": "CULTURAL_PRIOR_BIAS",
         "citation_ids": [
-          "pg-framing-aggrieved",
-          "pg-framing-benefiting"
+          "pg-framing-benefiting",
+          "pg-framing-aggrieved"
         ],
-        "rationale": "Named sources frame the same settled fact in opposed valence.",
+        "rationale": "The manager who benefited from the decision called the same contact part of the game and praised VAR for not intervening on a subjective matter, reading the identical, agreed contact in the opposite direction (pg-framing-benefiting). In contrast, the manager ruled against insisted the contact was a clear, obvious foul that any consistent application of the Law would punish, pointing to other matches where the same contact was given (pg-framing-aggrieved). These two named people describe one agreed event in opposing terms.",
         "state": "PRESENT"
       },
       "seal": {
         "checked_context_citation_ids": [
-          "pg-framing-aggrieved",
-          "pg-framing-benefiting"
+          "pg-framing-benefiting",
+          "pg-framing-aggrieved"
         ],
-        "guardian_model": "deterministic-router",
+        "guardian_model": "granite3-guardian:2b",
         "verdict": "GROUNDED"
       }
     }
@@ -116,83 +110,87 @@
   "lenses": [
     {
       "output": {
-        "citation_ids": [
-          "pg-hist-threshold",
-          "pg-hist-opposite-rulings"
-        ],
+        "citation_ids": [],
         "lens": "REFEREE",
-        "rationale": "The retrieved record shows the 'clear and obvious' and 'non-footballing action' thresholds are matters of degree, not bright lines, so near-identical contact is ruled in opposite ways across matches (pg-hist-threshold, pg-hist-opposite-rulings); the rule's threshold itself generates the disagreement.",
-        "stance": "DISPUTES",
-        "state": "GROUNDED"
+        "rationale": "No evidence was retrieved for this lens on this incident.",
+        "stance": "INSUFFICIENT_EVIDENCE",
+        "state": "INSUFFICIENT_EVIDENCE"
       },
       "seal": {
-        "checked_context_citation_ids": [
-          "pg-hist-threshold",
-          "pg-hist-opposite-rulings"
-        ],
-        "guardian_model": "deterministic-router",
-        "verdict": "GROUNDED"
+        "checked_context_citation_ids": [],
+        "guardian_model": "granite3-guardian:2b",
+        "verdict": "UNGROUNDED"
       }
     },
     {
       "output": {
         "citation_ids": [],
         "lens": "TACTICAL",
-        "rationale": "No event-data anomaly resolves whether the threshold was met.",
+        "rationale": "No evidence was retrieved for this lens on this incident.",
         "stance": "INSUFFICIENT_EVIDENCE",
         "state": "INSUFFICIENT_EVIDENCE"
       },
       "seal": {
         "checked_context_citation_ids": [],
-        "guardian_model": "deterministic-router",
-        "verdict": "GROUNDED"
+        "guardian_model": "granite3-guardian:2b",
+        "verdict": "UNGROUNDED"
       }
     },
     {
       "output": {
         "citation_ids": [
-          "pg-hist-visible"
+          "pg-hist-visible",
+          "pg-hist-threshold",
+          "pg-hist-opposite-rulings"
         ],
         "lens": "HISTORICAL",
-        "rationale": "The retrieved facts state the contact was visible on replay and reviewed by VAR (pg-hist-visible); the information available was adequate, so the dispute is not about what could be seen but about whether the threshold was met.",
-        "stance": "DISPUTES",
-        "state": "GROUNDED"
-      },
-      "seal": {
-        "checked_context_citation_ids": [
-          "pg-hist-visible"
-        ],
-        "guardian_model": "deterministic-router",
-        "verdict": "GROUNDED"
-      }
-    },
-    {
-      "output": {
-        "citation_ids": [
-          "pg-framing-aggrieved",
-          "pg-framing-benefiting"
-        ],
-        "lens": "FRAMING",
-        "rationale": "The manager ruled against is reported to call the contact a clear, obvious foul (pg-framing-aggrieved) while the manager who benefited calls the identical contact part of the game (pg-framing-benefiting); two named sources frame the same agreed contact in opposite valence.",
+        "rationale": "The retrieved facts state that the contact in these incidents was visible on replay and reviewed by VAR ([pg-hist-visible]). The decision-time information was adequate. However, the dispute is not about what happened but about whether the threshold for intervention was met ([pg-hist-threshold]). These thresholds are described as 'matters of degree' and 'not bright lines', with reasonable officials applying them differently to similar contact. This subjectivity is further evidenced by opposite rulings in near-identical situations across different matches during the 2025/26 season ([pg-hist-opposite-rulings]), which were recorded as 'subjective' rather than errors by the Key Match Incidents Panel. Therefore, while the officials could access the truth at the moment of the decision, the truth is not fully determinable due to the inherent subjectivity in interpreting these thresholds.",
         "stance": "MIXED",
         "state": "GROUNDED"
       },
       "seal": {
         "checked_context_citation_ids": [
-          "pg-framing-aggrieved",
-          "pg-framing-benefiting"
+          "pg-hist-visible",
+          "pg-hist-threshold",
+          "pg-hist-opposite-rulings"
         ],
-        "guardian_model": "deterministic-router",
+        "guardian_model": "granite3-guardian:2b",
+        "verdict": "GROUNDED"
+      }
+    },
+    {
+      "output": {
+        "citation_ids": [
+          "pg-framing-benefiting",
+          "pg-framing-aggrieved"
+        ],
+        "lens": "FRAMING",
+        "rationale": "The manager who benefited from the decision called the same contact part of the game and praised VAR for not intervening on a subjective matter, reading the identical, agreed contact in the opposite direction (pg-framing-benefiting). In contrast, the manager ruled against insisted the contact was a clear, obvious foul that any consistent application of the Law would punish, pointing to other matches where the same contact was given (pg-framing-aggrieved). These two named people describe one agreed event in opposing terms.",
+        "stance": "MIXED",
+        "state": "GROUNDED"
+      },
+      "seal": {
+        "checked_context_citation_ids": [
+          "pg-framing-benefiting",
+          "pg-framing-aggrieved"
+        ],
+        "guardian_model": "granite3-guardian:2b",
         "verdict": "GROUNDED"
       }
     }
   ],
+  "probes": [],
   "provenance": {
-    "corpus_git_sha": "52499cff84ff95f7281b24bef4aa2fca471483af",
+    "corpus_git_sha": "889b304af3cbb5012931960e3d7d9540daefa9df",
     "embed_model": "granite-embedding:30m",
-    "granite_model": "deterministic-router",
-    "guardian_model": "deterministic-router",
-    "options": {}
+    "granite_model": "granite3.3:8b",
+    "guardian_model": "granite3-guardian:2b",
+    "options": {
+      "num_ctx": 8192,
+      "num_predict": 1024,
+      "seed": 42,
+      "temperature": 0.0
+    }
   },
   "rule_evolution": null,
   "settled_fact": {
@@ -206,36 +204,33 @@
     "cells": [
       {
         "axis": "RULE_AMBIGUITY",
-        "citation_ids": [
-          "pg-hist-threshold",
-          "pg-hist-opposite-rulings"
-        ],
-        "rationale": "Retrieved clauses point to different outcomes for the same facts.",
-        "state": "PRESENT"
+        "citation_ids": [],
+        "rationale": "No referee-law evidence bears on this incident.",
+        "state": "NOT_DOCUMENTED"
       },
       {
         "axis": "INDETERMINACY",
         "citation_ids": [],
-        "rationale": "Nothing makes the truth unrecoverable — the retrieved facts state the contact was visible on replay and reviewed by VAR (pg-hist-visible).",
+        "rationale": "Nothing makes the truth unrecoverable — the retrieved facts state that the contact in these incidents was visible on replay and reviewed by VAR ([pg-hist-visible]).",
         "state": "NOT_DOCUMENTED"
       },
       {
         "axis": "DECISION_TIME_DEFICIT",
         "citation_ids": [],
-        "rationale": "The decisive truth was available at the moment — the retrieved facts state the contact was visible on replay and reviewed by VAR (pg-hist-visible).",
+        "rationale": "The decisive truth was available at the moment — the retrieved facts state that the contact in these incidents was visible on replay and reviewed by VAR ([pg-hist-visible]).",
         "state": "ABSENT"
       },
       {
         "axis": "CULTURAL_PRIOR_BIAS",
         "citation_ids": [
-          "pg-framing-aggrieved",
-          "pg-framing-benefiting"
+          "pg-framing-benefiting",
+          "pg-framing-aggrieved"
         ],
-        "rationale": "Named sources frame the same settled fact in opposed valence.",
+        "rationale": "The manager who benefited from the decision called the same contact part of the game and praised VAR for not intervening on a subjective matter, reading the identical, agreed contact in the opposite direction (pg-framing-benefiting). In contrast, the manager ruled against insisted the contact was a clear, obvious foul that any consistent application of the Law would punish, pointing to other matches where the same contact was given (pg-framing-aggrieved). These two named people describe one agreed event in opposing terms.",
         "state": "PRESENT"
       }
     ],
-    "headline": "It stays contested over whether the Law is clear and how named sources frame the same fact — not over the dimensions ruled out."
+    "headline": "It stays contested over how named sources frame the same fact — not over the dimensions ruled out."
   },
   "title": "The 'subjective' VAR call"
 }

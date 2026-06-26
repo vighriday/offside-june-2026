@@ -12,6 +12,7 @@ export type LensKind = "REFEREE" | "TACTICAL" | "HISTORICAL" | "FRAMING";
 export type LensStance = "SUPPORTS" | "DISPUTES" | "MIXED" | "INSUFFICIENT_EVIDENCE";
 export type LensState = "GROUNDED" | "INSUFFICIENT_EVIDENCE";
 export type GuardianVerdict = "GROUNDED" | "UNGROUNDED";
+export type ProbeKind = "FLIP" | "NOISE" | "OVERREACH";
 
 export interface Bbox {
   left: number;
@@ -89,6 +90,19 @@ export interface RuleEvolution {
   note: string;
 }
 
+export interface Probe {
+  kind: ProbeKind;
+  axis: SplitAxis;
+  label: string;
+  plain_question: string;
+  injected_text: string;
+  state_before: CellState;
+  state_after: CellState;
+  guardian_verdict: GuardianVerdict;
+  guardian_model: string;
+  outcome: string;
+}
+
 export interface IncidentBundle {
   incident_id: string;
   title: string;
@@ -99,6 +113,7 @@ export interface IncidentBundle {
   citations: Record<string, Citation>;
   provenance: BakeProvenance;
   rule_evolution: RuleEvolution | null;
+  probes: Probe[];
 }
 
 // The four axes in the canonical order the SPLIT always renders them.

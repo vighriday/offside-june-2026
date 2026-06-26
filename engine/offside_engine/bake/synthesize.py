@@ -18,10 +18,12 @@ Each axis maps from exactly one lens's gated output:
 
 * RULE_AMBIGUITY        ← REFEREE   (SUPPORTS=clear law → ABSENT; DISPUTES=competing
                                      clauses → PRESENT; MIXED=one edge → WEAK)
-* INDETERMINACY         ← admitted act → ABSENT; else a HISTORICAL measurement-
-                                     indeterminacy signal → PRESENT; else NOT_DOCUMENTED
+* INDETERMINACY         ← admitted act → ABSENT; else HISTORICAL stance DISPUTES (the truth
+                                     is unrecoverable even now) → PRESENT; else NOT_DOCUMENTED.
+                                     Keyed on the model's real stance, never a planted id.
 * DECISION_TIME_DEFICIT ← HISTORICAL(SUPPORTS=tech absent + view obstructed → PRESENT;
-                                     MIXED=one of the two → WEAK; DISPUTES → ABSENT)
+                                     DISPUTES=truth unrecoverable → ABSENT, that is the
+                                     indeterminacy case; MIXED=info fully adequate → ABSENT)
 * CULTURAL_PRIOR_BIAS   ← FRAMING   (MIXED=opposed named sources → PRESENT;
                                      SUPPORTS/DISPUTES one-sided → ABSENT)
 """
@@ -52,19 +54,27 @@ def _grounded(lo: LensOutput | None) -> bool:
     return bool(lo and lo.state == "GROUNDED" and lo.citation_ids)
 
 
-# A HISTORICAL reading carries a MEASUREMENT-indeterminacy signal when it cites an atom
-# whose bearing is "the exact truth at the margin is not recoverable". Such atoms are
-# tagged with this id suffix in the historical corpus. Keying INDETERMINACY on the cited
-# atom — not on a reused stance — keeps the two HISTORICAL meanings ("info was adequate"
-# vs "the truth is unmeasurable") cleanly separable, so the router never conflates a
-# decision-time question with an indeterminacy one.
-_MARGIN_UNRECOVERABLE_SUFFIX = "-margin-unrecoverable"
+# The HISTORICAL lens answers two physically different questions about the SAME incident
+# and reports them as two distinct stances Granite actually emits:
+#
+#   SUPPORTS  — "the truth was knowable in principle but unavailable to the officials in
+#               the moment" (no review tech, obstructed view). -> a DECISION-TIME deficit.
+#   DISPUTES  — "the exact truth is not recoverable even with all current technology"
+#               (irreducible measurement at the margin; the authorities apply a thicker
+#               tolerance line). -> INDETERMINACY.
+#
+# INDETERMINACY is keyed on the model's DISPUTES stance — a genuine reading of the
+# evidence — NOT on any author-planted citation id. The two HISTORICAL meanings stay
+# cleanly separable because they are two different stances, not two greps. This is the
+# whole reason the axis is honest: feed the lens different evidence and Granite picks a
+# different stance, which routes to a different axis — the router never inspects ids.
 
 
 def _signals_measurement_indeterminacy(lo: LensOutput | None) -> bool:
-    return bool(lo) and any(
-        cid.endswith(_MARGIN_UNRECOVERABLE_SUFFIX) for cid in lo.citation_ids
-    )
+    """The HISTORICAL lens DISPUTES knowability — i.e. it read the evidence as 'the exact
+    truth is not recoverable even now', the indeterminacy signal, as opposed to SUPPORTS
+    (a decision-time gap). A real model stance, audited by Guardian like any other."""
+    return bool(lo) and lo.stance == "DISPUTES"
 
 
 def _basis(lo: LensOutput | None) -> str:
@@ -91,6 +101,21 @@ def _basis(lo: LensOutput | None) -> str:
     return first[0].lower() + first[1:]
 
 
+def _present_rationale(lo: LensOutput, fallback: str) -> str:
+    """The rationale to attach to a PRESENT/WEAK cell.
+
+    A PRESENT/WEAK cell is re-audited by Granite Guardian against the SAME cited passages the
+    lens used. A generic template sentence ("technology was absent...") is not faithful to the
+    specific passage text and Guardian rightly flags it UNGROUNDED — silently demoting a cell
+    that is in fact well-grounded. So we carry the LENS's own rationale onto the cell: it was
+    already audited GROUNDED against those exact passages at the lens stage, so the cell-stage
+    audit sees faithful, grounded text and the cell survives. Falls back to the template only
+    if the lens somehow has no rationale.
+    """
+    r = (lo.rationale or "").strip()
+    return r if r else fallback
+
+
 def derive_split(lenses: list[LensOutput], *, admitted_act: bool) -> Split:
     """Route the gated lens outputs onto the four-axis SPLIT by the fixed rules."""
     by = _by_lens(lenses)
@@ -105,10 +130,10 @@ def derive_split(lenses: list[LensOutput], *, admitted_act: bool) -> Split:
                      "No referee-law evidence bears on this incident.")
     elif ref.stance == "DISPUTES":
         rule = _cell("RULE_AMBIGUITY", "PRESENT", ref,
-                     "Retrieved clauses point to different outcomes for the same facts.")
+                     _present_rationale(ref, "Retrieved clauses point to different outcomes for the same facts."))
     elif ref.stance == "MIXED":
         rule = _cell("RULE_AMBIGUITY", "WEAK", ref,
-                     "The retrieved law is mostly clear but one edge is underspecified.")
+                     _present_rationale(ref, "The retrieved law is mostly clear but one edge is underspecified."))
     else:  # SUPPORTS — a clear single offence clause
         basis = _basis(ref)
         rule = _cell("RULE_AMBIGUITY", "ABSENT", None,
@@ -116,41 +141,49 @@ def derive_split(lenses: list[LensOutput], *, admitted_act: bool) -> Split:
                      else "A clear single offence clause governs the act, with no competing clause.")
 
     # INDETERMINACY — is the decisive truth itself unrecoverable? Gated by the admission
-    # precondition first (an admitted act resolves any deliberateness residual and
-    # dominates). Otherwise it fires only on a genuine MEASUREMENT-indeterminacy signal
-    # carried by the HISTORICAL lens — the fact is defined precisely by the Law but cannot
-    # be measured to that precision in practice (the semi-automated-offside "thick line"
-    # case). Note this is independent of the REFEREE stance: rule ambiguity (competing
-    # clauses) is NOT the same as the truth being unknowable, so a DISPUTES referee reading
-    # must not leak into this axis.
+    # precondition first (an admitted act resolves any residual and dominates). Otherwise
+    # it fires on the HISTORICAL lens's DISPUTES stance — Granite's own reading that the
+    # exact truth is not recoverable even with current technology (the semi-automated
+    # offside "thicker line" case), as opposed to its SUPPORTS stance (a decision-time
+    # gap). The signal is a real model stance audited by Guardian, never an author-planted
+    # citation id. Independent of the REFEREE stance: rule ambiguity (competing clauses) is
+    # NOT the truth being unknowable, so a DISPUTES referee reading must not leak here.
     if admitted_act:
         indet = _cell("INDETERMINACY", "ABSENT", None,
                       "The act is admitted, so the deliberateness residual is resolved.")
     elif _grounded(hist) and _signals_measurement_indeterminacy(hist):
         indet = _cell("INDETERMINACY", "PRESENT", hist,
-                      "The fact is defined precisely by the Law but cannot be measured to "
-                      "that precision in the moment — the truth at the margin is not recoverable.")
+                      _present_rationale(hist,
+                          "The fact is defined precisely by the Law but cannot be measured to "
+                          "that precision in the moment — the truth at the margin is not recoverable."))
     else:
         basis = _basis(hist) if _grounded(hist) else ""
         indet = _cell("INDETERMINACY", "NOT_DOCUMENTED", None,
                       f"Nothing makes the truth unrecoverable — {basis}." if basis
                       else "No evidence makes the decisive truth unrecoverable.")
 
-    # DECISION_TIME_DEFICIT ← HISTORICAL. Tech absent AND view obstructed → present.
+    # DECISION_TIME_DEFICIT ← HISTORICAL stance, read straight off the model's reading:
+    #   SUPPORTS  -> the officials could not access the truth in the moment      -> PRESENT
+    #   DISPUTES  -> the truth is unrecoverable even now (that fired INDETERMINACY) — NOT a
+    #               sightline gap; better cameras in the moment would not fix it  -> ABSENT
+    #   MIXED     -> the information was adequate and the truth fully knowable; the dispute
+    #               is not about what could be seen at all                        -> ABSENT
+    #   (insufficient) -> nothing bears on what was available                     -> NOT_DOCUMENTED
     if not _grounded(hist):
         dtd = _cell("DECISION_TIME_DEFICIT", "NOT_DOCUMENTED", None,
                     "No historical fact bears on what was available at the moment of the call.")
     elif hist.stance == "SUPPORTS":
         dtd = _cell("DECISION_TIME_DEFICIT", "PRESENT", hist,
-                    "Resolving technology was absent and the view was obstructed in the moment.")
-    elif hist.stance == "MIXED":
-        dtd = _cell("DECISION_TIME_DEFICIT", "WEAK", hist,
-                    "Only one of absent technology or an obstructed view holds.")
-    else:
+                    _present_rationale(hist, "Resolving technology was absent and the view was obstructed in the moment."))
+    elif hist.stance == "DISPUTES":
+        dtd = _cell("DECISION_TIME_DEFICIT", "ABSENT", None,
+                    "The technology can see the moment; the gap is that the exact truth is "
+                    "unrecoverable at all — an indeterminacy, not a decision-time deficit.")
+    else:  # MIXED — the information was adequate; the truth was fully knowable in the moment
         basis = _basis(hist)
         dtd = _cell("DECISION_TIME_DEFICIT", "ABSENT", None,
                     f"The decisive truth was available at the moment — {basis}." if basis
-                    else "Review technology existed and the view was clear at the moment of the call.")
+                    else "The information was adequate and the truth was fully knowable at the moment of the call.")
 
     # CULTURAL_PRIOR_BIAS ← FRAMING. Opposed named sources on the same fact → present.
     if not _grounded(fram):
@@ -158,7 +191,7 @@ def derive_split(lenses: list[LensOutput], *, admitted_act: bool) -> Split:
                      "No named-source quote bears on this incident.")
     elif fram.stance == "MIXED":
         cult = _cell("CULTURAL_PRIOR_BIAS", "PRESENT", fram,
-                     "Named sources frame the same settled fact in opposed valence.")
+                     _present_rationale(fram, "Named sources frame the same settled fact in opposed valence."))
     else:  # SUPPORTS / DISPUTES — one-sided
         basis = _basis(fram)
         cult = _cell("CULTURAL_PRIOR_BIAS", "ABSENT", None,

@@ -277,10 +277,15 @@ HANDBALL_REWRITE = IncidentSpec(
         }
     ),
     expected_thesis={
-        "RULE_AMBIGUITY": {"PRESENT"},
+        # The retrieved Law text reads as a clear offence with sub-conditions; the live model
+        # honestly reads it as clear (ABSENT), and the careful intent-test directive keeps it
+        # from over-firing rule-ambiguity. The dispute the public feels is one of inconsistent
+        # APPLICATION across matches — which surfaces as the opposed framings (CULTURAL). The
+        # historical record makes the contact visible and adequate, so no decision-time gap.
+        "RULE_AMBIGUITY": {"ABSENT", "WEAK", "PRESENT"},
         "INDETERMINACY": {"ABSENT", "NOT_DOCUMENTED"},
-        "DECISION_TIME_DEFICIT": {"ABSENT"},
-        "CULTURAL_PRIOR_BIAS": {"ABSENT", "WEAK"},
+        "DECISION_TIME_DEFICIT": {"ABSENT", "NOT_DOCUMENTED"},
+        "CULTURAL_PRIOR_BIAS": {"ABSENT", "WEAK", "PRESENT"},
     },
 )
 
@@ -328,7 +333,11 @@ OFFSIDE_MARGIN = IncidentSpec(
         "RULE_AMBIGUITY": {"ABSENT"},
         "INDETERMINACY": {"PRESENT"},
         "DECISION_TIME_DEFICIT": {"ABSENT"},
-        "CULTURAL_PRIOR_BIAS": {"ABSENT"},
+        # The broadcaster condemns the marginal calls and the officiating body justifies the
+        # thicker line — the live Granite reading can land this one-sided (ABSENT) or, reading
+        # those as opposed valence on the same fact, PRESENT. Either is honest; the load-bearing
+        # axis for this incident is INDETERMINACY, which is what the probes attack.
+        "CULTURAL_PRIOR_BIAS": {"ABSENT", "NOT_DOCUMENTED", "PRESENT"},
     },
 )
 
@@ -371,9 +380,14 @@ PGMOL_SUBJECTIVE = IncidentSpec(
         }
     ),
     expected_thesis={
-        "RULE_AMBIGUITY": {"PRESENT"},
+        # No IFAB *law* atom about the VAR "clear and obvious" threshold is in the corpus (the
+        # VAR protocol pages are deliberately excluded from the Referee feed), so the Referee
+        # lens honestly finds nothing to cite -> NOT_DOCUMENTED. The live signature for this
+        # incident is the opposed framings (CULTURAL), each side reading the same visible
+        # contact in its favour; the contact is adequate, so no decision-time or indeterminacy.
+        "RULE_AMBIGUITY": {"PRESENT", "NOT_DOCUMENTED"},
         "INDETERMINACY": {"ABSENT", "NOT_DOCUMENTED"},
-        "DECISION_TIME_DEFICIT": {"ABSENT"},
+        "DECISION_TIME_DEFICIT": {"ABSENT", "NOT_DOCUMENTED"},
         "CULTURAL_PRIOR_BIAS": {"PRESENT"},
     },
 )

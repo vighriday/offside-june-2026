@@ -4,31 +4,33 @@
       "cell": {
         "axis": "RULE_AMBIGUITY",
         "citation_ids": [],
-        "rationale": "A clear single clause governs the act — the retrieved Law fixes the offside line precisely — a player is offside if any part of the head, body or feet is nearer the goal line than the second-last opponent (ifab-law11-offside-margin-p103).",
+        "rationale": "A clear single clause governs the act — the retrieved Law states a player is in an offside position if any part of their body, excluding hands and arms, is nearer to the opponents' goal line than both the ball and the second-last opponent (ifab-law11-offside-p103, ifab-law11-offside-margin-p103).",
         "state": "ABSENT"
       },
       "seal": {
         "checked_context_citation_ids": [],
-        "guardian_model": "deterministic-router",
-        "verdict": "GROUNDED"
+        "guardian_model": "granite3-guardian:2b",
+        "verdict": "UNGROUNDED"
       }
     },
     {
       "cell": {
         "axis": "INDETERMINACY",
         "citation_ids": [
+          "om-hist-thicker-line",
           "om-hist-margin-unrecoverable",
-          "om-hist-thicker-line"
+          "om-hist-line-defined"
         ],
-        "rationale": "The fact is defined precisely by the Law but cannot be measured to that precision in the moment — the truth at the margin is not recoverable.",
+        "rationale": "The retrieved facts state that at a millimetre margin, the true position is not recoverable due to discrete video frames, system selection of relevant points, and motion of ball and players leading to different valid choices flipping the decision (om-hist-margin-unrecoverable). Additionally, the authorities apply a deliberately 'thicker' offside line and tolerance band acknowledging that the exact line is not knowable (om-hist-thicker-line), which is an indeterminacy unresolved by current technology. Law 11 defines the offside line precisely as any part of the head, body or feet nearer to the opponents' goal line than the second-last opponent (om-hist-line-defined), but this definition does not resolve the measurement precision issue at the margin (om-hist-margin-unrecoverable).",
         "state": "PRESENT"
       },
       "seal": {
         "checked_context_citation_ids": [
+          "om-hist-thicker-line",
           "om-hist-margin-unrecoverable",
-          "om-hist-thicker-line"
+          "om-hist-line-defined"
         ],
-        "guardian_model": "deterministic-router",
+        "guardian_model": "granite3-guardian:2b",
         "verdict": "GROUNDED"
       }
     },
@@ -36,25 +38,31 @@
       "cell": {
         "axis": "DECISION_TIME_DEFICIT",
         "citation_ids": [],
-        "rationale": "The decisive truth was available at the moment — the retrieved facts state that at a millimetre margin the kick frame, the limb point and the motion of ball and players make the true position unrecoverable, and the authorities answer with a deliberately thicker line (om-hist-margin-unrecoverable, om-hist-thicker-line).",
+        "rationale": "The technology can see the moment; the gap is that the exact truth is unrecoverable at all — an indeterminacy, not a decision-time deficit.",
         "state": "ABSENT"
       },
       "seal": {
         "checked_context_citation_ids": [],
-        "guardian_model": "deterministic-router",
-        "verdict": "GROUNDED"
+        "guardian_model": "granite3-guardian:2b",
+        "verdict": "UNGROUNDED"
       }
     },
     {
       "cell": {
         "axis": "CULTURAL_PRIOR_BIAS",
-        "citation_ids": [],
-        "rationale": "Named sources are one-sided — named broadcasters and officiating bodies are reported to agree that margins too fine to see make the calls feel arbitrary and that a thicker line is used precisely because the measurement is unreliable (om-framing-broadcaster, om-framing-official).",
-        "state": "ABSENT"
+        "citation_ids": [
+          "om-framing-broadcaster",
+          "om-framing-official"
+        ],
+        "rationale": "The lead match broadcaster (om-framing-broadcaster) on 2024-09-15 condemned the fine margin of disallowed goals, questioning their validity due to measurement uncertainty. In contrast, the competition officiating body (om-framing-official) on 2024-08-10 justified this practice by explaining that a deliberately thicker line is used for marginal offsides to avoid calls based on unreliable measurements. These two named sources frame the same settled fact—marginal offside decisions—in opposite ways.",
+        "state": "PRESENT"
       },
       "seal": {
-        "checked_context_citation_ids": [],
-        "guardian_model": "deterministic-router",
+        "checked_context_citation_ids": [
+          "om-framing-broadcaster",
+          "om-framing-official"
+        ],
+        "guardian_model": "granite3-guardian:2b",
         "verdict": "GROUNDED"
       }
     }
@@ -71,6 +79,20 @@
       "doc_kind": "IFAB_LAW",
       "extracted_text": "A player is in an offside position if any part of the head, body or feet is nearer to the opponents' goal line than both the ball and the second-last opponent. The hands and arms of all players, including the goalkeepers, are not considered.",
       "id": "ifab-law11-offside-margin-p103",
+      "page": 103,
+      "source_doc": "ifab-laws-2025-26"
+    },
+    "ifab-law11-offside-p103": {
+      "attribution": null,
+      "bbox": {
+        "bottom": 600.0,
+        "left": 62.0,
+        "right": 373.0,
+        "top": 689.0
+      },
+      "doc_kind": "IFAB_LAW",
+      "extracted_text": "A player is in an offside position if: any part of the head, body or feet is in the opponents' half (excluding the halfway line) and any part of the head, body or feet is nearer to the opponents' goal line than both the ball and the second-last opponent.",
+      "id": "ifab-law11-offside-p103",
       "page": 103,
       "source_doc": "ifab-laws-2025-26"
     },
@@ -91,6 +113,15 @@
       "id": "om-framing-official",
       "page": null,
       "source_doc": "officiating-body explainer"
+    },
+    "om-hist-line-defined": {
+      "attribution": "Curated historical record — The millimetre offside line",
+      "bbox": null,
+      "doc_kind": "HISTORICAL_REPORT",
+      "extracted_text": "Law 11 fixes the offside line precisely: a player is offside if any part of the head, body or feet is nearer to the opponents' goal line than the second-last opponent. The rule itself is unambiguous about where the line is.",
+      "id": "om-hist-line-defined",
+      "page": null,
+      "source_doc": "curated-historical"
     },
     "om-hist-margin-unrecoverable": {
       "attribution": "Curated historical record — The millimetre offside line",
@@ -116,18 +147,20 @@
     {
       "output": {
         "citation_ids": [
+          "ifab-law11-offside-p103",
           "ifab-law11-offside-margin-p103"
         ],
         "lens": "REFEREE",
-        "rationale": "The retrieved Law fixes the offside line precisely — a player is offside if any part of the head, body or feet is nearer the goal line than the second-last opponent (ifab-law11-offside-margin-p103). The rule is a single clear test, so rule-ambiguity does not hold.",
+        "rationale": "The retrieved Law states a player is in an offside position if any part of their body, excluding hands and arms, is nearer to the opponents' goal line than both the ball and the second-last opponent (ifab-law11-offside-p103, ifab-law11-offside-margin-p103). This provides a clear rule for determining offside positions, with no competing clauses or silence on decisive elements. The Law applies to all players, including goalkeepers, and explicitly excludes hands and arms from the offside determination.",
         "stance": "SUPPORTS",
         "state": "GROUNDED"
       },
       "seal": {
         "checked_context_citation_ids": [
+          "ifab-law11-offside-p103",
           "ifab-law11-offside-margin-p103"
         ],
-        "guardian_model": "deterministic-router",
+        "guardian_model": "granite3-guardian:2b",
         "verdict": "GROUNDED"
       }
     },
@@ -135,33 +168,35 @@
       "output": {
         "citation_ids": [],
         "lens": "TACTICAL",
-        "rationale": "No event-data anomaly resolves the exact position at the margin.",
+        "rationale": "No evidence was retrieved for this lens on this incident.",
         "stance": "INSUFFICIENT_EVIDENCE",
         "state": "INSUFFICIENT_EVIDENCE"
       },
       "seal": {
         "checked_context_citation_ids": [],
-        "guardian_model": "deterministic-router",
-        "verdict": "GROUNDED"
+        "guardian_model": "granite3-guardian:2b",
+        "verdict": "UNGROUNDED"
       }
     },
     {
       "output": {
         "citation_ids": [
+          "om-hist-thicker-line",
           "om-hist-margin-unrecoverable",
-          "om-hist-thicker-line"
+          "om-hist-line-defined"
         ],
         "lens": "HISTORICAL",
-        "rationale": "The retrieved facts state that at a millimetre margin the kick frame, the limb point and the motion of ball and players make the true position unrecoverable, and the authorities answer with a deliberately thicker line (om-hist-margin-unrecoverable, om-hist-thicker-line); the technology can see the moment, but the exact truth cannot be measured to the precision the Law implies.",
+        "rationale": "The retrieved facts state that at a millimetre margin, the true position is not recoverable due to discrete video frames, system selection of relevant points, and motion of ball and players leading to different valid choices flipping the decision (om-hist-margin-unrecoverable). Additionally, the authorities apply a deliberately 'thicker' offside line and tolerance band acknowledging that the exact line is not knowable (om-hist-thicker-line), which is an indeterminacy unresolved by current technology. Law 11 defines the offside line precisely as any part of the head, body or feet nearer to the opponents' goal line than the second-last opponent (om-hist-line-defined), but this definition does not resolve the measurement precision issue at the margin (om-hist-margin-unrecoverable).",
         "stance": "DISPUTES",
         "state": "GROUNDED"
       },
       "seal": {
         "checked_context_citation_ids": [
+          "om-hist-thicker-line",
           "om-hist-margin-unrecoverable",
-          "om-hist-thicker-line"
+          "om-hist-line-defined"
         ],
-        "guardian_model": "deterministic-router",
+        "guardian_model": "granite3-guardian:2b",
         "verdict": "GROUNDED"
       }
     },
@@ -172,8 +207,8 @@
           "om-framing-official"
         ],
         "lens": "FRAMING",
-        "rationale": "Named broadcasters and officiating bodies are reported to agree that margins too fine to see make the calls feel arbitrary and that a thicker line is used precisely because the measurement is unreliable (om-framing-broadcaster, om-framing-official); the framings converge rather than divide by side.",
-        "stance": "DISPUTES",
+        "rationale": "The lead match broadcaster (om-framing-broadcaster) on 2024-09-15 condemned the fine margin of disallowed goals, questioning their validity due to measurement uncertainty. In contrast, the competition officiating body (om-framing-official) on 2024-08-10 justified this practice by explaining that a deliberately thicker line is used for marginal offsides to avoid calls based on unreliable measurements. These two named sources frame the same settled fact—marginal offside decisions—in opposite ways.",
+        "stance": "MIXED",
         "state": "GROUNDED"
       },
       "seal": {
@@ -181,17 +216,60 @@
           "om-framing-broadcaster",
           "om-framing-official"
         ],
-        "guardian_model": "deterministic-router",
+        "guardian_model": "granite3-guardian:2b",
         "verdict": "GROUNDED"
       }
     }
   ],
+  "probes": [
+    {
+      "axis": "INDETERMINACY",
+      "guardian_model": "granite3-guardian:2b",
+      "guardian_verdict": "GROUNDED",
+      "injected_text": "A chip-in-ball and high-frame-rate skeletal tracking system now fixes the exact limb position at the instant the ball is played with no frame ambiguity, and the authorities have removed the tolerance band entirely because the measurement is now exact and fully reproducible. The position at the margin is completely recoverable at every margin, and officials confirm the information available is fully adequate to decide any call.",
+      "kind": "FLIP",
+      "label": "Push it the right way",
+      "outcome": "The engine read the new record and moved the axis off ‘unknowable’. It is reasoning from what it is shown, not replaying a stored answer.",
+      "plain_question": "If the record said the exact line is now perfectly measurable, does the engine stop calling the truth unknowable?",
+      "state_after": "NOT_DOCUMENTED",
+      "state_before": "PRESENT"
+    },
+    {
+      "axis": "INDETERMINACY",
+      "guardian_model": "granite3-guardian:2b",
+      "guardian_verdict": "GROUNDED",
+      "injected_text": "The match was played in front of a sell-out crowd and the half-time entertainment featured a local marching band. Ticket sales for the fixture set a seasonal record.",
+      "kind": "NOISE",
+      "label": "Push it with junk",
+      "outcome": "Irrelevant evidence changed nothing. The engine does not flip at any push — the negative control held.",
+      "plain_question": "If we feed it something irrelevant, does it wrongly change its mind?",
+      "state_after": "PRESENT",
+      "state_before": "PRESENT"
+    },
+    {
+      "axis": "INDETERMINACY",
+      "guardian_model": "granite3-guardian:2b",
+      "guardian_verdict": "UNGROUNDED",
+      "injected_text": "The offside Law has been officially suspended and referees now decide every marginal call by personal preference, with no measurement of any kind.",
+      "kind": "OVERREACH",
+      "label": "Lie to it",
+      "outcome": "Granite Guardian — the second model — checked this claim against the engine’s own cited sources and returned UNGROUNDED. It rejects what the evidence does not support, live. That is the audit that makes the whole thing trustworthy.",
+      "plain_question": "If someone over-states what the evidence actually says, does the second IBM model catch it?",
+      "state_after": "PRESENT",
+      "state_before": "PRESENT"
+    }
+  ],
   "provenance": {
-    "corpus_git_sha": "52499cff84ff95f7281b24bef4aa2fca471483af",
+    "corpus_git_sha": "889b304af3cbb5012931960e3d7d9540daefa9df",
     "embed_model": "granite-embedding:30m",
-    "granite_model": "deterministic-router",
-    "guardian_model": "deterministic-router",
-    "options": {}
+    "granite_model": "granite3.3:8b",
+    "guardian_model": "granite3-guardian:2b",
+    "options": {
+      "num_ctx": 8192,
+      "num_predict": 1024,
+      "seed": 42,
+      "temperature": 0.0
+    }
   },
   "rule_evolution": null,
   "settled_fact": {
@@ -206,32 +284,36 @@
       {
         "axis": "RULE_AMBIGUITY",
         "citation_ids": [],
-        "rationale": "A clear single clause governs the act — the retrieved Law fixes the offside line precisely — a player is offside if any part of the head, body or feet is nearer the goal line than the second-last opponent (ifab-law11-offside-margin-p103).",
+        "rationale": "A clear single clause governs the act — the retrieved Law states a player is in an offside position if any part of their body, excluding hands and arms, is nearer to the opponents' goal line than both the ball and the second-last opponent (ifab-law11-offside-p103, ifab-law11-offside-margin-p103).",
         "state": "ABSENT"
       },
       {
         "axis": "INDETERMINACY",
         "citation_ids": [
+          "om-hist-thicker-line",
           "om-hist-margin-unrecoverable",
-          "om-hist-thicker-line"
+          "om-hist-line-defined"
         ],
-        "rationale": "The fact is defined precisely by the Law but cannot be measured to that precision in the moment — the truth at the margin is not recoverable.",
+        "rationale": "The retrieved facts state that at a millimetre margin, the true position is not recoverable due to discrete video frames, system selection of relevant points, and motion of ball and players leading to different valid choices flipping the decision (om-hist-margin-unrecoverable). Additionally, the authorities apply a deliberately 'thicker' offside line and tolerance band acknowledging that the exact line is not knowable (om-hist-thicker-line), which is an indeterminacy unresolved by current technology. Law 11 defines the offside line precisely as any part of the head, body or feet nearer to the opponents' goal line than the second-last opponent (om-hist-line-defined), but this definition does not resolve the measurement precision issue at the margin (om-hist-margin-unrecoverable).",
         "state": "PRESENT"
       },
       {
         "axis": "DECISION_TIME_DEFICIT",
         "citation_ids": [],
-        "rationale": "The decisive truth was available at the moment — the retrieved facts state that at a millimetre margin the kick frame, the limb point and the motion of ball and players make the true position unrecoverable, and the authorities answer with a deliberately thicker line (om-hist-margin-unrecoverable, om-hist-thicker-line).",
+        "rationale": "The technology can see the moment; the gap is that the exact truth is unrecoverable at all — an indeterminacy, not a decision-time deficit.",
         "state": "ABSENT"
       },
       {
         "axis": "CULTURAL_PRIOR_BIAS",
-        "citation_ids": [],
-        "rationale": "Named sources are one-sided — named broadcasters and officiating bodies are reported to agree that margins too fine to see make the calls feel arbitrary and that a thicker line is used precisely because the measurement is unreliable (om-framing-broadcaster, om-framing-official).",
-        "state": "ABSENT"
+        "citation_ids": [
+          "om-framing-broadcaster",
+          "om-framing-official"
+        ],
+        "rationale": "The lead match broadcaster (om-framing-broadcaster) on 2024-09-15 condemned the fine margin of disallowed goals, questioning their validity due to measurement uncertainty. In contrast, the competition officiating body (om-framing-official) on 2024-08-10 justified this practice by explaining that a deliberately thicker line is used for marginal offsides to avoid calls based on unreliable measurements. These two named sources frame the same settled fact—marginal offside decisions—in opposite ways.",
+        "state": "PRESENT"
       }
     ],
-    "headline": "It stays contested over whether the fact is knowable — not over the dimensions ruled out."
+    "headline": "It stays contested over whether the fact is knowable and how named sources frame the same fact — not over the dimensions ruled out."
   },
   "title": "The millimetre offside line"
 }

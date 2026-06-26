@@ -4,26 +4,26 @@
       "cell": {
         "axis": "RULE_AMBIGUITY",
         "citation_ids": [],
-        "rationale": "A clear single clause governs the act — the retrieved Law states a goal is scored when the whole of the ball passes over the goal line (ifab-law10-goal-scored-p97).",
+        "rationale": "A clear single clause governs the act — the retrieved Law states that a goal is scored when the whole of the ball passes over the goal line, between the goalposts and under the crossbar, provided that no offence has been committed by the team scoring the goal (ifab-law10-goal-scored-p97). This clause provides a clear rule for determining when a goal is scored. There are no competing clauses or silence on decisive elements.",
         "state": "ABSENT"
       },
       "seal": {
         "checked_context_citation_ids": [],
-        "guardian_model": "deterministic-router",
-        "verdict": "GROUNDED"
+        "guardian_model": "granite3-guardian:2b",
+        "verdict": "UNGROUNDED"
       }
     },
     {
       "cell": {
         "axis": "INDETERMINACY",
         "citation_ids": [],
-        "rationale": "Nothing makes the truth unrecoverable — in 2010 there was no goal-line technology and the decision could not be reviewed (lampard-hist-no-glt-2010), and neither official was level with the line at the moment of the bounce (lampard-hist-sightline).",
+        "rationale": "Nothing makes the truth unrecoverable — the retrieved facts state there was no goal-line technology or VAR in 2010, and the referee along with the assistant had to judge in real time whether the ball had crossed the line without any review available (lampard-hist-no-glt-2010).",
         "state": "NOT_DOCUMENTED"
       },
       "seal": {
         "checked_context_citation_ids": [],
-        "guardian_model": "deterministic-router",
-        "verdict": "GROUNDED"
+        "guardian_model": "granite3-guardian:2b",
+        "verdict": "UNGROUNDED"
       }
     },
     {
@@ -31,17 +31,19 @@
         "axis": "DECISION_TIME_DEFICIT",
         "citation_ids": [
           "lampard-hist-no-glt-2010",
-          "lampard-hist-sightline"
+          "lampard-hist-sightline",
+          "lampard-hist-crossed-line"
         ],
-        "rationale": "Resolving technology was absent and the view was obstructed in the moment.",
+        "rationale": "The retrieved facts state there was no goal-line technology or VAR in 2010, and the referee along with the assistant had to judge in real time whether the ball had crossed the line without any review available (lampard-hist-no-glt-2010). Additionally, neither official had a clear view of where the ball landed as they were not level with the goal line at the moment of the bounce (lampard-hist-sightline). The ball struck the crossbar and bounced down well behind the goal line before spinning back out (lampard-hist-crossed-line), which television replays within seconds confirmed had clearly crossed the line. Therefore, the decisive truth was not available to the officials at the moment of the decision due to a lack of review technology and obstructed sightlines, constituting a decision-time deficit.",
         "state": "PRESENT"
       },
       "seal": {
         "checked_context_citation_ids": [
           "lampard-hist-no-glt-2010",
-          "lampard-hist-sightline"
+          "lampard-hist-sightline",
+          "lampard-hist-crossed-line"
         ],
-        "guardian_model": "deterministic-router",
+        "guardian_model": "granite3-guardian:2b",
         "verdict": "GROUNDED"
       }
     },
@@ -49,13 +51,13 @@
       "cell": {
         "axis": "CULTURAL_PRIOR_BIAS",
         "citation_ids": [],
-        "rationale": "Named sources are one-sided — frank Lampard is reported to have said there was no doubt the ball was over the line (lampard-framing-lampard), and FIFA's Sepp Blatter publicly apologised for the error (lampard-framing-blatter).",
+        "rationale": "Named sources are one-sided — frank Lampard (lampard-framing-lampard) condemns the non-award of the goal as a mistake that changed the match's course, while Sepp Blatter (lampard-framing-blatter) admits the error and calls for goal-line technology to prevent such incidents.",
         "state": "ABSENT"
       },
       "seal": {
         "checked_context_citation_ids": [],
-        "guardian_model": "deterministic-router",
-        "verdict": "GROUNDED"
+        "guardian_model": "granite3-guardian:2b",
+        "verdict": "UNGROUNDED"
       }
     }
   ],
@@ -91,6 +93,15 @@
       "id": "lampard-framing-lampard",
       "page": null,
       "source_doc": "post-match interviews"
+    },
+    "lampard-framing-merkel-context": {
+      "attribution": "named commentary at the time, contemporary German match coverage (2010-06-27)",
+      "bbox": null,
+      "doc_kind": "FRAMING_SOURCE",
+      "extracted_text": "named commentary at the time (2010-06-27) — ADMITS: German coverage and players widely acknowledged the ball had crossed the line and that the goal should have stood — agreement on the fact, not division over it.",
+      "id": "lampard-framing-merkel-context",
+      "page": null,
+      "source_doc": "contemporary German match coverage"
     },
     "lampard-hist-crossed-line": {
       "attribution": "Curated historical record — Lampard's ghost goal",
@@ -128,7 +139,7 @@
           "ifab-law10-goal-scored-p97"
         ],
         "lens": "REFEREE",
-        "rationale": "The retrieved Law states a goal is scored when the whole of the ball passes over the goal line (ifab-law10-goal-scored-p97); the rule is a single clear test with no competing clause, so rule-ambiguity does not hold.",
+        "rationale": "The retrieved Law states that a goal is scored when the whole of the ball passes over the goal line, between the goalposts and under the crossbar, provided that no offence has been committed by the team scoring the goal (ifab-law10-goal-scored-p97). This clause provides a clear rule for determining when a goal is scored. There are no competing clauses or silence on decisive elements; hence, there is no rule ambiguity.",
         "stance": "SUPPORTS",
         "state": "GROUNDED"
       },
@@ -136,7 +147,7 @@
         "checked_context_citation_ids": [
           "ifab-law10-goal-scored-p97"
         ],
-        "guardian_model": "deterministic-router",
+        "guardian_model": "granite3-guardian:2b",
         "verdict": "GROUNDED"
       }
     },
@@ -144,72 +155,75 @@
       "output": {
         "citation_ids": [],
         "lens": "TACTICAL",
-        "rationale": "No event-data anomaly bears on this incident.",
+        "rationale": "No evidence was retrieved for this lens on this incident.",
         "stance": "INSUFFICIENT_EVIDENCE",
         "state": "INSUFFICIENT_EVIDENCE"
       },
       "seal": {
         "checked_context_citation_ids": [],
-        "guardian_model": "deterministic-router",
-        "verdict": "GROUNDED"
+        "guardian_model": "granite3-guardian:2b",
+        "verdict": "UNGROUNDED"
       }
     },
     {
       "output": {
         "citation_ids": [
           "lampard-hist-no-glt-2010",
-          "lampard-hist-sightline"
+          "lampard-hist-sightline",
+          "lampard-hist-crossed-line"
         ],
         "lens": "HISTORICAL",
-        "rationale": "In 2010 there was no goal-line technology and the decision could not be reviewed (lampard-hist-no-glt-2010), and neither official was level with the line at the moment of the bounce (lampard-hist-sightline); the decisive truth was not available to them in the moment, though it was knowable on replay within seconds.",
+        "rationale": "The retrieved facts state there was no goal-line technology or VAR in 2010, and the referee along with the assistant had to judge in real time whether the ball had crossed the line without any review available (lampard-hist-no-glt-2010). Additionally, neither official had a clear view of where the ball landed as they were not level with the goal line at the moment of the bounce (lampard-hist-sightline). The ball struck the crossbar and bounced down well behind the goal line before spinning back out (lampard-hist-crossed-line), which television replays within seconds confirmed had clearly crossed the line. Therefore, the decisive truth was not available to the officials at the moment of the decision due to a lack of review technology and obstructed sightlines, constituting a decision-time deficit.",
         "stance": "SUPPORTS",
         "state": "GROUNDED"
       },
       "seal": {
         "checked_context_citation_ids": [
           "lampard-hist-no-glt-2010",
-          "lampard-hist-sightline"
+          "lampard-hist-sightline",
+          "lampard-hist-crossed-line"
         ],
-        "guardian_model": "deterministic-router",
+        "guardian_model": "granite3-guardian:2b",
         "verdict": "GROUNDED"
       }
     },
     {
       "output": {
         "citation_ids": [
+          "lampard-framing-merkel-context",
           "lampard-framing-lampard",
           "lampard-framing-blatter"
         ],
         "lens": "FRAMING",
-        "rationale": "Frank Lampard is reported to have said there was no doubt the ball was over the line (lampard-framing-lampard), and FIFA's Sepp Blatter publicly apologised for the error (lampard-framing-blatter); the named sources agree on the fact rather than dividing over it.",
+        "rationale": "Frank Lampard (lampard-framing-lampard) condemns the non-award of the goal as a mistake that changed the match's course, while Sepp Blatter (lampard-framing-blatter) admits the error and calls for goal-line technology to prevent such incidents. German coverage and players (lampard-framing-merkel-context) also acknowledged the ball had crossed the line, indicating agreement on the fact, not division over it.",
         "stance": "SUPPORTS",
         "state": "GROUNDED"
       },
       "seal": {
         "checked_context_citation_ids": [
+          "lampard-framing-merkel-context",
           "lampard-framing-lampard",
           "lampard-framing-blatter"
         ],
-        "guardian_model": "deterministic-router",
+        "guardian_model": "granite3-guardian:2b",
         "verdict": "GROUNDED"
       }
     }
   ],
+  "probes": [],
   "provenance": {
-    "corpus_git_sha": "52499cff84ff95f7281b24bef4aa2fca471483af",
+    "corpus_git_sha": "889b304af3cbb5012931960e3d7d9540daefa9df",
     "embed_model": "granite-embedding:30m",
-    "granite_model": "deterministic-router",
-    "guardian_model": "deterministic-router",
-    "options": {}
+    "granite_model": "granite3.3:8b",
+    "guardian_model": "granite3-guardian:2b",
+    "options": {
+      "num_ctx": 8192,
+      "num_predict": 1024,
+      "seed": 42,
+      "temperature": 0.0
+    }
   },
-  "rule_evolution": {
-    "axis": "DECISION_TIME_DEFICIT",
-    "from_era": "2010 — no goal-line technology",
-    "from_state": "PRESENT",
-    "note": "What was undetectable in the moment is automatic now — the fact was always settled; only its availability to the officials changed.",
-    "to_era": "2026 — automatic goal-line detection",
-    "to_state": "ABSENT"
-  },
+  "rule_evolution": null,
   "settled_fact": {
     "citation_ids": [
       "lampard-hist-crossed-line"
@@ -222,28 +236,29 @@
       {
         "axis": "RULE_AMBIGUITY",
         "citation_ids": [],
-        "rationale": "A clear single clause governs the act — the retrieved Law states a goal is scored when the whole of the ball passes over the goal line (ifab-law10-goal-scored-p97).",
+        "rationale": "A clear single clause governs the act — the retrieved Law states that a goal is scored when the whole of the ball passes over the goal line, between the goalposts and under the crossbar, provided that no offence has been committed by the team scoring the goal (ifab-law10-goal-scored-p97). This clause provides a clear rule for determining when a goal is scored. There are no competing clauses or silence on decisive elements.",
         "state": "ABSENT"
       },
       {
         "axis": "INDETERMINACY",
         "citation_ids": [],
-        "rationale": "Nothing makes the truth unrecoverable — in 2010 there was no goal-line technology and the decision could not be reviewed (lampard-hist-no-glt-2010), and neither official was level with the line at the moment of the bounce (lampard-hist-sightline).",
+        "rationale": "Nothing makes the truth unrecoverable — the retrieved facts state there was no goal-line technology or VAR in 2010, and the referee along with the assistant had to judge in real time whether the ball had crossed the line without any review available (lampard-hist-no-glt-2010).",
         "state": "NOT_DOCUMENTED"
       },
       {
         "axis": "DECISION_TIME_DEFICIT",
         "citation_ids": [
           "lampard-hist-no-glt-2010",
-          "lampard-hist-sightline"
+          "lampard-hist-sightline",
+          "lampard-hist-crossed-line"
         ],
-        "rationale": "Resolving technology was absent and the view was obstructed in the moment.",
+        "rationale": "The retrieved facts state there was no goal-line technology or VAR in 2010, and the referee along with the assistant had to judge in real time whether the ball had crossed the line without any review available (lampard-hist-no-glt-2010). Additionally, neither official had a clear view of where the ball landed as they were not level with the goal line at the moment of the bounce (lampard-hist-sightline). The ball struck the crossbar and bounced down well behind the goal line before spinning back out (lampard-hist-crossed-line), which television replays within seconds confirmed had clearly crossed the line. Therefore, the decisive truth was not available to the officials at the moment of the decision due to a lack of review technology and obstructed sightlines, constituting a decision-time deficit.",
         "state": "PRESENT"
       },
       {
         "axis": "CULTURAL_PRIOR_BIAS",
         "citation_ids": [],
-        "rationale": "Named sources are one-sided — frank Lampard is reported to have said there was no doubt the ball was over the line (lampard-framing-lampard), and FIFA's Sepp Blatter publicly apologised for the error (lampard-framing-blatter).",
+        "rationale": "Named sources are one-sided — frank Lampard (lampard-framing-lampard) condemns the non-award of the goal as a mistake that changed the match's course, while Sepp Blatter (lampard-framing-blatter) admits the error and calls for goal-line technology to prevent such incidents.",
         "state": "ABSENT"
       }
     ],

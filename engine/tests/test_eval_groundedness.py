@@ -41,9 +41,22 @@ def test_report_writes_json_and_md(tmp_path: Path):
     assert "groundedness" in mp.read_text(encoding="utf-8").lower()
 
 
+def _keys(obj):
+    """Yield every dict key anywhere in a nested JSON structure."""
+    if isinstance(obj, dict):
+        for k, v in obj.items():
+            yield k
+            yield from _keys(v)
+    elif isinstance(obj, list):
+        for v in obj:
+            yield from _keys(v)
+
+
 def test_eval_numbers_never_entered_the_shipped_fixtures():
-    # the audit metric must live only in the report — fixtures stay number-free
+    # The audit metric must live only in the report — no 'groundedness' SCORE FIELD may enter
+    # a fixture. We check JSON KEYS, not the substring: the word legitimately appears in a
+    # rationale ("the groundedness gate could not confirm this reading"), which is prose, not
+    # a number. A score would be a numeric field named 'groundedness'.
     for path in _FIXTURES.glob("*.json"):
         raw = json.loads(path.read_text(encoding="utf-8"))
-        # the bundle must carry no 'groundedness' field anywhere (it is report-only)
-        assert "groundedness" not in json.dumps(raw)
+        assert "groundedness" not in set(_keys(raw))

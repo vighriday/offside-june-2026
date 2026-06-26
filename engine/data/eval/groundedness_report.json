@@ -1,106 +1,7 @@
 [
   {
-    "incident_id": "hand-of-god-1986",
+    "incident_id": "offside-margin",
     "lens": "REFEREE",
-    "stance": "SUPPORTS",
-    "guardian_verdict": "GROUNDED",
-    "n_citations": 1,
-    "groundedness": 1.0,
-    "backend": "deterministic"
-  },
-  {
-    "incident_id": "hand-of-god-1986",
-    "lens": "TACTICAL",
-    "stance": "SUPPORTS",
-    "guardian_verdict": "GROUNDED",
-    "n_citations": 1,
-    "groundedness": 1.0,
-    "backend": "deterministic"
-  },
-  {
-    "incident_id": "hand-of-god-1986",
-    "lens": "HISTORICAL",
-    "stance": "SUPPORTS",
-    "guardian_verdict": "GROUNDED",
-    "n_citations": 2,
-    "groundedness": 1.0,
-    "backend": "deterministic"
-  },
-  {
-    "incident_id": "hand-of-god-1986",
-    "lens": "FRAMING",
-    "stance": "MIXED",
-    "guardian_verdict": "GROUNDED",
-    "n_citations": 2,
-    "groundedness": 1.0,
-    "backend": "deterministic"
-  },
-  {
-    "incident_id": "handball-rewrite",
-    "lens": "REFEREE",
-    "stance": "DISPUTES",
-    "guardian_verdict": "GROUNDED",
-    "n_citations": 2,
-    "groundedness": 1.0,
-    "backend": "deterministic"
-  },
-  {
-    "incident_id": "handball-rewrite",
-    "lens": "TACTICAL",
-    "stance": "INSUFFICIENT_EVIDENCE",
-    "guardian_verdict": "GROUNDED",
-    "n_citations": 0,
-    "groundedness": 0.0,
-    "backend": "deterministic"
-  },
-  {
-    "incident_id": "handball-rewrite",
-    "lens": "HISTORICAL",
-    "stance": "DISPUTES",
-    "guardian_verdict": "GROUNDED",
-    "n_citations": 2,
-    "groundedness": 1.0,
-    "backend": "deterministic"
-  },
-  {
-    "incident_id": "handball-rewrite",
-    "lens": "FRAMING",
-    "stance": "DISPUTES",
-    "guardian_verdict": "GROUNDED",
-    "n_citations": 2,
-    "groundedness": 1.0,
-    "backend": "deterministic"
-  },
-  {
-    "incident_id": "lampard-ghost-goal-2010",
-    "lens": "REFEREE",
-    "stance": "SUPPORTS",
-    "guardian_verdict": "GROUNDED",
-    "n_citations": 1,
-    "groundedness": 1.0,
-    "backend": "deterministic"
-  },
-  {
-    "incident_id": "lampard-ghost-goal-2010",
-    "lens": "TACTICAL",
-    "stance": "INSUFFICIENT_EVIDENCE",
-    "guardian_verdict": "GROUNDED",
-    "n_citations": 0,
-    "groundedness": 0.0,
-    "backend": "deterministic"
-  },
-  {
-    "incident_id": "lampard-ghost-goal-2010",
-    "lens": "HISTORICAL",
-    "stance": "SUPPORTS",
-    "guardian_verdict": "GROUNDED",
-    "n_citations": 2,
-    "groundedness": 1.0,
-    "backend": "deterministic"
-  },
-  {
-    "incident_id": "lampard-ghost-goal-2010",
-    "lens": "FRAMING",
     "stance": "SUPPORTS",
     "guardian_verdict": "GROUNDED",
     "n_citations": 2,
@@ -109,18 +10,9 @@
   },
   {
     "incident_id": "offside-margin",
-    "lens": "REFEREE",
-    "stance": "SUPPORTS",
-    "guardian_verdict": "GROUNDED",
-    "n_citations": 1,
-    "groundedness": 1.0,
-    "backend": "deterministic"
-  },
-  {
-    "incident_id": "offside-margin",
     "lens": "TACTICAL",
     "stance": "INSUFFICIENT_EVIDENCE",
-    "guardian_verdict": "GROUNDED",
+    "guardian_verdict": "UNGROUNDED",
     "n_citations": 0,
     "groundedness": 0.0,
     "backend": "deterministic"
@@ -130,84 +22,12 @@
     "lens": "HISTORICAL",
     "stance": "DISPUTES",
     "guardian_verdict": "GROUNDED",
-    "n_citations": 2,
+    "n_citations": 3,
     "groundedness": 1.0,
     "backend": "deterministic"
   },
   {
     "incident_id": "offside-margin",
-    "lens": "FRAMING",
-    "stance": "DISPUTES",
-    "guardian_verdict": "GROUNDED",
-    "n_citations": 2,
-    "groundedness": 1.0,
-    "backend": "deterministic"
-  },
-  {
-    "incident_id": "pgmol-subjective",
-    "lens": "REFEREE",
-    "stance": "DISPUTES",
-    "guardian_verdict": "GROUNDED",
-    "n_citations": 2,
-    "groundedness": 1.0,
-    "backend": "deterministic"
-  },
-  {
-    "incident_id": "pgmol-subjective",
-    "lens": "TACTICAL",
-    "stance": "INSUFFICIENT_EVIDENCE",
-    "guardian_verdict": "GROUNDED",
-    "n_citations": 0,
-    "groundedness": 0.0,
-    "backend": "deterministic"
-  },
-  {
-    "incident_id": "pgmol-subjective",
-    "lens": "HISTORICAL",
-    "stance": "DISPUTES",
-    "guardian_verdict": "GROUNDED",
-    "n_citations": 1,
-    "groundedness": 1.0,
-    "backend": "deterministic"
-  },
-  {
-    "incident_id": "pgmol-subjective",
-    "lens": "FRAMING",
-    "stance": "MIXED",
-    "guardian_verdict": "GROUNDED",
-    "n_citations": 2,
-    "groundedness": 1.0,
-    "backend": "deterministic"
-  },
-  {
-    "incident_id": "suarez-handball-2010",
-    "lens": "REFEREE",
-    "stance": "SUPPORTS",
-    "guardian_verdict": "GROUNDED",
-    "n_citations": 1,
-    "groundedness": 1.0,
-    "backend": "deterministic"
-  },
-  {
-    "incident_id": "suarez-handball-2010",
-    "lens": "HISTORICAL",
-    "stance": "DISPUTES",
-    "guardian_verdict": "GROUNDED",
-    "n_citations": 1,
-    "groundedness": 1.0,
-    "backend": "deterministic"
-  },
-  {
-    "incident_id": "suarez-handball-2010",
-    "lens": "TACTICAL",
-    "stance": "INSUFFICIENT_EVIDENCE",
-    "guardian_verdict": "GROUNDED",
-    "n_citations": 0,
-    "groundedness": 0.0,
-    "backend": "deterministic"
-  },
-  {
-    "incident_id": "suarez-handball-2010",
     "lens": "FRAMING",
     "stance": "MIXED",
     "guardian_verdict": "GROUNDED",

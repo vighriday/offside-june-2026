@@ -4,13 +4,13 @@
       "cell": {
         "axis": "RULE_AMBIGUITY",
         "citation_ids": [],
-        "rationale": "A clear single clause governs the act — the retrieved Law states that denying a goal by deliberate handball is a sending-off offence (ifab-law12-dogso-handball-p118).",
+        "rationale": "A clear single clause governs the act — the retrieved Law states that a player is sent off for denying the opposing team a goal or an obvious goal-scoring opportunity by committing a deliberate handball offence (ifab-law12-dogso-handball-p118).",
         "state": "ABSENT"
       },
       "seal": {
         "checked_context_citation_ids": [],
-        "guardian_model": "deterministic-router",
-        "verdict": "GROUNDED"
+        "guardian_model": "granite3-guardian:2b",
+        "verdict": "UNGROUNDED"
       }
     },
     {
@@ -22,21 +22,21 @@
       },
       "seal": {
         "checked_context_citation_ids": [],
-        "guardian_model": "deterministic-router",
-        "verdict": "GROUNDED"
+        "guardian_model": "granite3-guardian:2b",
+        "verdict": "UNGROUNDED"
       }
     },
     {
       "cell": {
         "axis": "DECISION_TIME_DEFICIT",
         "citation_ids": [],
-        "rationale": "The decisive truth was available at the moment — the retrieved facts state the referee saw the handball in real time and applied the Law exactly — a red card and a penalty (suarez-hist-correctly-adjudicated).",
+        "rationale": "The decisive truth was available at the moment — the retrieved facts state that the referee saw the handball in real time, applied the Law correctly by sending off Suárez and awarding a penalty to Ghana (suarez-hist-correctly-adjudicated).",
         "state": "ABSENT"
       },
       "seal": {
         "checked_context_citation_ids": [],
-        "guardian_model": "deterministic-router",
-        "verdict": "GROUNDED"
+        "guardian_model": "granite3-guardian:2b",
+        "verdict": "UNGROUNDED"
       }
     },
     {
@@ -46,7 +46,7 @@
           "suarez-framing-suarez",
           "suarez-framing-gyan"
         ],
-        "rationale": "Named sources frame the same settled fact in opposed valence.",
+        "rationale": "Luis Suárez is reported to have called the handball 'the save of the tournament' and said the Hand of God now belonged to him, framing the handball as a worthwhile sacrifice for the team (suarez-framing-suarez). In contrast, Asamoah Gyan described the moment as a cruel injustice that denied Ghana a deserved place in the semi-final, a wound that the missed penalty made permanent (suarez-framing-gyan). These two named people describe one agreed event in opposing terms.",
         "state": "PRESENT"
       },
       "seal": {
@@ -54,7 +54,7 @@
           "suarez-framing-suarez",
           "suarez-framing-gyan"
         ],
-        "guardian_model": "deterministic-router",
+        "guardian_model": "granite3-guardian:2b",
         "verdict": "GROUNDED"
       }
     }
@@ -72,6 +72,20 @@
       "extracted_text": "Where a player denies the opposing team a goal or an obvious goal-scoring opportunity by committing a deliberate handball offence the player is sent off whatever the position of the offence.",
       "id": "ifab-law12-dogso-handball-p118",
       "page": 118,
+      "source_doc": "ifab-laws-2025-26"
+    },
+    "ifab-law12-handball-offence-p110": {
+      "attribution": null,
+      "bbox": {
+        "bottom": 175.0,
+        "left": 54.0,
+        "right": 373.0,
+        "top": 309.0
+      },
+      "doc_kind": "IFAB_LAW",
+      "extracted_text": "It is an offence if a player deliberately touches the ball with their hand/arm, or scores in the opponents' goal immediately after the ball has touched their hand/arm, even if accidental. A goal scored in this way does not stand.",
+      "id": "ifab-law12-handball-offence-p110",
+      "page": 110,
       "source_doc": "ifab-laws-2025-26"
     },
     "suarez-framing-gyan": {
@@ -100,6 +114,15 @@
       "id": "suarez-hist-correctly-adjudicated",
       "page": null,
       "source_doc": "curated-historical"
+    },
+    "suarez-hist-on-the-line": {
+      "attribution": "Curated historical record — Suárez's handball on the line",
+      "bbox": null,
+      "doc_kind": "HISTORICAL_REPORT",
+      "extracted_text": "In the final minute of extra time, Luis Suárez deliberately handled a goal-bound ball on the goal line to stop a certain Ghana goal. The act was clear and admitted.",
+      "id": "suarez-hist-on-the-line",
+      "page": null,
+      "source_doc": "curated-historical"
     }
   },
   "incident_id": "suarez-handball-2010",
@@ -107,36 +130,20 @@
     {
       "output": {
         "citation_ids": [
-          "ifab-law12-dogso-handball-p118"
+          "ifab-law12-dogso-handball-p118",
+          "ifab-law12-handball-offence-p110"
         ],
         "lens": "REFEREE",
-        "rationale": "The retrieved Law states that denying a goal by deliberate handball is a sending-off offence (ifab-law12-dogso-handball-p118); the sanction is a single clear rule, so rule-ambiguity does not hold.",
+        "rationale": "The retrieved Law states that a player is sent off for denying the opposing team a goal or an obvious goal-scoring opportunity by committing a deliberate handball offence (ifab-law12-dogso-handball-p118). The Law also specifies that a player commits a handball offence if they deliberately touch the ball with their hand/arm, or score in the opponents' goal immediately after the ball has touched their hand/arm, and a goal scored in this way does not stand (ifab-law12-handball-offence-p110). Therefore, there is no ambiguity as both clauses point to the same outcome for the same facts.",
         "stance": "SUPPORTS",
         "state": "GROUNDED"
       },
       "seal": {
         "checked_context_citation_ids": [
-          "ifab-law12-dogso-handball-p118"
+          "ifab-law12-dogso-handball-p118",
+          "ifab-law12-handball-offence-p110"
         ],
-        "guardian_model": "deterministic-router",
-        "verdict": "GROUNDED"
-      }
-    },
-    {
-      "output": {
-        "citation_ids": [
-          "suarez-hist-correctly-adjudicated"
-        ],
-        "lens": "HISTORICAL",
-        "rationale": "The retrieved facts state the referee saw the handball in real time and applied the Law exactly — a red card and a penalty (suarez-hist-correctly-adjudicated); the decisive truth WAS available in the moment, so there is no decision-time deficit.",
-        "stance": "DISPUTES",
-        "state": "GROUNDED"
-      },
-      "seal": {
-        "checked_context_citation_ids": [
-          "suarez-hist-correctly-adjudicated"
-        ],
-        "guardian_model": "deterministic-router",
+        "guardian_model": "granite3-guardian:2b",
         "verdict": "GROUNDED"
       }
     },
@@ -144,13 +151,33 @@
       "output": {
         "citation_ids": [],
         "lens": "TACTICAL",
-        "rationale": "No event-data anomaly bears on this incident.",
+        "rationale": "No evidence was retrieved for this lens on this incident.",
         "stance": "INSUFFICIENT_EVIDENCE",
         "state": "INSUFFICIENT_EVIDENCE"
       },
       "seal": {
         "checked_context_citation_ids": [],
-        "guardian_model": "deterministic-router",
+        "guardian_model": "granite3-guardian:2b",
+        "verdict": "UNGROUNDED"
+      }
+    },
+    {
+      "output": {
+        "citation_ids": [
+          "suarez-hist-correctly-adjudicated",
+          "suarez-hist-on-the-line"
+        ],
+        "lens": "HISTORICAL",
+        "rationale": "The retrieved facts state that the referee saw the handball in real time, applied the Law correctly by sending off Suárez and awarding a penalty to Ghana (suarez-hist-correctly-adjudicated). However, it also mentions that Suárez clearly and admittedly handled the ball on the goal line to prevent a certain Ghana goal (suarez-hist-on-the-line). This indicates that while the officials at the moment could access the decisive truth and made a correct decision, the incident itself involved a contentious act of handball that could have been disputed due to its clear nature and Suárez's admission.",
+        "stance": "MIXED",
+        "state": "GROUNDED"
+      },
+      "seal": {
+        "checked_context_citation_ids": [
+          "suarez-hist-correctly-adjudicated",
+          "suarez-hist-on-the-line"
+        ],
+        "guardian_model": "granite3-guardian:2b",
         "verdict": "GROUNDED"
       }
     },
@@ -161,7 +188,7 @@
           "suarez-framing-gyan"
         ],
         "lens": "FRAMING",
-        "rationale": "Luis Suárez is reported to have called the handball the 'save of the tournament' (suarez-framing-suarez), while Asamoah Gyan is reported to have described it as a cruel injustice (suarez-framing-gyan); two named sources frame the same admitted act in opposite valence.",
+        "rationale": "Luis Suárez is reported to have called the handball 'the save of the tournament' and said the Hand of God now belonged to him, framing the handball as a worthwhile sacrifice for the team (suarez-framing-suarez). In contrast, Asamoah Gyan described the moment as a cruel injustice that denied Ghana a deserved place in the semi-final, a wound that the missed penalty made permanent (suarez-framing-gyan). These two named people describe one agreed event in opposing terms.",
         "stance": "MIXED",
         "state": "GROUNDED"
       },
@@ -170,17 +197,23 @@
           "suarez-framing-suarez",
           "suarez-framing-gyan"
         ],
-        "guardian_model": "deterministic-router",
+        "guardian_model": "granite3-guardian:2b",
         "verdict": "GROUNDED"
       }
     }
   ],
+  "probes": [],
   "provenance": {
-    "corpus_git_sha": "52499cff84ff95f7281b24bef4aa2fca471483af",
+    "corpus_git_sha": "889b304af3cbb5012931960e3d7d9540daefa9df",
     "embed_model": "granite-embedding:30m",
-    "granite_model": "deterministic-router",
-    "guardian_model": "deterministic-router",
-    "options": {}
+    "granite_model": "granite3.3:8b",
+    "guardian_model": "granite3-guardian:2b",
+    "options": {
+      "num_ctx": 8192,
+      "num_predict": 1024,
+      "seed": 42,
+      "temperature": 0.0
+    }
   },
   "rule_evolution": null,
   "settled_fact": {
@@ -195,7 +228,7 @@
       {
         "axis": "RULE_AMBIGUITY",
         "citation_ids": [],
-        "rationale": "A clear single clause governs the act — the retrieved Law states that denying a goal by deliberate handball is a sending-off offence (ifab-law12-dogso-handball-p118).",
+        "rationale": "A clear single clause governs the act — the retrieved Law states that a player is sent off for denying the opposing team a goal or an obvious goal-scoring opportunity by committing a deliberate handball offence (ifab-law12-dogso-handball-p118).",
         "state": "ABSENT"
       },
       {
@@ -207,7 +240,7 @@
       {
         "axis": "DECISION_TIME_DEFICIT",
         "citation_ids": [],
-        "rationale": "The decisive truth was available at the moment — the retrieved facts state the referee saw the handball in real time and applied the Law exactly — a red card and a penalty (suarez-hist-correctly-adjudicated).",
+        "rationale": "The decisive truth was available at the moment — the retrieved facts state that the referee saw the handball in real time, applied the Law correctly by sending off Suárez and awarding a penalty to Ghana (suarez-hist-correctly-adjudicated).",
         "state": "ABSENT"
       },
       {
@@ -216,7 +249,7 @@
           "suarez-framing-suarez",
           "suarez-framing-gyan"
         ],
-        "rationale": "Named sources frame the same settled fact in opposed valence.",
+        "rationale": "Luis Suárez is reported to have called the handball 'the save of the tournament' and said the Hand of God now belonged to him, framing the handball as a worthwhile sacrifice for the team (suarez-framing-suarez). In contrast, Asamoah Gyan described the moment as a cruel injustice that denied Ghana a deserved place in the semi-final, a wound that the missed penalty made permanent (suarez-framing-gyan). These two named people describe one agreed event in opposing terms.",
         "state": "PRESENT"
       }
     ],

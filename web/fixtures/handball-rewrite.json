@@ -3,58 +3,58 @@
     {
       "cell": {
         "axis": "RULE_AMBIGUITY",
-        "citation_ids": [
-          "ifab-law12-handball-deliberate-p110",
-          "ifab-law12-handball-offence-p110"
-        ],
-        "rationale": "Retrieved clauses point to different outcomes for the same facts.",
-        "state": "PRESENT"
+        "citation_ids": [],
+        "rationale": "A clear single clause governs the act — the retrieved Law states that it is an offence if a player deliberately touches the ball with their hand/arm or scores in the opponents' goal immediately after the ball has touched their hand/arm, even if accidental (ifab-law12-handball-offence-p110).",
+        "state": "ABSENT"
       },
       "seal": {
-        "checked_context_citation_ids": [
-          "ifab-law12-handball-deliberate-p110",
-          "ifab-law12-handball-offence-p110"
-        ],
-        "guardian_model": "deterministic-router",
-        "verdict": "GROUNDED"
+        "checked_context_citation_ids": [],
+        "guardian_model": "granite3-guardian:2b",
+        "verdict": "UNGROUNDED"
       }
     },
     {
       "cell": {
         "axis": "INDETERMINACY",
         "citation_ids": [],
-        "rationale": "Nothing makes the truth unrecoverable — the retrieved facts state that whether the ball touched the hand or arm is almost always visible and, with modern replay, fully knowable (hb-hist-visible-knowable).",
+        "rationale": "Nothing makes the truth unrecoverable — the retrieved facts state that whether the ball touched the hand or arm is almost always visible and knowable with modern replay (hb-hist-visible-knowable).",
         "state": "NOT_DOCUMENTED"
       },
       "seal": {
         "checked_context_citation_ids": [],
-        "guardian_model": "deterministic-router",
-        "verdict": "GROUNDED"
+        "guardian_model": "granite3-guardian:2b",
+        "verdict": "UNGROUNDED"
       }
     },
     {
       "cell": {
         "axis": "DECISION_TIME_DEFICIT",
         "citation_ids": [],
-        "rationale": "The decisive truth was available at the moment — the retrieved facts state that whether the ball touched the hand or arm is almost always visible and, with modern replay, fully knowable (hb-hist-visible-knowable).",
+        "rationale": "The decisive truth was available at the moment — the retrieved facts state that whether the ball touched the hand or arm is almost always visible and knowable with modern replay (hb-hist-visible-knowable).",
         "state": "ABSENT"
       },
       "seal": {
         "checked_context_citation_ids": [],
-        "guardian_model": "deterministic-router",
-        "verdict": "GROUNDED"
+        "guardian_model": "granite3-guardian:2b",
+        "verdict": "UNGROUNDED"
       }
     },
     {
       "cell": {
         "axis": "CULTURAL_PRIOR_BIAS",
-        "citation_ids": [],
-        "rationale": "Named sources are one-sided — named officiating analysts and managers are reported to share one complaint — that near-identical contact is judged differently because the Law offers several tests rather than one (hb-framing-pundit, hb-framing-coach).",
-        "state": "ABSENT"
+        "citation_ids": [
+          "hb-framing-coach",
+          "hb-framing-pundit"
+        ],
+        "rationale": "The top-flight head coach (hb-framing-coach) condemns the current handball penalty rules, stating that managers on both sides cannot predict penalisation due to the rule itself (hb-framing-coach). Similarly, an officiating analyst (hb-framing-pundit) criticizes the inconsistent application of handball judgments, attributing it to multiple tests in the Law and calling for simplified wording. Both named sources frame the same settled fact—inconsistent handball penalty decisions—in opposite ways, with one focusing on rule ambiguity (coach) and the other on rule complexity (pundit).",
+        "state": "PRESENT"
       },
       "seal": {
-        "checked_context_citation_ids": [],
-        "guardian_model": "deterministic-router",
+        "checked_context_citation_ids": [
+          "hb-framing-coach",
+          "hb-framing-pundit"
+        ],
+        "guardian_model": "granite3-guardian:2b",
         "verdict": "GROUNDED"
       }
     }
@@ -77,6 +77,15 @@
       "id": "hb-framing-pundit",
       "page": null,
       "source_doc": "matchday officiating analysis"
+    },
+    "hb-hist-inconsistent-application": {
+      "attribution": "Curated historical record — The modern handball call",
+      "bbox": null,
+      "doc_kind": "HISTORICAL_REPORT",
+      "extracted_text": "Across the 2024/25 and 2025/26 seasons, comparable handball situations were penalised in some matches and waved away in others, with officials and panels reaching different conclusions on near-identical contact. The inconsistency tracks the choice of clause.",
+      "id": "hb-hist-inconsistent-application",
+      "page": null,
+      "source_doc": "curated-historical"
     },
     "hb-hist-three-tests": {
       "attribution": "Curated historical record — The modern handball call",
@@ -130,20 +139,20 @@
     {
       "output": {
         "citation_ids": [
-          "ifab-law12-handball-deliberate-p110",
-          "ifab-law12-handball-offence-p110"
+          "ifab-law12-handball-offence-p110",
+          "ifab-law12-handball-deliberate-p110"
         ],
         "lens": "REFEREE",
-        "rationale": "The retrieved Law sets out several different tests for the same contact — a deliberate movement of the hand/arm, the hand/arm making the body 'unnaturally bigger', and an accidental touch that leads directly to a goal (ifab-law12-handball-deliberate-p110) — each with a different consequence. Competing clauses point to different outcomes for the same facts, so the rule itself is ambiguous.",
-        "stance": "DISPUTES",
+        "rationale": "The retrieved Law states that it is an offence if a player deliberately touches the ball with their hand/arm or scores in the opponents' goal immediately after the ball has touched their hand/arm, even if accidental (ifab-law12-handball-offence-p110). The Law also specifies that a goal scored in this way does not stand. Furthermore, it provides a clear definition of deliberate touching, such as moving the hand/arm towards the ball or using it to make their body unnaturally bigger (ifab-law12-handball-deliberate-p110). Since there is one clear offence clause with no competing clause, the Law is clear and rule-ambiguity does not hold here.",
+        "stance": "SUPPORTS",
         "state": "GROUNDED"
       },
       "seal": {
         "checked_context_citation_ids": [
-          "ifab-law12-handball-deliberate-p110",
-          "ifab-law12-handball-offence-p110"
+          "ifab-law12-handball-offence-p110",
+          "ifab-law12-handball-deliberate-p110"
         ],
-        "guardian_model": "deterministic-router",
+        "guardian_model": "granite3-guardian:2b",
         "verdict": "GROUNDED"
       }
     },
@@ -151,63 +160,71 @@
       "output": {
         "citation_ids": [],
         "lens": "TACTICAL",
-        "rationale": "No event-data anomaly resolves which handball test applies.",
+        "rationale": "No evidence was retrieved for this lens on this incident.",
         "stance": "INSUFFICIENT_EVIDENCE",
         "state": "INSUFFICIENT_EVIDENCE"
       },
       "seal": {
         "checked_context_citation_ids": [],
-        "guardian_model": "deterministic-router",
-        "verdict": "GROUNDED"
+        "guardian_model": "granite3-guardian:2b",
+        "verdict": "UNGROUNDED"
       }
     },
     {
       "output": {
         "citation_ids": [
-          "hb-hist-three-tests",
-          "hb-hist-visible-knowable"
+          "hb-hist-visible-knowable",
+          "hb-hist-inconsistent-application",
+          "hb-hist-three-tests"
         ],
         "lens": "HISTORICAL",
-        "rationale": "The retrieved facts state that whether the ball touched the hand or arm is almost always visible and, with modern replay, fully knowable (hb-hist-visible-knowable); the information available at the moment was adequate, so there is no decision-time deficit. What is contested is which clause applies.",
-        "stance": "DISPUTES",
+        "rationale": "The retrieved facts state that whether the ball touched the hand or arm is almost always visible and knowable with modern replay (hb-hist-visible-knowable). The decision-time information was adequate. However, the contested aspect is which clause of the Law the contact falls under, indicating an inconsistent application by officials across seasons (hb-hist-inconsistent-application). The 2024/25 Law 12 retains three distinct handball tests, each carrying a different sanction, and an official must decide which test applies in real time (hb-hist-three-tests). This suggests that while the truth of what happened is knowable, the interpretation and application of the rules to that truth can vary, leading to mixed outcomes.",
+        "stance": "MIXED",
         "state": "GROUNDED"
       },
       "seal": {
         "checked_context_citation_ids": [
-          "hb-hist-three-tests",
-          "hb-hist-visible-knowable"
+          "hb-hist-visible-knowable",
+          "hb-hist-inconsistent-application",
+          "hb-hist-three-tests"
         ],
-        "guardian_model": "deterministic-router",
+        "guardian_model": "granite3-guardian:2b",
         "verdict": "GROUNDED"
       }
     },
     {
       "output": {
         "citation_ids": [
-          "hb-framing-pundit",
-          "hb-framing-coach"
+          "hb-framing-coach",
+          "hb-framing-pundit"
         ],
         "lens": "FRAMING",
-        "rationale": "Named officiating analysts and managers are reported to share one complaint — that near-identical contact is judged differently because the Law offers several tests rather than one (hb-framing-pundit, hb-framing-coach). The framings agree on the problem rather than dividing by side, so there is no opposed valence.",
-        "stance": "DISPUTES",
+        "rationale": "The top-flight head coach (hb-framing-coach) condemns the current handball penalty rules, stating that managers on both sides cannot predict penalisation due to the rule itself (hb-framing-coach). Similarly, an officiating analyst (hb-framing-pundit) criticizes the inconsistent application of handball judgments, attributing it to multiple tests in the Law and calling for simplified wording. Both named sources frame the same settled fact—inconsistent handball penalty decisions—in opposite ways, with one focusing on rule ambiguity (coach) and the other on rule complexity (pundit).",
+        "stance": "MIXED",
         "state": "GROUNDED"
       },
       "seal": {
         "checked_context_citation_ids": [
-          "hb-framing-pundit",
-          "hb-framing-coach"
+          "hb-framing-coach",
+          "hb-framing-pundit"
         ],
-        "guardian_model": "deterministic-router",
+        "guardian_model": "granite3-guardian:2b",
         "verdict": "GROUNDED"
       }
     }
   ],
+  "probes": [],
   "provenance": {
-    "corpus_git_sha": "52499cff84ff95f7281b24bef4aa2fca471483af",
+    "corpus_git_sha": "889b304af3cbb5012931960e3d7d9540daefa9df",
     "embed_model": "granite-embedding:30m",
-    "granite_model": "deterministic-router",
-    "guardian_model": "deterministic-router",
-    "options": {}
+    "granite_model": "granite3.3:8b",
+    "guardian_model": "granite3-guardian:2b",
+    "options": {
+      "num_ctx": 8192,
+      "num_predict": 1024,
+      "seed": 42,
+      "temperature": 0.0
+    }
   },
   "rule_evolution": null,
   "settled_fact": {
@@ -221,33 +238,33 @@
     "cells": [
       {
         "axis": "RULE_AMBIGUITY",
-        "citation_ids": [
-          "ifab-law12-handball-deliberate-p110",
-          "ifab-law12-handball-offence-p110"
-        ],
-        "rationale": "Retrieved clauses point to different outcomes for the same facts.",
-        "state": "PRESENT"
+        "citation_ids": [],
+        "rationale": "A clear single clause governs the act — the retrieved Law states that it is an offence if a player deliberately touches the ball with their hand/arm or scores in the opponents' goal immediately after the ball has touched their hand/arm, even if accidental (ifab-law12-handball-offence-p110).",
+        "state": "ABSENT"
       },
       {
         "axis": "INDETERMINACY",
         "citation_ids": [],
-        "rationale": "Nothing makes the truth unrecoverable — the retrieved facts state that whether the ball touched the hand or arm is almost always visible and, with modern replay, fully knowable (hb-hist-visible-knowable).",
+        "rationale": "Nothing makes the truth unrecoverable — the retrieved facts state that whether the ball touched the hand or arm is almost always visible and knowable with modern replay (hb-hist-visible-knowable).",
         "state": "NOT_DOCUMENTED"
       },
       {
         "axis": "DECISION_TIME_DEFICIT",
         "citation_ids": [],
-        "rationale": "The decisive truth was available at the moment — the retrieved facts state that whether the ball touched the hand or arm is almost always visible and, with modern replay, fully knowable (hb-hist-visible-knowable).",
+        "rationale": "The decisive truth was available at the moment — the retrieved facts state that whether the ball touched the hand or arm is almost always visible and knowable with modern replay (hb-hist-visible-knowable).",
         "state": "ABSENT"
       },
       {
         "axis": "CULTURAL_PRIOR_BIAS",
-        "citation_ids": [],
-        "rationale": "Named sources are one-sided — named officiating analysts and managers are reported to share one complaint — that near-identical contact is judged differently because the Law offers several tests rather than one (hb-framing-pundit, hb-framing-coach).",
-        "state": "ABSENT"
+        "citation_ids": [
+          "hb-framing-coach",
+          "hb-framing-pundit"
+        ],
+        "rationale": "The top-flight head coach (hb-framing-coach) condemns the current handball penalty rules, stating that managers on both sides cannot predict penalisation due to the rule itself (hb-framing-coach). Similarly, an officiating analyst (hb-framing-pundit) criticizes the inconsistent application of handball judgments, attributing it to multiple tests in the Law and calling for simplified wording. Both named sources frame the same settled fact—inconsistent handball penalty decisions—in opposite ways, with one focusing on rule ambiguity (coach) and the other on rule complexity (pundit).",
+        "state": "PRESENT"
       }
     ],
-    "headline": "It stays contested over whether the Law is clear — not over the dimensions ruled out."
+    "headline": "It stays contested over how named sources frame the same fact — not over the dimensions ruled out."
   },
   "title": "The modern handball call"
 }

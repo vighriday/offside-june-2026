@@ -44,8 +44,17 @@ def test_unknown_incident_fails_gracefully():
 
 
 def test_no_numbers_leak_across_the_mcp_boundary():
+    # The no-numbers contract is about the REASONING the agent consumes — the SPLIT states,
+    # the rationales, the headline — never a confidence score or percentage. Provenance model
+    # ids (e.g. "granite3.3:8b") and a source's page number are code-owned identifiers, not
+    # magnitudes the model emitted, so the check targets the reasoning fields specifically.
     for iid in ("hand-of-god-1986", "handball-rewrite", "offside-margin"):
-        payload = decompose_disagreement(iid)
-        # no percentage and no confidence-shaped score in the agent-facing payload
-        assert not re.search(r"\d+\s*%", payload)
-        assert not re.search(r"\b0?\.\d+\b", payload)  # no bare 0.xx confidence floats
+        d = json.loads(decompose_disagreement(iid))
+        reasoning_parts = [d["split"]["headline"], d["settled_fact"]["statement"]]
+        for cell in d["split"]["cells"]:
+            reasoning_parts.append(cell["state"])
+            reasoning_parts.append(cell["rationale"])
+        reasoning = " ".join(reasoning_parts)
+        # no percentage and no confidence-shaped score in the agent-facing reasoning
+        assert not re.search(r"\d+\s*%", reasoning)
+        assert not re.search(r"\b0?\.\d+\b", reasoning)  # no bare 0.xx confidence floats

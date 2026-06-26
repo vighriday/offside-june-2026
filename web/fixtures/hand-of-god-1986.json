@@ -4,13 +4,13 @@
       "cell": {
         "axis": "RULE_AMBIGUITY",
         "citation_ids": [],
-        "rationale": "A clear single clause governs the act — the retrieved Law states a goal scored immediately after the ball touches the hand or arm does not stand (ifab-law12-handball-offence-p110).",
+        "rationale": "A clear single clause governs the act — the retrieved Law states that it is an offence if a player deliberately touches the ball with their hand/arm, or scores in the opponents' goal immediately after the ball has touched their hand/arm, even if accidental.",
         "state": "ABSENT"
       },
       "seal": {
         "checked_context_citation_ids": [],
-        "guardian_model": "deterministic-router",
-        "verdict": "GROUNDED"
+        "guardian_model": "granite3-guardian:2b",
+        "verdict": "UNGROUNDED"
       }
     },
     {
@@ -22,26 +22,28 @@
       },
       "seal": {
         "checked_context_citation_ids": [],
-        "guardian_model": "deterministic-router",
-        "verdict": "GROUNDED"
+        "guardian_model": "granite3-guardian:2b",
+        "verdict": "UNGROUNDED"
       }
     },
     {
       "cell": {
         "axis": "DECISION_TIME_DEFICIT",
         "citation_ids": [
-          "hist-tech-1986",
-          "hist-officials-accounts"
+          "hist-officials-accounts",
+          "hist-never-overturned",
+          "hist-tech-1986"
         ],
-        "rationale": "Resolving technology was absent and the view was obstructed in the moment.",
+        "rationale": "The referee and assistant referee gave differing later accounts of what they saw (hist-officials-accounts); neither had a clear, unobstructed view of the handling at full speed. The goal stood and the result was never overturned (hist-never-overturned), indicating that the decisive truth was not available to the officials at the moment of the call. There was no VAR and no goal-line technology in 1986 (hist-tech-1986), reinforcing that the officials could not access the truth in real time, a decision-time deficit.",
         "state": "PRESENT"
       },
       "seal": {
         "checked_context_citation_ids": [
-          "hist-tech-1986",
-          "hist-officials-accounts"
+          "hist-officials-accounts",
+          "hist-never-overturned",
+          "hist-tech-1986"
         ],
-        "guardian_model": "deterministic-router",
+        "guardian_model": "granite3-guardian:2b",
         "verdict": "GROUNDED"
       }
     },
@@ -49,18 +51,20 @@
       "cell": {
         "axis": "CULTURAL_PRIOR_BIAS",
         "citation_ids": [
+          "framing-robson",
           "framing-maradona-1986",
-          "framing-shilton"
+          "framing-maradona-2000"
         ],
-        "rationale": "Named sources frame the same settled fact in opposed valence.",
+        "rationale": "Bobby Robson (framing-robson) condemned the goal, describing it as 'scored with the hand of a rascal', not the hand of God. In contrast, Diego Maradona (framing-maradona-1986) justified it by stating 'a little with the head of Maradona and a little with the hand of God'. Later, Maradona (framing-maradona-2000) admitted to punching the ball into the net, calling it the 'hand of God', showing divergence in how two named sources framed the same event.",
         "state": "PRESENT"
       },
       "seal": {
         "checked_context_citation_ids": [
+          "framing-robson",
           "framing-maradona-1986",
-          "framing-shilton"
+          "framing-maradona-2000"
         ],
-        "guardian_model": "deterministic-router",
+        "guardian_model": "granite3-guardian:2b",
         "verdict": "GROUNDED"
       }
     }
@@ -75,14 +79,32 @@
       "page": null,
       "source_doc": "post-match press conference"
     },
-    "framing-shilton": {
-      "attribution": "Peter Shilton, post-match and subsequent interviews (1986-06-22)",
+    "framing-maradona-2000": {
+      "attribution": "Diego Maradona, Yo soy el Diego (autobiography) (2000-01-01)",
       "bbox": null,
       "doc_kind": "FRAMING_SOURCE",
-      "extracted_text": "Peter Shilton (1986-06-22) — CONDEMNS: Shilton maintained it was cheating and that Maradona never apologised.",
-      "id": "framing-shilton",
+      "extracted_text": "Diego Maradona (2000-01-01) — ADMITS: Maradona later acknowledged he punched the ball into the net, calling it the \"hand of God\".",
+      "id": "framing-maradona-2000",
       "page": null,
-      "source_doc": "post-match and subsequent interviews"
+      "source_doc": "Yo soy el Diego (autobiography)"
+    },
+    "framing-robson": {
+      "attribution": "Bobby Robson, post-match comments (1986-06-22)",
+      "bbox": null,
+      "doc_kind": "FRAMING_SOURCE",
+      "extracted_text": "Bobby Robson (1986-06-22) — CONDEMNS: Robson described the goal as scored \"with the hand of a rascal\", not the hand of God.",
+      "id": "framing-robson",
+      "page": null,
+      "source_doc": "post-match comments"
+    },
+    "hist-never-overturned": {
+      "attribution": "Curated historical record — The Hand of God",
+      "bbox": null,
+      "doc_kind": "HISTORICAL_REPORT",
+      "extracted_text": "The goal stood and the result was never overturned. The handball was confirmed only later, including by Maradona's own admission.",
+      "id": "hist-never-overturned",
+      "page": null,
+      "source_doc": "curated-historical"
     },
     "hist-officials-accounts": {
       "attribution": "Curated historical record — The Hand of God",
@@ -101,6 +123,20 @@
       "id": "hist-tech-1986",
       "page": null,
       "source_doc": "curated-historical"
+    },
+    "ifab-law12-dogso-handball-p118": {
+      "attribution": null,
+      "bbox": {
+        "bottom": 415.0,
+        "left": 62.0,
+        "right": 372.0,
+        "top": 478.0
+      },
+      "doc_kind": "IFAB_LAW",
+      "extracted_text": "Where a player denies the opposing team a goal or an obvious goal-scoring opportunity by committing a deliberate handball offence the player is sent off whatever the position of the offence.",
+      "id": "ifab-law12-dogso-handball-p118",
+      "page": 118,
+      "source_doc": "ifab-laws-2025-26"
     },
     "ifab-law12-handball-offence-p110": {
       "attribution": null,
@@ -131,18 +167,20 @@
     {
       "output": {
         "citation_ids": [
-          "ifab-law12-handball-offence-p110"
+          "ifab-law12-handball-offence-p110",
+          "ifab-law12-dogso-handball-p118"
         ],
         "lens": "REFEREE",
-        "rationale": "The retrieved Law states a goal scored immediately after the ball touches the hand or arm does not stand (ifab-law12-handball-offence-p110); the rule yields one outcome for a hand-scored goal, so it is clear and rule-ambiguity does not hold.",
+        "rationale": "The retrieved Law states that it is an offence if a player deliberately touches the ball with their hand/arm, or scores in the opponents' goal immediately after the ball has touched their hand/arm, even if accidental. A goal scored in this way does not stand (ifab-law12-handball-offence-p110). Furthermore, where a player denies the opposing team a goal or an obvious goal-scoring opportunity by committing a deliberate handball offence, the player is sent off regardless of the position of the offence (ifab-law12-dogso-handball-p118). These clauses provide clear rules for handling handball offences, including scoring directly from the hand or arm and the consequences thereof. There are no competing clauses that would lead to different outcomes for the same facts, nor is the Law silent on a decisive element. Therefore, rule-ambiguity does not hold here.",
         "stance": "SUPPORTS",
         "state": "GROUNDED"
       },
       "seal": {
         "checked_context_citation_ids": [
-          "ifab-law12-handball-offence-p110"
+          "ifab-law12-handball-offence-p110",
+          "ifab-law12-dogso-handball-p118"
         ],
-        "guardian_model": "deterministic-router",
+        "guardian_model": "granite3-guardian:2b",
         "verdict": "GROUNDED"
       }
     },
@@ -152,7 +190,7 @@
           "sb-hand-of-god-body-part"
         ],
         "lens": "TACTICAL",
-        "rationale": "The event data records this goal's body part as the catch-all label 'Other' while a comparable goal is a specific class (sb-hand-of-god-body-part); the schema having no category for the action is where the data model strains. This describes the data model only.",
+        "rationale": "The aggregate records this goal's body part as the catch-all label 'Other' while a comparable goal by the same player is recorded with a specific body-part class ('Left Foot') (sb-hand-of-god-body-part). The shot ontology has no category for a hand-scored goal, so the event falls back to 'Other'. This describes the data model only — not officiating, intent, or knowability.",
         "stance": "SUPPORTS",
         "state": "GROUNDED"
       },
@@ -160,57 +198,67 @@
         "checked_context_citation_ids": [
           "sb-hand-of-god-body-part"
         ],
-        "guardian_model": "deterministic-router",
+        "guardian_model": "granite3-guardian:2b",
         "verdict": "GROUNDED"
       }
     },
     {
       "output": {
         "citation_ids": [
-          "hist-tech-1986",
-          "hist-officials-accounts"
+          "hist-officials-accounts",
+          "hist-never-overturned",
+          "hist-tech-1986"
         ],
         "lens": "HISTORICAL",
-        "rationale": "In 1986 there was no VAR or goal-line technology and the decision could not be reviewed (hist-tech-1986), and the officials gave differing accounts with no clear view of the handling (hist-officials-accounts); the decisive truth was not available to them in the moment.",
+        "rationale": "The referee and assistant referee gave differing later accounts of what they saw (hist-officials-accounts); neither had a clear, unobstructed view of the handling at full speed. The goal stood and the result was never overturned (hist-never-overturned), indicating that the decisive truth was not available to the officials at the moment of the call. There was no VAR and no goal-line technology in 1986 (hist-tech-1986), reinforcing that the officials could not access the truth in real time, a decision-time deficit.",
         "stance": "SUPPORTS",
         "state": "GROUNDED"
       },
       "seal": {
         "checked_context_citation_ids": [
-          "hist-tech-1986",
-          "hist-officials-accounts"
+          "hist-officials-accounts",
+          "hist-never-overturned",
+          "hist-tech-1986"
         ],
-        "guardian_model": "deterministic-router",
+        "guardian_model": "granite3-guardian:2b",
         "verdict": "GROUNDED"
       }
     },
     {
       "output": {
         "citation_ids": [
+          "framing-robson",
           "framing-maradona-1986",
-          "framing-shilton"
+          "framing-maradona-2000"
         ],
         "lens": "FRAMING",
-        "rationale": "Diego Maradona is reported to have justified the goal as 'a little with the head of Maradona and a little with the hand of God' (framing-maradona-1986), while Peter Shilton is reported to have condemned it as cheating (framing-shilton); two named sources frame the same agreed handball in opposite valence.",
+        "rationale": "Bobby Robson (framing-robson) condemned the goal, describing it as 'scored with the hand of a rascal', not the hand of God. In contrast, Diego Maradona (framing-maradona-1986) justified it by stating 'a little with the head of Maradona and a little with the hand of God'. Later, Maradona (framing-maradona-2000) admitted to punching the ball into the net, calling it the 'hand of God', showing divergence in how two named sources framed the same event.",
         "stance": "MIXED",
         "state": "GROUNDED"
       },
       "seal": {
         "checked_context_citation_ids": [
+          "framing-robson",
           "framing-maradona-1986",
-          "framing-shilton"
+          "framing-maradona-2000"
         ],
-        "guardian_model": "deterministic-router",
+        "guardian_model": "granite3-guardian:2b",
         "verdict": "GROUNDED"
       }
     }
   ],
+  "probes": [],
   "provenance": {
-    "corpus_git_sha": "52499cff84ff95f7281b24bef4aa2fca471483af",
+    "corpus_git_sha": "889b304af3cbb5012931960e3d7d9540daefa9df",
     "embed_model": "granite-embedding:30m",
-    "granite_model": "deterministic-router",
-    "guardian_model": "deterministic-router",
-    "options": {}
+    "granite_model": "granite3.3:8b",
+    "guardian_model": "granite3-guardian:2b",
+    "options": {
+      "num_ctx": 8192,
+      "num_predict": 1024,
+      "seed": 42,
+      "temperature": 0.0
+    }
   },
   "rule_evolution": null,
   "settled_fact": {
@@ -225,7 +273,7 @@
       {
         "axis": "RULE_AMBIGUITY",
         "citation_ids": [],
-        "rationale": "A clear single clause governs the act — the retrieved Law states a goal scored immediately after the ball touches the hand or arm does not stand (ifab-law12-handball-offence-p110).",
+        "rationale": "A clear single clause governs the act — the retrieved Law states that it is an offence if a player deliberately touches the ball with their hand/arm, or scores in the opponents' goal immediately after the ball has touched their hand/arm, even if accidental.",
         "state": "ABSENT"
       },
       {
@@ -237,19 +285,21 @@
       {
         "axis": "DECISION_TIME_DEFICIT",
         "citation_ids": [
-          "hist-tech-1986",
-          "hist-officials-accounts"
+          "hist-officials-accounts",
+          "hist-never-overturned",
+          "hist-tech-1986"
         ],
-        "rationale": "Resolving technology was absent and the view was obstructed in the moment.",
+        "rationale": "The referee and assistant referee gave differing later accounts of what they saw (hist-officials-accounts); neither had a clear, unobstructed view of the handling at full speed. The goal stood and the result was never overturned (hist-never-overturned), indicating that the decisive truth was not available to the officials at the moment of the call. There was no VAR and no goal-line technology in 1986 (hist-tech-1986), reinforcing that the officials could not access the truth in real time, a decision-time deficit.",
         "state": "PRESENT"
       },
       {
         "axis": "CULTURAL_PRIOR_BIAS",
         "citation_ids": [
+          "framing-robson",
           "framing-maradona-1986",
-          "framing-shilton"
+          "framing-maradona-2000"
         ],
-        "rationale": "Named sources frame the same settled fact in opposed valence.",
+        "rationale": "Bobby Robson (framing-robson) condemned the goal, describing it as 'scored with the hand of a rascal', not the hand of God. In contrast, Diego Maradona (framing-maradona-1986) justified it by stating 'a little with the head of Maradona and a little with the hand of God'. Later, Maradona (framing-maradona-2000) admitted to punching the ball into the net, calling it the 'hand of God', showing divergence in how two named sources framed the same event.",
         "state": "PRESENT"
       }
     ],

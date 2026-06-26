@@ -126,9 +126,18 @@ THE DECISION versus now. You do not know the Laws' wording, the event data, or
 opinion.
 
 YOUR ONE QUESTION:
-At the moment the decision was made, could the officials access the decisive truth?
-DECISION-TIME DEFICIT = the truth was knowable in principle but NOT available to the
-officials then (no review tech, obstructed or differing sightlines).
+At the moment the decision was made, could the officials access the decisive truth —
+AND, separately, is that truth even recoverable AT ALL?
+
+Two DIFFERENT gaps live here, and you must tell them apart:
+- DECISION-TIME DEFICIT = the truth was knowable in principle but NOT available to the
+  officials then (no review tech, obstructed or differing sightlines). With today's
+  technology it WOULD be resolved.
+- INDETERMINACY (truth unrecoverable) = even with all current technology the exact truth
+  cannot be measured to the precision the Law implies — the quantity is physically not
+  recoverable at the decisive margin, and the authorities themselves acknowledge it (e.g.
+  a deliberately "thicker" line / tolerance band). This is NOT a sightline problem; better
+  cameras do not fix it.
 
 NEVER:
 - NEVER assert a fact, technology status, or sightline detail not in RETRIEVED
@@ -139,13 +148,30 @@ NEVER:
   chunk that establishes the gap.
 - NEVER editorialise about fairness or outcome.
 
-stance:
-- stance SUPPORTS -> facts show officials could not access the decisive truth in the
-                     moment (no review tech AND obstructed/differing view).
-- stance MIXED    -> only one of the two conditions holds.
-- INSUFFICIENT_EVIDENCE -> no retrieved fact bears on what was knowable then.
+DECISION PROCEDURE (apply in order — the FIRST match wins; this is the load-bearing call):
+  Q1. Do the facts say a PHYSICAL, QUANTITATIVE quantity (a position, a distance, a moment
+      in time) cannot be measured to the precision the Law requires, even with current
+      technology — an irreducible MEASUREMENT limit the authorities acknowledge (e.g. a
+      deliberately thicker offside line / tolerance band because the value cannot be measured
+      reliably)?  If YES -> stance DISPUTES. STOP. (The unrecoverability IS the finding; it
+      routes to INDETERMINACY.)
+      HARD EXCLUSION: a SUBJECTIVE threshold or "matter of degree" — "clear and obvious",
+      "non-footballing action", whether a foul met an interpretive bar — is NOT a measurement
+      limit. Inconsistent or "subjective" judgements of a visible, agreed fact are a question
+      of where the rule draws its line, NOT of an unmeasurable physical truth. That is NEVER
+      DISPUTES here; if the fact itself was visible and adequate, go to Q3 (MIXED).
+  Q2. Else, do the facts say the officials could not access the truth in the moment (no
+      review tech AND obstructed/differing view), though it was recoverable in principle?
+      If YES -> stance SUPPORTS. STOP. (a DECISION-TIME deficit.)
+  Q3. Else, the information was adequate and the truth fully knowable -> stance MIXED.
+  Q4. Else (nothing retrieved bears on this) -> INSUFFICIENT_EVIDENCE.
 
-WORKED EXAMPLE (do NOT reuse):
+CRITICAL: "no decision-time deficit" does NOT imply MIXED. An incident can have NO deficit
+AND an unrecoverable truth at the same time — that is precisely the DISPUTES case. If your
+own rationale uses the word "indeterminacy" or says the exact value "cannot be measured" /
+"is not recoverable" with current technology, your stance MUST be DISPUTES, never MIXED.
+
+WORKED EXAMPLE A — decision-time deficit (do NOT reuse):
 RETRIEVED HISTORY:
   [HIST-demo] "No video review existed in this competition. The officials' views of
    the contact differed and neither had a clear sightline. The call stood unreviewed."
@@ -155,6 +181,20 @@ GOOD OUTPUT:
  views of the contact differed with no clear sightline (HIST-demo). So the decisive
  truth was not available to the officials at the moment of the call, a decision-time
  deficit distinct from whether the truth is knowable today."}
+
+WORKED EXAMPLE B — truth unrecoverable / indeterminacy (do NOT reuse):
+RETRIEVED HISTORY:
+  [HIST-demo-b] "At the finest margin the exact position is not recoverable: the frame
+   is chosen from discrete video, the measured point is selected by the system, and the
+   subjects are in motion. The authorities deliberately apply a thicker tolerance line
+   because the exact value cannot be measured reliably."
+GOOD OUTPUT:
+{"lens":"HISTORICAL","stance":"DISPUTES","state":"GROUNDED","citation_ids":["HIST-demo-b"],
+ "rationale":"The retrieved facts state the exact position at the margin is not
+ recoverable because the frame and measured point are selected from discrete data while
+ the subjects move, and the authorities apply a deliberately thicker tolerance line
+ (HIST-demo-b). So the exact truth is not recoverable even with current technology — an
+ indeterminacy that better cameras would not resolve, distinct from a sightline gap."}
 """
 
 FRAMING_PROMPT = """\
@@ -248,12 +288,16 @@ RULE_AMBIGUITY — "Are the Laws themselves unclear or in conflict?"
   the intent test is NOT ambiguity and routes to no axis here.
 
 INDETERMINACY — "Does a fact stay contested even with all current technology?"
-  Feed: REFEREE intent-element note only.
+  Feed: HISTORICAL stance only (the lens that separates a sightline gap from an
+  irreducible measurement gap), gated by the SHARED_SETTLED_FACT admission note.
   HARD PRECONDITION: if SHARED_SETTLED_FACT records the actor ADMITTING the act,
-  the deliberateness residual is RESOLVED. INDETERMINACY may NOT be PRESENT or WEAK
-  on an admitted act -> ABSENT.
-  ELSE if a mental element is load-bearing AND unresolved -> PRESENT.
+  the residual is RESOLVED. INDETERMINACY may NOT be PRESENT or WEAK on an admitted
+  act -> ABSENT.
+  ELSE HISTORICAL stance DISPUTES (the exact truth is not recoverable even with current
+  technology, and the authorities acknowledge it) -> PRESENT.
   no relevant evidence -> NOT_DOCUMENTED.
+  NOTE: a HISTORICAL stance SUPPORTS is a DECISION-TIME deficit (knowable now, not
+  available then), NOT indeterminacy — it routes to DECISION_TIME_DEFICIT, never here.
   NOTE: a TACTICAL data-ontology catch-all label means "the schema has no class for
   the action," NOT "the fact is unknowable." It is NEVER admissible to INDETERMINACY.
 

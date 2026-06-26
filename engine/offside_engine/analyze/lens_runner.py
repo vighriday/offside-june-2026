@@ -82,6 +82,7 @@ def run_lens(
     granite: GraniteClient,
     allowed_citation_ids: set[str] | None = None,
     k: int = 3,
+    extra_hits: tuple[RetrievedHit, ...] = (),
 ) -> LensRun:
     """Retrieve, render, generate, and guard one lens.
 
@@ -89,13 +90,21 @@ def run_lens(
     ``allowed_citation_ids``) → render it into the prompt → constrain Granite to
     :class:`LensOutput` → reject any citation the lens was not shown.
 
+    ``extra_hits`` lets a caller (the falsification probe) GUARANTEE a passage is in the
+    lens's evidence block regardless of retrieval ranking — the controlled "what if it also
+    saw THIS?" experiment. The injected hits are prepended (so they lead the block) and are
+    citable like any retrieved hit; they do not displace the real retrieved evidence.
+
     A lens with no retrieved evidence returns ``INSUFFICIENT_EVIDENCE`` without a model
     call. A lens that cites an id outside its retrieved set raises — a hallucinated
     citation must never reach a fixture.
     """
-    hits = retriever.retrieve(
+    retrieved = retriever.retrieve(
         lens=lens, query=query, k=k, allowed_citation_ids=allowed_citation_ids
     )
+    # Prepend any forced hits, de-duplicating by id (a forced hit wins its slot).
+    forced_ids = {h.citation_id for h in extra_hits}
+    hits = list(extra_hits) + [h for h in retrieved if h.citation_id not in forced_ids]
     if not hits:
         return LensRun(output=_insufficient(lens), hits=())
 

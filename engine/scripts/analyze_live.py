@@ -23,17 +23,29 @@ This is what you screen-record for the demo: pick an incident the engine has nev
 from __future__ import annotations
 
 import argparse
+import io
 import subprocess
 import sys
 import tempfile
 from pathlib import Path
 
+# Windows consoles default to cp1252 and choke on the box-drawing glyphs in the narration.
+# Force UTF-8 so the live run prints identically on any platform.
+if hasattr(sys.stdout, "reconfigure"):
+    sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+else:  # pragma: no cover - very old interpreters
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
+
 from offside_engine.analyze.granite_client import GraniteClient
 from offside_engine.analyze.guardian import GuardianClient
-from offside_engine.analyze.split_schema import Citation
+from offside_engine.analyze.split_schema import Citation, IncidentBundle
 from offside_engine.bake.bake import bake_incident
 from offside_engine.bake.corpus_pool import assemble_pool
 from offside_engine.bake.incident import INCIDENTS, IncidentSpec
+from offside_engine.bake.integrity import assert_probes_authentic
+from offside_engine.bake.probe import run_probe
+from offside_engine.bake.probe_specs import PROBE_SPECS_BY_INCIDENT
+from offside_engine.bake.write_fixture import write_fixture
 from offside_engine.config import DEFAULT_EMBED_MODEL, DEFAULT_GUARDIAN_MODEL, load_granite_config
 from offside_engine.eval.groundedness import score_bundle, write_report
 from offside_engine.index.build_lance import build_index
@@ -109,6 +121,11 @@ def main() -> None:
                     help="run through the executable LangGraph StateGraph (same engine)")
     ap.add_argument("--ragas", action="store_true",
                     help="also score lens groundedness with RAGAS (needs the [eval] extra)")
+    ap.add_argument("--probe", action="store_true",
+                    help="run the falsification probes (flip / noise / overreach) through the "
+                         "real pipeline and attach the captured outcomes to the bundle")
+    ap.add_argument("--write", action="store_true",
+                    help="freeze the resulting bundle to web/fixtures/<id>.json")
     args = ap.parse_args()
 
     if args.list or not args.incident:
@@ -183,6 +200,40 @@ def main() -> None:
     backend = rows[0].backend if rows else "deterministic"
     _say(f"\n{_DIM}· groundedness audit ({backend}): {grounded}/{len(rows)} lens readings "
          f"fully grounded → {mp}{_RST}")
+
+    # ── The falsification centerpiece — attack the engine's own answer, live. ──
+    if args.probe:
+        pspecs = PROBE_SPECS_BY_INCIDENT.get(spec.incident_id, [])
+        if not pspecs:
+            _say(f"\n{_YEL}No probes defined for {spec.incident_id}; skipping.{_RST}")
+        else:
+            _say(f"\n{_BOLD}Falsification probes — the engine tries to break its own answer:{_RST}")
+            base_gated = [sl.output for sl in bundle.lenses]
+            probes = []
+            for ps in pspecs:
+                p = run_probe(
+                    ps, spec, base_citations=pool, base_gated=base_gated,
+                    granite=granite, guardian=guardian,
+                )
+                probes.append(p)
+                moved = "→" if p.state_before != p.state_after else "·"
+                _say(f"  {_CYN}{p.kind:<9}{_RST} {p.axis}: "
+                     f"{p.state_before} {moved} {p.state_after}  "
+                     f"Guardian: {_GRN if p.guardian_verdict=='GROUNDED' else _YEL}"
+                     f"{p.guardian_verdict}{_RST}")
+                _say(f"  {_DIM}{p.outcome}{_RST}")
+
+            # The integrity lock: every verdict must be a real captured token, and each
+            # probe must have done what its kind claims. Faking is impossible — this raises.
+            assert_probes_authentic(probes)
+            _say(f"\n{_GRN}✓ integrity lock passed — every probe verdict is a real Granite "
+                 f"Guardian token.{_RST}")
+            bundle = bundle.model_copy(update={"probes": probes})
+
+    if args.write:
+        fixtures_dir = _REPO / "web" / "fixtures"
+        out = write_fixture(bundle, fixtures_dir)
+        _say(f"\n{_GRN}✓ froze bundle → {out}{_RST}")
 
 
 if __name__ == "__main__":

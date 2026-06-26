@@ -60,10 +60,19 @@ class LensRetriever:
         prerequisite for byte-identical frozen fixtures.
         """
         qvec = self._embedder.embed_one(query)
-        # Over-fetch then filter+sort+trim in code, so the allow-list cannot starve k.
+        # Push the per-incident allow-list INTO the vector search, not just a post-filter.
+        # Otherwise out-of-incident atoms (every other incident's framing/history sits in the
+        # same index) can fill the over-fetch window and starve an in-incident atom before the
+        # post-filter ever sees it — e.g. an opposed framing quote silently dropped, collapsing
+        # a PRESENT axis to ABSENT. Filtering in the query guarantees every admissible atom is a
+        # candidate. The redundant post-filter below stays as a belt-and-braces guard.
+        where = f"lens = '{lens}'"
+        if allowed_citation_ids:
+            ids = ", ".join(f"'{cid}'" for cid in sorted(allowed_citation_ids))
+            where += f" AND citation_id IN ({ids})"
         results = (
             self._table.search(qvec)
-            .where(f"lens = '{lens}'")
+            .where(where)
             .limit(max(k * 4, k))
             .to_list()
         )

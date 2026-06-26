@@ -1217,3 +1217,302 @@ body {
     color: var(--cds-text-placeholder, #6f6f6f);
   }
 }
+
+// ── The Falsification Panel — the self-attack centerpiece ──────────────────────
+// Three cards: feed the engine new evidence, watch the real pipeline respond. The verdict
+// badges are real captured Granite Guardian tokens, so this section is the proof the
+// two-model audit is not decoration.
+.falsify {
+  margin: 3.5rem 0 1rem;
+  padding: 2rem;
+  border: 1px solid var(--cds-border-subtle-01, #393939);
+  border-top: 3px solid var(--cds-support-info, #4589ff);
+  background: linear-gradient(
+    180deg,
+    rgba(69, 137, 255, 0.05),
+    var(--cds-layer-01, #1c1c1c)
+  );
+
+  &__head {
+    max-width: 52rem;
+    margin-bottom: 2rem;
+  }
+
+  &__title {
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    font-size: 1.75rem;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0 0 0.75rem;
+    color: var(--cds-text-primary, #f4f4f4);
+  }
+
+  &__lede {
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--cds-text-secondary, #c6c6c6);
+    margin: 0;
+
+    strong {
+      color: var(--cds-text-primary, #f4f4f4);
+      font-weight: 600;
+    }
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+    gap: 1.25rem;
+  }
+
+  &__card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    padding: 1.4rem;
+    background: var(--cds-layer-02, #262626);
+    border: 1px solid var(--cds-border-subtle-01, #393939);
+    border-left: 3px solid var(--cds-border-strong-01, #6f6f6f);
+
+    &[data-tone="flip"] {
+      border-left-color: var(--cds-support-info, #4589ff);
+    }
+    &[data-tone="noise"] {
+      border-left-color: var(--cds-text-placeholder, #6f6f6f);
+    }
+    &[data-tone="overrule"] {
+      border-left-color: var(--cds-support-warning, #f1c21b);
+    }
+  }
+
+  &__badge {
+    align-self: flex-start;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.25rem 0.55rem;
+    color: var(--cds-text-primary, #f4f4f4);
+    background: var(--cds-layer-03, #393939);
+  }
+
+  &__question {
+    font-size: 1.02rem;
+    line-height: 1.4;
+    font-weight: 500;
+    color: var(--cds-text-primary, #f4f4f4);
+    margin: 0;
+  }
+
+  &__what {
+    padding: 0.7rem 0.8rem;
+    background: var(--cds-background, #161616);
+    border: 1px solid var(--cds-border-subtle-01, #393939);
+  }
+
+  &__what-label {
+    display: block;
+    font-size: 0.65rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--cds-text-placeholder, #6f6f6f);
+    margin-bottom: 0.35rem;
+  }
+
+  &__injected {
+    font-size: 0.82rem;
+    line-height: 1.45;
+    font-style: italic;
+    color: var(--cds-text-secondary, #c6c6c6);
+    margin: 0;
+  }
+
+  &__move {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 0.9rem;
+  }
+
+  &__state {
+    padding: 0.2rem 0.5rem;
+    background: var(--cds-layer-01, #1c1c1c);
+    color: var(--cds-text-secondary, #c6c6c6);
+    border: 1px solid var(--cds-border-subtle-01, #393939);
+  }
+
+  &__arrow {
+    color: var(--cds-text-placeholder, #6f6f6f);
+    font-weight: 700;
+  }
+
+  &__move[data-moved="true"] &__arrow {
+    color: var(--cds-support-info, #4589ff);
+  }
+
+  &__move[data-moved="true"] &__state:last-child {
+    color: var(--cds-text-primary, #f4f4f4);
+    border-color: var(--cds-support-info, #4589ff);
+  }
+
+  &__verdict {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    padding-top: 0.4rem;
+    border-top: 1px solid var(--cds-border-subtle-01, #393939);
+  }
+
+  &__verdict-tag {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--seal-grounded, #42be65);
+  }
+
+  &__verdict[data-verdict="UNGROUNDED"] &__verdict-tag {
+    color: var(--cds-support-warning, #f1c21b);
+  }
+
+  &__verdict-model {
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 0.68rem;
+    color: var(--cds-text-placeholder, #6f6f6f);
+  }
+
+  &__outcome {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    color: var(--cds-text-secondary, #c6c6c6);
+    margin: 0;
+  }
+
+  &__foot {
+    max-width: 52rem;
+    margin: 2rem 0 0;
+    font-size: 0.95rem;
+    line-height: 1.55;
+    color: var(--cds-text-secondary, #c6c6c6);
+    padding-left: 1rem;
+    border-left: 2px solid var(--cds-support-info, #4589ff);
+  }
+}
+
+// ── How It Works — the one-screen, jargon-free explainer for judges ────────────
+.how {
+  margin: 2.5rem 0 3rem;
+  padding: 2rem;
+  background: var(--cds-layer-01, #1c1c1c);
+  border: 1px solid var(--cds-border-subtle-01, #393939);
+
+  &__title {
+    font-family: "IBM Plex Sans", system-ui, sans-serif;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--cds-text-placeholder, #6f6f6f);
+    margin: 0 0 1.5rem;
+  }
+
+  &__steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+    gap: 1.25rem;
+    margin-bottom: 2rem;
+  }
+
+  &__step {
+    display: flex;
+    gap: 0.85rem;
+    align-items: flex-start;
+  }
+
+  &__num {
+    flex: 0 0 auto;
+    width: 1.7rem;
+    height: 1.7rem;
+    display: grid;
+    place-items: center;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--cds-text-on-color, #161616);
+    background: var(--cds-support-info, #4589ff);
+  }
+
+  &__step-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--cds-text-primary, #f4f4f4);
+    margin: 0.15rem 0 0.35rem;
+  }
+
+  &__step-body {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--cds-text-secondary, #c6c6c6);
+    margin: 0;
+  }
+
+  &__models {
+    padding: 1.25rem 1.4rem;
+    background: var(--cds-background, #161616);
+    border: 1px solid var(--cds-border-subtle-01, #393939);
+    margin-bottom: 1.5rem;
+  }
+
+  &__models-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--cds-support-info, #4589ff);
+    margin: 0 0 0.85rem;
+  }
+
+  &__model-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.65rem;
+
+    li {
+      font-size: 0.92rem;
+      line-height: 1.5;
+      color: var(--cds-text-secondary, #c6c6c6);
+      padding-left: 1rem;
+      border-left: 2px solid var(--cds-border-subtle-01, #393939);
+
+      strong {
+        color: var(--cds-text-primary, #f4f4f4);
+        font-weight: 600;
+      }
+    }
+  }
+
+  &__honest {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--cds-text-secondary, #c6c6c6);
+    margin: 0;
+
+    strong {
+      color: var(--cds-text-primary, #f4f4f4);
+    }
+  }
+
+  &__honest-tag {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--cds-text-on-color, #161616);
+    background: var(--cds-support-success, #42be65);
+    padding: 0.15rem 0.5rem;
+    margin-right: 0.6rem;
+    vertical-align: middle;
+  }
+}

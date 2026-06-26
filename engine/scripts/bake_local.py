@@ -121,20 +121,21 @@ _LAMPARD_LENSES = [
 
 
 # ── Suárez handball ──────────────────────────────────────────────────────────
-# The decisive contrast: the Historical lens DISPUTES a decision-time deficit (the
-# officials saw it and ruled correctly), which routes DECISION_TIME_DEFICIT to ABSENT.
-# Only Cultural Prior Bias remains PRESENT — the axis it shares with the Hand of God.
+# The decisive contrast: the Historical lens reads the info as fully adequate (stance
+# MIXED — the officials saw it and ruled correctly), which routes DECISION_TIME_DEFICIT to
+# ABSENT and leaves INDETERMINACY undocumented. Only Cultural Prior Bias remains PRESENT —
+# the axis it shares with the Hand of God.
 
 _SUAREZ_LENSES = [
     _lens("REFEREE", "SUPPORTS", ["ifab-law12-dogso-handball-p118"],
           "The retrieved Law states that denying a goal by deliberate handball is a "
           "sending-off offence (ifab-law12-dogso-handball-p118); the sanction is a single "
           "clear rule, so rule-ambiguity does not hold."),
-    _lens("HISTORICAL", "DISPUTES", ["suarez-hist-correctly-adjudicated"],
+    _lens("HISTORICAL", "MIXED", ["suarez-hist-correctly-adjudicated"],
           "The retrieved facts state the referee saw the handball in real time and applied "
           "the Law exactly — a red card and a penalty (suarez-hist-correctly-adjudicated); "
-          "the decisive truth WAS available in the moment, so there is no decision-time "
-          "deficit."),
+          "the decisive truth was fully available in the moment, so there is no decision-time "
+          "deficit and nothing unrecoverable."),
     LensOutput(lens="TACTICAL", stance="INSUFFICIENT_EVIDENCE",
                state="INSUFFICIENT_EVIDENCE", citation_ids=[],
                rationale="No event-data anomaly bears on this incident."),
@@ -148,9 +149,10 @@ _SUAREZ_LENSES = [
 
 # ── The modern handball call (RULE_AMBIGUITY PRESENT) ─────────────────────────
 # The Referee lens DISPUTES — the Law offers several competing tests for the same contact,
-# pointing to different outcomes. The Historical lens DISPUTES a decision-time deficit (the
-# contact was visible and replayable), which routes DECISION_TIME_DEFICIT to ABSENT without
-# touching INDETERMINACY. The framings share one complaint (one-sided) → CULTURAL ABSENT.
+# pointing to different outcomes. The Historical lens reads the info as fully adequate
+# (stance MIXED — the contact was visible and replayable), which routes
+# DECISION_TIME_DEFICIT to ABSENT without touching INDETERMINACY. The framings share one
+# complaint (one-sided) → CULTURAL ABSENT.
 
 _HANDBALL_REWRITE_LENSES = [
     _lens("REFEREE", "DISPUTES",
@@ -164,12 +166,13 @@ _HANDBALL_REWRITE_LENSES = [
     LensOutput(lens="TACTICAL", stance="INSUFFICIENT_EVIDENCE",
                state="INSUFFICIENT_EVIDENCE", citation_ids=[],
                rationale="No event-data anomaly resolves which handball test applies."),
-    _lens("HISTORICAL", "DISPUTES",
+    _lens("HISTORICAL", "MIXED",
           ["hb-hist-three-tests", "hb-hist-visible-knowable"],
           "The retrieved facts state that whether the ball touched the hand or arm is "
           "almost always visible and, with modern replay, fully knowable "
           "(hb-hist-visible-knowable); the information available at the moment was adequate, "
-          "so there is no decision-time deficit. What is contested is which clause applies."),
+          "so there is no decision-time deficit and nothing unrecoverable. What is contested "
+          "is which clause applies."),
     _lens("FRAMING", "DISPUTES", ["hb-framing-pundit", "hb-framing-coach"],
           "Named officiating analysts and managers are reported to share one complaint — "
           "that near-identical contact is judged differently because the Law offers several "
@@ -180,9 +183,10 @@ _HANDBALL_REWRITE_LENSES = [
 
 # ── The millimetre offside line (INDETERMINACY PRESENT) ───────────────────────
 # The Referee lens SUPPORTS — Law 11 fixes the line precisely (RULE ABSENT). The Historical
-# lens DISPUTES knowability AND cites the measurement-unrecoverable atom, which routes
-# INDETERMINACY to PRESENT and DECISION_TIME_DEFICIT to ABSENT (the tech can see it; the
-# exact truth still cannot be measured). Framings one-sided → CULTURAL ABSENT.
+# lens DISPUTES knowability (the exact truth is unrecoverable even now) — a real model
+# stance, NOT a planted id — which routes INDETERMINACY to PRESENT and DECISION_TIME_DEFICIT
+# to ABSENT (the tech can see it; the exact truth still cannot be measured). Framings
+# one-sided → CULTURAL ABSENT.
 
 _OFFSIDE_MARGIN_LENSES = [
     _lens("REFEREE", "SUPPORTS", ["ifab-law11-offside-margin-p103"],
@@ -223,10 +227,10 @@ _PGMOL_SUBJECTIVE_LENSES = [
     LensOutput(lens="TACTICAL", stance="INSUFFICIENT_EVIDENCE",
                state="INSUFFICIENT_EVIDENCE", citation_ids=[],
                rationale="No event-data anomaly resolves whether the threshold was met."),
-    _lens("HISTORICAL", "DISPUTES", ["pg-hist-visible"],
+    _lens("HISTORICAL", "MIXED", ["pg-hist-visible"],
           "The retrieved facts state the contact was visible on replay and reviewed by VAR "
-          "(pg-hist-visible); the information available was adequate, so the dispute is not "
-          "about what could be seen but about whether the threshold was met."),
+          "(pg-hist-visible); the information available was fully adequate, so the dispute is "
+          "not about what could be seen but about whether the threshold was met."),
     _lens("FRAMING", "MIXED", ["pg-framing-aggrieved", "pg-framing-benefiting"],
           "The manager ruled against is reported to call the contact a clear, obvious foul "
           "(pg-framing-aggrieved) while the manager who benefited calls the identical "
