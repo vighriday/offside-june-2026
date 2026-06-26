@@ -36,7 +36,7 @@ what stays inherently uncertain, what was knowable at the time, and who's watchi
 | **Why it's different** | Today's football AI (X-VARS, SoccerRef-Agents) chases **correctness**. OFFSIDE decomposes **disagreement persistence** — an unclaimed lane. *We don't adjudicate; we decompose.* |
 | **Who it's for** | Not fans re-litigating a goal, but the people who **defend and write these decisions** — referees' bodies, IFAB/PGMOL, and the broadcasters who explain them. It shows *which structural gap* a controversy exposes, and lets you compare them across a season. |
 | **Current, not trivia** | Six incidents — one iconic hook, then **three live, unsettled disputes from the current Laws and season**: the rewritten handball Law, the millimetre semi-automated offside line, and the "subjective" VAR calls that flip week to week. Across the set, *all four* dimensions fire. |
-| **The trust spine** | Every cell clicks straight through to a real, page-numbered passage of the actual IFAB Laws of the Game. A second IBM model (Granite Guardian) audits the first and demotes anything it can't ground. Where there's no evidence, it says so. |
+| **The trust spine** | Every cell clicks straight through to a real, page-numbered passage of the actual IFAB Laws of the Game. A second IBM model (Granite Guardian) audits the first and demotes anything it can't ground — and a **live falsification engine** lets you watch Guardian overrule the first model on demand, integrity-locked in CI so the audit can't be faked. Where there's no evidence, it says so. |
 | **The moat** | The reasoning model is **structurally incapable of emitting a number** — no fabricated percentages, ever. Enforced by a test in CI. |
 | **Built with** | IBM Granite · IBM Docling · Granite Embedding · **Granite Guardian** · **LangGraph** · **Context Forge (MCP)** · Langflow · RAGAS audit |
 
@@ -142,6 +142,30 @@ It retrieves each lens's evidence, has Granite read it, has **Granite Guardian a
 reading**, routes the surviving evidence onto THE SPLIT, and prints the diagnosis — with no
 number anywhere. Point it at an incident and watch the four axes fall out of the evidence.
 
+### The falsification engine — the system attacks its own answer
+
+A frozen diagnosis could be mistaken for a lookup table. So OFFSIDE is built to **attack
+its own result**, live, through the same two IBM models — and the millimetre-offside
+incident ships three probes that do exactly that:
+
+| Probe | What it feeds the engine | What happens | What it proves |
+|-------|--------------------------|--------------|----------------|
+| **Push it the right way** | a grounded record saying the line is now perfectly measurable | the engine moves the axis **off** "unknowable" | it reasons from evidence, not a stored answer |
+| **Push it with junk** | an irrelevant passage | nothing moves | it doesn't flip at any push — the negative control holds |
+| **Lie to it** | a claim the sources can't support | **Granite Guardian returns `UNGROUNDED`** and overrules the first model | the second IBM model audits, live, and rejects what the evidence doesn't carry |
+
+Every verdict is a **real captured Granite Guardian token**. A CI integrity lock
+([`bake/integrity.py`](engine/offside_engine/bake/integrity.py)) fails the build if any probe
+verdict is hand-authored, or if a probe didn't actually do what its kind claims — so the
+audit is impossible to fake. Bake it live, or it doesn't ship.
+
+```bash
+python engine/scripts/analyze_live.py --incident offside-margin --probe
+```
+
+This is the Trust & Transparency claim made concrete: hand a skeptic the attack, and the
+engine holds — because a second IBM model is checking the first, on camera.
+
 ## The moat: a model that cannot fabricate a number
 
 The reasoning model is **structurally forbidden from emitting a number**. The schemas it
@@ -172,7 +196,9 @@ flowchart LR
     IDX --> L4["Framing lens · Granite"]
     L1 & L2 & L3 & L4 -->|cite-or-die| G["Granite Guardian<br/>groundedness gate"]
     G -->|deterministic routing| SPLIT["THE SPLIT<br/>4 MECE cells · no numbers"]
+    SPLIT --> PROBE["Falsification probes<br/>FLIP · NOISE · OVERREACH<br/>Guardian overrules, live · CI-locked"]
     SPLIT --> FX["Frozen IncidentBundle<br/>byte-identical JSON + provenance"]
+    PROBE --> FX
   end
   FX -->|committed to the repo| WEB["web/ · Next.js + IBM Carbon<br/>reads fixtures, no model at runtime"]
   WEB --> V["Vercel — $0, instant, reproducible"]
@@ -203,10 +229,12 @@ Plus a build-time **RAGAS / groundedness audit** ([`eval/groundedness.py`](engin
 
 The **Granite Guardian gate** is the move a single-model entry cannot make: a lens reading
 survives only if the first model asserted it **and** the second model could not refute it
-against the source. The audit is recorded as a trust seal, frozen at temperature 0. (The
-SPLIT cells themselves are then assigned by deterministic code, so their seals record
-`deterministic-router` — the routing is faithful and reproducible, never an overclaim that
-a model audited them.)
+against the source. The audit is recorded as a trust seal, frozen at temperature 0. Every
+shipped fixture is baked **live** through the real models — `granite3.3:8b` reads each lens
+and `granite3-guardian:2b` audits each — so the seals you see on the site are genuine
+captured verdicts, not placeholders. The four SPLIT axes are then assigned from that gated
+evidence by deterministic, documented rules (a pure function of the lens signatures), which
+is what keeps the diagnosis reproducible and the model unable to fabricate a magnitude.
 
 > Built using **IBM Project Bob** (Architect and Code modes) during development — the
 > architecture and engine were shaped with Bob and reviewed for issues along the way. Bob
@@ -223,7 +251,7 @@ you why an Argentine pundit, an English keeper, and a neutral analyst will never
 ## Repository
 
 ```text
-engine/     Python build-time factory (the bake) — 123 tests, runs on Colab
+engine/     Python build-time factory (the bake) — 145 tests, runs on Colab or locally via Ollama
   bake.ipynb         the cloud factory runner (pulls the Granite models, bakes a fixture)
   scripts/bake_local.py   the offline deterministic baker (no GPU; reproducible fixtures)
   offside_engine/    the pipeline: ingest → index → retrieve → lenses → guardian → split
@@ -261,7 +289,7 @@ fixtures deterministically without a GPU.
 ```bash
 cd engine
 pip install -e ".[dev]"
-pytest -q          # 123 tests, incl. the no-numbers moat + cite-or-die guards
+pytest -q          # 145 tests, incl. the no-numbers moat, cite-or-die guards, and the probe integrity lock
 ```
 
 ## License

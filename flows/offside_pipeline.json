@@ -1,129 +1,176 @@
 {
+  "id": "offside-disagreement-pipeline",
   "name": "OFFSIDE — The Disagreement Pipeline",
-  "description": "Docling evidence → per-lens retrieval → four Granite lens readings → Granite Guardian groundedness gate → deterministic SPLIT routing → frozen fixture. The orchestration OFFSIDE runs at bake time, as a Langflow graph.",
+  "description": "A visual reference of the OFFSIDE bake orchestration: Docling evidence → granite-embedding per-lens index → four Granite lens readings → Granite Guardian groundedness gate → deterministic SPLIT routing → live falsification probes → frozen fixture. The EXECUTABLE form of this graph is the LangGraph StateGraph in engine/offside_engine/orchestrate/graph.py (run + tested); this canvas is the human-readable map of the same stages.",
+  "last_tested_version": "1.1.1",
   "data": {
+    "viewport": { "x": 0, "y": 0, "zoom": 0.7 },
     "nodes": [
       {
-        "id": "docling",
+        "id": "NoteNode-docling",
         "type": "noteNode",
         "position": { "x": 0, "y": 240 },
         "data": {
+          "id": "NoteNode-docling",
+          "type": "note",
           "node": {
-            "template": {},
-            "description": "IBM Docling extracts the IFAB Laws of the Game into structured, page-cited evidence (page number + bounding box + verbatim text). This is the click-to-source spine.",
-            "display_name": "IBM Docling — Evidence Extraction"
+            "template": { "backgroundColor": "neutral" },
+            "description": "**IBM Docling — Evidence Extraction**\n\nExtracts the IFAB Laws of the Game into structured, page-cited evidence (page number + bounding box + verbatim text). This is the click-to-source spine.",
+            "display_name": "IBM Docling — Evidence Extraction",
+            "documentation": ""
           }
         }
       },
       {
-        "id": "embed_index",
+        "id": "NoteNode-embed",
         "type": "noteNode",
-        "position": { "x": 320, "y": 240 },
+        "position": { "x": 340, "y": 240 },
         "data": {
+          "id": "NoteNode-embed",
+          "type": "note",
           "node": {
-            "template": {},
-            "description": "granite-embedding:30m embeds every evidence atom into a per-lens LanceDB index. Each lens sees only its own evidence via a metadata filter — disagreement emerges because the retrieved evidence differs, not because tone differs.",
-            "display_name": "Granite Embedding + LanceDB — Per-Lens Index"
+            "template": { "backgroundColor": "blue" },
+            "description": "**Granite Embedding + LanceDB — Per-Lens Index**\n\ngranite-embedding:30m embeds every evidence atom into a per-lens LanceDB index. Each lens sees only its own evidence via a metadata filter — disagreement emerges because the retrieved evidence differs, not because the tone differs.",
+            "display_name": "Granite Embedding + LanceDB",
+            "documentation": ""
           }
         }
       },
       {
-        "id": "lens_referee",
+        "id": "NoteNode-referee",
         "type": "noteNode",
-        "position": { "x": 680, "y": 0 },
+        "position": { "x": 700, "y": 0 },
         "data": {
+          "id": "NoteNode-referee",
+          "type": "note",
           "node": {
-            "template": {},
-            "description": "Granite reads only the IFAB Law evidence. Cite-or-die: every sentence cites a real clause, or the lens returns INSUFFICIENT_EVIDENCE. No numbers, ever.",
-            "display_name": "Referee Lens — Granite"
+            "template": { "backgroundColor": "neutral" },
+            "description": "**Referee Lens — Granite**\n\nGranite reads only the IFAB Law evidence. Cite-or-die: every sentence cites a real clause, or the lens returns INSUFFICIENT_EVIDENCE. No numbers, ever.",
+            "display_name": "Referee Lens — Granite",
+            "documentation": ""
           }
         }
       },
       {
-        "id": "lens_tactical",
+        "id": "NoteNode-tactical",
         "type": "noteNode",
-        "position": { "x": 680, "y": 160 },
+        "position": { "x": 700, "y": 170 },
         "data": {
+          "id": "NoteNode-tactical",
+          "type": "note",
           "node": {
-            "template": {},
-            "description": "Granite reads only the StatsBomb event aggregate. Reports where the data model strains (a goal forced into the catch-all body-part label 'Other'); never a stat value.",
-            "display_name": "Tactical Lens — Granite"
+            "template": { "backgroundColor": "neutral" },
+            "description": "**Tactical Lens — Granite**\n\nGranite reads only the StatsBomb event aggregate. Reports where the data model strains (a goal forced into the catch-all body-part label 'Other'); never a stat value.",
+            "display_name": "Tactical Lens — Granite",
+            "documentation": ""
           }
         }
       },
       {
-        "id": "lens_historical",
+        "id": "NoteNode-historical",
         "type": "noteNode",
-        "position": { "x": 680, "y": 320 },
+        "position": { "x": 700, "y": 340 },
         "data": {
+          "id": "NoteNode-historical",
+          "type": "note",
           "node": {
-            "template": {},
-            "description": "Granite reads only the curated historical record. Reconstructs what was knowable AT THE MOMENT of the decision versus now — the decision-time deficit.",
-            "display_name": "Historical Lens — Granite"
+            "template": { "backgroundColor": "neutral" },
+            "description": "**Historical Lens — Granite**\n\nGranite reads only the curated historical record. Reconstructs what was knowable AT THE MOMENT of the decision versus now — the decision-time deficit, distinct from an irreducible measurement limit.",
+            "display_name": "Historical Lens — Granite",
+            "documentation": ""
           }
         }
       },
       {
-        "id": "lens_framing",
+        "id": "NoteNode-framing",
         "type": "noteNode",
-        "position": { "x": 680, "y": 480 },
+        "position": { "x": 700, "y": 510 },
         "data": {
+          "id": "NoteNode-framing",
+          "type": "note",
           "node": {
-            "template": {},
-            "description": "Granite reads only named-source quotes. Reports what each NAMED person said; a nationality is never a source. The structural guard against stereotyping.",
-            "display_name": "Framing Lens — Granite"
+            "template": { "backgroundColor": "neutral" },
+            "description": "**Framing Lens — Granite**\n\nGranite reads only named-source quotes. Reports what each NAMED person said; a nationality is never a source. The structural guard against stereotyping.",
+            "display_name": "Framing Lens — Granite",
+            "documentation": ""
           }
         }
       },
       {
-        "id": "guardian",
+        "id": "NoteNode-guardian",
         "type": "noteNode",
-        "position": { "x": 1040, "y": 240 },
+        "position": { "x": 1060, "y": 240 },
         "data": {
+          "id": "NoteNode-guardian",
+          "type": "note",
           "node": {
-            "template": {},
-            "description": "Granite Guardian — a SECOND IBM model — audits each lens reading for groundedness against its cited page. Any reading it cannot confirm is demoted to INSUFFICIENT_EVIDENCE. The build-time trust gate.",
-            "display_name": "Granite Guardian — Groundedness Gate"
+            "template": { "backgroundColor": "emerald" },
+            "description": "**Granite Guardian — Groundedness Gate**\n\nA SECOND IBM model audits each lens reading for groundedness against its cited page. Any reading it cannot confirm is demoted to INSUFFICIENT_EVIDENCE. The build-time trust gate — and the same model the live falsification probes use to overrule the first.",
+            "display_name": "Granite Guardian — Groundedness Gate",
+            "documentation": ""
           }
         }
       },
       {
-        "id": "split",
+        "id": "NoteNode-split",
         "type": "noteNode",
-        "position": { "x": 1400, "y": 240 },
+        "position": { "x": 1400, "y": 130 },
         "data": {
+          "id": "NoteNode-split",
+          "type": "note",
           "node": {
-            "template": {},
-            "description": "The gated lens evidence is routed onto the four MECE axes (Rule Ambiguity, Indeterminacy, Decision-Time Deficit, Cultural Prior Bias) by fixed deterministic rules. THE SPLIT carries states, never magnitudes.",
-            "display_name": "THE SPLIT — Deterministic Routing"
+            "template": { "backgroundColor": "blue" },
+            "description": "**THE SPLIT — Deterministic Routing**\n\nThe gated lens evidence is routed onto the four MECE axes (Rule Ambiguity, Indeterminacy, Decision-Time Deficit, Cultural Prior Bias) by fixed, documented rules — a pure function of the lens signatures. THE SPLIT carries states, never magnitudes.",
+            "display_name": "THE SPLIT — Deterministic Routing",
+            "documentation": ""
           }
         }
       },
       {
-        "id": "fixture",
+        "id": "NoteNode-probes",
+        "type": "noteNode",
+        "position": { "x": 1400, "y": 360 },
+        "data": {
+          "id": "NoteNode-probes",
+          "type": "note",
+          "node": {
+            "template": { "backgroundColor": "amber" },
+            "description": "**Falsification Probes — Self-Attack**\n\nThe centerpiece incident is re-run through three live probes via the SAME Granite + Granite Guardian models: FLIP (new evidence moves the axis), NOISE (junk does nothing), OVERREACH (Granite Guardian returns a real UNGROUNDED and overrules the first model). A CI integrity lock fails the build if any verdict is hand-authored.",
+            "display_name": "Falsification Probes — Self-Attack",
+            "documentation": ""
+          }
+        }
+      },
+      {
+        "id": "NoteNode-fixture",
         "type": "noteNode",
         "position": { "x": 1760, "y": 240 },
         "data": {
+          "id": "NoteNode-fixture",
+          "type": "note",
           "node": {
-            "template": {},
-            "description": "The audited bundle is frozen to byte-identical JSON with full provenance (models + corpus git SHA). The web app reads this offline — no model runs at runtime.",
-            "display_name": "Frozen IncidentBundle — Fixture"
+            "template": { "backgroundColor": "neutral" },
+            "description": "**Frozen IncidentBundle — Fixture**\n\nThe audited bundle (plus any probe outcomes) is frozen to byte-identical JSON with full provenance (models used + corpus git SHA). The web app reads this offline — no model runs at runtime.",
+            "display_name": "Frozen IncidentBundle — Fixture",
+            "documentation": ""
           }
         }
       }
     ],
     "edges": [
-      { "id": "e1", "source": "docling", "target": "embed_index" },
-      { "id": "e2", "source": "embed_index", "target": "lens_referee" },
-      { "id": "e3", "source": "embed_index", "target": "lens_tactical" },
-      { "id": "e4", "source": "embed_index", "target": "lens_historical" },
-      { "id": "e5", "source": "embed_index", "target": "lens_framing" },
-      { "id": "e6", "source": "lens_referee", "target": "guardian" },
-      { "id": "e7", "source": "lens_tactical", "target": "guardian" },
-      { "id": "e8", "source": "lens_historical", "target": "guardian" },
-      { "id": "e9", "source": "lens_framing", "target": "guardian" },
-      { "id": "e10", "source": "guardian", "target": "split" },
-      { "id": "e11", "source": "split", "target": "fixture" }
+      { "id": "e-docling-embed", "source": "NoteNode-docling", "target": "NoteNode-embed", "type": "default" },
+      { "id": "e-embed-referee", "source": "NoteNode-embed", "target": "NoteNode-referee", "type": "default" },
+      { "id": "e-embed-tactical", "source": "NoteNode-embed", "target": "NoteNode-tactical", "type": "default" },
+      { "id": "e-embed-historical", "source": "NoteNode-embed", "target": "NoteNode-historical", "type": "default" },
+      { "id": "e-embed-framing", "source": "NoteNode-embed", "target": "NoteNode-framing", "type": "default" },
+      { "id": "e-referee-guardian", "source": "NoteNode-referee", "target": "NoteNode-guardian", "type": "default" },
+      { "id": "e-tactical-guardian", "source": "NoteNode-tactical", "target": "NoteNode-guardian", "type": "default" },
+      { "id": "e-historical-guardian", "source": "NoteNode-historical", "target": "NoteNode-guardian", "type": "default" },
+      { "id": "e-framing-guardian", "source": "NoteNode-framing", "target": "NoteNode-guardian", "type": "default" },
+      { "id": "e-guardian-split", "source": "NoteNode-guardian", "target": "NoteNode-split", "type": "default" },
+      { "id": "e-split-probes", "source": "NoteNode-split", "target": "NoteNode-probes", "type": "default" },
+      { "id": "e-split-fixture", "source": "NoteNode-split", "target": "NoteNode-fixture", "type": "default" },
+      { "id": "e-probes-fixture", "source": "NoteNode-probes", "target": "NoteNode-fixture", "type": "default" }
     ]
   }
 }
