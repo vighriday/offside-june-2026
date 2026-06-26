@@ -30,7 +30,7 @@ export function IncidentExplorer({ incidents }: IncidentExplorerProps) {
   const bundles = incidents.map((i) => i.bundle);
 
   return (
-    <main className="incident">
+    <div className="incident">
       {isSample && (
         <p className="incident__sample-banner">
           ⚽ Pre-bake sample fixture — the audited bundle replaces this once the bake runs.
@@ -76,7 +76,7 @@ export function IncidentExplorer({ incidents }: IncidentExplorerProps) {
           />
         </div>
       </div>
-    </main>
+    </div>
   );
 }
 
