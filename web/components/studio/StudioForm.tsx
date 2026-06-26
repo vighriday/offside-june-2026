@@ -16,9 +16,11 @@ const EXAMPLE: StudioFormPayload = {
   tactical_note: null,
 };
 
-export function StudioForm({ disabled, onRun }: {
+export function StudioForm({ disabled, onRun, onExample }: {
   disabled: boolean;
   onRun: (p: StudioFormPayload) => void;
+  /** When provided, overrides the default "fill the form" behaviour of the example button. */
+  onExample?: () => void;
 }) {
   const [form, setForm] = useState<StudioFormPayload>({
     title: "", settled_statement: "", historical_note: "",
@@ -61,7 +63,7 @@ export function StudioForm({ disabled, onRun }: {
       </label>
 
       <div className="studio-form__actions">
-        <button type="button" onClick={() => setForm(EXAMPLE)}>Load an example</button>
+        <button type="button" onClick={() => onExample ? onExample() : setForm(EXAMPLE)}>Load an example</button>
         <button type="submit" disabled={!canRun}>Decompose live</button>
       </div>
       {!canRun && filledQuotes.length < 2 && (

@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import type { IncidentBundle, StudioStreamEvent } from "@/types/contract";
-import { checkHealth, decomposeStream, type StudioFormPayload } from "@/lib/studioClient";
+import { checkHealth, decomposeStream, loadExampleBundle, type StudioFormPayload } from "@/lib/studioClient";
 import { StudioForm } from "./StudioForm";
 import { LiveSplit } from "./LiveSplit";
 
@@ -14,6 +14,18 @@ export function StudioPanel() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => { checkHealth().then((h) => setHealthy(!!h?.ok)); }, []);
+
+  // When the backend is unreachable, "Load an example" loads the pre-baked fixture
+  // and sets it as bundle directly so LiveSplit renders the complete real result.
+  async function loadExample() {
+    setEvents([]); setBundle(null); setError(null);
+    try {
+      const b = await loadExampleBundle();
+      setBundle(b);
+    } catch (err) {
+      setError(err instanceof Error ? err.message : String(err));
+    }
+  }
 
   async function run(payload: StudioFormPayload) {
     setEvents([]); setBundle(null); setError(null); setRunning(true);
@@ -48,7 +60,11 @@ export function StudioPanel() {
         </div>
       )}
 
-      <StudioForm disabled={running || healthy === false} onRun={run} />
+      <StudioForm
+        disabled={running || healthy === false}
+        onRun={run}
+        onExample={healthy === false ? loadExample : undefined}
+      />
       {error && <p className="studio__error">{error}</p>}
       {(events.length > 0 || bundle) && <LiveSplit events={events} bundle={bundle} />}
     </section>

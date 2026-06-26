@@ -1,4 +1,5 @@
 import type { IncidentBundle, StudioStreamEvent } from "@/types/contract";
+import exampleFixture from "@/fixtures/studio-example.json";
 
 export interface HealthResult {
   ok: boolean;
@@ -56,6 +57,13 @@ export async function decomposeStream(
       if (json) onEvent(JSON.parse(json) as StudioStreamEvent);
     }
   }
+}
+
+// Returns the pre-baked Studio example fixture so the public static site can show a
+// complete real result with no backend. Uses a static import (resolveJsonModule: true)
+// because web/fixtures/ is not under public/ and is therefore not served at a public URL.
+export async function loadExampleBundle(): Promise<IncidentBundle> {
+  return exampleFixture as IncidentBundle;
 }
 
 export type { IncidentBundle };
