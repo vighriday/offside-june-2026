@@ -19,12 +19,21 @@ export const STUDIO_BASE =
   process.env.NEXT_PUBLIC_STUDIO_BASE ?? "http://localhost:8000";
 
 export async function checkHealth(base = STUDIO_BASE): Promise<HealthResult | null> {
+  // Fail FAST when no backend is reachable. On the public ($0 static) site there is no
+  // backend, so this fetch would otherwise hang until the browser's default timeout —
+  // leaving the UI stuck in its "unknown" state for tens of seconds and making the form
+  // appear to do nothing. A short abort flips us into the no-backend fallback immediately:
+  // the banner shows and "Load an example" renders the pre-baked fixture instantly.
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 2500);
   try {
-    const r = await fetch(`${base}/health`, { cache: "no-store" });
+    const r = await fetch(`${base}/health`, { cache: "no-store", signal: controller.signal });
     if (!r.ok) return null;
     return (await r.json()) as HealthResult;
   } catch {
-    return null; // backend not reachable → public-site fallback
+    return null; // backend not reachable (or timed out) → public-site fallback
+  } finally {
+    clearTimeout(timeout);
   }
 }
 

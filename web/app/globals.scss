@@ -598,6 +598,19 @@ body {
     }
   }
 
+  // Up-front "this takes a few minutes" notice, shown when the backend is live and idle.
+  &__notice {
+    margin-bottom: 2rem;
+    padding: 1rem 1.25rem;
+    border-left: 3px solid var(--split-present, #4589ff);
+    background: var(--cds-layer-01, #262626);
+    font-size: 0.875rem;
+    line-height: 1.55;
+    color: var(--cds-text-secondary, #c6c6c6);
+
+    strong { color: var(--cds-text-primary, #f4f4f4); }
+  }
+
   &__error {
     margin-top: 1rem;
     padding: 0.75rem 1rem;
@@ -606,6 +619,10 @@ body {
     font-size: 0.875rem;
     color: var(--cds-support-error, #fa4d56);
   }
+}
+
+@keyframes live-split-spin {
+  to { transform: rotate(360deg); }
 }
 
 // ── Studio form ───────────────────────────────────────────────────────────────
@@ -740,14 +757,59 @@ body {
 
 // ── Live split — four boxes filling in as cell events arrive ──────────────────
 .live-split {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1px;
   margin-top: clamp(2rem, 5vw, 3rem);
-  border: 1px solid var(--cds-border-subtle-01, #393939);
 
-  @media (max-width: 40rem) {
-    grid-template-columns: 1fr;
+  // The live activity banner — a real spinner + the "this takes a few minutes" line + timer.
+  &__status {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1rem;
+    margin-bottom: 1px;
+    font-size: 0.875rem;
+    color: var(--cds-text-secondary, #c6c6c6);
+    background: var(--cds-layer-01, #1c1c1c);
+    border: 1px solid var(--cds-border-subtle-01, #393939);
+
+    strong { color: var(--split-present, #4589ff); font-variant-numeric: tabular-nums; }
+  }
+
+  &__spinner {
+    flex: none;
+    width: 0.9rem;
+    height: 0.9rem;
+    border: 2px solid var(--cds-border-subtle-01, #393939);
+    border-top-color: var(--split-present, #4589ff);
+    border-radius: 50%;
+    animation: live-split-spin 0.8s linear infinite;
+  }
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    border: 1px solid var(--cds-border-subtle-01, #393939);
+
+    @media (max-width: 40rem) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  // The real activity trail — one line per engine step, newest at the bottom.
+  &__log {
+    list-style: none;
+    margin: 1px 0 0;
+    padding: 1rem 1.25rem;
+    background: var(--cds-layer-01, #1c1c1c);
+    border: 1px solid var(--cds-border-subtle-01, #393939);
+    font-family: var(--cds-code-01-font-family, "IBM Plex Mono", monospace);
+    font-size: 0.8125rem;
+    line-height: 1.7;
+    color: var(--cds-text-secondary, #c6c6c6);
+  }
+
+  &__log-line {
+    &::before { content: "› "; color: var(--split-present, #4589ff); }
   }
 
   &__cell {
