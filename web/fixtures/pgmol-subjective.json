@@ -17,8 +17,8 @@
       "cell": {
         "axis": "INDETERMINACY",
         "citation_ids": [],
-        "rationale": "Nothing makes the truth unrecoverable — the retrieved facts state that the contact in these incidents was visible on replay and reviewed by VAR ([pg-hist-visible]).",
-        "state": "NOT_DOCUMENTED"
+        "rationale": "The decisive truth is recoverable — the retrieved facts state that the contact in these incidents was visible on replay and reviewed by VAR, indicating the decision-time information was adequate (pg-hist-visible).",
+        "state": "ABSENT"
       },
       "seal": {
         "checked_context_citation_ids": [],
@@ -30,7 +30,7 @@
       "cell": {
         "axis": "DECISION_TIME_DEFICIT",
         "citation_ids": [],
-        "rationale": "The decisive truth was available at the moment — the retrieved facts state that the contact in these incidents was visible on replay and reviewed by VAR ([pg-hist-visible]).",
+        "rationale": "The decisive truth was available at the moment — the retrieved facts state that the contact in these incidents was visible on replay and reviewed by VAR, indicating the decision-time information was adequate (pg-hist-visible).",
         "state": "ABSENT"
       },
       "seal": {
@@ -144,7 +144,7 @@
           "pg-hist-opposite-rulings"
         ],
         "lens": "HISTORICAL",
-        "rationale": "The retrieved facts state that the contact in these incidents was visible on replay and reviewed by VAR ([pg-hist-visible]). The decision-time information was adequate. However, the dispute is not about what happened but about whether the threshold for intervention was met ([pg-hist-threshold]). These thresholds are described as 'matters of degree' and 'not bright lines', with reasonable officials applying them differently to similar contact. This subjectivity is further evidenced by opposite rulings in near-identical situations across different matches during the 2025/26 season ([pg-hist-opposite-rulings]), which were recorded as 'subjective' rather than errors by the Key Match Incidents Panel. Therefore, while the officials could access the truth at the moment of the decision, the truth is not fully determinable due to the inherent subjectivity in interpreting these thresholds.",
+        "rationale": "The retrieved facts state that the contact in these incidents was visible on replay and reviewed by VAR, indicating the decision-time information was adequate (pg-hist-visible). However, the dispute centers around whether the threshold for intervention was met, which involves matters of degree such as 'clear and obvious' error and 'non-footballing action' (pg-hist-threshold). These are not bright lines but subjective interpretations, acknowledged by the Key Match Incidents Panel's split on similar situations (pg-hist-opposite-rulings). Therefore, while the information was adequate at the time, the truth of whether the threshold was met is disputed due to inherent subjectivity.",
         "stance": "MIXED",
         "state": "GROUNDED"
       },
@@ -181,7 +181,7 @@
   ],
   "probes": [],
   "provenance": {
-    "corpus_git_sha": "889b304af3cbb5012931960e3d7d9540daefa9df",
+    "corpus_git_sha": "5645d8301ca409d4f113f4077045b5d2dd5240eb",
     "embed_model": "granite-embedding:30m",
     "granite_model": "granite3.3:8b",
     "guardian_model": "granite3-guardian:2b",
@@ -211,13 +211,13 @@
       {
         "axis": "INDETERMINACY",
         "citation_ids": [],
-        "rationale": "Nothing makes the truth unrecoverable — the retrieved facts state that the contact in these incidents was visible on replay and reviewed by VAR ([pg-hist-visible]).",
-        "state": "NOT_DOCUMENTED"
+        "rationale": "The decisive truth is recoverable — the retrieved facts state that the contact in these incidents was visible on replay and reviewed by VAR, indicating the decision-time information was adequate (pg-hist-visible).",
+        "state": "ABSENT"
       },
       {
         "axis": "DECISION_TIME_DEFICIT",
         "citation_ids": [],
-        "rationale": "The decisive truth was available at the moment — the retrieved facts state that the contact in these incidents was visible on replay and reviewed by VAR ([pg-hist-visible]).",
+        "rationale": "The decisive truth was available at the moment — the retrieved facts state that the contact in these incidents was visible on replay and reviewed by VAR, indicating the decision-time information was adequate (pg-hist-visible).",
         "state": "ABSENT"
       },
       {

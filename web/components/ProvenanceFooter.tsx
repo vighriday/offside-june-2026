@@ -51,7 +51,7 @@ export function ProvenanceFooter({ provenance, citations }: ProvenanceFooterProp
       {isDeterministic && (
         <p className="provenance__honesty">
           This fixture was routed deterministically from the committed corpus. The live
-          four-model pipeline (Granite reads each lens, Granite Guardian audits each) runs
+          Granite pipeline (Granite reads each lens, Granite Guardian audits each) runs
           via <code>analyze_live.py</code> and is shown in the demo.
         </p>
       )}

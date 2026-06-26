@@ -30,7 +30,7 @@
       "cell": {
         "axis": "DECISION_TIME_DEFICIT",
         "citation_ids": [],
-        "rationale": "The decisive truth was available at the moment — the retrieved facts state that the referee saw the handball in real time, applied the Law correctly by sending off Suárez and awarding a penalty to Ghana (suarez-hist-correctly-adjudicated).",
+        "rationale": "The decisive truth was available at the moment — the retrieved facts state that the referee saw the handball in real time and applied the Law correctly, sending off Suárez and awarding a penalty to Ghana (suarez-hist-correctly-adjudicated).",
         "state": "ABSENT"
       },
       "seal": {
@@ -168,7 +168,7 @@
           "suarez-hist-on-the-line"
         ],
         "lens": "HISTORICAL",
-        "rationale": "The retrieved facts state that the referee saw the handball in real time, applied the Law correctly by sending off Suárez and awarding a penalty to Ghana (suarez-hist-correctly-adjudicated). However, it also mentions that Suárez clearly and admittedly handled the ball on the goal line to prevent a certain Ghana goal (suarez-hist-on-the-line). This indicates that while the officials at the moment could access the decisive truth and made a correct decision, the incident itself involved a contentious act of handball that could have been disputed due to its clear nature and Suárez's admission.",
+        "rationale": "The retrieved facts state that the referee saw the handball in real time and applied the Law correctly, sending off Suárez and awarding a penalty to Ghana (suarez-hist-correctly-adjudicated). However, it also mentions that the act was clear and admitted by Suárez himself (suarez-hist-on-the-line). The information was adequate for a determinate decision at the moment, hence the stance MIXED.",
         "stance": "MIXED",
         "state": "GROUNDED"
       },
@@ -204,7 +204,7 @@
   ],
   "probes": [],
   "provenance": {
-    "corpus_git_sha": "889b304af3cbb5012931960e3d7d9540daefa9df",
+    "corpus_git_sha": "5645d8301ca409d4f113f4077045b5d2dd5240eb",
     "embed_model": "granite-embedding:30m",
     "granite_model": "granite3.3:8b",
     "guardian_model": "granite3-guardian:2b",
@@ -240,7 +240,7 @@
       {
         "axis": "DECISION_TIME_DEFICIT",
         "citation_ids": [],
-        "rationale": "The decisive truth was available at the moment — the retrieved facts state that the referee saw the handball in real time, applied the Law correctly by sending off Suárez and awarding a penalty to Ghana (suarez-hist-correctly-adjudicated).",
+        "rationale": "The decisive truth was available at the moment — the retrieved facts state that the referee saw the handball in real time and applied the Law correctly, sending off Suárez and awarding a penalty to Ghana (suarez-hist-correctly-adjudicated).",
         "state": "ABSENT"
       },
       {

@@ -35,7 +35,7 @@ what stays inherently uncertain, what was knowable at the time, and who's watchi
 | **What** | For any contested refereeing decision, it decomposes **why the disagreement persists** across four fixed, evidence-grounded dimensions — never whether the call was correct. |
 | **Why it's different** | Today's football AI (X-VARS, SoccerRef-Agents) chases **correctness**. OFFSIDE decomposes **disagreement persistence** — an unclaimed lane. *We don't adjudicate; we decompose.* |
 | **Who it's for** | Not fans re-litigating a goal, but the people who **defend and write these decisions** — referees' bodies, IFAB/PGMOL, and the broadcasters who explain them. It shows *which structural gap* a controversy exposes, and lets you compare them across a season. |
-| **Current, not trivia** | Six incidents — one iconic hook, then **three live, unsettled disputes from the current Laws and season**: the rewritten handball Law, the millimetre semi-automated offside line, and the "subjective" VAR calls that flip week to week. Across the set, *all four* dimensions fire. |
+| **Current, not trivia** | Six incidents — one iconic hook, then **three live, unsettled disputes from the current Laws and season**: the rewritten handball Law, the millimetre semi-automated offside line, and the "subjective" VAR calls that flip week to week. Across the set, three of the four dimensions fire on real evidence and the fourth *rules itself out* — the diagnostic is computed, not staged. |
 | **The trust spine** | Every cell clicks straight through to a real, page-numbered passage of the actual IFAB Laws of the Game. A second IBM model (Granite Guardian) audits the first and demotes anything it can't ground — and a **live falsification engine** lets you watch Guardian overrule the first model on demand, integrity-locked in CI so the audit can't be faked. Where there's no evidence, it says so. |
 | **The moat** | The reasoning model is **structurally incapable of emitting a number** — no fabricated percentages, ever. Enforced by a test in CI. |
 | **Built with** | IBM Granite · IBM Docling · Granite Embedding · **Granite Guardian** · **LangGraph** · **Context Forge (MCP)** · Langflow · RAGAS audit |
@@ -55,7 +55,8 @@ And it is not nostalgia. **This season**, the same structural fight plays out li
 same contact; semi-automated offside draws a line to the millimetre that the authorities
 themselves blur because it cannot be measured that finely; and a PGMOL panel logs
 week-to-week contradictions as "subjective decisions" that are not even counted as errors.
-The 2026 World Cup will run on exactly these Laws and this technology.
+These are the Laws and the match technology in force across the game right now — the same
+framework the next World Cup cycle is being played and refereed under.
 
 Today's football AI tells you **what happened** and adjudicates **whether a call was
 correct**. OFFSIDE answers the question nobody else does:
@@ -96,30 +97,40 @@ state (`NOT_DOCUMENTED`), rather than guessing.
 ### It generalizes — the proof it isn't hard-coded
 
 Switch incidents on the live site and THE SPLIT *changes*. Six real incidents produce six
-distinct signatures from the same engine and the same four rules — and across the set,
-**every one of the four dimensions fires**, which is the proof the framework is
-load-bearing rather than decorative:
+distinct signatures from the same engine and the same four rules — and the dimensions
+**light up or rule themselves out from the evidence**, never on cue, which is the proof the
+framework is load-bearing rather than decorative:
+
+These are the **actual signatures the live Granite pipeline produces** — read straight off
+the committed fixtures, not a hand-drawn ideal:
 
 | Incident | Rule | Indeterminacy | Decision-time | Cultural | What it shows |
 |----------|:----:|:----:|:----:|:----:|----|
 | **Hand of God** (1986) | ○ | ○ | ● | ● | unseen handball + nation-vs-nation |
-| **Modern handball Law** *(live)* | ● | · | ○ | ○ | the **rulebook itself** has competing tests |
-| **Millimetre offside** *(live)* | ○ | ● | ○ | ○ | the **truth is unmeasurable** at the margin |
-| **"Subjective" VAR call** *(live)* | ● | · | ○ | ● | fuzzy threshold **and** each side reads it its way |
+| **Millimetre offside** *(live)* | ○ | ● | ○ | ● | the **truth is unmeasurable** at the margin, and the framings split |
+| **Modern handball Law** *(live)* | ○ | ○ | ○ | ● | the contact is clear; the fight is over **inconsistent application**, framed oppositely |
+| **"Subjective" VAR call** *(live)* | · | ○ | ○ | ● | a fuzzy threshold the written Law doesn't define, and **each side reads it its way** |
 | **Suárez** (2010) | ○ | ○ | ○ | ● | seen + correctly called, pure framing split |
-| **Lampard** (2010) | ○ | · | ● | ○ | knowable now, unavailable then; sides agreed |
+| **Lampard** (2010) | ○ | ○ | ● | ○ | knowable now, unavailable then; sides agreed |
 
 *(● present · ◐ weak · ○ ruled out · · not documented)*
 
-The archive incidents alone only ever lit *Decision-time* and *Cultural bias*; the three
-**current** disputes are what make *Rule ambiguity* and *Indeterminacy* fire — pointing the
-same engine at live, unsettled problems instead of settled trivia. Each incident ships a
-schematic of the disputed moment, so you *see* it before you read it:
+Across the set, three of the four dimensions fire on real evidence — **Decision-time**
+(Hand of God, Lampard), **Indeterminacy** (the millimetre offside line, the de-circularized
+axis the engine used to fake), and **Cultural bias** (everywhere a controversy is really
+about whose side you're on). **Rule ambiguity is the honest counter-case**: for the modern
+handball Law the engine reads the retrieved Law text and finds it *clear* — the dispute is
+about inconsistent **application**, not the rulebook's wording — and for the "subjective" VAR
+call it finds the written Law simply doesn't speak to the threshold at all (`NOT_DOCUMENTED`),
+rather than inventing a conflict. That a diagnostic dimension can *rule itself out*, or
+honestly report *no evidence*, on real retrieval rather than light up on cue, is the proof the
+framework is load-bearing, not decorative.
+Each incident ships a schematic of the disputed moment, so you *see* it before you read it:
 
 | The modern handball Law | The millimetre offside line | The "subjective" VAR call |
 |:--:|:--:|:--:|
 | ![Modern handball Law — one contact, three competing tests](docs/assets/incident-handball-rewrite.png) | ![Millimetre offside — the precise line vs the thick tolerance band](docs/assets/incident-offside-margin.png) | ![Subjective VAR — same contact, opposite calls](docs/assets/incident-pgmol-subjective.png) |
-| RULE AMBIGUITY · present | INDETERMINACY · present | RULE + CULTURAL · present |
+| CULTURAL · present | INDETERMINACY + CULTURAL · present | CULTURAL · present |
 
 ![Three incidents, three different SPLIT signatures from the same engine](docs/assets/generalization.svg)
 
@@ -131,7 +142,8 @@ the change.
 
 The deployed site reads frozen fixtures (static hosting has no GPU). The other half — the
 proof this is a *system*, not six hand-written answers — is a one-command live run that
-executes the actual four-model pipeline on any incident and narrates every step:
+executes the actual Granite pipeline (three IBM models across four lenses) on any incident
+and narrates every step:
 
 ```bash
 # with Ollama serving the three IBM models (granite3.3:8b, granite-embedding:30m, granite3-guardian:2b)
@@ -199,7 +211,7 @@ flowchart LR
     L1 & L2 & L3 & L4 -->|cite-or-die| G["Granite Guardian<br/>groundedness gate"]
     G -->|deterministic routing| SPLIT["THE SPLIT<br/>4 MECE cells · no numbers"]
     SPLIT --> PROBE["Falsification probes<br/>FLIP · NOISE · OVERREACH<br/>Guardian overrules, live · CI-locked"]
-    SPLIT --> FX["Frozen IncidentBundle<br/>byte-identical JSON + provenance"]
+    SPLIT --> FX["Frozen IncidentBundle<br/>cited JSON + provenance"]
     PROBE --> FX
   end
   FX -->|committed to the repo| WEB["web/ · Next.js + IBM Carbon<br/>reads fixtures, no model at runtime"]
@@ -209,9 +221,12 @@ flowchart LR
 Granite reads each lens's evidence (cite-or-die); Granite Guardian audits those readings;
 then **deterministic code** assigns the four diagnostic axes from the gated evidence. The
 routing is code, not a model emission — which is exactly what keeps THE SPLIT reproducible
-and the model unable to fabricate a magnitude. The fixture is deterministic: re-running
-the bake on the same corpus produces a byte-identical file, and every fixture carries its
-own provenance (the models used and the corpus git SHA) so any result can be reproduced.
+and the model unable to fabricate a magnitude. Every fixture carries its own provenance (the
+models used and the corpus git SHA) so any result can be traced. Reproducibility comes in two
+honest grades: the **offline deterministic baker** routes from the committed corpus and
+re-runs **byte-for-byte identical**; the **live Granite bake** runs at temperature 0 with a
+fixed seed, so re-running it reproduces the same SPLIT signature, the same citations, and the
+same Guardian verdicts (the diagnosis is stable, not necessarily bit-identical token text).
 
 ## Built with IBM
 
@@ -237,10 +252,6 @@ and `granite3-guardian:2b` audits each — so the seals you see on the site are 
 captured verdicts, not placeholders. The four SPLIT axes are then assigned from that gated
 evidence by deterministic, documented rules (a pure function of the lens signatures), which
 is what keeps the diagnosis reproducible and the model unable to fabricate a magnitude.
-
-> Built using **IBM Project Bob** (Architect and Code modes) during development — the
-> architecture and engine were shaped with Bob and reviewed for issues along the way. Bob
-> is part of how this was built, not a runtime component of the product.
 
 ## Prior art & the wedge
 

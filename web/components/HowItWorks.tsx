@@ -3,8 +3,8 @@
 import { motion } from "motion/react";
 
 // A one-screen, jargon-free explainer for a judge who has 30 seconds. It states plainly:
-// what OFFSIDE is, the four IBM models and what each does, and — the honest part — what is
-// real versus frozen. It sits right after the masthead so the rest of the page makes sense.
+// what OFFSIDE is, the three Granite models (plus Docling) and what each does, and — the
+// honest part — what is real versus frozen. It sits after the masthead so the page makes sense.
 export function HowItWorks() {
   return (
     <section className="how" aria-label="How OFFSIDE works">

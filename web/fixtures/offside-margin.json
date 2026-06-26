@@ -21,7 +21,7 @@
           "om-hist-margin-unrecoverable",
           "om-hist-line-defined"
         ],
-        "rationale": "The retrieved facts state that at a millimetre margin, the true position is not recoverable due to discrete video frames, system selection of relevant points, and motion of ball and players leading to different valid choices flipping the decision (om-hist-margin-unrecoverable). Additionally, the authorities apply a deliberately 'thicker' offside line and tolerance band acknowledging that the exact line is not knowable (om-hist-thicker-line), which is an indeterminacy unresolved by current technology. Law 11 defines the offside line precisely as any part of the head, body or feet nearer to the opponents' goal line than the second-last opponent (om-hist-line-defined), but this definition does not resolve the measurement precision issue at the margin (om-hist-margin-unrecoverable).",
+        "rationale": "The retrieved facts state that at a millimetre margin, the true position is not recoverable due to discrete video frames, system-selected points, and moving ball and players leading to different valid choices flipping the decision (om-hist-margin-unrecoverable). Additionally, the authorities deliberately apply a 'thicker' offside line and tolerance band because the exact line is not knowable (om-hist-thicker-line), acknowledging an indeterminacy that better cameras would not resolve. The rule itself is unambiguous about where the line is drawn (om-hist-line-defined), but the precision required by the Law cannot be met with current technology at the margin.",
         "state": "PRESENT"
       },
       "seal": {
@@ -186,7 +186,7 @@
           "om-hist-line-defined"
         ],
         "lens": "HISTORICAL",
-        "rationale": "The retrieved facts state that at a millimetre margin, the true position is not recoverable due to discrete video frames, system selection of relevant points, and motion of ball and players leading to different valid choices flipping the decision (om-hist-margin-unrecoverable). Additionally, the authorities apply a deliberately 'thicker' offside line and tolerance band acknowledging that the exact line is not knowable (om-hist-thicker-line), which is an indeterminacy unresolved by current technology. Law 11 defines the offside line precisely as any part of the head, body or feet nearer to the opponents' goal line than the second-last opponent (om-hist-line-defined), but this definition does not resolve the measurement precision issue at the margin (om-hist-margin-unrecoverable).",
+        "rationale": "The retrieved facts state that at a millimetre margin, the true position is not recoverable due to discrete video frames, system-selected points, and moving ball and players leading to different valid choices flipping the decision (om-hist-margin-unrecoverable). Additionally, the authorities deliberately apply a 'thicker' offside line and tolerance band because the exact line is not knowable (om-hist-thicker-line), acknowledging an indeterminacy that better cameras would not resolve. The rule itself is unambiguous about where the line is drawn (om-hist-line-defined), but the precision required by the Law cannot be met with current technology at the margin.",
         "stance": "DISPUTES",
         "state": "GROUNDED"
       },
@@ -231,7 +231,7 @@
       "label": "Push it the right way",
       "outcome": "The engine read the new record and moved the axis off ‘unknowable’. It is reasoning from what it is shown, not replaying a stored answer.",
       "plain_question": "If the record said the exact line is now perfectly measurable, does the engine stop calling the truth unknowable?",
-      "state_after": "NOT_DOCUMENTED",
+      "state_after": "ABSENT",
       "state_before": "PRESENT"
     },
     {
@@ -260,7 +260,7 @@
     }
   ],
   "provenance": {
-    "corpus_git_sha": "889b304af3cbb5012931960e3d7d9540daefa9df",
+    "corpus_git_sha": "5645d8301ca409d4f113f4077045b5d2dd5240eb",
     "embed_model": "granite-embedding:30m",
     "granite_model": "granite3.3:8b",
     "guardian_model": "granite3-guardian:2b",
@@ -294,7 +294,7 @@
           "om-hist-margin-unrecoverable",
           "om-hist-line-defined"
         ],
-        "rationale": "The retrieved facts state that at a millimetre margin, the true position is not recoverable due to discrete video frames, system selection of relevant points, and motion of ball and players leading to different valid choices flipping the decision (om-hist-margin-unrecoverable). Additionally, the authorities apply a deliberately 'thicker' offside line and tolerance band acknowledging that the exact line is not knowable (om-hist-thicker-line), which is an indeterminacy unresolved by current technology. Law 11 defines the offside line precisely as any part of the head, body or feet nearer to the opponents' goal line than the second-last opponent (om-hist-line-defined), but this definition does not resolve the measurement precision issue at the margin (om-hist-margin-unrecoverable).",
+        "rationale": "The retrieved facts state that at a millimetre margin, the true position is not recoverable due to discrete video frames, system-selected points, and moving ball and players leading to different valid choices flipping the decision (om-hist-margin-unrecoverable). Additionally, the authorities deliberately apply a 'thicker' offside line and tolerance band because the exact line is not knowable (om-hist-thicker-line), acknowledging an indeterminacy that better cameras would not resolve. The rule itself is unambiguous about where the line is drawn (om-hist-line-defined), but the precision required by the Law cannot be met with current technology at the margin.",
         "state": "PRESENT"
       },
       {

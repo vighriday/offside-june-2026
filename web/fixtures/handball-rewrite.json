@@ -17,8 +17,8 @@
       "cell": {
         "axis": "INDETERMINACY",
         "citation_ids": [],
-        "rationale": "Nothing makes the truth unrecoverable — the retrieved facts state that whether the ball touched the hand or arm is almost always visible and knowable with modern replay (hb-hist-visible-knowable).",
-        "state": "NOT_DOCUMENTED"
+        "rationale": "The decisive truth is recoverable — the retrieved facts state that whether the ball touched the hand or arm is almost always visible and fully knowable with modern replay (hb-hist-visible-knowable).",
+        "state": "ABSENT"
       },
       "seal": {
         "checked_context_citation_ids": [],
@@ -30,7 +30,7 @@
       "cell": {
         "axis": "DECISION_TIME_DEFICIT",
         "citation_ids": [],
-        "rationale": "The decisive truth was available at the moment — the retrieved facts state that whether the ball touched the hand or arm is almost always visible and knowable with modern replay (hb-hist-visible-knowable).",
+        "rationale": "The decisive truth was available at the moment — the retrieved facts state that whether the ball touched the hand or arm is almost always visible and fully knowable with modern replay (hb-hist-visible-knowable).",
         "state": "ABSENT"
       },
       "seal": {
@@ -178,7 +178,7 @@
           "hb-hist-three-tests"
         ],
         "lens": "HISTORICAL",
-        "rationale": "The retrieved facts state that whether the ball touched the hand or arm is almost always visible and knowable with modern replay (hb-hist-visible-knowable). The decision-time information was adequate. However, the contested aspect is which clause of the Law the contact falls under, indicating an inconsistent application by officials across seasons (hb-hist-inconsistent-application). The 2024/25 Law 12 retains three distinct handball tests, each carrying a different sanction, and an official must decide which test applies in real time (hb-hist-three-tests). This suggests that while the truth of what happened is knowable, the interpretation and application of the rules to that truth can vary, leading to mixed outcomes.",
+        "rationale": "The retrieved facts state that whether the ball touched the hand or arm is almost always visible and fully knowable with modern replay (hb-hist-visible-knowable). The decision-time information was adequate. However, the contested aspect is which clause of the Law the contact falls under, indicating a subjective threshold rather than an unmeasurable physical truth (hb-hist-inconsistent-application, hb-hist-three-tests). This is a question of where the rule draws its line, not an unrecoverable measurement limit.",
         "stance": "MIXED",
         "state": "GROUNDED"
       },
@@ -215,7 +215,7 @@
   ],
   "probes": [],
   "provenance": {
-    "corpus_git_sha": "889b304af3cbb5012931960e3d7d9540daefa9df",
+    "corpus_git_sha": "5645d8301ca409d4f113f4077045b5d2dd5240eb",
     "embed_model": "granite-embedding:30m",
     "granite_model": "granite3.3:8b",
     "guardian_model": "granite3-guardian:2b",
@@ -245,13 +245,13 @@
       {
         "axis": "INDETERMINACY",
         "citation_ids": [],
-        "rationale": "Nothing makes the truth unrecoverable — the retrieved facts state that whether the ball touched the hand or arm is almost always visible and knowable with modern replay (hb-hist-visible-knowable).",
-        "state": "NOT_DOCUMENTED"
+        "rationale": "The decisive truth is recoverable — the retrieved facts state that whether the ball touched the hand or arm is almost always visible and fully knowable with modern replay (hb-hist-visible-knowable).",
+        "state": "ABSENT"
       },
       {
         "axis": "DECISION_TIME_DEFICIT",
         "citation_ids": [],
-        "rationale": "The decisive truth was available at the moment — the retrieved facts state that whether the ball touched the hand or arm is almost always visible and knowable with modern replay (hb-hist-visible-knowable).",
+        "rationale": "The decisive truth was available at the moment — the retrieved facts state that whether the ball touched the hand or arm is almost always visible and fully knowable with modern replay (hb-hist-visible-knowable).",
         "state": "ABSENT"
       },
       {

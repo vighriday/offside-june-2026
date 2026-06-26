@@ -17,8 +17,8 @@
       "cell": {
         "axis": "INDETERMINACY",
         "citation_ids": [],
-        "rationale": "Nothing makes the truth unrecoverable — the retrieved facts state there was no goal-line technology or VAR in 2010, and the referee along with the assistant had to judge in real time whether the ball had crossed the line without any review available (lampard-hist-no-glt-2010).",
-        "state": "NOT_DOCUMENTED"
+        "rationale": "The decisive truth is recoverable — the retrieved facts state there was no goal-line technology or VAR in 2010, and the referee along with the assistant had to judge whether the ball had crossed the line in real time without any review available (lampard-hist-no-glt-2010).",
+        "state": "ABSENT"
       },
       "seal": {
         "checked_context_citation_ids": [],
@@ -34,7 +34,7 @@
           "lampard-hist-sightline",
           "lampard-hist-crossed-line"
         ],
-        "rationale": "The retrieved facts state there was no goal-line technology or VAR in 2010, and the referee along with the assistant had to judge in real time whether the ball had crossed the line without any review available (lampard-hist-no-glt-2010). Additionally, neither official had a clear view of where the ball landed as they were not level with the goal line at the moment of the bounce (lampard-hist-sightline). The ball struck the crossbar and bounced down well behind the goal line before spinning back out (lampard-hist-crossed-line), which television replays within seconds confirmed had clearly crossed the line. Therefore, the decisive truth was not available to the officials at the moment of the decision due to a lack of review technology and obstructed sightlines, constituting a decision-time deficit.",
+        "rationale": "The retrieved facts state there was no goal-line technology or VAR in 2010, and the referee along with the assistant had to judge whether the ball had crossed the line in real time without any review available (lampard-hist-no-glt-2010). Additionally, neither official had a clear view of where the ball landed as they were not level with the goal line at the moment of the bounce (lampard-hist-sightline). Television replays within seconds showed the whole ball had clearly crossed the line (lampard-hist-crossed-line), indicating that while the officials could not access the truth in the moment, the truth was knowable in principle with current technology.",
         "state": "PRESENT"
       },
       "seal": {
@@ -173,7 +173,7 @@
           "lampard-hist-crossed-line"
         ],
         "lens": "HISTORICAL",
-        "rationale": "The retrieved facts state there was no goal-line technology or VAR in 2010, and the referee along with the assistant had to judge in real time whether the ball had crossed the line without any review available (lampard-hist-no-glt-2010). Additionally, neither official had a clear view of where the ball landed as they were not level with the goal line at the moment of the bounce (lampard-hist-sightline). The ball struck the crossbar and bounced down well behind the goal line before spinning back out (lampard-hist-crossed-line), which television replays within seconds confirmed had clearly crossed the line. Therefore, the decisive truth was not available to the officials at the moment of the decision due to a lack of review technology and obstructed sightlines, constituting a decision-time deficit.",
+        "rationale": "The retrieved facts state there was no goal-line technology or VAR in 2010, and the referee along with the assistant had to judge whether the ball had crossed the line in real time without any review available (lampard-hist-no-glt-2010). Additionally, neither official had a clear view of where the ball landed as they were not level with the goal line at the moment of the bounce (lampard-hist-sightline). Television replays within seconds showed the whole ball had clearly crossed the line (lampard-hist-crossed-line), indicating that while the officials could not access the truth in the moment, the truth was knowable in principle with current technology.",
         "stance": "SUPPORTS",
         "state": "GROUNDED"
       },
@@ -212,7 +212,7 @@
   ],
   "probes": [],
   "provenance": {
-    "corpus_git_sha": "889b304af3cbb5012931960e3d7d9540daefa9df",
+    "corpus_git_sha": "5645d8301ca409d4f113f4077045b5d2dd5240eb",
     "embed_model": "granite-embedding:30m",
     "granite_model": "granite3.3:8b",
     "guardian_model": "granite3-guardian:2b",
@@ -223,7 +223,14 @@
       "temperature": 0.0
     }
   },
-  "rule_evolution": null,
+  "rule_evolution": {
+    "axis": "DECISION_TIME_DEFICIT",
+    "from_era": "2010 — no goal-line technology",
+    "from_state": "PRESENT",
+    "note": "What was undetectable in the moment is automatic now — the fact was always settled; only its availability to the officials changed.",
+    "to_era": "2026 — automatic goal-line detection",
+    "to_state": "ABSENT"
+  },
   "settled_fact": {
     "citation_ids": [
       "lampard-hist-crossed-line"
@@ -242,8 +249,8 @@
       {
         "axis": "INDETERMINACY",
         "citation_ids": [],
-        "rationale": "Nothing makes the truth unrecoverable — the retrieved facts state there was no goal-line technology or VAR in 2010, and the referee along with the assistant had to judge in real time whether the ball had crossed the line without any review available (lampard-hist-no-glt-2010).",
-        "state": "NOT_DOCUMENTED"
+        "rationale": "The decisive truth is recoverable — the retrieved facts state there was no goal-line technology or VAR in 2010, and the referee along with the assistant had to judge whether the ball had crossed the line in real time without any review available (lampard-hist-no-glt-2010).",
+        "state": "ABSENT"
       },
       {
         "axis": "DECISION_TIME_DEFICIT",
@@ -252,7 +259,7 @@
           "lampard-hist-sightline",
           "lampard-hist-crossed-line"
         ],
-        "rationale": "The retrieved facts state there was no goal-line technology or VAR in 2010, and the referee along with the assistant had to judge in real time whether the ball had crossed the line without any review available (lampard-hist-no-glt-2010). Additionally, neither official had a clear view of where the ball landed as they were not level with the goal line at the moment of the bounce (lampard-hist-sightline). The ball struck the crossbar and bounced down well behind the goal line before spinning back out (lampard-hist-crossed-line), which television replays within seconds confirmed had clearly crossed the line. Therefore, the decisive truth was not available to the officials at the moment of the decision due to a lack of review technology and obstructed sightlines, constituting a decision-time deficit.",
+        "rationale": "The retrieved facts state there was no goal-line technology or VAR in 2010, and the referee along with the assistant had to judge whether the ball had crossed the line in real time without any review available (lampard-hist-no-glt-2010). Additionally, neither official had a clear view of where the ball landed as they were not level with the goal line at the moment of the bounce (lampard-hist-sightline). Television replays within seconds showed the whole ball had clearly crossed the line (lampard-hist-crossed-line), indicating that while the officials could not access the truth in the moment, the truth was knowable in principle with current technology.",
         "state": "PRESENT"
       },
       {

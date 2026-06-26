@@ -2,8 +2,9 @@
 answers" proof.
 
 The deployed site reads frozen fixtures (no GPU on static hosting). This script is the
-other half: it runs the *actual* four-model pipeline end to end on a chosen incident and
-narrates every step, so a viewer watches the engine think rather than replay a recording:
+other half: it runs the *actual* Granite pipeline (three IBM models across four lenses) end
+to end on a chosen incident and narrates every step, so a viewer watches the engine think
+rather than replay a recording:
 
   retrieve (per-lens, incident-scoped)  →  Granite reads each lens  →  Granite Guardian
   audits each reading  →  the gated evidence is routed onto THE SPLIT  →  Guardian audits
