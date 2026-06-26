@@ -5,11 +5,13 @@ RUN pip install --no-cache-dir uv
 
 WORKDIR /app
 
-# Copy the package files
-COPY pyproject.toml .
-COPY offside_engine/ offside_engine/
+# Copy dependency manifests first so uv sync is pinned/reproducible
+COPY pyproject.toml uv.lock ./
 
 # Install with the serve extra (fastapi + uvicorn + sse-starlette)
 RUN uv sync --extra serve
+
+# Copy package source after deps are installed (better layer caching)
+COPY offside_engine/ offside_engine/
 
 EXPOSE 8000

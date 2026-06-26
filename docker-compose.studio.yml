@@ -5,12 +5,20 @@ services:
     image: ollama/ollama:latest
     ports: ["11434:11434"]
     volumes: ["ollama:/root/.ollama"]
+  model-puller:
+    image: ollama/ollama:latest
+    depends_on: ["ollama"]
+    environment: { OLLAMA_HOST: "ollama:11434" }
+    entrypoint: >
+      sh -c "until ollama list >/dev/null 2>&1; do echo 'waiting for ollama...'; sleep 2; done &&
+             ollama pull granite3.3:8b &&
+             ollama pull granite-embedding:30m &&
+             ollama pull granite3-guardian:2b &&
+             echo 'models ready'"
+    restart: "no"
   studio:
     build: { context: ./engine, dockerfile: Dockerfile.studio }
-    command: >
-      sh -c "ollama pull granite3.3:8b && ollama pull granite-embedding:30m &&
-             ollama pull granite3-guardian:2b &&
-             uv run uvicorn offside_engine.serve.app:app --host 0.0.0.0 --port 8000"
+    command: sh -c "uv run uvicorn offside_engine.serve.app:app --host 0.0.0.0 --port 8000"
     environment: { OLLAMA_HOST: "ollama:11434" }
     ports: ["8000:8000"]
     depends_on: ["ollama"]
