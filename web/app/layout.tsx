@@ -2,7 +2,16 @@ import type { Metadata } from "next";
 import "./globals.scss";
 import "./tailwind.css";
 
+// Absolute base for resolving the Open Graph / Twitter card image. Without it, Next
+// resolves the relative /og-card.png against http://localhost:3000 in the built HTML,
+// so a shared link (Slack, X, LinkedIn) shows a broken preview. On Vercel the production
+// URL is injected; the literal fallback covers local builds and any non-Vercel host.
+const SITE_URL = process.env.VERCEL_PROJECT_PRODUCTION_URL
+  ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}`
+  : "https://offside-june-2026.vercel.app";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "OFFSIDE — The Football Disagreement Engine",
   description:
     "OFFSIDE shows why a football decision stays argued — broken into four plain reasons, " +
