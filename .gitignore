@@ -5,6 +5,8 @@ _local/
 # ── Local tooling state (not part of the project) ─────────────────────
 .claude/
 .veris/
+.superpowers/
+docs/superpowers/
 
 # ── Secrets / env ──────────────────────────────────────────────────────
 .env
