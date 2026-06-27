@@ -3,7 +3,10 @@
 import { useState } from "react";
 import type { StudioFormPayload } from "@/lib/studioClient";
 
-const EXAMPLE: StudioFormPayload = {
+// The worked example. These are the exact inputs the committed studio-example.json fixture
+// was baked from, so prefilling the form with EXAMPLE and rendering that fixture show the
+// SAME incident — the judge sees the evidence that produced the result on screen.
+export const EXAMPLE: StudioFormPayload = {
   title: "A disputed penalty",
   settled_statement:
     "A defender's arm blocked the ball inside the box. The arm-to-ball contact is agreed by both sides.",
@@ -68,7 +71,16 @@ export function StudioForm({ disabled, onRun, onExample, liveEnabled }: {
       </label>
 
       <div className="studio-form__actions">
-        <button type="button" onClick={() => onExample ? onExample() : setForm(EXAMPLE)}>
+        <button
+          type="button"
+          onClick={() => {
+            // Always fill the form fields with the example's inputs, so the evidence is
+            // visible. On the public site (onExample set) ALSO render the pre-baked result,
+            // so the judge sees both the inputs and the complete decomposition together.
+            setForm(EXAMPLE);
+            onExample?.();
+          }}
+        >
           {liveEnabled ? "Load an example" : "Show a worked example"}
         </button>
         {liveEnabled && <button type="submit" disabled={!canRun}>Decompose live</button>}
